@@ -1,0 +1,360 @@
++--------------------------------------------------------+
+|              Notes on important functions:              |
++--------------------------------------------------------+
+| readline          | rl_clear_history    | rl_on_new_line |
+| rl_replace_line   | rl_redisplay        | add_history    |
+| printf            | malloc              | free           |
+| write             | access              | open           |
+| read              | close               | fork           |
+| wait              | waitpid             | wait3          |
+| wait4             | signal              | sigaction      |
+| sigemptyset       | sigaddset           | kill           |
+| exit              | getcwd              | chdir          |
+| stat              | lstat               | fstat          |
+| unlink            | execve              | dup            |
+| dup2              | pipe                | opendir        |
+| readdir           | closedir            | strerror       |
+| perror            | isatty              | ttyname        |
+| ttyslot           | ioctl               | getenv         |
+| tcsetattr         | tcgetattr           | tgetent        |
+| tgetflag          | tgetnum             | tgetstr        |
+| tgoto             | tputs               |                |
++--------------------------------------------------------+
+
+ _                                _                                        
+| |                    _         | |                 _                 _   
+| |____  ____  _   _ _| |_      / /     ___  _   _ _| |_ ____  _   _ _| |_ 
+| |  _ \|  _ \| | | (_   _)    / /     / _ \| | | (_   _)  _ \| | | (_   _)
+| | | | | |_| | |_| | | |_    / /     | |_| | |_| | | |_| |_| | |_| | | |_ 
+|_|_| |_|  __/|____/   \__)  |_|       \___/|____/   \__)  __/|____/   \__)
+        |_|                                             |_|                
+
+Function: printf
+Library: #include <stdio.h>
+Prototype: int printf(const char *format, ...);
+Use: prints formatted output to the standard output stream,
+according to the format string specified by format.
+The format string can include conversion specifiers that control how arguments are printed.
+
+Function: write
+Library: #include <unistd.h>
+Prototype: ssize_t write(int fd, const void *buf, size_t count);
+Use: writes up to count bytes from the buffer pointed to by buf to the file referred to by the file descriptor fd.
+
+Function: read
+Library: #include <unistd.h>
+Prototype: ssize_t read(int fd, void *buf, size_t count);
+Use: attempts to read up to count bytes from the file referred to by the file descriptor fd into the buffer pointed to by buf.
+
+Function: open
+Library: #include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+Prototype: int open(const char *pathname, int flags);
+Use: attempts to open the file specified by pathname, and returns a file descriptor on success, or -1 on error.
+
+Function: close
+Library: #include <unistd.h>
+Prototype: int close(int fd);
+Use: closes the file referred to by the file descriptor fd.
+
+Function: access
+Library: #include <unistd.h>
+Prototype: int access(const char *pathname, int mode);
+Use: checks whether the calling process can access the file specified by pathname, using the permissions specified by mode.
+Returns 0 on success, or -1 on error.
+
+Function: unlink
+Library: #include <unistd.h>
+Prototype: int unlink(const char *path)
+Use: This function deletes the file specified by path. If path points to a symbolic link,
+the link is removed, not the file it points to.
+
+Function: opendir
+Library: #include <dirent.h>
+Prototype: DIR *opendir(const char *name);
+Use: This function opens a directory stream corresponding to the directory specified by the path name name and returns
+a pointer to the directory stream.
+
+Function: readdir
+Library: #include <dirent.h>
+Prototype: struct dirent *readdir(DIR *dirp);
+Use: This function returns a pointer to the next directory entry in the directory stream dirp.
+It returns NULL when the end of the directory stream is reached.
+
+Function: closedir
+Library: #include <dirent.h>
+Prototype: int closedir(DIR *dirp);
+Use: This function closes the directory stream dirp.
+
+Function: perror
+Library: #include <stdio.h>
+Prototype: void perror(const char *s);
+Use: prints a message to stderr that describes the last error that occurred,
+based on the value of the global variable errno.
+If s is not NULL and points to a string of characters, this string is printed before the error message.
+
+Function: strerror
+Library: #include <string.h>
+Prototype: char *strerror(int errnum);
+Use: returns a string that describes the error code passed in errnum,
+according to the current locale settings. The string may be a language-specific translation of the error message.
+If the error code is not recognized, the function returns a generic "Unknown error" message.
+
+Function: isatty
+Library: #include <unistd.h>
+Prototype: int isatty(int fd);
+Use: This function checks whether the file descriptor fd is associated with a terminal device.
+It returns 1 if the descriptor is a terminal, and 0 otherwise.
+
+Function: ttyslot
+Library: #include <unistd.h>
+Prototype: int ttyslot(void);
+Use: This function returns the index of the entry in the termcap database for the terminal device associated with the standard input.
+
+Function: ioctl
+Library: #include <sys/ioctl.h>
+Prototype: int ioctl(int fd, unsigned long request, ...);
+Use: This function manipulates the terminal device associated with the file descriptor fd,
+according to the request specified by the request argument. The remaining arguments, if any,
+depend on the specific request.
+This function is often used to set terminal attributes such as the terminal size or terminal mode.
+
+ ______                                    _______                            _  
+(_____ \                                  (_______)            _             | | 
+ _____) )___ ___   ____ _____  ___  ___    _       ___  ____ _| |_  ____ ___ | | 
+|  ____/ ___) _ \ / ___) ___ |/___)/___)  | |     / _ \|  _ (_   _)/ ___) _ \| | 
+| |   | |  | |_| ( (___| ____|___ |___ |  | |____| |_| | | | || |_| |  | |_| | | 
+|_|   |_|   \___/ \____)_____|___/(___/    \______)___/|_| |_| \__)_|   \___/ \_)
+                                                                                 
+Function: fork
+Library: #include <unistd.h>
+Prototype: pid_t fork(void);
+Use: creates a new process by duplicating the calling process.
+The new process, called the child process, is an exact copy of the calling process,
+called the parent process, except for a few values that are changed in the child process.
+Both processes continue to run from the point where fork was called,
+but they have different process IDs (PIDs) and different parent process IDs (PPIDs).
+
+Function: wait
+Library: #include <sys/wait.h>
+Prototype: pid_t wait(int *status);
+Use: suspends the calling process until one of its child processes terminates.
+The function returns the PID of the terminated child process,
+and if the status parameter is not NULL, the exit status of the child process is stored in it.
+
+Function: waitpid
+Library: #include <sys/wait.h>
+Prototype: pid_t waitpid(pid_t pid, int *status, int options);
+Use: suspends the calling process until the child process specified by pid terminates,
+or until a signal is received. The function returns the PID of the terminated child process,
+and if the status parameter is not NULL, the exit status of the child process is stored in it.
+The options parameter can be used to control the behavior of the function.
+
+Function: wait3
+Library: #include <sys/wait.h>
+Prototype: int wait3(int *status, int options, struct rusage *rusage);
+Use: similar to waitpid, but also returns resource usage information about the terminated child process in the rusage structure.
+
+Function: wait4
+Library: #include <sys/wait.h>
+Prototype: int wait4(pid_t pid, int *status, int options, struct rusage *rusage);
+Use: similar to waitpid, but also returns resource usage information about the terminated child process in the rusage structure.
+
+Function: signal
+Library: #include <signal.h>
+Prototype: void (*signal(int signum, void (*handler)(int)))(int);
+Use: sets the signal handler for the specified signal, signum.
+The handler can be a function pointer that takes an integer parameter (the signal number).
+If the handler parameter is SIG_IGN, the signal is ignored. If it is SIG_DFL, the default behavior for the signal is restored.
+
+Function: sigaction
+Library: #include <signal.h>
+Prototype: int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+Use: sets the signal handler for the specified signal,
+signum. The handler can be a function pointer that takes an integer parameter (the signal number).
+The act parameter is a pointer to a struct that specifies the new handler and some other options.
+If the oldact parameter is not NULL, the previous signal handler information is stored in it.
+
+Function: sigemptyset
+Library: #include <signal.h>
+Prototype: int sigemptyset(sigset_t *set);
+Use: initializes the signal set pointed to by set to be empty, i.e., with no signals set.
+
+Function: sigaddset
+Library: #include <signal.h>
+Prototype: int sigaddset(sigset_t *set, int signum);
+Use: adds the specified signal, signum, to the signal set pointed to by set.
+
+Function: kill
+Library: #include <signal.h>
+Prototype: int kill(pid_t pid, int sig);
+Use: sends the specified signal, sig, to the process or group of processes specified by pid. If pid is positive,
+it specifies the PID of the process to send the signal to. If pid is zero, the signal is sent to
+
+   ______                                          __   __    _          
+  / ____/___  ____ ___  ____ ___  ____ _____  ____/ /  / /   (_)___  ___ 
+ / /   / __ \/ __ `__ \/ __ `__ \/ __ `/ __ \/ __  /  / /   / / __ \/ _ \
+/ /___/ /_/ / / / / / / / / / / / /_/ / / / / /_/ /  / /___/ / / / /  __/
+\____/\____/_/ /_/ /_/_/ /_/ /_/\__,_/_/ /_/\__,_/  /_____/_/_/ /_/\___/ 
+                                                                         
+readline
+Library: #include <stdio.h> or #include <readline/readline.h> or #include <readline/history.h>
+Prototype: char * readline (const char *prompt);
+Use: readline will read a line from the terminal and return it, it malloc the string. Leaks by default and does need to be freed.
+
+Function: rl_clear_history
+Library: #include <readline/readline.h>
+Prototype: void rl_clear_history(void)
+Use: This function clears the command history maintained by the Readline library.
+Note:https://tiswww.case.edu/php/chet/readline/readline.html
+
+Function: rl_on_new_line
+Library: #include <readline/readline.h>
+Prototype: void rl_on_new_line(void)
+Use: This function informs the Readline library that the cursor has moved to a new line.
+It should be called by applications after printing a newline character.
+
+Function: rl_replace_line
+Library: #include <readline/readline.h>
+Prototype: void rl_replace_line(const char *text, int clear_undo)
+Use: This function replaces the current line of input with the specified text.
+If clear_undo is non-zero, the undo list for the current line is cleared.
+
+Function: rl_redisplay
+Library: #include <readline/readline.h>
+Prototype: void rl_redisplay(void)
+Use: This function tells the Readline library to redisplay the current input line, refreshing the screen.
+It is useful when some external event causes the display to become garbled.
+
+Function: add_history
+Library: #include <readline/history.h>
+Prototype: void add_history(const char *line)
+Use: This function adds a line to the command history maintained by the Readline library.
+The line is added to the end of the history list.
+
+Function: ttyname
+Library: #include <unistd.h>
+Prototype: char *ttyname(int fd);
+Use: This function returns a pointer to a string containing the name of
+the terminal device associated with the file descriptor fd.
+
+ ______   __     __         ______        ______     __  __     ______     ______   ______     __    __    
+/\  ___\ /\ \   /\ \       /\  ___\      /\  ___\   /\ \_\ \   /\  ___\   /\__  _\ /\  ___\   /\ "-./  \   
+\ \  __\ \ \ \  \ \ \____  \ \  __\      \ \___  \  \ \____ \  \ \___  \  \/_/\ \/ \ \  __\   \ \ \-./\ \  
+ \ \_\    \ \_\  \ \_____\  \ \_____\     \/\_____\  \/\_____\  \/\_____\    \ \_\  \ \_____\  \ \_\ \ \_\ 
+  \/_/     \/_/   \/_____/   \/_____/      \/_____/   \/_____/   \/_____/     \/_/   \/_____/   \/_/  \/_/ 
+                                                                                                           
+
+Function: getcwd
+Library: #include <unistd.h>
+Prototype: char *getcwd(char *buf, size_t size)
+Use: This function gets the current working directory and stores it in the buffer pointed to by buf,
+which has size bytes of space. The return value is a pointer to the buffer containing the current working directory.
+
+Function: chdir
+Library: #include <unistd.h>
+Prototype: int chdir(const char *path)
+Use: This function changes the current working directory to the specified path.
+
+Function: stat
+Library: #include <sys/stat.h>
+Prototype: int stat(const char *path, struct stat *buf)
+Use: This function retrieves information about the file specified by path and stores it in the stat structure pointed to by buf.
+
+Function: lstat
+Library: #include <sys/stat.h>
+Prototype: int lstat(const char *path, struct stat *buf)
+Use: This function is similar to stat, but it returns information about the symbolic link itself if path points to a symbolic link.
+
+Function: fstat
+Library: #include <sys/stat.h>
+Prototype: int fstat(int fd, struct stat *buf)
+Use: This function retrieves information about the file associated with the file descriptor fd and stores
+it in the stat structure pointed to by buf.
+
+Function: getenv
+Library: #include <stdlib.h>
+Prototype: char *getenv(const char *name);
+Use: This function searches the environment list for a string that matches the string pointed to by name,
+and returns a pointer to the corresponding value string.
+
+oOoOOoOOo                                         o       o      O                    o  o                 
+    o                           o                O        O      o                   O  O  o               
+    o                                            o        o      O                   o  o                  
+    O                                            O        OoOooOOo                   o  O                  
+    o     .oOo. `OoOo. `oOOoOO. O  'OoOo. .oOoO' o        o      O .oOoO' 'OoOo. .oOoO  o  O  'OoOo. .oOoO 
+    O     OooO'  o      O  o  o o   o   O O   o  O        O      o O   o   o   O o   O  O  o   o   O o   O 
+    O     O      O      o  O  O O   O   o o   O  o        o      o o   O   O   o O   o  o  O   O   o O   o 
+    o'    `OoO'  o      O  o  o o'  o   O `OoO'o Oo       o      O `OoO'o  o   O `OoO'o Oo o'  o   O `OoOo 
+                                                                                                         O 
+                                                                                                      OoO' 
+Function: tcsetattr
+Library: #include <termios.h>
+Prototype: int tcsetattr(int fd, int optional_actions, const struct termios *termios_p);
+Use: This function sets the terminal attributes associated with the file descriptor fd to the values specified
+by the termios structure pointed to by termios_p.
+
+Function: tcgetattr
+Library: #include <termios.h>
+Prototype: int tcgetattr(int fd, struct termios *termios_p);
+Use: This function gets the terminal attributes associated with the file descriptor fd,
+and stores them in the termios structure pointed to by termios_p.
+
+Function: tgetent
+Library: #include <curses.h>
+Prototype: int tgetent(char *bp, const char *name);
+Use: This function loads the termcap entry for the terminal type specified by name,
+and stores it in the buffer pointed to by bp. It returns 1 if successful,
+0 if the entry could not be found, and -1 if there was an error.
+
+Function: tgetflag
+Library: #include <curses.h>
+Prototype: int tgetflag(const char *capname);
+Use: This function looks up the boolean capability specified by capname in the termcap database,
+and returns 1 if it is set, and 0 otherwise.
+
+Function: tgetnum
+Library: #include <curses.h>
+Prototype: int tgetnum(const char *capname);
+Use: This function looks up the numeric capability specified by capname in the termcap/terminfo database,
+and returns its value as an integer. If the capability is not found or is not a numeric value, -1 is returned.
+
+Function: tgetstr
+Library: #include <curses.h>
+Prototype: char *tgetstr(const char *capname, char **area);
+Use: This function looks up the string capability specified by capname in the termcap/terminfo database,
+and returns a pointer to a string that represents the capability.
+The area argument is a pointer to a buffer that is used to hold the string, and is updated by the function.
+
+Function: tgoto
+Library: #include <curses.h>
+Prototype: char *tgoto(const char *cap, int col, int row);
+Use: This function generates a string that can be used to move the cursor to the specified position on the screen,
+using the capabilities specified by cap. The col and row arguments specify the destination position.
+
+Function: tputs
+Library: #include <term.h>
+Prototype: int tputs(const char *str, int affcnt, int (*putc)(int));
+Use: This function outputs the string str to the terminal,
+interpreting any termcap/terminfo escape sequences that it contains.
+The affcnt argument is used to indicate how many lines would be affected by the operation,
+and the putc argument is a function pointer that is used to output individual characters to the terminal.
+
+ ______                                   ______                                                       
+|  ___ \                                 |  ___ \                                                 _    
+| | _ | | ____ ____   ___   ____ _   _   | | _ | | ____ ____   ____  ____  ____ ____   ____ ____ | |_  
+| || || |/ _  )    \ / _ \ / ___) | | |  | || || |/ _  |  _ \ / _  |/ _  |/ _  )    \ / _  )  _ \|  _) 
+| || || ( (/ /| | | | |_| | |   | |_| |  | || || ( ( | | | | ( ( | ( ( | ( (/ /| | | ( (/ /| | | | |__ 
+|_||_||_|\____)_|_|_|\___/|_|    \__  |  |_||_||_|\_||_|_| |_|\_||_|\_|| |\____)_|_|_|\____)_| |_|\___)
+                                (____/                             (_____|                                
+Function: malloc
+Library: #include <stdlib.h>
+Prototype: void *malloc(size_t size);
+Use: Allocates a block of memory of size "size" bytes and returns a pointer to the start of the block.
+
+Function: free
+Library: #include <stdlib.h>
+Prototype: void free(void *ptr);
+Use: Deallocates the memory previously allocated by malloc, calloc or realloc.
+The pointer to the start of the block to deallocate is passed as an argument to free.
