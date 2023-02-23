@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/22 05:54:20 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/02/23 14:58:53 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,29 @@ void	handle(int num)
 	exit (0);
 }
 
-int	main(void)
+// char *ft_strsjoin(char **av)
+// {
+// 	char *tmp;
+// 	int i = 1;
+// 	while (av[i])
+// 	{
+// 		tmp = ft_strjoin(tmp, av[i++]);
+// 	}
+// 	return (tmp);
+// }
+
+int	main(int argc, char *argv[], char *envp[])
 {
 	char *message;
 
 	signal(SIGINT, handle);
+	//message = NULL;
+	//if (argc > 1)
+	//	message = ft_strsjoin(argv);
 	printf(GRN "Minishell >" RESET);
-	message = readline(" ");
-	while (check_input(message) != 0)
+	//if (!message)
+		message = readline(" ");
+	while (check_input(message, envp) != 0)
 	{
 		free (message);
 		printf(GRN "Minishell >" RESET);

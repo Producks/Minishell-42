@@ -25,6 +25,8 @@
 # Define an array of tests
 tests=(
   "echo Bonjour"
+  "ls -la"
+  "sleep 3"
   "pwd"
 )
 

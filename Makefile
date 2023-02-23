@@ -12,7 +12,9 @@ LIBFT = lib/Libft-42/libft.a
 # Source #
 SRC = 	./src/main.c \
 		./src/check_input.c \
-		./src/pipex.c
+		./src/pipex.c \
+		./src/cmds/echo.c \
+		./src/cmds/pwd.c
 # Colors #
 BLACK = \033[0;30m
 RED = \033[0;31m
@@ -28,6 +30,10 @@ all: lib $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 		${CC} ${CFGLAGS} ${OBJS} -L lib/Libft-42/ -lft -lreadline -o ${NAME}
+
+assert: CFLAGS += -DASSERT=1
+assert: fclean all
+	@python3 ./assert_minishell.py
 
 lib:
 	@make -s -C libs/Libft-42
