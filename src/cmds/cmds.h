@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.h                                             :+:      :+:    :+:   */
+/*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 14:30:21 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/23 14:31:01 by ddemers          ###   ########.fr       */
+/*   Created: 2023/02/27 09:15:29 by ddemers           #+#    #+#             */
+/*   Updated: 2023/02/27 09:35:23 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ECHO_H
-# define ECHO_H
+#ifndef CMDS_H
+# define CMDS_H
 
 void	echo(char **message);
+void	pwd(void);
+void	env(char *envp[]);
+void	cd(char *message);
 
 #endif

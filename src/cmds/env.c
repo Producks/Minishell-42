@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:37:08 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/27 12:17:22 by ddemers          ###   ########.fr       */
+/*   Created: 2023/02/27 09:15:20 by ddemers           #+#    #+#             */
+/*   Updated: 2023/02/27 09:27:15 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 
-void	pwd(void)
+/*Check later if this works*/
+void	env(char *envp[])
 {
-	char	*str;
+	char *str;
 
-	str = getcwd(NULL, 69);
-	printf("%s\n", str);
-	free (str);
+	while (*envp != NULL)
+	{
+		printf("%s\n", *envp);
+		envp++;
+	}
 }

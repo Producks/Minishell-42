@@ -14,7 +14,8 @@ SRC = 	./src/main.c \
 		./src/check_input.c \
 		./src/pipex.c \
 		./src/cmds/echo.c \
-		./src/cmds/pwd.c
+		./src/cmds/pwd.c \
+		./src/cmds/env.c
 # Colors #
 BLACK = \033[0;30m
 RED = \033[0;31m

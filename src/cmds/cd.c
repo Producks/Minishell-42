@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.h                                              :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:35:50 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/23 15:41:26 by ddemers          ###   ########.fr       */
+/*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
+/*   Updated: 2023/02/27 09:38:28 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PWD_H
-# define PWD_H
+#include <unistd.h>
 
-void	pwd(void);
-
-#endif
+void	cd(char *message)
+{
+	chdir(message);
+	return ;
+}

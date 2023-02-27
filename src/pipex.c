@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/23 13:33:36 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/02/27 09:09:17 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,25 @@ void	make_child(int nbr, char *message, char *envp[])
 	wait(&id);
 }
 
-
-
 void	create_child(char *message, char *envp[])
 {
 	int	pid;
 
 	pid = fork();
-	if (pid == 0){
+	if (pid < 0)
+		exit (0);
+	if (pid == 0)
+	{
 		char *test[] = {"/bin/bash", "-c", message, NULL};
 		execve("/bin/bash", test, envp);
 	}
 	else
 		wait(&pid);
+}
+
+void	test(char *message, char *envp[])
+{
+	int	fdin;
+	int	fdout;
+	int	index;
 }
