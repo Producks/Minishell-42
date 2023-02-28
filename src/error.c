@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:37:08 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 13:01:51 by ddemers          ###   ########.fr       */
+/*   Created: 2023/02/28 12:27:12 by ddemers           #+#    #+#             */
+/*   Updated: 2023/02/28 12:30:52 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 
-int	pwd(void)
+void	print_errno(const char *str)
 {
-	char	*str;
-
-	str = getcwd(NULL, 69);
-	printf("%s\n", str);
-	free (str);
-	return (0);
+	perror(str);
 }

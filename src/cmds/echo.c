@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 02:56:45 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/02/28 13:02:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdbool.h>
 #include "../../lib/libft.h"
 
-void	echo(char **message)
+int	echo(char **message)
 {
 	int		index;
 	bool	check_n;
@@ -36,4 +36,5 @@ void	echo(char **message)
 	}
 	if (check_n == false)
 		printf("\n");
+	return (0);
 }

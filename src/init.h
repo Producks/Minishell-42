@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:37:08 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 13:01:51 by ddemers          ###   ########.fr       */
+/*   Created: 2023/02/28 09:33:47 by ddemers           #+#    #+#             */
+/*   Updated: 2023/02/28 10:01:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef INIT_H
+#define INIT_H
 
-int	pwd(void)
-{
-	char	*str;
+#include "struct.h"
 
-	str = getcwd(NULL, 69);
-	printf("%s\n", str);
-	free (str);
-	return (0);
-}
+int		init_struct(t_mini *mini, char *envp[]);
+void	free_struct(t_mini *mini);
+
+#endif

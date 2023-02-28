@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:37:08 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 13:01:51 by ddemers          ###   ########.fr       */
+/*   Created: 2023/02/28 12:18:19 by ddemers           #+#    #+#             */
+/*   Updated: 2023/02/28 12:37:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef ERROR_H
+# define ERROR_H
 
-int	pwd(void)
-{
-	char	*str;
+# define SUCCESS 0
+# define ENOMEM 12
 
-	str = getcwd(NULL, 69);
-	printf("%s\n", str);
-	free (str);
-	return (0);
-}
+void	print_errno(const char *str);
+
+#endif

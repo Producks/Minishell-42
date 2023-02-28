@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 03:28:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/02/28 13:57:15 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <readline/readline.h>
-#include "check_input.h"
+#include "parsing/check_input.h"
+#include "struct.h"
+#include "init.h"
+#include "../lib/libft.h"
+#include "error.h"
 
 # define RED   "\x1B[31m"
 # define GRN   "\x1B[32m"
@@ -27,26 +31,26 @@
 
 void	handle(int num)
 {
-	printf("\nEXIT!\n");
+	printf("EXIT\n");
 	exit (0);
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char *message;
+	t_mini	mini;
 
 	signal(SIGINT, handle);
-	message = NULL;
-	printf(GRN "Minishell >" RESET);
-	if (!message)
-		message = readline(" ");
-	while (check_input(message, envp) != 0)
-	{
-		free (message);
-		printf(GRN "Minishell >" RESET);
-		message = readline(" ");
-	}
-	printf("Bye bye!\n");
-	free (message);
-	return (0);
+	if (init_struct(&mini, envp) == -1)
+		return (ENOMEM);
+	// printf(GRN "Minishell >" RESET);
+	// if (!mini.message)
+	// 	mini.message = readline(" ");
+	// while (check_input(mini.message, envp) != 0)
+	// {
+	// 	free (mini.message);
+	// 	printf(GRN "Minishell >" RESET);
+	// 	mini.message = readline(" ");
+	// }
+	free_struct(&mini);
+	return (SUCCESS);
 }

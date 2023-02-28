@@ -12,12 +12,17 @@ LIBFT = lib/libft.a
 # RUN #
 RUN = @./minishell
 # Source #
-SRC = 	./src/main.c \
-		./src/check_input.c \
-		./src/pipex.c \
-		./src/cmds/echo.c \
-		./src/cmds/pwd.c \
-		./src/cmds/env.c
+SRC = 	./src/main.c\
+		./src/pipex.c\
+		./src/cmds/echo.c\
+		./src/cmds/pwd.c\
+		./src/cmds/env.c\
+		./src/cmds/cd.c\
+		./src/cmds/export.c\
+		./src/cmds/ft_exit.c\
+		./src/cmds/unset.c\
+		./src/init.c \
+		./src/parsing/check_input.c
 # Colors #
 BLACK = \033[0;30m
 RED = \033[0;31m

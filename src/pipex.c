@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 02:56:29 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/02/28 12:49:01 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,4 @@ void	create_child(char *message, char *envp[])
 	}
 	else
 		wait(&pid);
-}
-
-void	test(char *message, char *envp[])
-{
-	int	fdin;
-	int	fdout;
-	int	index;
 }
