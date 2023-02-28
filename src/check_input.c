@@ -6,13 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/27 12:05:20 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/02/28 03:06:19 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdio.h>
-#include "../lib/Libft-42/libft.h"
+#include "../lib/libft.h"
 #include "pipex.h"
 #include "cmds/cmds.h"
 

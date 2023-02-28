@@ -7,7 +7,7 @@ CFGLAGS = -Wall -Werror -Wextra
 REMOVE = rm -f
 # OBJS #
 OBJS = ${SRC:.c=.o}
-#LIB #
+# LIB #
 LIBFT = lib/libft.a
 # Source #
 SRC = 	./src/main.c \
@@ -29,15 +29,15 @@ WHITE = \033[0;37m
 
 all: lib $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-		${CC} ${CFGLAGS} ${OBJS} -L lib/ -lft -lreadline -o ${NAME}
-
-assert: CFLAGS += -DASSERT=1
-assert: fclean all
-	@python3 ./assert_minishell.py
+$(NAME): $(OBJS) lib $(LIBFT)
+		${CC} ${CFGLAGS} ${OBJS} -L lib -lft -lreadline -o ${NAME}
 
 lib:
-	@make -s -C libs/Libft-42
+	@make -s -C lib
+
+#assert: CFLAGS += -DASSERT=1
+#assert: fclean all
+#	@python3 ./assert_minishell.py
 
 clean:
 	${REMOVE} ${OBJS}
