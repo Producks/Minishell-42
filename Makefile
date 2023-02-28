@@ -8,7 +8,7 @@ REMOVE = rm -f
 # OBJS #
 OBJS = ${SRC:.c=.o}
 #LIB #
-LIBFT = lib/Libft-42/libft.a
+LIBFT = lib/libft.a
 # Source #
 SRC = 	./src/main.c \
 		./src/check_input.c \
@@ -30,7 +30,7 @@ WHITE = \033[0;37m
 all: lib $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-		${CC} ${CFGLAGS} ${OBJS} -L lib/Libft-42/ -lft -lreadline -o ${NAME}
+		${CC} ${CFGLAGS} ${OBJS} -L lib/ -lft -lreadline -o ${NAME}
 
 assert: CFLAGS += -DASSERT=1
 assert: fclean all
