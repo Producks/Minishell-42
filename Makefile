@@ -1,14 +1,16 @@
 # Executable #
 NAME = minishell
 # Compile stuff #
-CC = gcc
+CC = @gcc
 CFGLAGS = -Wall -Werror -Wextra
 # Remove #
-REMOVE = rm -f
+REMOVE = @rm -f
 # OBJS #
 OBJS = ${SRC:.c=.o}
 # LIB #
 LIBFT = lib/libft.a
+# RUN #
+RUN = @./minishell
 # Source #
 SRC = 	./src/main.c \
 		./src/check_input.c \
@@ -26,11 +28,11 @@ PURPLE = \033[0;35m
 CYAN = \033[0;36m
 WHITE = \033[0;37m
 
-
 all: lib $(NAME)
 
-$(NAME): $(OBJS) lib $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT)
 		${CC} ${CFGLAGS} ${OBJS} -L lib -lft -lreadline -o ${NAME}
+	@echo "$(GREEN)Done$(WHITE)"
 
 lib:
 	@make -s -C lib
@@ -40,13 +42,17 @@ lib:
 #	@python3 ./assert_minishell.py
 
 clean:
+	@make clean -s -C lib
 	${REMOVE} ${OBJS}
 
 fclean:clean
+	@make fclean -s -C lib
 	${REMOVE} ${NAME}
+	@echo "$(RED)Cleaning done$(WHITE)"
 
 re: fclean all
 
-run: ${NAME} ${RUN}
+run: all
+	${RUN}
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re lib run
