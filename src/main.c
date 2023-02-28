@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 13:57:15 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:29:33 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ int	main(int argc, char *argv[], char *envp[])
 	signal(SIGINT, handle);
 	if (init_struct(&mini, envp) == -1)
 		return (ENOMEM);
-	// printf(GRN "Minishell >" RESET);
-	// if (!mini.message)
-	// 	mini.message = readline(" ");
-	// while (check_input(mini.message, envp) != 0)
-	// {
-	// 	free (mini.message);
-	// 	printf(GRN "Minishell >" RESET);
-	// 	mini.message = readline(" ");
-	// }
+	printf(GRN "Minishell >" RESET);
+	if (!mini.message)
+		mini.message = readline(" ");
+	while (check_input(&mini) != 0)
+	{
+		free (mini.message);
+		printf(GRN "Minishell >" RESET);
+		mini.message = readline(" ");
+	}
 	free_struct(&mini);
 	return (SUCCESS);
 }
