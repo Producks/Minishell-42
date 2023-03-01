@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 14:29:33 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/01 05:46:07 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <readline/readline.h>
+#include <errno.h>
 #include "parsing/check_input.h"
 #include "struct.h"
 #include "init.h"

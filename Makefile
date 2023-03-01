@@ -13,7 +13,7 @@ LIBFT = lib/libft.a
 RUN = @./minishell
 # Source #
 SRC = 	./src/main.c\
-		./src/pipex.c\
+		./src/execution/pipex.c\
 		./src/cmds/echo.c\
 		./src/cmds/pwd.c\
 		./src/cmds/env.c\

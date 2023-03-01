@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 12:18:19 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 12:37:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/01 01:49:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ERROR_H
 
 # define SUCCESS 0
-# define ENOMEM 12
+//# define ENOMEM 12
 
 void	print_errno(const char *str);
 

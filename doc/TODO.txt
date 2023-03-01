@@ -1,6 +1,6 @@
 What to do and various notes ✔️
 
-• Display a new prompt when waiting for a new command ✔️
+• Display a new prompt when waiting for a new command ✔️⚠️ #Refactor for later 
 
 • Have a working history. ❌
 
@@ -42,10 +42,10 @@ foreground pipeline. ❌
 	◦ ctrl-\ does nothing. ❌
 
 • Your shell must implement the following builtins: ❌
-	◦ echo with option -n ✔️
+	◦ echo with option -n ✔️⚠️ # More testing need to be done
 	◦ cd with only a relative or absolute path ❌
-	◦ pwd with no options ✔️
+	◦ pwd with no options ✔️⚠️ # More testing need to be done
 	◦ export with no options ❌
-	◦ unset with no options ❌ 
-	◦ env with no options or arguments ✔️
-	◦ exit with no options ❌
+	◦ unset with no options ✔️⚠️ # More testing need to be done and remove PATH = no env maybe? 
+	◦ env with no options or arguments ✔️⚠️ # More testing need to be done
+	◦ exit with no options ✔️⚠️ # More testing need to be done ~~ seems to work fine for now

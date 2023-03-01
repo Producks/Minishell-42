@@ -6,11 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 13:34:16 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/01 13:12:43 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	export(void)
+#include "../struct.h"
+
+int	ft_export(t_mini *mini)
 {
 	return (0);
 }
