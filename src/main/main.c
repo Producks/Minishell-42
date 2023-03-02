@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/01 05:46:07 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/02 12:26:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 #include <signal.h>
 #include <readline/readline.h>
 #include <errno.h>
-#include "parsing/check_input.h"
+#include "../parsing/check_input.h"
 #include "struct.h"
 #include "init.h"
-#include "../lib/libft.h"
-#include "error.h"
+#include "../../lib/libft.h"
 
 # define RED   "\x1B[31m"
 # define GRN   "\x1B[32m"
@@ -53,5 +52,5 @@ int	main(int argc, char *argv[], char *envp[])
 		mini.message = readline(" ");
 	}
 	free_struct(&mini);
-	return (SUCCESS);
+	return (0);
 }
