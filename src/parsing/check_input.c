@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/02 12:26:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/02 15:50:10 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int check_input(t_mini *mini)
 	// else
 	// 	create_child(mini->message, mini->env_copy);
 	//env(mini->env_list);
-	env(mini->env_copy);
+	//env(mini->env_copy);
 	ft_free(mini->cmd);
 	return (0);
 }
