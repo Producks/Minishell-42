@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/03 21:32:07 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/04 08:49:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 		if (!ft_strncmp(mini->cmd[index], mini->env_copy[i], size))
 		{
 			free(mini->env_copy[i]);
-			mini->env_copy[i] = ft_strdup(mini->cmd[index]);
+			if (flag)
+				mini->env_copy[i] = ft_strjoin(mini->cmd[index], "\0");
+			else
+				mini->env_copy[i] = ft_strdup(mini->cmd[index]);
 			return (1);
 		}
 		i++;
@@ -35,8 +38,7 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 	return (0);
 }
 
-// /*Check for order later, adding it at the end for now
-// ADD later parsing if first value is letter*/
+/*Check for order later, adding it at the end for now*/
 static void	add_export(t_mini *mini, const char flag, int index)
 {
 	char	**new;
@@ -46,7 +48,10 @@ static void	add_export(t_mini *mini, const char flag, int index)
 	new = ft_realloc(mini->env_copy, sizeof(char *) * (size + 1));
 	if (!new)
 		return ;
-	new[size] = ft_strdup(mini->cmd[index]);
+	if (flag)
+		new[size] = ft_strjoin(mini->cmd[index], "\0");
+	else
+		new[size] = ft_strdup(mini->cmd[index]);
 	new[size + 1] = NULL;
 	mini->env_copy = new;
 	size = count_double_array(mini->env_copy);
