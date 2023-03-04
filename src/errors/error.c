@@ -6,13 +6,15 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 12:27:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 12:30:52 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/03 11:00:38 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <errno.h>
 
-void	print_errno(const char *str)
+int	error_handler(const char *message)
 {
-	perror(str);
+	perror(message);
+	return (errno);
 }

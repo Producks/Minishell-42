@@ -6,21 +6,20 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:05 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/02 15:51:11 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/03 12:36:43 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "../main/struct.h"
 
-static void	ft_remove_element(t_mini *mini, int index)
+static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 {
-	int	i;
-	int	size;
-	char **new;
+	int		size;
+	char	**new;
 
 	size = 0;
-	i = 0;
 	while (mini->env_copy[size] != NULL)
 		size++;
 	new = malloc(sizeof(char *) * size);
@@ -28,24 +27,13 @@ static void	ft_remove_element(t_mini *mini, int index)
 	{
 		ft_free(mini->env_copy);
 		mini->env_copy = NULL;
-		return;
+		return ;
 	}
-	i = 0;
-	while (mini->env_copy[i])
-	{
-		if (i == index)
-			i++;
-		else
-		{
-			new[i] = ft_strdup(mini->env_copy[i]);
-			i++;
-		}
-	}
-	//printf("%s\n", new[0]);
-	new[i] = NULL;
+	while (mini->env_copy[++i])
+		if (i != index)
+			new[j++] = ft_strdup(mini->env_copy[i]);
+	new[j] = NULL;
 	ft_free(mini->env_copy);
-	for (int j = 0; new[j]; j++)
-		printf("%d %s\n", j, new[j]);
 	mini->env_copy = new;
 }
 
@@ -63,20 +51,23 @@ static int	unset_strcmp(const char *str1, const char *str2)
 int	unset(t_mini *mini)
 {
 	int	index;
+	int	j;
 
-	index = 0;
+	j = 0;
 	if (mini->cmd[1] == NULL)
 		return (0);
-	while (mini->env_copy[index])
+	while (mini->cmd[++j])
 	{
-		if (unset_strcmp(mini->cmd[1], mini->env_copy[index]) == 0)
+		index = 0;
+		while (mini->env_copy[index])
 		{
-			ft_remove_element(mini, index);
-			return (0);
+			if (unset_strcmp(mini->cmd[j], mini->env_copy[index]) == 0)
+			{
+				ft_remove_element(mini, index, -1, 0);
+				break ;
+			}
+			index++;
 		}
-		index++;
 	}
-	for (int i = 0; mini->env_copy[i]; i++)
-		printf("%s\n", mini->env_copy[i]);
 	return (0);
 }

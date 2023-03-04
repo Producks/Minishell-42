@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:39 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/02 12:28:11 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/03 21:26:24 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 void	ft_exit(t_mini *mini)
 {
 	printf("Buh Bye\n");
+	free_struct(mini);
 	exit (0);
 }

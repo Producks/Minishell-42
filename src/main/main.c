@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/02 12:26:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/03 21:31:35 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include "struct.h"
 #include "init.h"
 #include "../../lib/libft.h"
+
+//Global variable for exit status
+//int	g_exit_status = 0;
 
 # define RED   "\x1B[31m"
 # define GRN   "\x1B[32m"
