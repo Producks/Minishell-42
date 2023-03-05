@@ -6,14 +6,14 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/04 09:12:20 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 09:36:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdio.h>
 #include "../main/struct.h"
-#include "../../lib/libft.h"
+#include "../../libs/Libft/libft.h"
 #include "../execution/pipex.h"
 #include "../cmds/cmds.h"
 

@@ -6,14 +6,14 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/01 05:29:14 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 09:35:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../../lib/libft.h"
+#include "../../libs/Libft/libft.h"
 
 void	make_child(int nbr, char *message, char *envp[])
 {

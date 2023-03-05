@@ -6,13 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/02/28 13:02:32 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 09:35:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdbool.h>
-#include "../../lib/libft.h"
+#include "../../libs/Libft/libft.h"
 
 int	echo(char **message)
 {

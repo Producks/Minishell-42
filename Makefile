@@ -8,7 +8,7 @@ REMOVE = @rm -f
 # OBJS #
 OBJS = ${SRC:.c=.o}
 # LIB #
-LIBFT = lib/libft.a
+LIBFT = libs/Libft/libft.a
 # RUN #
 RUN = @./minishell
 # Source #
@@ -38,22 +38,22 @@ WHITE = \033[0;37m
 all: lib $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-		${CC} ${CFGLAGS} ${OBJS} -L lib -lft -lreadline -o ${NAME}
+		${CC} ${CFGLAGS} ${OBJS} -L libs/Libft -lft -lreadline -o ${NAME}
 	@echo "$(GREEN)Done$(WHITE)"
 
 lib:
-	@make -s -C lib
+	@make -s -C libs/Libft
 
 #assert: CFLAGS += -DASSERT=1
 #assert: fclean all
 #	@python3 ./assert_minishell.py
 
 clean:
-	@make clean -s -C lib
+	@make clean -s -C libs/Libft
 	${REMOVE} ${OBJS}
 
 fclean:clean
-	@make fclean -s -C lib
+	@make fclean -s -C libs/Libft
 	${REMOVE} ${NAME}
 	@echo "$(RED)Cleaning done$(WHITE)"
 

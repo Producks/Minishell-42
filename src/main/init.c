@@ -6,12 +6,12 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/03 21:23:02 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 09:36:11 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../lib/libft.h"
+#include "../../libs/Libft/libft.h"
 #include "init.h"
 
 /*Make a copy of the envp and store it in the struct*/
