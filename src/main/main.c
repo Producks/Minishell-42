@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/03 21:31:35 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 04:42:19 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@ void	handle(int num)
 	printf("EXIT\n");
 	exit (0);
 }
+
+int add_(int num)
+{
+    int result;
+    __asm__ __volatile__(
+        "mov %1, %0\n\t"
+        "xor %%eax, %%eax\n\t" // clear the eax register
+        "jmp loop_check\n\t"
+        "loop_body:\n\t"
+        "inc %0\n\t"
+        "loop_check:\n\t"
+        "inc %%eax\n\t"
+        "cmp $11, %%eax\n\t"
+        "jne loop_body\n\t" // jump to loop body if not equal
+        : "=r" (result)
+        : "r" (num)
+        : "%eax"
+    );
+    return result;
+}
+
 
 int	main(int argc, char *argv[], char *envp[])
 {

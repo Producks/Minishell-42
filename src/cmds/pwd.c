@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:37:08 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/04 08:50:07 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 04:57:15 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 
 int	pwd(void)
 {
-	char	*str;
+	char	*pwd;
 
-	str = getcwd(NULL, 69);
-	printf("%s\n", str);
-	free (str);
+	pwd = getcwd(NULL, 69);
+	if (!pwd)
+		return (-1);
+	printf("%s\n", pwd);
+	free (pwd);
 	return (0);
 }

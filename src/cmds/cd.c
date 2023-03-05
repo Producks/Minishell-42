@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/04 15:16:07 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 05:08:57 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,15 @@ static int	add_pwd_to_env(t_mini *mini, char *old_pwd)
 		if (ft_strncmp(mini->env_copy[index], "PWD=", 4) == 0)
 		{
 			free(mini->env_copy[index]);
+			mini->env_copy[index] = ft_strjoin("PWD=", getcwd(NULL, 69));
+			if (!mini->env_copy[index])
+				return (-1);
 			count++;
 		}
 		else if (ft_strncmp(mini->env_copy[index], "OLDPWD=", 7) == 0)
 		{
 			free(mini->env_copy[index]);
+			mini->env_copy[index] = ft_strjoin("OLDPWD=", old_pwd);
 			count++;
 		}
 		index++;
@@ -62,16 +66,11 @@ static char	*get_home(t_mini *mini)
 	return (NULL);
 }
 
-int	cd(t_mini *mini)
+static int	cd_deez(t_mini *mini, int count)
 {
-	int		ret;
-	int		count;
-	char	*error;
 	char	*home;
-	char	*current;
-	
-	count = count_double_array(mini->cmd);
-	current = getcwd(NULL, 69);
+	int		ret;
+
 	if (count > 2)
 	{
 		write(2, "minishell: cd: too many arguments\n", 35);
@@ -86,8 +85,25 @@ int	cd(t_mini *mini)
 			return (-1);
 		ret = chdir(home);
 	}
+	return (ret);
+}
+
+int	cd(t_mini *mini)
+{
+	int		ret;
+	int		count;
+	char	*current;
+
+	count = count_double_array(mini->cmd);
+	current = getcwd(NULL, 69);
+	if (!current)
+		return (-1);
+	ret = cd_deez(mini, count);
 	if (ret == -1)
 		perror("cd");
-	add_pwd_to_env(mini, current);
+	ret = add_pwd_to_env(mini, current);
+	if (ret)
+		return (-1);
+	free(current);
 	return (0);
 }

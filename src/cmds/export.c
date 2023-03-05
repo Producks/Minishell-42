@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/04 08:49:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/04 19:37:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	parse_string(const char *str)
 	int	index;
 
 	index = 0;
-	if (!ft_isalpha(str[0]))
+	if (!ft_isalpha(str[0]) && str[0] != '_')
 	{
 		write(2, "minishell: export: '", 21);
 		write(2, str, ft_strlen(str));
