@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 07:54:53 by ddemers          ###   ########.fr       */
+/*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
+/*   Updated: 2023/03/05 07:40:11 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
-#include "signal.h"
-#include "struct.h"
-#include "init.h"
-#include "../parsing/read_input.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
 
-//Global variable for exit status
-//int	g_exit_status = 0;
-
-int	main(int argc, char *argv[], char *envp[])
+void	handle(int num)
 {
-	t_mini	mini;
+	printf("EXIT\n");
+	exit (0);
+}
 
-	init_signals();
-	if (init_struct(&mini, envp) == -1)
-		return (ENOMEM);
-	read_input(&mini);
-	free_struct(&mini);
-	return (0);
+void	init_signals(void)
+{
+	signal(SIGINT, handle);
 }

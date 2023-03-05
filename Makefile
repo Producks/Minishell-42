@@ -22,6 +22,8 @@ SRC = 	./src/main/main.c\
 		./src/cmds/ft_exit.c\
 		./src/cmds/unset.c\
 		./src/main/init.c \
+		./src/main/signal.c \
+		./src/parsing/read_input.c \
 		./src/parsing/check_input.c
 # Colors #
 BLACK = \033[0;30m

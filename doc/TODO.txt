@@ -41,9 +41,9 @@ foreground pipeline. ❌
 	◦ ctrl-D exits the shell. ❌
 	◦ ctrl-\ does nothing. ❌
 
-• Your shell must implement the following builtins: ❌
+• Your shell must implement the following builtins: ✅❗
 	◦ echo with option -n ✅❗ # More testing need to be done
-	◦ cd with only a relative or absolute path ❌
+	◦ cd with only a relative or absolute path ✅❗
 	◦ pwd with no options ✅❗ # More testing need to be done
 	◦ export with no options ✅❗ # More testing need to be done, also check alphabetical order
 	◦ unset with no options ✅❗ # More testing need to be done and remove PATH = no env maybe? 
