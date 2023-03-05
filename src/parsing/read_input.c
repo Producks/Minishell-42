@@ -6,26 +6,33 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 07:55:13 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 09:01:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 #include "../main/struct.h"
 #include "read_input.h"
 #include "check_input.h"
 
+void rl_replace_line (const char *text, int clear_undo);
+
 int	read_input(t_mini *mini)
 {
-	printf(GRN "Minishell >" RESET);
+	char	*history;
+
 	if (!mini->message)
-		mini->message = readline(" ");
+		mini->message = readline(GRN "Minishell > " RESET);
+	add_history(mini->message);
 	while (check_input(mini) != 0)
 	{
 		free (mini->message);
-		printf(GRN "Minishell >" RESET);
-		mini->message = readline(" ");
+		mini->message = readline(GRN "Minishell > " RESET);
+		rl_on_new_line();
+		add_history(mini->message);
 	}
+	//rl_clear_history(); // Why doesn't this trash want to compile? garbage fucking mac
 	return (0);
 }

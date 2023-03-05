@@ -2,7 +2,7 @@ What to do and various notes ✅
 
 • Display a new prompt when waiting for a new command ✅❗ #Refactor for later 
 
-• Have a working history. ❌
+• Have a working history. ✅❗ Not sure if we need to make a copy like bash. Check later// Fix mac issue later
 
 • Search and launch the right executable (based on the PATH variable or using a
 relative or an absolute path). ❌
