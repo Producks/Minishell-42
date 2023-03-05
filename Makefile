@@ -7,8 +7,14 @@ CFGLAGS = -Wall -Werror -Wextra
 REMOVE = @rm -f
 # OBJS #
 OBJS = ${SRC:.c=.o}
+# check later if needed #
+# INC_LIBFT = -I libs/Libft/includes
+# INC_READLINE = -I libs/readline/include
 # LIB #
 LIBFT = libs/Libft/libft.a
+# readline #
+READLINE = libs/readline/libreadline.a
+HISTORY = libs/readline/libhistory.a
 # RUN #
 RUN = @./minishell
 # Source #
@@ -34,6 +40,7 @@ BLUE = \033[0;34m
 PURPLE = \033[0;35m
 CYAN = \033[0;36m
 WHITE = \033[0;37m
+# ${CC} ${CFGLAGS} ${OBJS} -L libs/Libft -lft -L libs/readline -lreadline -lhistory ${INC_READLINE} -o ${NAME} #
 
 all: lib $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 07:54:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 11:09:23 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../parsing/read_input.h"
 
 //Global variable for exit status
-//int	g_exit_status = 0;
+int	g_exit_status = 0;
 
 int	main(int argc, char *argv[], char *envp[])
 {

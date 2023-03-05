@@ -6,18 +6,18 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 09:01:40 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 10:18:23 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+// #include "../../libs/readline/readline.h"
+// #include "../../libs/readline/history.h"
 #include "../main/struct.h"
 #include "read_input.h"
 #include "check_input.h"
-
-void rl_replace_line (const char *text, int clear_undo);
 
 int	read_input(t_mini *mini)
 {
@@ -30,7 +30,7 @@ int	read_input(t_mini *mini)
 	{
 		free (mini->message);
 		mini->message = readline(GRN "Minishell > " RESET);
-		rl_on_new_line();
+		rl_redisplay();
 		add_history(mini->message);
 	}
 	//rl_clear_history(); // Why doesn't this trash want to compile? garbage fucking mac

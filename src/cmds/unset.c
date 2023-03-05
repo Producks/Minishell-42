@@ -6,13 +6,15 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:05 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/03 12:36:43 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/05 12:37:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include "../main/struct.h"
+
+// extern int	g_exit_status;
 
 static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 {
