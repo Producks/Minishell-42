@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 09:35:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/06 07:38:15 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	echo(char **message)
 			check_n = true;
 		}
 		if (message[index])
-			printf("%s", message[index]);
+			ft_putstr_fd(message[index], 1);
 		if (message[index + 1] && message[index])
-			printf(" ");
+			write(1, " ", 1);
 		index++;
 	}
 	if (check_n == false)
-		printf("\n");
+		write(1, "\n", 1);
 	return (0);
 }

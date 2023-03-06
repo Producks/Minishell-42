@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 09:36:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/06 10:58:00 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	check_if_utils(t_mini *mini)
 		env(mini->env_copy);
 	else if (ft_strcmp(mini->cmd[0], "exit") == 0)
 		ft_exit(mini);
+	else if (ft_strcmp(mini->cmd[0], "debug") == 0) // special variable to test pipes
+		create_fork(mini);
 	return (1);
 }
 

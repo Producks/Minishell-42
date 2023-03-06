@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 09:35:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/06 12:21:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "../../libs/Libft/libft.h"
+#include "../main/struct.h"
+#include "../utils/utils.h"
 
 void	make_child(int nbr, char *message, char *envp[])
 {
@@ -42,4 +44,58 @@ void	create_child(char *message, char *envp[])
 	}
 	else
 		wait(&pid);
+}
+
+t_cmds	*generate_cmds(int flag)
+{
+	t_cmds *cmds;
+
+	cmds = create_node_cmds();
+	if (flag == 0)
+	{
+		cmds->cmds = ft_split("echo hello", ' ');
+		cmds->in = 0;
+		cmds->out = 1;
+	}
+	else
+	{
+		cmds->cmds = ft_split("cat", ' ');
+		cmds->in = 1;
+		cmds->out = 0;
+	}
+	return (cmds);
+}
+
+
+void	generate_test_env(t_mini *mini)
+{
+	t_cmds	*cmds;
+	t_cmds	*cmds_2;
+
+	cmds = generate_cmds(0);
+	cmds_2 = generate_cmds(1);
+	add_node_cmds(&mini->cmds_link_test, cmds);
+	add_node_cmds(&mini->cmds_link_test, cmds_2);
+}
+
+void	run_cmd(t_mini *mini)
+{
+	printf("%s\n", mini->cmds_link_test->cmds[0]);
+	exit(0);
+}
+
+void	create_fork(t_mini *mini)
+{
+	pid_t	pid;
+
+	generate_test_env(mini);
+	pid = fork();
+	if (pid == 0)
+		run_cmd(mini);
+	delete_node(&mini->cmds_link_test, mini->cmds_link_test);
+	waitpid(pid, NULL, 0);
+	pid = fork();
+	if (pid == 0)
+		run_cmd(mini);
+	return ;
 }

@@ -30,7 +30,8 @@ SRC = 	./src/main/main.c\
 		./src/main/init.c \
 		./src/main/signal.c \
 		./src/parsing/read_input.c \
-		./src/parsing/check_input.c
+		./src/parsing/check_input.c \
+		./src/utils/linked_list_cmds.c
 # Colors #
 BLACK = \033[0;30m
 RED = \033[0;31m
