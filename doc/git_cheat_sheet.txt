@@ -1,2 +1,7 @@
-To update sub module (LIBFT)
+git clone git@github.com:Producks/Minishell-42.git
+Do this command in the root folder where minishell is:
+git submodule init
+Same thing, in the root of the project, this should pull the lib:
 git submodule update
+
+or clone libft repo directly in it
