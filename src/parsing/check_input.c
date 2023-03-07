@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/06 10:58:00 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/07 10:40:30 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	check_if_utils(t_mini *mini)
 		ft_exit(mini);
 	else if (ft_strcmp(mini->cmd[0], "debug") == 0) // special variable to test pipes
 		create_fork(mini);
+	else if (ft_strcmp(mini->cmd[0], "gpt") == 0)
+		system("open https://chat.openai.com");
 	return (1);
 }
 
