@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:06:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/06 12:12:01 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/06 21:48:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,24 @@ void	delete_node_cmds(t_cmds **head, t_cmds *node_to_delete)
 	node_to_delete->infile = safe_free(node_to_delete->infile);
 	node_to_delete->outfile = safe_free(node_to_delete->outfile);
 	free (node_to_delete);
+}
+
+
+void	*free_linked_list_mini(t_cmds **head)
+{
+	t_cmds *current;
+	t_cmds *previous;
+	
+	current = *head;
+	while (current)
+	{
+		ft_free(current->cmds);
+		safe_free(current->path);
+		safe_free(current->infile);
+		safe_free(current->outfile);
+		previous = current;
+		current = current->next;
+		free(previous);
+	}
+	return (NULL);
 }

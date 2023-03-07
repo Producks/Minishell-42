@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 08:08:21 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/06 19:14:25 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <signal.h>
 
+// wrong signal command place holder for now
+//try and make this work with ctrl+D intead of ctr+c so it doesn't seg fault TODO
 void	handle(int num)
 {
 	printf("EXIT\n");
