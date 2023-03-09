@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 13:56:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/09 17:30:05 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,19 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 	if (flag == 0)
 	{
 		cmds->cmds = ft_split("cat", ' ');
-		cmds->infile = ft_strdup("touch.txt");
+		cmds->infile = ft_strdup("test.txt");
 		cmds->in_type = 51;
-		cmds->out_type = 0;
+		cmds->out_type = 50;
 		cmds->fd_in = mini->fd_in;
 		cmds->fd_out = mini->fd_out;
 	}
 	else
 	{
-		cmds->cmds = ft_split("ls", ' ');
-		cmds->in_type = mini->fd_in;
-		cmds->out_type = mini->fd_out;
+		cmds->cmds = ft_split("wc", ' ');
+		cmds->in_type = 50;
+		cmds->out_type = 0;
+		cmds->fd_in = mini->fd_in;
+		cmds->fd_out = mini->fd_out;
 	}
 	return (cmds);
 }
@@ -72,9 +74,9 @@ void	generate_test_env(t_mini *mini)
 	t_cmds	*cmds_2;
 
 	cmds = generate_cmds(mini, 0);
-	//cmds_2 = generate_cmds(1);
+	cmds_2 = generate_cmds(mini, 1);
 	add_node_cmds(&mini->cmds_link_test, cmds);
-	//add_node_cmds(&mini->cmds_link_test, cmds_2);
+	add_node_cmds(&mini->cmds_link_test, cmds_2);
 }
 
 void	run_cmd(t_mini *mini)
@@ -89,32 +91,6 @@ void	run_cmd(t_mini *mini)
 	execve(path, mini->cmds_link_test->cmds, mini->env_copy);
 	exit(0);
 }
-
-/*typedef struct s_cmds
-{
-	char			**cmds;
-	char			*path;
-	int				in;
-	int				out;
-	char			*infile;
-	char			*outfile;
-	struct s_cmds	*previous;
-	struct s_cmds	*next;
-}	t_cmds;*/
-// int	pipe_deez(t_cmds *prev_cmd, t_cmds *curr_cmd, int fd[2])
-// {
-//     if (curr_cmd->fd_in == 1)
-//     {
-//         dup2(fd[READ_PIPE], STDIN_FILENO);
-//       	close(fd[WRITE_PIPE]);
-//     }
-//     else if (curr_cmd->fd_out == 1)
-//     {
-//         dup2(fd[WRITE_PIPE], STDOUT_FILENO);
-//      	close(fd[READ_PIPE]);
-//     }
-//     return (0);
-// }
 
 /*Will handle errors later prototype to see if the idea works*/
 void	create_fork(t_mini *mini)

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 10:09:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/09 14:55:07 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define READ_PIPE 0
 # define WRITE_PIPE 1
 
-# define REDIRECTION_PIPE = 50
-# define RED_INPUT = 51
-# define RED_OUTPUT = 52
+# define REDIRECTION_PIPE 50
+# define RED_INPUT 51
+# define RED_OUTPUT 52
 # define RED_APPEND_OUT 53
 # define RED_APPEND_IN 54
 
