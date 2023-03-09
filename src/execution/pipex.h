@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/08 13:56:17 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/09 10:09:53 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	make_child(int nbr, char *message, char *envp[]);
 void	create_child(char *message, char *envp[]);
 void	create_fork(t_mini *mini);
 int		pipe_redirection(t_mini *mini);
-void	pipe_restore(t_mini *mini, int in, int out);
+void	pipe_restore(t_mini *mini);
+int		close_pipes_subroutine(t_mini *mini);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/06 11:36:36 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/09 12:16:15 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ int	init_struct(t_mini *mini, char *envp[])
 	mini->message = NULL;
 	mini->cmd = NULL;
 	mini->cmds_link_test = NULL;
+	mini->fd_in = dup(0);
+	mini->fd_out = dup(1);
 	return (0);
 }
