@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/06 19:14:25 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/08 03:55:28 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	handle(int num)
 
 void	init_signals(void)
 {
-	signal(SIGINT, handle);
+	//signal(SIGINT, handle);
 }

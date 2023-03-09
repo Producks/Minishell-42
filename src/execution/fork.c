@@ -6,47 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/07 13:01:04 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/08 17:32:51 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h> //linux only for wait and waitpid
-#include <sys/wait.h> //linux only for wait and waitpid
-#include "../../libs/Libft/libft.h"
-#include "../main/struct.h"
-#include "../utils/utils.h"
-
-void	make_child(int nbr, char *message, char *envp[])
-{
-	int id;
-
-	id = fork();
-	if (id == 0)
-	{
-		char *test[] = {"/bin/bash", "-c", message, NULL};
-		execve("/bin/bash", test, envp);
-	}
-	wait(&id);
-}
-
-void	create_child(char *message, char *envp[])
-{
-	int	pid;
-
-	pid = fork();
-	if (pid < 0)
-		exit (0);
-	if (pid == 0)
-	{
-		char *test[] = {"/bin/bash", "-c", message, NULL};
-		execve("/bin/bash", test, envp);
-	}
-	else
-		wait(&pid);
-}
+#include "pipex.h"
 
 t_cmds	*generate_cmds(int flag)
 {
@@ -55,15 +19,15 @@ t_cmds	*generate_cmds(int flag)
 	cmds = create_node_cmds();
 	if (flag == 0)
 	{
-		cmds->cmds = ft_split("ls", ' ');
-		cmds->in = 0;
-		cmds->out = 1;
+		cmds->cmds = ft_split("echo weee", ' ');
+		cmds->fd_in = 0;
+		cmds->fd_out = 1;
 	}
 	else
 	{
-		cmds->cmds = ft_split("ls", ' ');
-		cmds->in = 1;
-		cmds->out = 0;
+		cmds->cmds = ft_split("cat", ' ');
+		cmds->fd_in = 1;
+		cmds->fd_out = 0;
 	}
 	return (cmds);
 }
@@ -123,24 +87,84 @@ void	run_cmd(t_mini *mini)
 	exit(0);
 }
 
+/*typedef struct s_cmds
+{
+	char			**cmds;
+	char			*path;
+	int				in;
+	int				out;
+	char			*infile;
+	char			*outfile;
+	struct s_cmds	*previous;
+	struct s_cmds	*next;
+}	t_cmds;*/
+int	pipe_deez(t_cmds *prev_cmd, t_cmds *curr_cmd, int fd[2])
+{
+    if (curr_cmd->fd_in == 1)
+    {
+        dup2(fd[READ_PIPE], STDIN_FILENO);
+      	close(fd[WRITE_PIPE]);
+    }
+    else if (curr_cmd->fd_out == 1)
+    {
+        dup2(fd[WRITE_PIPE], STDOUT_FILENO);
+     	close(fd[READ_PIPE]);
+    }
+    return (0);
+}
+
+/*Will handle errors later prototype to see if the idea works*/
 void	create_fork(t_mini *mini)
 {
 	pid_t	pid;
 	t_cmds *head;
-	int		pipe[2];
+	int		ret;
 
 	generate_test_env(mini);
 	head = mini->cmds_link_test;
 	pid = 0;
 	while (mini->cmds_link_test)
 	{
+		pipe_redirection(mini);
 		pid = fork();
-		//dup2();
-		//close();
 		if (pid == 0)
 			run_cmd(mini);
 		mini->cmds_link_test = mini->cmds_link_test->next;
+		pipe_restore(mini, 0, 1);
 	}
-	waitpid(pid, NULL, 0);
-	return ;
+	if (pid > 0)
+		waitpid(pid, NULL, 0);
 }
+
+
+// ret = pipe_deez(mini->cmds_link_test->previous, mini->cmds_link_test, fd);
+
+
+// void	make_child(int nbr, char *message, char *envp[])
+// {
+// 	int id;
+
+// 	id = fork();
+// 	if (id == 0)
+// 	{
+// 		char *test[] = {"/bin/bash", "-c", message, NULL};
+// 		execve("/bin/bash", test, envp);
+// 	}
+// 	wait(&id);
+// }
+
+// void	create_child(char *message, char *envp[])
+// {
+// 	int	pid;
+
+// 	pid = fork();
+// 	if (pid < 0)
+// 		exit (0);
+// 	if (pid == 0)
+// 	{
+// 		char *test[] = {"/bin/bash", "-c", message, NULL};
+// 		execve("/bin/bash", test, envp);
+// 	}
+// 	else
+// 		wait(&pid);
+// }

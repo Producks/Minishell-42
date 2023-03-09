@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:06:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/06 21:48:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/08 17:20:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ t_cmds *create_node_cmds(void)
 		return (NULL);
 	new_node->cmds = NULL;
 	new_node->path = NULL;
-	new_node->in = 0;
-	new_node->out = 0;
+	new_node->fd_in = 0;
+	new_node->fd_out = 0;
+	new_node->in_type = 0;
+	new_node->out_type = 1;
 	new_node->infile = NULL;
 	new_node->outfile = NULL;
 	new_node->previous = NULL;
