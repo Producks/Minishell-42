@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 13:41:16 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:00:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "signal.h"
 #include "struct.h"
 #include "init.h"
-#include "../parsing/read_input.h"
+#include "../parsing/parsing.h"
 
 //Global variable for exit status
 //int	g_exit_status = 0;

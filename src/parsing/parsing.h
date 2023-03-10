@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.h                                       :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 07:46:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 08:45:15 by ddemers          ###   ########.fr       */
+/*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
+/*   Updated: 2023/03/10 11:59:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_INPUT_H
-# define READ_INPUT_H
+#ifndef PARSING_H
+# define PARSING_H
 
+#include <stdbool.h>
+#include <stdio.h>
+#include <readline/readline.h> // fix later
+#include <readline/history.h> // fix later
 # include "../main/struct.h"
+#include "../../libs/Libft/libft.h"
+#include "../execution/exec.h"
+#include "../cmds/cmds.h"
 
 # define RED   "\x1B[31m"
 # define GRN   "\x1B[32m"
@@ -24,6 +31,7 @@
 # define WHT   "\x1B[37m"
 # define RESET "\x1B[0m"
 
+int check_input(t_mini *mini);
 int	read_input(t_mini *mini);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 17:30:05 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 18:06:09 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "exec.h"
 
 t_cmds	*generate_cmds(t_mini *mini, int flag)
 {
@@ -20,17 +20,26 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 	if (flag == 0)
 	{
 		cmds->cmds = ft_split("cat", ' ');
-		cmds->infile = ft_strdup("test.txt");
-		cmds->in_type = 51;
-		cmds->out_type = 50;
+		cmds->infile = ft_strdup("input.txt");
+		cmds->in_type = READ_INPUT;
+		cmds->out_type = REDIRECTION_PIPE;
+		cmds->fd_in = mini->fd_in;
+		cmds->fd_out = mini->fd_out;
+	}
+	else if (flag == 1)
+	{
+		cmds->cmds = ft_split("wc", ' ');
+		cmds->outfile = ft_strdup("output.txt");
+		cmds->in_type = REDIRECTION_PIPE;
+		cmds->out_type = READ_OUTPUT;
 		cmds->fd_in = mini->fd_in;
 		cmds->fd_out = mini->fd_out;
 	}
 	else
 	{
-		cmds->cmds = ft_split("wc", ' ');
-		cmds->in_type = 50;
-		cmds->out_type = 0;
+		cmds->cmds = ft_split("grep W", ' ');
+		cmds->in_type = REDIRECTION_PIPE;
+		cmds->out_type = REDIRECTION_PIPE;
 		cmds->fd_in = mini->fd_in;
 		cmds->fd_out = mini->fd_out;
 	}
@@ -40,7 +49,6 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 char	*find_path(t_mini *mini)
 {
 	char	*path;
-	char	*path_2;
 	char	**path_try;
 	int		index;
 
@@ -55,8 +63,7 @@ char	*find_path(t_mini *mini)
 	index = 0;
 	while (path_try[index])
 	{
-		path = ft_strjoin(path_try[index], "/"); //add malloc protection later
-		path = ft_strjoin(path, mini->cmds_link_test->cmds[0]); // leak here fix later
+		path = strjoin_path(path_try[index], mini->cmds_link_test->cmds[0], '/');
 		if (!access(path, F_OK))
 		{
 			ft_free(path_try);
@@ -65,6 +72,8 @@ char	*find_path(t_mini *mini)
 		free(path);
 		index++;
 	}
+	free(path);
+	ft_free(path_try);
 	return (NULL);
 }
 
@@ -72,11 +81,14 @@ void	generate_test_env(t_mini *mini)
 {
 	t_cmds	*cmds;
 	t_cmds	*cmds_2;
+	t_cmds	*cmds_3;
 
 	cmds = generate_cmds(mini, 0);
-	cmds_2 = generate_cmds(mini, 1);
+	cmds_2 = generate_cmds(mini, 2);
+	cmds_3 = generate_cmds(mini, 1);
 	add_node_cmds(&mini->cmds_link_test, cmds);
 	add_node_cmds(&mini->cmds_link_test, cmds_2);
+	add_node_cmds(&mini->cmds_link_test, cmds_3);
 }
 
 void	run_cmd(t_mini *mini)
@@ -111,8 +123,8 @@ void	create_fork(t_mini *mini)
 		mini->cmds_link_test = mini->cmds_link_test->next;
 		pipe_restore(mini);
 	}
-	mini->cmds_link_test = head;
-	close_pipes_subroutine(mini);
 	if (pid > 0)
 		waitpid(pid, NULL, 0);
+	//close_pipes_subroutine(mini);
+	mini->cmds_link_test = free_linked_list_mini(&head);
 }

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:06:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 13:53:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:36:59 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,9 @@ t_cmds *create_node_cmds(void)
 {
 	t_cmds *new_node;
 
-	new_node = malloc(sizeof(t_cmds));
+	new_node = ft_calloc(1, sizeof(t_cmds));
 	if (!new_node)
 		return (NULL);
-	new_node->cmds = NULL;
-	new_node->path = NULL;
-	new_node->fd_in = 0;
-	new_node->fd_out = 0;
-	new_node->in_type = 0;
-	new_node->out_type = 1;
-	new_node->infile = NULL;
-	new_node->outfile = NULL;
-	new_node->previous = NULL;
-	new_node->next = NULL;
 	return (new_node);
 }
 
@@ -88,6 +78,7 @@ void	*free_linked_list_mini(t_cmds **head)
 		previous = current;
 		current = current->next;
 		free(previous);
+		previous = NULL;
 	}
 	return (NULL);
 }

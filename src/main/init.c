@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 12:16:15 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 11:33:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	free_struct(t_mini *mini)
 	mini->cmd = ft_free(mini->cmd);
 	if (mini->message)
 		free (mini->message);
+	close(mini->fd_in);
+	close(mini->fd_out);
 }
 
 int	init_struct(t_mini *mini, char *envp[])

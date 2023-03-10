@@ -6,16 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 12:04:33 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 11:59:45 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include <stdio.h>
-#include "../main/struct.h"
-#include "../../libs/Libft/libft.h"
-#include "../execution/pipex.h"
-#include "../cmds/cmds.h"
+#include "parsing.h"
 
 int	check_if_utils(t_mini *mini)
 {
