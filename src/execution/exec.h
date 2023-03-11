@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 17:00:59 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 21:18:14 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define REDIRECTION_PIPE 50
 # define READ_INPUT 51
 # define READ_OUTPUT 52
-# define READ_APPEND_OUT 53
-# define READ_APPEND_IN 54
+# define APPEND_OUT 53
+# define APPEND_IN 54
 
 void	make_child(int nbr, char *message, char *envp[]);
 void	create_child(char *message, char *envp[]);

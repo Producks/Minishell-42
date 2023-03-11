@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 13:41:03 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 18:21:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 21:22:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ int	pipe_heredoc(t_mini *mini)
 
 int	pipe_append_out(t_mini *mini)
 {
+	mini->cmds_link_test->fd_out = open(mini->cmds_link_test->outfile, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (mini->cmds_link_test->fd_out == -1)
+		return (-1);
+	if (dup2(mini->cmds_link_test->fd_out, STDOUT_FILENO) == -1)
+		return (-1);
+	if (close(mini->cmds_link_test->fd_out) == -1)
+		return (-1);
 	return (0);
 }
 

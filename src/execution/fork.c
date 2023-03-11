@@ -6,11 +6,12 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 18:06:09 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 22:31:15 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "../cmds/cmds.h"
 
 t_cmds	*generate_cmds(t_mini *mini, int flag)
 {
@@ -19,10 +20,10 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 	cmds = create_node_cmds();
 	if (flag == 0)
 	{
-		cmds->cmds = ft_split("cat", ' ');
+		cmds->cmds = ft_split("echo hello", ' ');
 		cmds->infile = ft_strdup("input.txt");
 		cmds->in_type = READ_INPUT;
-		cmds->out_type = REDIRECTION_PIPE;
+		cmds->out_type = 0;
 		cmds->fd_in = mini->fd_in;
 		cmds->fd_out = mini->fd_out;
 	}
@@ -31,7 +32,7 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 		cmds->cmds = ft_split("wc", ' ');
 		cmds->outfile = ft_strdup("output.txt");
 		cmds->in_type = REDIRECTION_PIPE;
-		cmds->out_type = READ_OUTPUT;
+		cmds->out_type = APPEND_OUT;
 		cmds->fd_in = mini->fd_in;
 		cmds->fd_out = mini->fd_out;
 	}
@@ -84,11 +85,30 @@ void	generate_test_env(t_mini *mini)
 	t_cmds	*cmds_3;
 
 	cmds = generate_cmds(mini, 0);
-	cmds_2 = generate_cmds(mini, 2);
-	cmds_3 = generate_cmds(mini, 1);
+	//cmds_2 = generate_cmds(mini, 2);
+	//cmds_3 = generate_cmds(mini, 1);
 	add_node_cmds(&mini->cmds_link_test, cmds);
-	add_node_cmds(&mini->cmds_link_test, cmds_2);
-	add_node_cmds(&mini->cmds_link_test, cmds_3);
+	//add_node_cmds(&mini->cmds_link_test, cmds_2);
+	//add_node_cmds(&mini->cmds_link_test, cmds_3);
+}
+
+int	check_if_built_ins(t_mini *mini)
+{
+	if (ft_strcmp(mini->cmds_link_test->cmds[0], "echo") == 0)
+		return (echo(mini->cmds_link_test->cmds)); 
+	// else if (ft_strcmp(mini->cmd[0], "cd") == 0)
+	// 	cd(mini);
+	// else if (ft_strcmp(mini->cmd[0], "pwd") == 0)
+	// 	pwd();
+	// else if (ft_strcmp(mini->cmd[0], "export") == 0)
+	// 	ft_export(mini);
+	// else if (ft_strcmp(mini->cmd[0], "unset") == 0)
+	// 	unset(mini);
+	// else if (ft_strcmp(mini->cmd[0], "env") == 0)
+	// 	env(mini->env_copy);
+	// else if (ft_strcmp(mini->cmd[0], "exit") == 0)
+	// 	ft_exit(mini);
+	return (1);
 }
 
 void	run_cmd(t_mini *mini)
@@ -98,6 +118,8 @@ void	run_cmd(t_mini *mini)
 	char	*test;
 
 	index = 0;
+	if (check_if_built_ins(mini))
+		exit (0);
 	path = find_path(mini);
 	mini->cmds_link_test->cmds[0] = path; //leaks
 	execve(path, mini->cmds_link_test->cmds, mini->env_copy);
@@ -116,7 +138,7 @@ void	create_fork(t_mini *mini)
 	pid = 0;
 	while (mini->cmds_link_test)
 	{
-		pipe_redirection(mini);
+		ret = pipe_redirection(mini);
 		pid = fork();
 		if (pid == 0)
 			run_cmd(mini);
@@ -125,6 +147,5 @@ void	create_fork(t_mini *mini)
 	}
 	if (pid > 0)
 		waitpid(pid, NULL, 0);
-	//close_pipes_subroutine(mini);
 	mini->cmds_link_test = free_linked_list_mini(&head);
 }
