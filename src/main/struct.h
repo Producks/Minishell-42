@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/09 13:34:40 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/10 23:10:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_cmds
 	int				out_type; // Type of redirection, > < >> << |, have to come up with the way we want to do it
 	char			*infile; /*For < <<, store the name of the file. If < was the infile redirection, here an example and what it would store from the example. file1.txt < cat | wc. This would store file1.txt has a string */
 	char			*outfile; // Same thing from infile, but for the > >>
+	pid_t			pid; //child pid for execution only
 	struct s_cmds	*previous; // Point to previous node, function that create the node deal with it
 	struct s_cmds	*next; // Point to next node, function that create the node deal with it
 }	t_cmds;

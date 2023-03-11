@@ -6,21 +6,23 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 11:59:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/11 07:53:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <readline/readline.h> // fix later
-#include <readline/history.h> // fix later
+# include <stdbool.h>
+# include <stdio.h>
+//#include <readline/readline.h> // fix later
+//#include <readline/history.h> // fix later
 # include "../main/struct.h"
-#include "../../libs/Libft/libft.h"
-#include "../execution/exec.h"
-#include "../cmds/cmds.h"
+# include "../../libs/readline/history.h"
+# include "../../libs/readline/readline.h"
+# include "../../libs/Libft/libft.h"
+# include "../execution/exec.h"
+# include "../cmds/cmds.h"
 
 # define RED   "\x1B[31m"
 # define GRN   "\x1B[32m"

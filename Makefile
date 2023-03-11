@@ -1,22 +1,29 @@
 # Executable #
 NAME = minishell
+
 # Compile stuff #
 CC = @gcc
 CFGLAGS = -Wall -Werror -Wextra
+
 # Remove #
 REMOVE = @rm -f
+
 # OBJS #
 OBJS = ${SRC:.c=.o}
-# check later if needed #
-# INC_LIBFT = -I libs/Libft/includes
-# INC_READLINE = -I libs/readline/include
-# LIB #
+
+# includes #
 LIBFT = libs/Libft/libft.a
-# readline #
 READLINE = libs/readline/libreadline.a
-HISTORY = libs/readline/libhistory.a
+READHISTORY = libs/readline/libhistory.a
+
+# Path for libs #
+Path_LIBFT = libs/Libft/
+PATH_READLINE = libs/readline/
+PATH_READHISTORY = libs/readline/
+
 # RUN #
 RUN = @./minishell
+
 # Source #
 SRC = 	./src/main/main.c\
 		./src/execution/fork.c\
@@ -34,6 +41,7 @@ SRC = 	./src/main/main.c\
 		./src/utils/linked_list_cmds.c \
 		./src/execution/pipes.c \
 		./src/utils/strjoin_path.c
+
 # Colors #
 BLACK = \033[0;30m
 RED = \033[0;31m
@@ -43,12 +51,32 @@ BLUE = \033[0;34m
 PURPLE = \033[0;35m
 CYAN = \033[0;36m
 WHITE = \033[0;37m
-# ${CC} ${CFGLAGS} ${OBJS} -L libs/Libft -lft -L libs/readline -lreadline -lhistory ${INC_READLINE} -o ${NAME} #
+
+# Check if linux or mac, add a flag depending on the os #
+# ifeq ($(OS), Linux)
+# 	FLAGS = $(LINUX)
+# else ifeq ($(OS), Darwin)
+# 	FLAGS = $(MAC)
+#         ,----,
+#    ___.`      `,
+#    `===  D     :
+#      `'.      .'
+#         )    (                   ,
+#        /      \_________________/|
+#       /                          |
+#      |                           ;
+#      |               _____       /
+#      |      \       ______7    ,'
+#      |       \    ______7     /
+#       \       `-,____7      ,'   
+# ^~^~^~^`\                  /~^~^~^~^
+#   ~^~^~^ `----------------' ~^~^~^
+#  ~^~^~^~^~^^~^~^~^~^~^~^~^~^~^~^~
 
 all: lib $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-		${CC} ${CFGLAGS} ${OBJS} -L libs/Libft -lft -lreadline -o ${NAME}
+		${CC} ${CFGLAGS} ${OBJS} -lreadline -lncurses ${READLINE} ${READHISTORY} ${LIBFT} -o ${NAME}
 	@echo "$(GREEN)Done$(WHITE)"
 
 lib:
