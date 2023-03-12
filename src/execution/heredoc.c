@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/11 08:11:17 by ddemers          ###   ########.fr       */
+/*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
+/*   Updated: 2023/03/12 12:37:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
+#include "execution.h"
 
-// wrong signal command place holder for now
-//try and make this work with ctrl+D intead of ctr+c so it doesn't seg fault TODO
-void	handle(int num)
+int	pipe_heredoc(t_mini *mini)
 {
-	printf("EXIT\n");
-	exit (0);
-}
-
-void	init_signals(void)
-{
-	signal(SIGINT, handle);
+	return (0);
 }

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 21:18:14 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/12 17:20:01 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -27,6 +27,9 @@
 # include "../main/struct.h"
 # include "../utils/utils.h"
 
+# define SUCCESS 0
+# define FAILURE -1
+
 # define READ_PIPE 0
 # define WRITE_PIPE 1
 
@@ -36,11 +39,22 @@
 # define APPEND_OUT 53
 # define APPEND_IN 54
 
-void	make_child(int nbr, char *message, char *envp[]);
-void	create_child(char *message, char *envp[]);
-void	create_fork(t_mini *mini);
-int		pipe_redirection(t_mini *mini);
-void	pipe_restore(t_mini *mini);
-int		close_pipes_subroutine(t_mini *mini);
+void	create_child_process(t_mini *mini);
+void	handle_cmds(t_mini *mini);
+
+/*Functions of heredoc.c*/
+int		pipe_heredoc(t_mini *mini);
+
+/*Functions of path.c*/
+char	*find_path(t_mini *mini);
+
+/*Functions of redirection.c*/
+int		handle_redirections(t_mini *mini);
+void	restore_parent_fds(t_mini *mini);
+int		redirect_in_to_pipe(t_mini *mini);
+int		redirect_out_to_pipe(t_mini *mini);
+int		redirect_input(t_mini *mini);
+int		redirect_output(t_mini *mini);
+int		redirect_output_append(t_mini *mini);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 23:10:44 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/12 17:13:16 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ None:0
 
 typedef struct s_mini
 {
-	t_cmds	*cmds_link_test;
+	t_cmds	*cmds_list;
 	char	**env_copy;
 	char 	*message;
 	char	**cmd;

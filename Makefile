@@ -39,8 +39,10 @@ SRC = 	./src/main/main.c\
 		./src/parsing/read_input.c \
 		./src/parsing/check_input.c \
 		./src/utils/linked_list_cmds.c \
-		./src/execution/pipes.c \
-		./src/utils/strjoin_path.c
+		./src/execution/redirection.c \
+		./src/utils/strjoin_path.c \
+		./src/execution/path.c \
+		./src/execution/heredoc.c
 
 # Colors #
 BLACK = \033[0;30m
