@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/12 19:38:43 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/13 12:18:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 	cmds = create_node_cmds();
 	if (flag == 0)
 	{
-		cmds->cmds = ft_split("./rand.out", ' ');
+		cmds->cmds = ft_split("./minishell", ' ');
 		//cmds->infile = ft_strdup("/home/dave/Minishell-42/Makefile");
 		cmds->in_type = 0;
-		cmds->out_type = REDIRECTION_PIPE;
+		cmds->out_type = 0;
 		cmds->fd_in = mini->fd_in;
 		cmds->fd_out = mini->fd_out;
 	}
 	else if (flag == 1)
 	{
-		cmds->cmds = ft_split("wc", ' ');
+		cmds->cmds = ft_split("grep 9", ' ');
 		//cmds->outfile = ft_strdup("output.txt");
 		cmds->in_type = REDIRECTION_PIPE;
 		cmds->out_type = 0;
@@ -56,11 +56,11 @@ void	generate_test_env(t_mini *mini)
 	t_cmds	*cmds_3;
 
 	cmds = generate_cmds(mini, 0);
-	cmds_2 = generate_cmds(mini, 2);
-	cmds_3 = generate_cmds(mini, 1);
+	//cmds_2 = generate_cmds(mini, 2);
+	//cmds_3 = generate_cmds(mini, 1);
 	add_node_cmds(&mini->cmds_list, cmds);
-	add_node_cmds(&mini->cmds_list, cmds_2);
-	add_node_cmds(&mini->cmds_list, cmds_3);
+	//add_node_cmds(&mini->cmds_list, cmds_2);
+	//add_node_cmds(&mini->cmds_list, cmds_3);
 }
 
 int	check_if_built_ins(t_mini *mini)
