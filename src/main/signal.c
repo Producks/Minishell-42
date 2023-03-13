@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/11 08:11:17 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/13 14:36:53 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 // wrong signal command place holder for now
 //try and make this work with ctrl+D intead of ctr+c so it doesn't seg fault TODO
+//newcomment
 void	handle(int num)
 {
 	printf("EXIT\n");
