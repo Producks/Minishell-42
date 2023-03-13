@@ -20,9 +20,10 @@
 *.gch
 *.pch
 
-# Libraries
+# Libraries ignore .a file only for readline
 *.lib
 *.a
+!/libs/readline/*.a
 *.la
 *.lo
 
