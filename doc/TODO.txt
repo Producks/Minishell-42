@@ -5,7 +5,7 @@ What to do and various notes ✅
 • Have a working history. ✅❗ Not sure if we need to make a copy like bash. Check later// Fix mac issue later
 
 • Search and launch the right executable (based on the PATH variable or using a
-relative or an absolute path). ✅❗ // protoype works for now
+relative or an absolute path). ✅❗ // protoype works for now!
 
 • Not use more than one global variable. Think about it. You will have to explain
 its purpose ✅❗ // exit status has to be done but we only have 1
