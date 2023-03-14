@@ -43,7 +43,8 @@ SRC = 	./src/main/main.c\
 		./src/utils/strjoin_path.c \
 		./src/execution/path.c \
 		./src/execution/heredoc.c \
-		./src/utils/place_holder.c
+		./src/utils/place_holder.c \
+		./src/utils/mini_split.c
 
 # Colors #
 BLACK = \033[0;30m
