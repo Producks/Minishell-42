@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:06:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 12:36:59 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/14 10:48:13 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ void *safe_free(char *str)
 	return (NULL);
 }
 
-void	delete_node_cmds(t_cmds **head, t_cmds *node_to_delete)
-{
-	if (*head == node_to_delete)
-		*head = node_to_delete->next;
-	if (node_to_delete->previous != NULL)
-		node_to_delete->previous->next = node_to_delete->next;
-	if (node_to_delete->next != NULL)
-		node_to_delete->next->previous = node_to_delete->previous;
-	ft_free(node_to_delete->cmds);
-	node_to_delete->path = safe_free(node_to_delete->path);
-	node_to_delete->infile = safe_free(node_to_delete->infile);
-	node_to_delete->outfile = safe_free(node_to_delete->outfile);
-	free (node_to_delete);
-}
+// void	delete_node_cmds(t_cmds **head, t_cmds *node_to_delete)
+// {
+// 	if (*head == node_to_delete)
+// 		*head = node_to_delete->next;
+// 	if (node_to_delete->previous != NULL)
+// 		node_to_delete->previous->next = node_to_delete->next;
+// 	if (node_to_delete->next != NULL)
+// 		node_to_delete->next->previous = node_to_delete->previous;
+// 	ft_free(node_to_delete->cmds);
+// 	node_to_delete->path = safe_free(node_to_delete->path);
+// 	node_to_delete->infile = safe_free(node_to_delete->infile);
+// 	node_to_delete->outfile = safe_free(node_to_delete->outfile);
+// 	free (node_to_delete);
+// }
 
 
 void	*free_linked_list_mini(t_cmds **head)
@@ -73,8 +73,6 @@ void	*free_linked_list_mini(t_cmds **head)
 	{
 		ft_free(current->cmds);
 		safe_free(current->path);
-		safe_free(current->infile);
-		safe_free(current->outfile);
 		previous = current;
 		current = current->next;
 		free(previous);

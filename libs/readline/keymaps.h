@@ -1,6 +1,6 @@
 /* keymaps.h -- Manipulation of readline keymaps. */
 
-/* Copyright (C) 1987, 1989, 1992-2021 Free Software Foundation, Inc.
+/* Copyright (C) 1987, 1989, 1992 Free Software Foundation, Inc.
 
    This file is part of the GNU Readline Library (Readline), a library
    for reading lines of text with interactive input and history editing.      
@@ -26,15 +26,11 @@
 extern "C" {
 #endif
 
-#if defined (READLINE_LIBRARY)
+
 #  include "rlstdc.h"
 #  include "chardefs.h"
 #  include "rltypedefs.h"
-#else
-#  include <readline/rlstdc.h>
-#  include <readline/chardefs.h>
-#  include <readline/rltypedefs.h>
-#endif
+
 
 /* A keymap contains one entry for each key in the ASCII set.
    Each entry consists of a type and a pointer.
@@ -65,33 +61,33 @@ extern KEYMAP_ENTRY_ARRAY vi_insertion_keymap, vi_movement_keymap;
 
 /* Return a new, empty keymap.
    Free it with free() when you are done. */
-extern Keymap rl_make_bare_keymap (void);
+extern Keymap rl_make_bare_keymap PARAMS((void));
 
 /* Return a new keymap which is a copy of MAP. */
-extern Keymap rl_copy_keymap (Keymap);
+extern Keymap rl_copy_keymap PARAMS((Keymap));
 
 /* Return a new keymap with the printing characters bound to rl_insert,
    the lowercase Meta characters bound to run their equivalents, and
    the Meta digits bound to produce numeric arguments. */
-extern Keymap rl_make_keymap (void);
+extern Keymap rl_make_keymap PARAMS((void));
 
 /* Free the storage associated with a keymap. */
-extern void rl_discard_keymap (Keymap);
+extern void rl_discard_keymap PARAMS((Keymap));
 
 /* These functions actually appear in bind.c */
 
 /* Return the keymap corresponding to a given name.  Names look like
    `emacs' or `emacs-meta' or `vi-insert'.  */
-extern Keymap rl_get_keymap_by_name (const char *);
+extern Keymap rl_get_keymap_by_name PARAMS((const char *));
 
 /* Return the current keymap. */
-extern Keymap rl_get_keymap (void);
+extern Keymap rl_get_keymap PARAMS((void));
 
 /* Set the current keymap to MAP. */
-extern void rl_set_keymap (Keymap);
+extern void rl_set_keymap PARAMS((Keymap));
 
 /* Set the name of MAP to NAME */
-extern int rl_set_keymap_name (const char *, Keymap);
+extern int rl_set_keymap_name PARAMS((const char *, Keymap));
 
 #ifdef __cplusplus
 }
