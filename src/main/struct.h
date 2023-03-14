@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 13:05:00 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/14 13:47:07 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_redirect
 // linked list of commands example listed in comments of how a node would look like
 typedef struct s_cmds
 {
-	char			**cmds;
+	char			**cmds; // {echo, -n, hello, NULL}
 	char			*path;
 	int				fd_in;
 	int				fd_out;
