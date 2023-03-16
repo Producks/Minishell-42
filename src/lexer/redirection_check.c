@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:43:16 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/15 18:32:10 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/16 14:56:24 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@
 
 extern int	g_exit_status;
 
-bool	error_handling(const char *str, int error_nbr)
+int	error_handling(const char *str, int error_nbr)
 {
 	write(2, str, ft_strlen(str));
 	g_exit_status = error_nbr;
-	return (false);
+	return (-1);
 }
 
-static bool	is_redirection(const char c)
+static int	is_redirection(const char c)
 {
 	if (c == '|' || c == '>' || c == '<')
-		return (true);
-	return (false);
+		return (1);
+	return (0);
 }
 
-bool	check_redir_token(const char *str)
+int	check_redir_token(const char *str)
 {
 	int		index;
 	char	type;
@@ -47,7 +47,7 @@ bool	check_redir_token(const char *str)
 	if (is_redirection(str[index]) && str[index] != type)
 		return (error_handling("minishell: incorrect input after token\n", 2));
 	if (!is_redirection(str[index]))
-		return (true);
+		return (1);
 	index++;
 	while (isspace(str[index]))
 		index++;
@@ -55,10 +55,10 @@ bool	check_redir_token(const char *str)
 		return (error_handling("minishell: syntax error near unexpected token `newline'\n", 2));
 	if (is_redirection(str[index]))
 		return (error_handling("minishell: incorrect input after token\n", 2));
-	return (true);
+	return (1);
 }
 
-bool	check_pipe_token(const char *str)
+int	check_pipe_token(const char *str)
 {
 	int		index;
 
@@ -69,15 +69,28 @@ bool	check_pipe_token(const char *str)
 		return (error_handling("minishell: syntax error near unexpected token `newline'\n", 2));
 	if (str[index] == '|')
 		return (error_handling("minishell: syntax error near unexpected token `|'\n", 2));
-	return (true);
+	return (1);
 }
 
 /*check error message later should be good to go for now, more polish needed later*/
-bool	redirection_check(const char *str)
+void	redirection_check(t_literal *literal, const char *str)
 {
 	if (!is_redirection(*str))
-		return (false);
+	{
+		literal->ret = 1;
+		return ;
+	}
 	if (*str == '|')
-		return (check_pipe_token(str));
-	return (check_redir_token(str));
+	{
+		literal->ret = check_pipe_token(str);
+		// if (literal->ret == -1)
+		// 	literal->count = -1;
+		return ;
+	}
+	literal->ret = check_redir_token(str);
+	// if (literal->ret == -1)
+	// {
+	// 		printf("%d\n", literal->ret);
+	// 	literal->count = -1;
+	// }
 }

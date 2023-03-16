@@ -46,7 +46,8 @@ SRC = 	./src/main/main.c\
 		./src/utils/place_holder.c \
 		./src/utils/mini_split.c \
 		./src/lexer/lexer.c \
-		./src/lexer/redirection_check.c
+		./src/lexer/redirection_check.c \
+		./src/lexer/literal.c
 
 # Colors #
 BLACK = \033[0;30m

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/15 20:03:47 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/16 14:01:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,21 @@
 # include "../main/struct.h"
 # include <stdbool.h>
 
-bool	redirection_check(const char *str);
+# define FAILURE -1
+# define SINGLE_QUOTE 39
+# define DOUBLE_QUOTE 34
+
+typedef struct s_literal
+{
+	int		index;
+	int		count;
+	int		ret;
+	char	flag;
+	char	type;
+	char	**array;
+}	t_literal;
+
+void	redirection_check(t_literal *literal, const char *str);
 
 /*literal.c*/
 
