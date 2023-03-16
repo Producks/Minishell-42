@@ -6,11 +6,12 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 15:21:59 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/15 19:45:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../lexer/lexer.h"
 #include "../utils/utils.h"
 
 int	check_if_utils(t_mini *mini)
@@ -30,7 +31,7 @@ int	check_if_utils(t_mini *mini)
 	else if (ft_strcmp(mini->cmd[0], "exit") == 0)
 		ft_exit(mini);
 	else if (ft_strcmp(mini->cmd[0], "debug") == 0) // special variable to test pipes
-		test_function(mini);
+		printf("%d\n", redirection_check("|>    	"));
 	else if (ft_strcmp(mini->cmd[0], "gpt") == 0)
 		system("open https://chat.openai.com");
 	return (1);

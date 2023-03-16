@@ -44,7 +44,9 @@ SRC = 	./src/main/main.c\
 		./src/execution/path.c \
 		./src/execution/heredoc.c \
 		./src/utils/place_holder.c \
-		./src/utils/mini_split.c
+		./src/utils/mini_split.c \
+		./src/lexer/lexer.c \
+		./src/lexer/redirection_check.c
 
 # Colors #
 BLACK = \033[0;30m
