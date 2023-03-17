@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:43:16 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/16 14:56:24 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/17 08:43:33 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ extern int	g_exit_status;
 int	error_handling(const char *str, int error_nbr)
 {
 	write(2, str, ft_strlen(str));
-	g_exit_status = error_nbr;
+	//g_exit_status = error_nbr;
 	return (-1);
 }
 
@@ -77,20 +77,17 @@ void	redirection_check(t_literal *literal, const char *str)
 {
 	if (!is_redirection(*str))
 	{
-		literal->ret = 1;
+		literal->ret = 0;
 		return ;
 	}
 	if (*str == '|')
 	{
 		literal->ret = check_pipe_token(str);
-		// if (literal->ret == -1)
-		// 	literal->count = -1;
+		if (literal->ret == -1)
+			literal->count = -1;
 		return ;
 	}
 	literal->ret = check_redir_token(str);
-	// if (literal->ret == -1)
-	// {
-	// 		printf("%d\n", literal->ret);
-	// 	literal->count = -1;
-	// }
+	if (literal->ret == -1)
+		literal->count = -1;
 }
