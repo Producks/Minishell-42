@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 13:05:00 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/17 22:47:12 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 typedef struct s_redirect
 {
     char				*filename;
-	bool				in; 
+	bool				in;
 	bool 				out;
     int					type;
     struct s_redirect	*next;
+	struct s_redirect	*head;
 }	t_redir;
 
 // linked list of commands example listed in comments of how a node would look like

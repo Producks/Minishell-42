@@ -1,3 +1,7 @@
 {
-	"cmake.sourceDirectory": "${workspaceFolder}/push_swap/push_swap_visualizer-master"
+	"cmake.sourceDirectory": "${workspaceFolder}/push_swap/push_swap_visualizer-master",
+	"files.associations": {
+		"iterator": "c",
+		"parsing.h": "c"
+	}
 }
