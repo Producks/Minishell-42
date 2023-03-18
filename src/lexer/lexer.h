@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/17 08:30:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/17 17:41:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@
 typedef struct s_literal
 {
 	int		index;
+	int		i;
 	int		count;
 	int		ret;
 	char	flag;
 	char	type;
+	char	*str;
 	char	**array;
 }	t_literal;
 
