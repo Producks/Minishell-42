@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/17 17:41:41 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/19 00:00:59 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_literal
 	char	*str;
 	char	**array;
 }	t_literal;
+
+void	lexer(t_mini *mini);
 
 void	redirection_check(t_literal *literal, const char *str);
 

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:02:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/18 11:40:45 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/19 00:07:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,26 @@ void	init_literal_struct(t_literal *literal)
 
 void	check_single_redir_error(t_literal *literal)
 {
-	return ;
+	if (isredir(literal->array[literal->index][1])) // check if there another redirection glued to it
+		return (literal_error_handling(literal, "Pipe right token\n", 2));
+	if (!literal->array[literal->index + 1]) // check if pipe has no args to the right
+		return (literal_error_handling(literal, "Pipe right empty\n", 2));
+	if (literal->index == 0) // check if pipe has no args to the left
+		return (literal_error_handling(literal, "Pipe left empty\n", 2));
+	if (isredir(literal->array[literal->index - 1][0]))
+		return (literal_error_handling(literal, "Argument to left of pipe\n", 2));
 }
 
 void	check_double_redir_error(t_literal *literal)
 {
+	// if (isredir(literal->array[literal->index][1])) // check if there another redirection glued to it
+	// 	return (literal_error_handling(literal, "ERRORdd\n", 2));
+	if (!literal->array[literal->index + 1]) // check if pipe has no args to the right
+		return (literal_error_handling(literal, "Pipe right empty\n", 2));
+	if (literal->index == 0) // check if pipe has no args to the left
+		return (literal_error_handling(literal, "da\n", 2));
+	if (isredir(literal->array[literal->index - 1][0]))
+		return (literal_error_handling(literal, "ta\n", 2));
 	return ;
 }
 
@@ -168,7 +183,6 @@ void	literal_check_errors(t_literal *literal)
 				check_single_redir_error(literal);
 			if (literal->ret == -1)
 				return ;
-			
 		}
 		literal->index++;
 	}
@@ -180,21 +194,20 @@ char	**literal_tokenization(t_mini *mini)
 	t_literal	literal;
 	
 	init_literal_struct(&literal);
-	count_literal_string(&literal, "echo hello >a|cat");
+	count_literal_string(&literal, mini->message);
 	if (!literal.count)
 		return (NULL);
 	literal.str = malloc(sizeof(char) * literal.count);
 	if (!literal.str) // handle later
 		return (NULL);
-	literal_string_sep(&literal, "echo hello >a|cat");
+	literal_string_sep(&literal, mini->message);
 	if (literal.ret == -1)
 		return (free (literal.str), NULL);
 	literal.array = ft_split(literal.str, 29);
 	if (!literal.array)
 		return (free (literal.str), NULL); // handle later
-	for (int i = 0; literal.array[i]; i++)
-		printf("%s\n", literal.array[i]);
-	literal_check_errors(&literal);
-	exit (0);
-	return (literal.array);
+	literal_check_errors(&literal); // check more case later
+	if (literal.ret == -1)
+		return (free(literal.str), NULL);
+	return (free(literal.str), literal.array);
 }
