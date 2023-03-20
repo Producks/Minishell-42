@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/19 01:13:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/19 23:16:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 
 # include "../../libs/Libft/libft.h"
 # include "../main/struct.h"
+# include "../utils/utils.h"
 # include <stdbool.h>
+# include <stdio.h>
 
+# define SUCCESS 0
 # define FAILURE -1
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34
+# define DOLLAR_SIGN  36
+# define QUESTION_MARK 63
+
+extern int	g_exit_status;
 
 typedef struct s_literal
 {
@@ -33,6 +40,7 @@ typedef struct s_literal
 	char	**array;
 }	t_literal;
 
+/*Lexer.c*/
 void	lexer(t_mini *mini);
 
 /*Literal.c*/
@@ -47,5 +55,12 @@ char	**literal_tokenization(t_mini *mini);
 /*Literal_error.c*/
 void	literal_error_handling(t_literal *literal, const char *str, int err_nbr);
 void	literal_check_errors(t_literal *literal);
+
+/*tokens_interpreter.c*/
+int		tokens_interpreter(t_mini *mini, char **literal);
+/*dollar.interpreter.c*/
+int		dollar_interpreter(t_mini *mini, char **literal, int index);
+/*quotes_interpreter.c*/
+int		interpret_quotes(t_mini *mini, char *str);
 
 #endif

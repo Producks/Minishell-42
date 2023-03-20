@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 16:35:12 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/19 17:34:29 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_redir *create_node_redir(void);
 /*Split*/
 char	**ft_split(char const *s, char c);
 void	test_function(t_mini *mini);
+
+char	*str_cutcut(char *original, char *replacement, char *to_replace);
 
 #endif
 
