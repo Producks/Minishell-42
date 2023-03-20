@@ -2,7 +2,7 @@ What to do and various notes ✅
 
 • Display a new prompt when waiting for a new command ✅❗ #Refactor for later 
 
-• Have a working history. ✅❗ Not sure if we need to make a copy like bash. Check later// Fix mac issue later
+• Have a working history. ✅❗ Not sure if we need to make a copy like bash.
 
 • Search and launch the right executable (based on the PATH variable or using a
 relative or an absolute path). ✅❗ // protoype works for now!
@@ -32,7 +32,7 @@ connected to the input of the next command via a pipe. ✅❗ // Prototype works
 should expand to their values. ❌
 
 • Handle $? which should expand to the exit status of the most recently executed
-foreground pipeline. ❌
+foreground pipeline. ✅❗ // check if leaks later
 
 •Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash. ❌
 

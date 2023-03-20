@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/19 23:16:56 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 14:07:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	literal_error_handling(t_literal *literal, const char *str, int err_nbr);
 void	literal_check_errors(t_literal *literal);
 
 /*tokens_interpreter.c*/
-int		tokens_interpreter(t_mini *mini, char **literal);
+//int		tokens_interpreter(t_mini *mini, char **literal);
 /*dollar.interpreter.c*/
-int		dollar_interpreter(t_mini *mini, char **literal, int index);
+int		dollar_interpreter(t_mini *mini, char **literal);
 /*quotes_interpreter.c*/
-int		interpret_quotes(t_mini *mini, char *str);
+char	*interpret_quotes(t_mini *mini, char **tokens, int index);
 
 #endif

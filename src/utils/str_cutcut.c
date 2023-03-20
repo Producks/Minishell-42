@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:22:23 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/19 18:00:45 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 11:09:20 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static size_t	len_result(char *original, char *replacement, char *to_replace)
 {
 	size_t	len;
 
-	len = (ft_strlen(original) - ft_strlen(to_replace)) + ft_strlen(replacement
-			+ 1);
-	return (len + 1);
+	len = ft_strlen(original) - ft_strlen(to_replace);
+	len = len + ft_strlen(replacement) + 1;
+	return (len); // CHECK LATER IF CORRECT AND NO CONDITIONAL JUMP
 }
 
-/*Cracked*/
+/*Cracked function*/
 char	*str_cutcut(char *original, char *replacement, char *to_replace)
 {
 	size_t	len;
@@ -56,5 +56,5 @@ char	*str_cutcut(char *original, char *replacement, char *to_replace)
 	ft_strncpy(result + len, replacement, ft_strlen(replacement));
 	copy_left_over(result + len + ft_strlen(replacement),
 		position + ft_strlen(to_replace));
-	return (free (original), free (replacement), result);
+	return (result);
 }
