@@ -52,7 +52,6 @@ SRC = 	./src/main/main.c\
 		./src/lexer/literal/literal_error.c \
 		./src/lexer/interpreter/dollar_interpreter.c \
 		./src/lexer/interpreter/quotes_interpreter.c \
-		./src/lexer/interpreter/tokens_interpreter.c \
 		./src/utils/str_cutcut.c
 
 # Colors #

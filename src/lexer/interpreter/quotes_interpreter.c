@@ -6,64 +6,74 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 10:09:01 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 21:16:35 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/21 10:45:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
 
-static size_t	count_quotes(const char *str, char type)
+static size_t	count_quotes(char *str)
 {
 	size_t	count;
 	int		index;
+	char	type;
 
 	index = 0;
 	count = 0;
 	while (str[index])
 	{
-		if (str[index] == type)
-			count++;
+		if (str[index] == SINGLE_QUOTE || str[index] == DOUBLE_QUOTE)
+		{
+			type = str[index++];
+			while (str[index] != type)
+				index++;
+			count += 2;
+		}
 		index++;
 	}
 	return (count);
 }
 
-static char	*quote_interpreter(t_mini *mini, char *str, char type)
+static void	quote_interpreter(char *copy, char *result)
 {
-	size_t	count;
 	int		index;
 	int		j;
-	char	*result;
+	char	type;
 
 	index = 0;
 	j = 0;
-	count = count_quotes(str, type); // maybe add later cause issue
-	result = malloc(sizeof(char) * ((ft_strlen(str) - count) + 1));
-	if (!result)
-		return (NULL);
-	while (str[index])
+	while (copy[index])
 	{
-		if (str[index] != type)
-			result[j++] = str[index];
-		index++;
+		if (copy[index] == SINGLE_QUOTE || copy[index] == DOUBLE_QUOTE)
+		{
+			type = copy[index];
+			index++;
+			while (copy[index] != type)
+				result[j++] = copy[index++];
+			index++;
+			continue ;
+		}
+		result[j++] = copy[index++];
 	}
 	result[j] = '\0';
-	return (result);
 }
 
 int	interpret_quotes(t_mini *mini, char **tokens, int index)
 {
-	char	*double_result;
-	char	*single_result;
+	size_t	count;
+	char	*result;
+	char	*copy;
 
-	single_result = quote_interpreter(mini, tokens[index], SINGLE_QUOTE);
-	if (!single_result)
+	copy = ft_strdup(tokens[index]);
+	if (!copy)
 		return (FAILURE);
-	double_result = quote_interpreter(mini, single_result, DOUBLE_QUOTE);
-	if (!double_result)
-		return (free(single_result), FAILURE);
-	free (single_result);
+	count = count_quotes(copy);
+	result = malloc(sizeof(char) * (ft_strlen(copy) - count) + 1);
+	if (!result)
+		return (free(copy), FAILURE);
+	quote_interpreter(copy, result);
+	free (copy);
 	free (tokens[index]);
-	tokens[index] = double_result;
+	tokens[index] = result;
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:58:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 16:18:00 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/21 09:45:19 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static void	check_single_redir_error(t_literal *literal)
 		return (literal_error_handling(literal, "Redirection to the right\n", 2));
 	if (!literal->array[literal->index + 1]) // check if pipe has no args to the right
 		return (literal_error_handling(literal, "Empty arg to the right\n", 2));
-	if (literal->index == 0) // check if pipe has no args to the left
+	if (literal->index == 0 && literal->array[0][0] != '<') // check if pipe has no args to the left
 		return (literal_error_handling(literal, "No left arg\n", 2));
+	if (literal->index == 0) // added fix check later big testing
+		return ;
 	if (isredir(literal->array[literal->index - 1][0]))
 		return (literal_error_handling(literal, "No left arg\n", 2));
 }
@@ -38,8 +40,10 @@ static void	check_double_redir_error(t_literal *literal)
 	// 	return (literal_error_handling(literal, "ERRORdd\n", 2));
 	if (!literal->array[literal->index + 1]) // check if pipe has no args to the right
 		return (literal_error_handling(literal, "No argument to the right\n", 2));
-	if (literal->index == 0) // check if pipe has no args to the left
+	if (literal->index == 0 && literal->array[0][0] != '<') // check if pipe has no args to the left
 		return (literal_error_handling(literal, "No argument to the left\n", 2));
+	if (literal->index == 0) // added fix check later big testing
+		return ;
 	if (isredir(literal->array[literal->index - 1][0]))
 		return (literal_error_handling(literal, "No argument to the left\n", 2));
 	return ;
