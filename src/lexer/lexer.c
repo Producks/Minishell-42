@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 14:28:04 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 21:15:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,9 @@ void	lexer(t_mini *mini)
 	mini->message = readline(GRN "Minishell > " RESET);
 	literal_tokens = literal_tokenization(mini);
 	if (!literal_tokens)
-		exit(0);
-	// for (int i = 0; literal_tokens[i]; i++)
-	// 	printf("%s\n", literal_tokens[i]);
+		exit(0); // add later
 	dollar_interpreter(mini, literal_tokens);
 	interpret_quotes(mini, literal_tokens, 1); //dangerous check later if fail null = bad
-	//tokens_interpreter(mini, literal_tokens);
 	for (int i = 0; literal_tokens[i]; i++)
 		printf("%s\n", literal_tokens[i]);
 	ft_free(literal_tokens);

@@ -6,13 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:02:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 10:05:06 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:09:35 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
-
-extern int	g_exit_status;
 
 static void	init_literal_struct(t_literal *literal)
 {

@@ -13,10 +13,10 @@ its purpose ✅❗ // exit status has to be done but we only have 1
 • Not interpret unclosed quotes or special characters which are not required by the
 subject such as \ (backslash) or ; (semicolon). ✅
 
-• Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence. ❌
+• Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence. ✅❗ //proto done
 
 • Handle " (double quote) which should prevent the shell from interpreting the metacharacters
-in the quoted sequence except for $ (dollar sign). ❌
+in the quoted sequence except for $ (dollar sign). ✅❗ //proto done
 
 • Implement redirections: ❌
 	◦ < should redirect input. ✅❗ // Prototype works for now

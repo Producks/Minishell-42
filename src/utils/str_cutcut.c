@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:22:23 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 11:09:20 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:06:14 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static size_t	len_result(char *original, char *replacement, char *to_replace)
 	return (len); // CHECK LATER IF CORRECT AND NO CONDITIONAL JUMP
 }
 
-/*Cracked function*/
+/*Cracked*/
 char	*str_cutcut(char *original, char *replacement, char *to_replace)
 {
 	size_t	len;

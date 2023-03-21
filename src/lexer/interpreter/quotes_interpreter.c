@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 10:09:01 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 14:30:51 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 21:16:35 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ static char	*quote_interpreter(t_mini *mini, char *str, char type)
 
 	index = 0;
 	j = 0;
-	count = count_quotes(str, type);
-	if (!count)
-		return (str);
+	count = count_quotes(str, type); // maybe add later cause issue
 	result = malloc(sizeof(char) * ((ft_strlen(str) - count) + 1));
 	if (!result)
 		return (NULL);
@@ -53,22 +51,19 @@ static char	*quote_interpreter(t_mini *mini, char *str, char type)
 	return (result);
 }
 
-char	*interpret_quotes(t_mini *mini, char **tokens, int index)
+int	interpret_quotes(t_mini *mini, char **tokens, int index)
 {
-	int		ret;
-	int		i;
 	char	*double_result;
 	char	*single_result;
 
-	ret = 0;
-	i = 0;
 	single_result = quote_interpreter(mini, tokens[index], SINGLE_QUOTE);
 	if (!single_result)
-		return (NULL);
+		return (FAILURE);
 	double_result = quote_interpreter(mini, single_result, DOUBLE_QUOTE);
 	if (!double_result)
-		return (free(single_result), NULL);
+		return (free(single_result), FAILURE);
 	free (single_result);
 	free (tokens[index]);
-	return (double_result);
+	tokens[index] = double_result;
+	return (SUCCESS);
 }

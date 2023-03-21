@@ -45,7 +45,6 @@ SRC = 	./src/main/main.c\
 		./src/execution/path.c \
 		./src/execution/heredoc.c \
 		./src/utils/place_holder.c \
-		./src/utils/mini_split.c \
 		./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \
 		./src/lexer/literal/literal_string.c \
@@ -97,9 +96,9 @@ lib:
 	@make -s -C libs/Libft
 #	make -C libs/Libft
 
-#assert: CFLAGS += -DASSERT=1
-#assert: fclean all
-#	@python3 ./assert_minishell.py
+assert: CFLAGS += -DASSERT=1
+assert: fclean all
+	@python3 ./assert_minishell.py
 
 clean:
 	@make clean -s -C libs/Libft

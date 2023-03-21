@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 14:07:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 20:32:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	literal_check_errors(t_literal *literal);
 /*dollar.interpreter.c*/
 int		dollar_interpreter(t_mini *mini, char **literal);
 /*quotes_interpreter.c*/
-char	*interpret_quotes(t_mini *mini, char **tokens, int index);
+int		interpret_quotes(t_mini *mini, char **tokens, int index);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:43:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 13:28:36 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 21:15:20 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	dollar_interpreter(t_mini *mini, char **literal)
 				j++;
 				while (literal[index][j] == SINGLE_QUOTE)
 					j++;
+				if (!literal[index][j]) // conditional jump/invalied read careful fix later
+					break ;
 			}
 			if (literal[index][j] == DOLLAR_SIGN)
 			{
