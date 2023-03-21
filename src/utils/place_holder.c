@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_holder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 09:17:30 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 10:48:47 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/17 15:57:56 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_redir *create_node_redir(void)
 {
 	t_redir *new_node;
 
-	new_node = ft_calloc(1, sizeof(t_redir));
+		new_node = ft_calloc(1, sizeof(t_redir));
 	if (!new_node)
 		return (NULL);
 	return (new_node);
@@ -42,6 +42,7 @@ void	add_node_redir(t_redir **head, t_redir *new_node)
 		while (current->next)
 			current = current->next;
 		current->next = new_node;
+		// new_node->next = NULL;
 	}
 }
 
