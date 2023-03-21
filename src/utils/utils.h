@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 09:38:28 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/20 16:08:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define UTILS_H
 
 # include "../main/struct.h"
+
+# define SINGLE_QUOTE 39
+# define DOUBLE_QUOTE 34
+
+typedef struct s_split
+{
+	int		nbr_elements;
+	char	**array;
+}	t_split;
 
 t_cmds *create_node_cmds(void);
 void	add_node_cmds(t_cmds **head, t_cmds *new_node);
@@ -26,5 +35,7 @@ void	*free_linked_list_redir(t_redir **head);
 void	delete_node_redir(t_redir **head, t_redir *node_to_delete);
 void	add_node_redir(t_redir **head, t_redir *new_node);
 t_redir *create_node_redir(void);
+
+char	*str_cutcut(char *original, char *replacement, char *to_replace);
 
 #endif

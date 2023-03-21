@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/13 11:04:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/21 12:52:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	pipe_heredoc(t_mini *mini)
 {
-	return (0);
+	
+	return (SUCCESS);
 }
