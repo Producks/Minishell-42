@@ -6,10 +6,10 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/17 23:39:44 by cperron          ###   ########.fr       */
-/*   Updated: 2023/03/19 00:00:38 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/21 13:28:39 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "parsing.h"
 #include "../lexer/lexer.h"
@@ -61,7 +61,7 @@ int tokenize(t_mini *mini)
 	// printf("%s\n", token);
 	printf("number of token: %d\n", num_tokens);
 	// print_token(tokens, num_tokens);
-	parse_linked_list(tokens, num_tokens);
+	parse_linked_list(tokens);
 	free(tokens);
 	return (0);
 }
@@ -84,8 +84,8 @@ int	check_if_utils(t_mini *mini)
 		ft_exit(mini);
 	else if (ft_strcmp(mini->cmd[0], "debug") == 0) // special variable to test pipes
 		lexer(mini);
-	else if (ft_strcmp(mini->cmd[0], "chris") == 0)
-		tokenize(mini);
+	// else if (ft_strcmp(mini->cmd[0], "chris") == 0)
+	// 	parse_linked_list(tokens);
 	else if (ft_strcmp(mini->cmd[0], "gpt") == 0)
 		system("open https://chat.openai.com");
 	return (1);

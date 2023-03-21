@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/17 23:09:47 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/21 13:26:41 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int tokenize(t_mini *mini);
 
 void	redir_list(char **tokens);
 void	*free_linked_list_redirr(t_redir **head);
-void	parse_linked_list(char **tokens, int num_token);
+void	parse_linked_list(char **tokens);
 
 #endif

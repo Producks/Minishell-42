@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/21 10:09:05 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/21 13:28:15 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ void	lexer(t_mini *mini)
 	if (!literal_tokens)
 		exit(0); // add later
 	dollar_interpreter(mini, literal_tokens);
-	interpret_quotes(mini, literal_tokens, 1); //dangerous check later if fail null = bad
-	for (int i = 0; literal_tokens[i]; i++)
-		printf("%s\n", literal_tokens[i]);
-	ft_free(literal_tokens);
-	lol (mini);
-	exit (0);
+	// interpret_quotes(mini, literal_tokens, 1); //dangerous check later if fail null = bad
+	// for (int i = 0; literal_tokens[i]; i++)
+	// 	printf("%s\n", literal_tokens[i]);
+	// ft_free(literal_tokens);
+	// lol (mini);
+	// exit (0);
+	parse_linked_list(literal_tokens);
 	return ;
 }

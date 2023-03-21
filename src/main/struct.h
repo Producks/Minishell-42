@@ -6,10 +6,10 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/17 22:47:12 by cperron          ###   ########.fr       */
-/*   Updated: 2023/03/14 16:59:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/21 14:12:51 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCT_H
 # define STRUCT_H
@@ -38,6 +38,7 @@ typedef struct s_cmds
 	pid_t			pid;
 	struct s_cmds	*previous;
 	struct s_cmds	*next;
+	struct s_cmds	*head;
 }	t_cmds;
 
 /*
