@@ -7,10 +7,13 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 02:47:59 by ddemers           #+#    #+#             */
 /*   Updated: 2023/03/17 23:39:44 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/19 00:00:38 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../lexer/lexer.h"
+#include "../utils/utils.h"
 
 void	print_token(char **tokens, int num_tokens)
 {
@@ -80,7 +83,7 @@ int	check_if_utils(t_mini *mini)
 	else if (ft_strcmp(mini->cmd[0], "exit") == 0)
 		ft_exit(mini);
 	else if (ft_strcmp(mini->cmd[0], "debug") == 0) // special variable to test pipes
-		handle_cmds(mini);
+		lexer(mini);
 	else if (ft_strcmp(mini->cmd[0], "chris") == 0)
 		tokenize(mini);
 	else if (ft_strcmp(mini->cmd[0], "gpt") == 0)

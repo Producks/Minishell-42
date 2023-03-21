@@ -3,6 +3,7 @@ NAME = minishell
 
 # Compile stuff #
 CC = @gcc
+#CC = gcc
 CFGLAGS = -Wall -Werror -Wextra
 
 # Remove #
@@ -45,7 +46,15 @@ SRC = 	./src/main/main.c\
 		./src/utils/strjoin_path.c \
 		./src/execution/path.c \
 		./src/execution/heredoc.c \
-		./src/utils/place_holder.c
+		./src/utils/place_holder.c \
+		./src/lexer/lexer.c \
+		./src/lexer/literal/literal.c \
+		./src/lexer/literal/literal_string.c \
+		./src/lexer/literal/literal_redir.c \
+		./src/lexer/literal/literal_error.c \
+		./src/lexer/interpreter/dollar_interpreter.c \
+		./src/lexer/interpreter/quotes_interpreter.c \
+		./src/utils/str_cutcut.c
 
 # Colors #
 BLACK = \033[0;30m
@@ -86,10 +95,11 @@ $(NAME): $(OBJS) $(LIBFT)
 
 lib:
 	@make -s -C libs/Libft
+#	make -C libs/Libft
 
-#assert: CFLAGS += -DASSERT=1
-#assert: fclean all
-#	@python3 ./assert_minishell.py
+assert: CFLAGS += -DASSERT=1
+assert: fclean all
+	@python3 ./assert_minishell.py
 
 clean:
 	@make clean -s -C libs/Libft

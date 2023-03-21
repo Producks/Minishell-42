@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 13:05:54 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/14 13:19:24 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	redirect_in_to_pipe(t_mini *mini)
 {
-	if (dup2(mini->cmds_list->fd_in, STDIN_FILENO) == FAILURE)
+	if (dup2(mini->cmds_list->fd_in, STDIN_FILENO) == FAILURE) //hello
 		return (FAILURE);
 	if (close(mini->cmds_list->fd_in) == FAILURE)
 		return (FAILURE);
