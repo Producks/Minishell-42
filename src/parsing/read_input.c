@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/13 16:59:28 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/21 17:30:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	read_input(t_mini *mini)
 {
 	char	*history;
 
+	pipe_heredoc(mini);
 	if (!mini->message)
 		mini->message = readline(GRN "Minishell > " RESET);
 	add_history(mini->message);
