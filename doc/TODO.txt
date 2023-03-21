@@ -2,7 +2,7 @@ What to do and various notes ✅
 
 • Display a new prompt when waiting for a new command ✅❗ #Refactor for later 
 
-• Have a working history. ✅❗ Not sure if we need to make a copy like bash. Check later// Fix mac issue later
+• Have a working history. ✅❗ Not sure if we need to make a copy like bash.
 
 • Search and launch the right executable (based on the PATH variable or using a
 relative or an absolute path). ✅❗ // protoype works for now!
@@ -13,10 +13,10 @@ its purpose ✅❗ // exit status has to be done but we only have 1
 • Not interpret unclosed quotes or special characters which are not required by the
 subject such as \ (backslash) or ; (semicolon). ✅
 
-• Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence. ❌
+• Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence. ✅❗ //proto done
 
 • Handle " (double quote) which should prevent the shell from interpreting the metacharacters
-in the quoted sequence except for $ (dollar sign). ❌
+in the quoted sequence except for $ (dollar sign). ✅❗ //proto done
 
 • Implement redirections: ❌
 	◦ < should redirect input. ✅❗ // Prototype works for now
@@ -32,7 +32,7 @@ connected to the input of the next command via a pipe. ✅❗ // Prototype works
 should expand to their values. ❌
 
 • Handle $? which should expand to the exit status of the most recently executed
-foreground pipeline. ❌
+foreground pipeline. ✅❗ // check if leaks later
 
 •Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash. ❌
 

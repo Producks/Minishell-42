@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 10:31:04 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:13:33 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@
 
 # define SUCCESS 0
 # define FAILURE -1
-
-# define READ_PIPE 0
-# define WRITE_PIPE 1
 
 # define REDIRECTION_PIPE 50
 # define READ_INPUT 51

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/12 12:37:52 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/17 23:09:47 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <stdio.h>
+#include <string.h>
 //#include <readline/readline.h> // fix later
 //#include <readline/history.h> // fix later
 # include "../main/struct.h"
@@ -35,5 +36,10 @@
 
 int check_input(t_mini *mini);
 int	read_input(t_mini *mini);
+int tokenize(t_mini *mini);
+
+void	redir_list(char **tokens);
+void	*free_linked_list_redirr(t_redir **head);
+void	parse_linked_list(char **tokens, int num_token);
 
 #endif
