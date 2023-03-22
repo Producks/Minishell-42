@@ -54,7 +54,8 @@ SRC = 	./src/main/main.c\
 		./src/lexer/literal/literal_error.c \
 		./src/lexer/interpreter/dollar_interpreter.c \
 		./src/lexer/interpreter/quotes_interpreter.c \
-		./src/utils/str_cutcut.c
+		./src/utils/str_cutcut.c \
+		./src/lexer/interpreter/dollar_expandable.c
 
 # Colors #
 BLACK = \033[0;30m

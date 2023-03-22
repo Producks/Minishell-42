@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/17 22:47:12 by cperron          ###   ########.fr       */
-/*   Updated: 2023/03/14 16:59:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/22 13:49:21 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCT_H
 # define STRUCT_H

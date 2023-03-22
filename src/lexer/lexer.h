@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 20:32:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/22 13:57:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 
 # define SUCCESS 0
 # define FAILURE -1
-# define SINGLE_QUOTE 39
+# define SINGLE_QUOTE 39 
 # define DOUBLE_QUOTE 34
 # define DOLLAR_SIGN  36
 # define QUESTION_MARK 63
+# define UNDERSCORE 95
 
 extern int	g_exit_status;
 
@@ -62,5 +63,7 @@ void	literal_check_errors(t_literal *literal);
 int		dollar_interpreter(t_mini *mini, char **literal);
 /*quotes_interpreter.c*/
 int		interpret_quotes(t_mini *mini, char **tokens, int index);
+/*dollar_expandable.c*/
+int		dollar_expandable(t_mini *mini, char **literal, int index);
 
 #endif

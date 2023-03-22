@@ -6,42 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:43:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/21 13:00:16 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/22 08:27:20 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
-
-// static char	*get_env(t_mini *mini, char *str)
-// {
-// 	int		index;
-// 	int		j;
-// 	size_t	len;
-// 	char	*str;
-
-// 	index = 0;
-// 	len = 0;
-// 	j = 0;
-// 	while (str[index] != DOLLAR_SIGN)
-// 		index++;
-// 	len = ft_strlen(str + index);
-// 	str = malloc(sizeof(char) * len + 1);
-// 	if (!str)
-// 		return (NULL);
-// 	str[j++] = str[index++];
-// 	return (str);
-// }
-
-int	replace_env(t_mini *mini, char **literal, int index)
-{
-	// char	*env_str;
-
-	// env_str = get_env(mini, literal[index]);
-	// if (!env_str)
-	// 	return (FAILURE);
-	// exit (0);
-	return (SUCCESS);
-}
 
 int	replace_exit_status(t_mini *mini, char **literal, int index)
 {
@@ -86,7 +55,7 @@ int	dollar_interpreter(t_mini *mini, char **literal)
 				if (literal[index][j + 1] == QUESTION_MARK)
 					ret = replace_exit_status(mini, literal, index);
 				else
-					ret = replace_env(mini, literal, index);
+					ret = dollar_expandable(mini, literal, index);
 				if (ret == FAILURE)
 					return (FAILURE);
 			}
