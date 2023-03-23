@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/22 14:10:43 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/23 02:24:21 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,88 +19,110 @@ static bool	check_expandable(char c)
 	return (false);
 }
 
-static size_t	get_length(const char *str)
+static size_t	get_length(t_expandable *expand)
 {
-	size_t	length;
-	int		index;
-
-	index = 0;
-	length = 0;
-	while (str[index] && str[index] != DOLLAR_SIGN)
-		index++;
-	index++;
-	if (str[index] == '{')
-		index++;
-	if (!check_expandable(str[index])) // refacto here later
+	expand->index = 0;
+	expand->length = 0;
+	while (expand->str_literal[expand->index] && expand->str_literal[expand->index] != DOLLAR_SIGN)
+		expand->index++;
+	expand->dollar_index_start = expand->index;
+	expand->index++;
+	if (expand->str_literal[expand->index] == '{')
+		expand->index++;
+	if (!check_expandable(expand->str_literal[expand->index])) // refacto here later
 		return (0);
-	if (ft_isdigit(str[index]))
+	if (ft_isdigit(expand->str_literal[expand->index]))
 		return (0);
-	index++;
-	length++;
-	while (check_expandable(str[index++]))
-		length++;
-	return (length);
+	expand->index++;
+	expand->length++;
+	while (check_expandable(expand->str_literal[expand->index++]))
+		expand->length++;
 }
 
-static char *get_str(const char *str, size_t length)
+static int	get_cut_str(t_expandable *expand)
 {
-	int		index;
-	int		j;
-	char	*ret_str;
+	int	j;
 
-	index = 0;
 	j = 0;
-	ret_str = malloc(sizeof(char) * (length + 1));
-	if (!str)
-		return (NULL);
-	while (str[index] && str[index] != DOLLAR_SIGN)
-		index++;
-	index++;
-	while (check_expandable(str[index]))
-		ret_str[j++] = str[index++];
-	ret_str[j] = '\0';
-	return (ret_str);
-}
-
-static char	*env_test(t_mini *mini, char **literal, int index)
-{
-	int	i;
-}
-
-static char	*get_env(t_mini *mini, char **literal, int index)
-{
-	size_t	length;
-	char	*str;
-	int		i;
-
-	length = get_length(literal[index]);
-	str = get_str(literal[index], length);
-	if (!str)
-		return (NULL);
-	length = ft_strlen(str);
-	i = 0;
-	while (mini->env_copy[i])
-	{
-		if (!ft_strcmp(mini->env_copy[i], str))
-		{
-			if (mini->env_copy[i][length + 1] == '=')
-				return (get_env_str(mini, literal, index));
-			i++;
-			continue ;
-		}
-		i++;
-	}
-	return (free(str), NULL);
-}
-
-int	dollar_expandable(t_mini *mini, char **literal, int index)
-{
-	char	*env_str;
-
-	env_str = get_env(mini, literal, index);
-	if (!env_str)
+	expand->index = expand->dollar_index_start;
+	expand->original_cut = malloc(sizeof(char) * (expand->length + 4));
+	if (!expand->original_cut)
 		return (FAILURE);
-	printf("%s\n", env_str);
-	exit (0);
+	expand->original_cut[j++] = expand->str_literal[expand->index++];
+	if (expand->str_literal[expand->index] == '{')
+		expand->original_cut[j++] = expand->str_literal[expand->index++];
+	while (check_expandable(expand->str_literal[expand->index]))
+		expand->original_cut[j++] = expand->str_literal[expand->index++];
+	if (expand->str_literal[expand->index] == '}')
+		expand->original_cut[j++] = expand->str_literal[expand->index++];
+	expand->original_cut[j] = '\0';
+	return (SUCCESS);
+}
+
+static int	get_env_str(t_expandable *expand)
+{
+	int		j;
+
+	j = 0;
+	expand->index = expand->dollar_index_start;
+	expand->env_check = malloc(sizeof(char) * (expand->length + 1));
+	if (!expand->env_check)
+		return (FAILURE);
+	expand->index++;
+	if (expand->str_literal[expand->index] == '{')
+		expand->index++;
+	while (check_expandable(expand->str_literal[expand->index]))
+		expand->env_check[j++] = expand->str_literal[expand->index++];
+	expand->env_check[j] = '\0';
+	return (SUCCESS);
+}
+
+static int	get_envp(t_mini *mini, t_expandable *expand)
+{
+	int	index;
+
+	index = 0;
+	while (mini->env_copy[index])
+	{
+		if (!ft_strncmp(expand->env_check, mini->env_copy[index], expand->length))
+			{
+				if (mini->env_copy[index][expand->length] == '=')
+				{
+					expand->env_str = ft_strdup(mini->env_copy[index] + expand->length + 1);
+					if (!expand->env_str)
+						return (FAILURE);
+					return (SUCCESS);
+				}
+				index++;
+				continue ;
+			}
+		index++;
+	}
+	return (SUCCESS); // check later edge case
+}
+
+int	dollar_expandable(t_mini *mini, char **literal, int index) // check free order later
+{
+	t_expandable	expand;
+
+	expand.str_literal = literal[index];
+	get_length(&expand);
+	expand.ret = get_env_str(&expand);
+	if (expand.ret == FAILURE)
+		return (FAILURE);
+	expand.ret = get_cut_str(&expand);
+	if (expand.ret == FAILURE)
+		return (free(expand.env_str), FAILURE);
+	expand.ret = get_envp(mini, &expand);
+	if (expand.ret == FAILURE)
+		return (free(expand.env_str), free(expand.original_cut), FAILURE);
+	expand.cut_result = str_cutcut(literal[index], expand.env_str, expand.original_cut);
+	if (!expand.cut_result)
+		return (free(expand.env_str), free(expand.original_cut), free(expand.env_str), FAILURE);
+	free(literal[index]);
+	literal[index] = expand.cut_result;
+	free (expand.env_str);
+	free (expand.env_check);
+	free (expand.original_cut);
 	return (SUCCESS);
 }

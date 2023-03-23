@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/22 13:57:32 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/23 01:53:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@
 # define UNDERSCORE 95
 
 extern int	g_exit_status;
+
+typedef struct s_expandable
+{
+	size_t	length;
+	int		dollar_index_start;
+	int		index;
+	int		ret;
+	char	*env_str;
+	char	*env_check;
+	char	*original_cut;
+	char	*str_literal;
+	char	*cut_result;
+}	t_expandable;
 
 typedef struct s_literal
 {
