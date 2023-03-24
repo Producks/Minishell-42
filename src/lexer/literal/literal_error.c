@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:58:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/22 12:03:19 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/23 12:05:33 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	literal_check_errors(t_literal *literal)
 			return ;
 		literal->index++;
 	}
+	literal->index = 0;
 	while (literal->array[literal->index])
 	{
 		if (isredir(literal->array[literal->index][0]))

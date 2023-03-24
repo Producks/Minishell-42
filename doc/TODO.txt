@@ -29,7 +29,7 @@ in the quoted sequence except for $ (dollar sign). ✅❗ //proto done
 connected to the input of the next command via a pipe. ✅❗ // Prototype works for now
 
 • Handle environment variables ($ followed by a sequence of characters) which
-should expand to their values. ❌
+should expand to their values. ✅❗
 
 • Handle $? which should expand to the exit status of the most recently executed
 foreground pipeline. ✅❗ // check if leaks later

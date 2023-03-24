@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 13:58:27 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/23 12:08:51 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <termcap.h>
 #include <termios.h>
 #include <unistd.h>
+#include "../parsing/parsing.h"
+
+extern int	g_exit_status;
 
 void	silence_signal()
 {
@@ -39,7 +42,15 @@ void	q_handle(int num)
 	// exit (0);
 }
 
+void	place_holder(int num)
+{
+	g_exit_status = 69;
+	rl_on_new_line();
+	rl_redisplay();
+}
+
 void	init_signals(void)
 {
+	signal(SIGINT, place_holder);
 	signal(SIGQUIT, q_handle);
 }

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 02:24:21 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/23 17:18:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,25 @@ static bool	check_expandable(char c)
 	return (false);
 }
 
+static void	single_quote_inc(t_expandable *expand)
+{
+	expand->index++;
+	while (expand->str_literal[expand->index] != SINGLE_QUOTE)
+		expand->index++;
+	expand->index++;
+}
+
 static size_t	get_length(t_expandable *expand)
 {
 	expand->index = 0;
 	expand->length = 0;
-	while (expand->str_literal[expand->index] && expand->str_literal[expand->index] != DOLLAR_SIGN)
-		expand->index++;
+	while (expand->str_literal[expand->index] != DOLLAR_SIGN)
+	{
+		if (expand->str_literal[expand->index] == SINGLE_QUOTE)
+			single_quote_inc(expand);
+		else
+			expand->index++;
+	}
 	expand->dollar_index_start = expand->index;
 	expand->index++;
 	if (expand->str_literal[expand->index] == '{')
@@ -98,7 +111,11 @@ static int	get_envp(t_mini *mini, t_expandable *expand)
 			}
 		index++;
 	}
-	return (SUCCESS); // check later edge case
+	expand->env_str = malloc(sizeof(char) * 1);
+	if (!expand->env_str)
+		return (FAILURE);
+	expand->env_str[0] = '\0';
+	return (SUCCESS);
 }
 
 int	dollar_expandable(t_mini *mini, char **literal, int index) // check free order later
