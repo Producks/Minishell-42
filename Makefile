@@ -25,37 +25,52 @@ PATH_READHISTORY = libs/readline/
 # RUN #
 RUN = @./minishell
 
-# Source #
-SRC = 	./src/main/main.c\
-		./src/execution/fork.c\
-		./src/cmds/echo.c\
-		./src/cmds/pwd.c\
-		./src/cmds/env.c\
-		./src/cmds/cd.c\
-		./src/cmds/export.c\
-		./src/cmds/ft_exit.c\
-		./src/cmds/unset.c\
-		./src/main/init.c \
-		./src/main/signal.c \
-		./src/parsing/read_input.c \
+EXECUTION = ./src/execution/execution.c \
+			./src/execution/redirection/io_redirection.c \
+			./src/execution/redirection/redirection_utils.c \
+			./src/execution/child/path.c \
+			./src/execution/child/child.c \
+			./src/execution/child/execve.c \
+			./src/execution/heredoc/heredoc.c
+
+PARSING = ./src/parsing/read_input.c \
 		./src/parsing/check_input.c \
-		./src/parsing/list_christo.c\
-		./src/parsing/list_redir_christo.c\
-		./src/utils/linked_list_cmds.c \
-		./src/execution/redirection.c \
+		./src/parsing/list_christo.c \
+		./src/parsing/list_redir_christo.c
+
+UTILS = ./src/utils/linked_list_cmds.c \
 		./src/utils/strjoin_path.c \
-		./src/execution/path.c \
-		./src/execution/heredoc.c \
 		./src/utils/place_holder.c \
-		./src/lexer/lexer.c \
+		./src/utils/str_cutcut.c
+
+LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \
 		./src/lexer/literal/literal_string.c \
 		./src/lexer/literal/literal_redir.c \
 		./src/lexer/literal/literal_error.c \
 		./src/lexer/interpreter/dollar_interpreter.c \
 		./src/lexer/interpreter/quotes_interpreter.c \
-		./src/utils/str_cutcut.c \
 		./src/lexer/interpreter/dollar_expandable.c
+
+CMDS = ./src/cmds/echo.c \
+		./src/cmds/pwd.c \
+		./src/cmds/env.c \
+		./src/cmds/cd.c \
+		./src/cmds/export.c \
+		./src/cmds/ft_exit.c \
+		./src/cmds/unset.c
+
+MAIN = ./src/main/main.c \
+		./src/main/init.c \
+		./src/main/signal.c
+
+SRC = $(MAIN) \
+		$(EXECUTION) \
+		$(PARSING) \
+		$(UTILS) \
+		$(LEXER) \
+		$(CMDS)
+
 
 # Colors #
 BLACK = \033[0;30m

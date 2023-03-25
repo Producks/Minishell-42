@@ -1,0 +1,21 @@
+Last updated on : 2023-03-24
+
+Feature left to add:
+
+- Heredoc
+- Parsing
+- Signals
+- Error handling / Memory management
+- Refactoring for production push
+- Fix readline lib issues with readline for production push
+
+
+Known bug / What to fix:
+
+- Leaks
+- Do massive testing to check for any conditional jump
+- Fix built-ins to work with the current structure
+- Fix built-ins to return the correct error code in case of failure
+- Fix redisplay bug with readline history
+- Fix error messages for error checking during lexical analysis
+- Fix norminettes issues

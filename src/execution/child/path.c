@@ -6,11 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/12 19:36:13 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/24 08:45:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../execution.h"
 
 char	*find_built_in_path(t_mini *mini)
 {
