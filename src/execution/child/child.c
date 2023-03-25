@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/24 12:46:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 10:07:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	check_if_built_ins(t_mini *mini)
 {
 	if (ft_strcmp(mini->cmds_list->cmds[0], "echo") == 0)
-		return (echo(mini->cmds_list->cmds)); 
+		return (echo(mini->cmds_list->cmds));
 	// else if (ft_strcmp(mini->cmd[0], "cd") == 0)
 	// 	cd(mini);
 	// else if (ft_strcmp(mini->cmd[0], "pwd") == 0)
@@ -45,8 +45,8 @@ void	wait_for_child_process(t_cmds *cmds)
 /*Will handle errors later prototype to see if the idea works*/
 int	create_child_process(t_mini *mini)
 {
-	t_cmds *head;
-	int		ret;
+	t_cmds		*head;
+	int			ret;
 
 	head = mini->cmds_list;
 	ret = 0;

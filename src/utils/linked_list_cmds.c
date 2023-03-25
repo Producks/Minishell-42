@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_list_cmds.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:06:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/17 20:58:57 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/25 09:58:59 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	*free_linked_list_mini(t_cmds **head)
 	current = *head;
 	while (current)
 	{
+		if (current->redir_list)
+		{
+			free(current->redir_list->filename);
+			free(current->redir_list);
+		}
 		ft_free(current->cmds);
 		safe_free(current->path);
 		previous = current;

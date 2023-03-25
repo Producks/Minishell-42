@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/24 19:51:25 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 10:08:42 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,26 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 		// redir4->filename = ft_strdup("input.txt");
 		// add_node_redir(&redir, redir4);
 	}
-	else if (flag == 1)
-	{
-		cmds->cmds = ft_split("grep 9", ' ');
-		//cmds->outfile = ft_strdup("output.txt");
-		// cmds->in_type = REDIRECTION_PIPE;
-		// cmds->out_type = 0;
-		cmds->fd_in = mini->fd_in;
-		cmds->fd_out = mini->fd_out;
-	}
-	else
-	{
-		cmds->cmds = ft_split("echo hello", ' ');
-		// cmds->in_type = REDIRECTION_PIPE;
-		// cmds->out_type = REDIRECTION_PIPE;
-		cmds->fd_in = mini->fd_in;
-		cmds->fd_out = mini->fd_out;
-		// redir->in = true;
-		// redir->type = REDIRECTION_PIPE;
-		//free_linked_list_redir(&mini->cmds_list->redir_list);
-	}
+	// else if (flag == 1)
+	// {
+	// 	cmds->cmds = ft_split("grep 9", ' ');
+	// 	//cmds->outfile = ft_strdup("output.txt");
+	// 	// cmds->in_type = REDIRECTION_PIPE;
+	// 	// cmds->out_type = 0;
+	// 	cmds->fd_in = mini->fd_in;
+	// 	cmds->fd_out = mini->fd_out;
+	// }
+	// else
+	// {
+	// 	cmds->cmds = ft_split("echo hello", ' ');
+	// 	// cmds->in_type = REDIRECTION_PIPE;
+	// 	// cmds->out_type = REDIRECTION_PIPE;
+	// 	cmds->fd_in = mini->fd_in;
+	// 	cmds->fd_out = mini->fd_out;
+	// 	// redir->in = true;
+	// 	// redir->type = REDIRECTION_PIPE;
+	// 	//free_linked_list_redir(&mini->cmds_list->redir_list);
+	// }
 	cmds->redir_list = redir;
 	return (cmds);
 }
