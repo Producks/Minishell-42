@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 10:11:36 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 13:22:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,10 @@ void	run_cmd(t_mini *mini)
 {
 	char	*path;
 	int		index;
-	char	*test;
 
-	index = 0;
-	// if (check_if_built_ins(mini))
-	// 	exit (0);
-	//check_if_executable(mini);
 	path = find_path(mini);
 	mini->cmds_list->cmds[0] = path; //leaks
-	fprintf(stderr, "Fd:%d\n", mini->cmds_list->fd_in);
+	fprintf(stderr, "%s\n", mini->cmds_list->cmds[0]);
 	execve(path, mini->cmds_list->cmds, mini->env_copy);
 	exit(0);
 }

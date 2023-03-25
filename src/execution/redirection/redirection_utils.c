@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 10:07:19 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 10:58:13 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	restore_parent_file_descriptors(t_mini *mini)
 
 int	handle_io_redirections(t_mini *mini)
 {
-	int	ret;
+	int		ret;
+	t_redir	*head;
 
 	ret = 0;
+	head = mini->cmds_list->redir_list;
 	while (mini->cmds_list->redir_list != NULL)
 	{
 		if (mini->cmds_list->redir_list->in == true)
@@ -45,5 +47,6 @@ int	handle_io_redirections(t_mini *mini)
 		}
 		mini->cmds_list->redir_list = mini->cmds_list->redir_list->next;
 	}
+	mini->cmds_list->redir_list = head;
 	return (ret);
 }

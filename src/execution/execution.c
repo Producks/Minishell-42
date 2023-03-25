@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 10:08:42 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 12:36:17 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,32 @@ t_cmds	*generate_cmds(t_mini *mini, int flag)
 		redir->in = true;
 		redir->type = APPEND_IN;
 		redir->filename = ft_strdup("LOL");
-		// t_redir *redir2;
-		// redir2 = create_node_redir();
-		// redir2->out = true;
-		// redir->type = APPEND_IN;
-		// redir2->filename = ft_strdup("test2");
-		// add_node_redir(&redir ,redir2);
-		// t_redir *redir3;
-		// redir3 = create_node_redir();
-		// redir3->in = true;
-		// redir3->type = READ_INPUT;
-		// redir3->filename = ft_strdup("Makefile");
-		// add_node_redir(&redir, redir3);
+		t_redir *redir2;
+		redir2 = create_node_redir();
+		redir2->in = true;
+		redir2->type = APPEND_IN;
+		redir2->filename = ft_strdup("LOL");
+		add_node_redir(&redir ,redir2);
+		t_redir *redir3;
+		redir3 = create_node_redir();
+		redir3->out = true;
+		redir3->type = REDIRECTION_PIPE;
+		add_node_redir(&redir, redir3);
 		// t_redir *redir4;
 		// redir4 = create_node_redir();
-		// redir4->in = true;
-		// redir4->type = READ_INPUT;
-		// redir4->filename = ft_strdup("input.txt");
+		// redir4->out = true;
+		// redir4->type = APPEND_OUT;
+		// redir4->filename = ft_strdup("lol.txt");
 		// add_node_redir(&redir, redir4);
 	}
-	// else if (flag == 1)
-	// {
-	// 	cmds->cmds = ft_split("grep 9", ' ');
-	// 	//cmds->outfile = ft_strdup("output.txt");
-	// 	// cmds->in_type = REDIRECTION_PIPE;
-	// 	// cmds->out_type = 0;
-	// 	cmds->fd_in = mini->fd_in;
-	// 	cmds->fd_out = mini->fd_out;
-	// }
+	else if (flag == 1)
+	{
+		cmds->cmds = ft_split("cat", ' ');
+		redir->in = true;
+		redir->type = REDIRECTION_PIPE;
+		cmds->fd_in = mini->fd_in;
+		cmds->fd_out = mini->fd_out;
+	}
 	// else
 	// {
 	// 	cmds->cmds = ft_split("echo hello", ' ');
@@ -78,10 +76,10 @@ void	generate_test_env(t_mini *mini)
 
 	cmds = generate_cmds(mini, 0);
 	//cmds_2 = generate_cmds(mini, 2);
-	//cmds_3 = generate_cmds(mini, 1);
+	cmds_3 = generate_cmds(mini, 1);
 	add_node_cmds(&mini->cmds_list, cmds);
 	//add_node_cmds(&mini->cmds_list, cmds_2);
-	//add_node_cmds(&mini->cmds_list, cmds_3);
+	add_node_cmds(&mini->cmds_list, cmds_3);
 }
 
 void	execution(t_mini *mini)
@@ -89,5 +87,6 @@ void	execution(t_mini *mini)
 	generate_test_env(mini); // remove later, only used for testing commands without parsing
 	create_child_process(mini);
 	wait_for_child_process(mini->cmds_list);
-	mini->cmds_list = free_linked_list_mini(&mini->cmds_list);
+	mini->cmds_list = free_linked_list_mini(&mini->cmds_list); // fix later
+	unlink("MiniHeredoc");
 }
