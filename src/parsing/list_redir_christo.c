@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/24 21:13:56 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/25 02:04:30 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,54 @@ int	check_pipe_out(t_redir **redir, char **tokens, int i)
 	return (0);
 }
 
-void	check_redir(t_redir **redir, char **tokens, int i)
+// void	check_redir(t_redir **redir, char **tokens, int i)
+// {
+// 	while (tokens[i])
+// 	{
+// 		if (ft_strcmp(tokens[i], ">") == 0)
+// 			addnode_end_redir(redir, 51, 1, tokens[i + 1]);
+// 		if (ft_strcmp(tokens[i], "<") == 0)
+// 			addnode_end_redir(redir, 52, 0, tokens[i + 1]);
+// 		if (ft_strcmp(tokens[i], ">>") == 0)
+// 			addnode_end_redir(redir, 53, 1, tokens[i + 1]);
+// 		if (ft_strcmp(tokens[i], "<<") == 0)
+// 			addnode_end_redir(redir, 54, 0, tokens[i + 1]);
+// 		i++;
+// 	}
+// 	print_redir_list(*redir);
+// }
+
+// void	check_redir_first(t_redir **redir, char **tokens, int i, int n)
+// {
+// 	while (tokens[i] && i < n)
+// 	{
+// 		if (ft_strcmp(tokens[i], ">") == 0)
+// 			addnode_end_redir(redir, 51, 1, tokens[i + 1]);
+// 		if (ft_strcmp(tokens[i], "<") == 0)
+// 			addnode_end_redir(redir, 52, 0, tokens[i + 1]);
+// 		if (ft_strcmp(tokens[i], ">>") == 0)
+// 			addnode_end_redir(redir, 53, 1, tokens[i + 1]);
+// 		if (ft_strcmp(tokens[i], "<<") == 0)
+// 			addnode_end_redir(redir, 54, 0, tokens[i + 1]);
+// 		i++;
+// 	}
+// 	print_redir_list(*redir);
+// }
+
+int	check_redir_2(t_redir **redir, char **tokens, int i, int bef_cmd)
 {
-	while (tokens[i])
+	int	max;
+	
+	max = i;
+	i = bef_cmd;
+	while (tokens[i] && is_pipe(tokens[i]) == 0)
 	{
+		
+		// if (is_redir(tokens[i + 2]) == 0) // a checker
+		// {
+		// 	// i++;
+		// 	break;
+		// }
 		if (ft_strcmp(tokens[i], ">") == 0)
 			addnode_end_redir(redir, 51, 1, tokens[i + 1]);
 		if (ft_strcmp(tokens[i], "<") == 0)
@@ -137,43 +181,48 @@ void	check_redir(t_redir **redir, char **tokens, int i)
 		i++;
 	}
 	print_redir_list(*redir);
+	// printf ("THE i: %d\n", i);
+	if (!tokens[i]) // a checker
+		i -= 2;
+	return (i);
 }
 
-void	check_redir_first(t_redir **redir, char **tokens, int i, int n)
-{
-	while (tokens[i] && i < n)
-	{
-		if (ft_strcmp(tokens[i], ">") == 0)
-			addnode_end_redir(redir, 51, 1, tokens[i + 1]);
-		if (ft_strcmp(tokens[i], "<") == 0)
-			addnode_end_redir(redir, 52, 0, tokens[i + 1]);
-		if (ft_strcmp(tokens[i], ">>") == 0)
-			addnode_end_redir(redir, 53, 1, tokens[i + 1]);
-		if (ft_strcmp(tokens[i], "<<") == 0)
-			addnode_end_redir(redir, 54, 0, tokens[i + 1]);
-		i++;
-	}
-	print_redir_list(*redir);
-}
-
-void	redir_list_2(t_cmds **cmds, char **tokens, int i, int n, int f)
+int	redir_list_3(t_cmds **cmds, char **tokens, int i, int bef_cmd)
 {
 	t_redir *redir;
 	
-	redir = NULL;
 	
-	check_pipe_in(&redir, tokens, i, n);
-
+	redir = NULL;
+	i = bef_cmd;
+	check_pipe_in(&redir, tokens, i, 0);
 	check_pipe_out(&redir, tokens, i);
-	if (f == 1)
-		check_redir(&redir, tokens, i);
-	if (f == 0)
-		check_redir_first(&redir, tokens, 0, i);
+	i = check_redir_2(&redir, tokens, i, bef_cmd);
 	// print_redir_list(redir);
 	if(redir)
 		redir = free_linked_list_redirr(&redir);
 	// print_redir_list(redir);
+	return (i);
 }
+
+// void	redir_list_2(t_cmds **cmds, char **tokens, int i, int n, int f)
+// {
+// 	t_redir *redir;
+	
+	
+// 	redir = NULL;
+	
+// 	check_pipe_in(&redir, tokens, i, n);
+
+// 	check_pipe_out(&redir, tokens, i);
+// 	if (f == 1)
+// 		check_redir(&redir, tokens, i);
+// 	if (f == 0)
+// 		check_redir_first(&redir, tokens, 0, i);
+// 	// print_redir_list(redir);
+// 	if(redir)
+// 		redir = free_linked_list_redirr(&redir);
+// 	// print_redir_list(redir);
+// }
 
 // void	redir_list(char **tokens)
 // {

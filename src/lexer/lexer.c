@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/24 23:21:11 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/25 02:05:35 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lexer(t_mini *mini)
 	// mini->message = readline(GRN "Minishell > " RESET);
 	mini->message = ft_strdup("< rien < chalam << input.txt < input_two.txt cat -s -i -9 | wc -p >> output.txt > output_two.txt >> patitnoir > minishell");
 	//< rien < chalam << input.txt < input_two.txt cat -s -i -9 | wc -p >> output.txt > output_two.txt >> patitnoir > minishell
-	// < input.txt cat | wc > output.txt
+	// echo < input.txt cat | wc > output.txt
 	// << input.txt < input_two.txt cat | wc >> output.txt > output_two.txt
 	// cat1 < input.txt | cat2 | wc | cat3 > test.txt
 	literal_tokens = literal_tokenization(mini);
