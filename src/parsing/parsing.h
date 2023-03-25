@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/21 13:26:41 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/24 20:25:18 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ int	read_input(t_mini *mini);
 int tokenize(t_mini *mini);
 
 void	redir_list(char **tokens);
+void	redir_list_2(t_cmds **cmds, char **tokens, int i, int n, int f);
 void	*free_linked_list_redirr(t_redir **head);
-void	parse_linked_list(char **tokens);
+void	parse_linked_list(t_mini *mini, char **tokens);
+int		interpret_quotes(t_mini *mini, char **tokens, int index);
+
+void addnodecmds(t_cmds **list, t_cmds *new_node);
 
 #endif

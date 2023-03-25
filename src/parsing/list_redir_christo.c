@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/17 23:41:04 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/24 21:13:56 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	print_redir_list(t_redir *redir)
 	
 	i = 1;
 	current = redir;
+	
 	while (current)
 	{
 		if (current->type == 50)
@@ -47,13 +48,15 @@ void	print_redir_list(t_redir *redir)
 			printf(">>\n");
 		if (current->type == 54)
 			printf("<<\n");
-		printf("node :%d\n", i);
+		printf(GRN "node :%d\n" RESET, i);
 		printf("in :%d\n", current->in);
 		printf("out :%d\n", current->out);
 		printf("filename : %s\n\n", current->filename);
+		printf("next : %p\n", current->next);
 		current = current->next;
 		i++;
 	}
+
 }
 
 void	addnode_end_redir(t_redir **list, int type, int dir, char *filename)
@@ -70,7 +73,7 @@ void	addnode_end_redir(t_redir **list, int type, int dir, char *filename)
 	new_node->next = NULL;
 	new_node->head = *list;
 
-
+	
 	t_redir *current;
 	
 	if (*list == NULL)
@@ -85,27 +88,42 @@ void	addnode_end_redir(t_redir **list, int type, int dir, char *filename)
 	}
 }
 
-void	check_pipe(t_redir **redir, char **tokens, int num_token)
+int	check_pipe_in(t_redir **redir, char **tokens, int i, int n)
 {
-	int i;
-
-	i = 0;
 	while (tokens[i])
 	{
 		if (ft_strcmp(tokens[i], "|") == 0)
 		{
-			addnode_end_redir(redir, 50, 1, tokens[i - 1]);
-			addnode_end_redir(redir, 50, 0, tokens[i + 1]);
+			// puts("ici");
+			addnode_end_redir(redir, 50, 1, NULL);
+			// print_redir_list(*redir);
+			return (1);
 		}	
 		i++;
 	}
+	return (0);
 }
 
-void	check_redir(t_redir **redir, char **tokens, int num_token)
+int	check_pipe_out(t_redir **redir, char **tokens, int i)
 {
-	int i;
+	int j;
 
-	i = 0;
+	j = 0;
+	while (tokens[j] && j < i)
+	{
+		if (ft_strcmp(tokens[j], "|") == 0)
+		{
+			addnode_end_redir(redir, 50, 0, NULL);
+			// print_redir_list(*redir);
+			return (1);
+		}	
+		j++;
+	}
+	return (0);
+}
+
+void	check_redir(t_redir **redir, char **tokens, int i)
+{
 	while (tokens[i])
 	{
 		if (ft_strcmp(tokens[i], ">") == 0)
@@ -118,17 +136,54 @@ void	check_redir(t_redir **redir, char **tokens, int num_token)
 			addnode_end_redir(redir, 54, 0, tokens[i + 1]);
 		i++;
 	}
+	print_redir_list(*redir);
 }
 
-void	redir_list(char **tokens)
+void	check_redir_first(t_redir **redir, char **tokens, int i, int n)
+{
+	while (tokens[i] && i < n)
+	{
+		if (ft_strcmp(tokens[i], ">") == 0)
+			addnode_end_redir(redir, 51, 1, tokens[i + 1]);
+		if (ft_strcmp(tokens[i], "<") == 0)
+			addnode_end_redir(redir, 52, 0, tokens[i + 1]);
+		if (ft_strcmp(tokens[i], ">>") == 0)
+			addnode_end_redir(redir, 53, 1, tokens[i + 1]);
+		if (ft_strcmp(tokens[i], "<<") == 0)
+			addnode_end_redir(redir, 54, 0, tokens[i + 1]);
+		i++;
+	}
+	print_redir_list(*redir);
+}
+
+void	redir_list_2(t_cmds **cmds, char **tokens, int i, int n, int f)
 {
 	t_redir *redir;
 	
 	redir = NULL;
-	check_pipe(&redir, tokens, 0);
-	check_redir(&redir, tokens, 0);
-	print_redir_list(redir);
+	
+	check_pipe_in(&redir, tokens, i, n);
+
+	check_pipe_out(&redir, tokens, i);
+	if (f == 1)
+		check_redir(&redir, tokens, i);
+	if (f == 0)
+		check_redir_first(&redir, tokens, 0, i);
+	// print_redir_list(redir);
 	if(redir)
 		redir = free_linked_list_redirr(&redir);
-	print_redir_list(redir);
+	// print_redir_list(redir);
 }
+
+// void	redir_list(char **tokens)
+// {
+// 	t_redir *redir;
+	
+// 	redir = NULL;
+// 	check_pipe(&redir, tokens, 0);
+// 	check_redir(&redir, tokens, 0);
+// 	print_redir_list(redir);
+// 	if(redir)
+// 		redir = free_linked_list_redirr(&redir);
+// 	print_redir_list(redir);
+// }

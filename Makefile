@@ -41,6 +41,7 @@ SRC = 	./src/main/main.c\
 		./src/parsing/check_input.c \
 		./src/parsing/list_christo.c\
 		./src/parsing/list_redir_christo.c\
+		./src/parsing/list_utils.c\
 		./src/utils/linked_list_cmds.c \
 		./src/execution/redirection.c \
 		./src/utils/strjoin_path.c \
