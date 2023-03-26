@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 17:18:56 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 21:03:14 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	get_cut_str(t_expandable *expand)
 	expand->index = expand->dollar_index_start;
 	expand->original_cut = malloc(sizeof(char) * (expand->length + 4));
 	if (!expand->original_cut)
-		return (FAILURE);
+		return (print_errno(ENOMEM), FAILURE);
 	expand->original_cut[j++] = expand->str_literal[expand->index++];
 	if (expand->str_literal[expand->index] == '{')
 		expand->original_cut[j++] = expand->str_literal[expand->index++];
@@ -80,7 +80,7 @@ static int	get_env_str(t_expandable *expand)
 	expand->index = expand->dollar_index_start;
 	expand->env_check = malloc(sizeof(char) * (expand->length + 1));
 	if (!expand->env_check)
-		return (FAILURE);
+		return (print_errno(ENOMEM), FAILURE);
 	expand->index++;
 	if (expand->str_literal[expand->index] == '{')
 		expand->index++;
@@ -103,7 +103,7 @@ static int	get_envp(t_mini *mini, t_expandable *expand)
 				{
 					expand->env_str = ft_strdup(mini->env_copy[index] + expand->length + 1);
 					if (!expand->env_str)
-						return (FAILURE);
+						return (print_errno(ENOMEM), FAILURE);
 					return (SUCCESS);
 				}
 				index++;
@@ -113,7 +113,7 @@ static int	get_envp(t_mini *mini, t_expandable *expand)
 	}
 	expand->env_str = malloc(sizeof(char) * 1);
 	if (!expand->env_str)
-		return (FAILURE);
+		return (print_errno(ENOMEM), FAILURE);
 	expand->env_str[0] = '\0';
 	return (SUCCESS);
 }
@@ -129,13 +129,13 @@ int	dollar_expandable(t_mini *mini, char **literal, int index) // check free ord
 		return (FAILURE);
 	expand.ret = get_cut_str(&expand);
 	if (expand.ret == FAILURE)
-		return (free(expand.env_str), FAILURE);
+		return (free(expand.env_check), FAILURE); // done
 	expand.ret = get_envp(mini, &expand);
 	if (expand.ret == FAILURE)
-		return (free(expand.env_str), free(expand.original_cut), FAILURE);
+		return (free(expand.env_check), free(expand.original_cut), FAILURE);
 	expand.cut_result = str_cutcut(literal[index], expand.env_str, expand.original_cut);
 	if (!expand.cut_result)
-		return (free(expand.env_str), free(expand.original_cut), free(expand.env_str), FAILURE);
+		return (print_errno(ENOMEM), free(expand.env_check), free(expand.original_cut), free(expand.env_str), FAILURE);
 	free(literal[index]);
 	literal[index] = expand.cut_result;
 	free (expand.env_str);

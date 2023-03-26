@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:43:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 22:14:21 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 20:39:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	replace_exit_status(char **literal, int index)
 
 	exit_status = ft_itoa(g_exit_status);
 	if (!exit_status)
-		return (FAILURE);
+		return (print_errno(ENOMEM), FAILURE);
 	trim_str = str_cutcut(literal[index], exit_status, "$?");
 	if (!trim_str)
-		return (free(exit_status), FAILURE);
+		return (free(exit_status), print_errno(ENOMEM), FAILURE);
 	free (literal[index]);
 	free (exit_status);
 	literal[index] = trim_str;

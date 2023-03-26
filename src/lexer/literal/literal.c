@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:02:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 16:09:35 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 17:04:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ char	**literal_tokenization(t_mini *mini)
 	if (!literal.count)
 		return (NULL);
 	literal.str = malloc(sizeof(char) * literal.count);
-	if (!literal.str) // handle later
-		return (NULL);
+	if (!literal.str)
+		return (print_errno(ENOMEM), NULL);
 	literal_string_sep(&literal, mini->message);
 	if (literal.ret == -1)
-		return (free (literal.str), NULL);
+		return (free(literal.str), NULL);
 	literal.array = ft_split(literal.str, 29);
 	if (!literal.array)
-		return (free (literal.str), NULL); // handle later
+		return (free(literal.str), print_errno(ENOMEM), NULL);
 	literal_check_errors(&literal); // check more case later
 	if (literal.ret == -1)
-		return (free(literal.str), NULL);
+		return (free(literal.str), ft_free(literal.array), NULL);
 	return (free(literal.str), literal.array);
 }

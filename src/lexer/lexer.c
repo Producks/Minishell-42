@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 22:37:02 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 20:06:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ void	lexer(t_mini *mini)
 	literal_tokens = literal_tokenization(mini);
 	if (!literal_tokens)
 		return ;
-	dollar_interpreter(mini, literal_tokens);
+	if (dollar_interpreter(mini, literal_tokens) == FAILURE)
+	{
+		ft_free(literal_tokens);
+		return ;
+	}
 	for (int i = 0; literal_tokens[i]; i++)
 	{
 		interpret_quotes(mini, literal_tokens, i);

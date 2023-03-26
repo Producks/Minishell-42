@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 01:53:56 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 15:07:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../../libs/Libft/libft.h"
 # include "../main/struct.h"
 # include "../utils/utils.h"
+# include "../errors/error.h"
 # include <stdbool.h>
 # include <stdio.h>
 

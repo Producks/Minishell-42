@@ -60,6 +60,8 @@ CMDS = ./src/cmds/echo.c \
 		./src/cmds/ft_exit.c \
 		./src/cmds/unset.c
 
+ERRORS = ./src/errors/error.c
+
 MAIN = ./src/main/main.c \
 		./src/main/init.c \
 		./src/main/signal.c
@@ -69,7 +71,8 @@ SRC = $(MAIN) \
 		$(PARSING) \
 		$(UTILS) \
 		$(LEXER) \
-		$(CMDS)
+		$(CMDS) \
+		$(ERRORS)
 
 
 # Colors #
