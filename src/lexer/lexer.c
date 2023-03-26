@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 20:06:56 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 21:22:08 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void	lexer(t_mini *mini)
 {
 	char	**literal_tokens;
+	int		ret;
 
 	literal_tokens = literal_tokenization(mini);
 	if (!literal_tokens)
