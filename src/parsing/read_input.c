@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 16:37:11 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 14:39:20 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	read_input(t_mini *mini)
 		if (!mini->message)
 			break ;
 		add_history(mini->message);
-		lexer(mini);
+		execution(mini);
 		free (mini->message);
 		mini->message = NULL;
 	}

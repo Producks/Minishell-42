@@ -2,7 +2,6 @@ Last updated on : 2023-03-24
 
 Feature left to add:
 
-- Heredoc
 - Parsing
 - Signals
 - Error handling / Memory management
@@ -12,6 +11,8 @@ Feature left to add:
 
 Known bug / What to fix:
 
+- Heredoc FD/out and FD/in protection, massive bug if out redirected before heredoc
+- Heredoc file protection
 - Leaks
 - Do massive testing to check for any conditional jump
 - Fix built-ins to work with the current structure
