@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 21:40:31 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 23:39:48 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	lexer(t_mini *mini)
 	char	**literal_tokens;
 	int		ret;
 
+
+	// mini->message = ft_strdup("");
 	literal_tokens = literal_tokenization(mini);
 	if (!literal_tokens)
 		return ;
@@ -29,10 +31,7 @@ void	lexer(t_mini *mini)
 		ft_free(literal_tokens);
 		return ;
 	}
-	for (int i = 0; literal_tokens[i]; i++)
-	{
-		interpret_quotes(mini, literal_tokens, i);
-		printf("%s\n", literal_tokens[i]);
-	}
+	parse_linked_list(mini, literal_tokens);
 	ft_free(literal_tokens);
 }
+ // echo hello > cat

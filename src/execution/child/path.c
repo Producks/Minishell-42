@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/24 08:45:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:21:21 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ char	*find_built_in_path(t_mini *mini)
 		free(path);
 		index++;
 	}
-	free(path);
-	ft_free(path_try);
+	// free(path);
+	// ft_free(path_try); check later free bug if wrong command
 	return (NULL);
 }
 
@@ -47,7 +47,7 @@ char	*absolute_path(t_mini *mini)
 {
 	if (!access(mini->cmds_list->cmds[0], F_OK))
 		return (mini->cmds_list->cmds[0]);
-	return (NULL);	
+	return (NULL);
 }
 
 char	*executable_path(t_mini *mini)

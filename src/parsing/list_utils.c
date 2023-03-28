@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 20:18:42 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/25 23:20:56 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 22:53:58 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void addnodecmds(t_cmds **list, t_cmds *new_node)
 			current = current->next;
 		current->next = new_node;
 	}
+	
 }
 
 void addnoderedir(t_redir **list, t_redir *new_node)

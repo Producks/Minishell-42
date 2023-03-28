@@ -6,11 +6,49 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 21:38:04 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 23:59:33 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+void	*free_linked_list_redirr(t_redir **head)
+{
+	t_redir *current;
+	t_redir *previous;
+	
+	current = *head;
+	while (current)
+	{
+		previous = current;
+		current = current->next;
+		free(previous);
+		previous = NULL;
+	}
+	return (NULL);
+}
+
+void	*free_linked_list_cmds(t_cmds **head)
+{
+	t_cmds *current;
+	t_cmds *previous;
+	
+	current = *head;
+	while (current)
+	{
+		previous = current;
+		current = current->next;
+		printf("cmds add : %p\n", previous->cmds);
+		free(previous->cmds);
+		printf("cmds add : %p\n", previous->cmds);
+		free_linked_list_redirr(&previous->redir_list);
+		free(previous);
+		printf("cmds add : %p\n", previous->cmds);
+		previous = NULL;
+		// printf("cmds add : %p\n", previous->cmds);
+	}
+	return (NULL);
+}
 
 void	print_redir_list(t_redir *redir)
 {
@@ -134,17 +172,12 @@ int	count_arg_2(char **tokens, int i, int pipe_p)
 	int n_arg;
 
 	n_arg = 0;
-	// printf("pipe_p: %d\n", pipe_p);
-	// printf("i: %d\n", i);
 	while (tokens[i] && i < pipe_p)
 	{
 		if (is_redir_2(tokens[i]) == 1)
 			i += 2;
 		else
-		{
-			// puts("ici");
 			n_arg++;
-		}
 		i++;
 	}
 	
@@ -171,6 +204,23 @@ int	add_arg(t_cmds *new_node, char **tokens, int i, int n_arg, int c)
 	return (i);
 }
 
+int	count_cmds(char **tokens)
+{
+	int i;
+	int n_cmds;
+
+	i = 0;
+	n_cmds = 0;
+	while (tokens[i])
+	{
+		if (is_pipe(tokens[i]) == 1)
+			n_cmds++;
+		i++;
+	}
+	return (n_cmds + 1);
+}
+
+
 int add_cmd_2(t_cmds **list, char **tokens, int i, int bef_cmd, int pipe_p)
 {
 	t_cmds *new_node;
@@ -179,12 +229,14 @@ int add_cmd_2(t_cmds **list, char **tokens, int i, int bef_cmd, int pipe_p)
 	
 	c = 0;
 	new_node = ft_calloc(1, sizeof(t_cmds));
-	// puts("ici");
+	// new_node->nb_cmds = count_cmds(tokens);
+	// printf("n_cmds ; %d\n", new_node->nb_cmds);
 	if (pipe_p != 0)
 		n_arg = count_arg_2(tokens, i, pipe_p);
 	else 
 		n_arg = count_arg(tokens, i);
 	// printf ("n arg: %d\n", n_arg);
+	// puts("ici");
 	new_node->cmds = ft_calloc(sizeof(char*), n_arg + 1);
 	while (i < pipe_p && pipe_p != 0)
 	{
@@ -228,14 +280,19 @@ int	find_pipe(char **tokens, int i)
 	return (0);
 }
 
-void	check_cmds(t_cmds **cmds, char **tokens, int num_token)
+void    check_cmds(t_cmds **cmds, char **tokens, int num_token)
 {
 	int i;
 	int bef_cmd;
 	int	pipe_p;
+	int n;
 
+	n = 0;
 	i = 0;
+
 	bef_cmd = 0;
+	n = count_cmds(tokens);
+	printf("n_cmds ; %d\n", n);
 	while (tokens[i])
 	{
 		pipe_p = 0;
@@ -245,85 +302,36 @@ void	check_cmds(t_cmds **cmds, char **tokens, int num_token)
 		// printf ("pipe_p: %d\n", pipe_p);
 		// printf ("THE i: %d\n", i);
 		if (pipe_p == 0)
-		{
 			i = find_cmds(tokens, i);
-		}
-		if (!tokens[i + 1] && i == 0)
-		{
-			// printf ("THE i: %d\n", i);
-			i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
+		i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
+		printf ("THE i: %d\n", i);
+		if (pipe_p != 0)
 			i++;
-			break;
-		}
-		if (tokens[i + 1])
-		{
-			// puts( "ici");
-			// printf ("THE i: %d\n", i);
-			// i = add_cmd(cmds, tokens, i, bef_cmd);
-			i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);	
-		}
-		else if (!tokens[i + 1] && is_redir_2(tokens[i - 1]) == 0 && i > 2)
-			{
-			// printf ("THE i: %d\n", i);
-			// i = add_cmd(cmds, tokens, i, bef_cmd);
-			i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
-			i++;	
-		}
+		// i++;
+		// i++;
 		
-		i++;
-		// printf ("THE i: %d\n", i);
 	}
 	
 }
-
-void	*free_linked_list_redirr(t_redir **head)
-{
-	t_redir *current;
-	t_redir *previous;
-	
-	current = *head;
-	while (current)
-	{
-		previous = current;
-		current = current->next;
-		free(previous);
-		previous = NULL;
-	}
-	return (NULL);
-}
-
-void	*free_linked_list_cmds(t_cmds **head)
-{
-	t_cmds *current;
-	t_cmds *previous;
-	
-	current = *head;
-	while (current)
-	{
-		previous = current;
-		current = current->next;
-		printf("cmds add : %p\n", previous->cmds);
-		free(previous->cmds);
-		printf("cmds add : %p\n", previous->cmds);
-		free_linked_list_redirr(&previous->redir_list);
-		free(previous);
-		printf("cmds add : %p\n", previous->cmds);
-		previous = NULL;
-		// printf("cmds add : %p\n", previous->cmds);
-	}
-	return (NULL);
-}
-
 
 void	parse_linked_list(t_mini *mini, char **tokens)
 {
 	t_cmds	*cmds;
 	
 	cmds = NULL;
+	
+	// cmds = ft_calloc(1, sizeof(t_cmds));
+	// cmds->nb_cmds = count_cmds(tokens);
+	// printf("n_cmds ; %d\n", cmds->nb_cmds);
+	
 	// print_token(tokens);
-	count_cmds(&cmds, tokens);
+	// puts ("ici");
+	
+	
 	check_cmds(&cmds, tokens, 0);
+	mini->cmds_list = cmds;
 	printall(cmds);
-	cmds = free_linked_list_cmds(&cmds);
+	execution(mini);
+	//cmds = free_linked_list_cmds(&cmds);
 	// printall(cmds);
 }

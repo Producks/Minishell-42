@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 14:27:09 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 23:09:04 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	child_cleanup(t_mini *mini)
 {
-	fprintf(stderr, "Child: %s %p\n", mini->env_copy[0], mini->env_copy[0]);
+	fprintf(stderr, "Cherhrehreherhild: %s %p\n", mini->env_copy[0], mini->env_copy[0]);
 	mini->env_copy[0][0] = 'Z';
 	fprintf(stderr, "Child: %s %p\n", mini->env_copy[0], mini->env_copy[0]);
 	free (mini->message);
@@ -38,9 +38,11 @@ void	run_cmd(t_mini *mini)
 	int		index;
 
 	//child_cleanup(mini);
+	// fprintf(stderr, "Child: %p n", mini->cmds_list->cmds);
 	if (!mini->cmds_list->cmds)
 		child_cleanup(mini);
 	path = find_path(mini); // check later for errors leaks etc..
 	execve(path, mini->cmds_list->cmds, mini->env_copy);
+	perror("Minishell");
 	exit(0);
 }
