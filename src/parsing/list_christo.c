@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 21:35:44 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 22:24:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ void    check_cmds(t_cmds **cmds, char **tokens, int num_token)
             // i = add_cmd(cmds, tokens, i, bef_cmd);
             i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
         }
-        else if (!tokens[i + 1] && is_redir_2(tokens[i - 1]) == 0 && i > 2)
+        else if (!tokens[i + 1] && is_redir_2(tokens[i - 1]) == 0 && i > 1)
             {
             // printf ("THE i: %d\n", i);
             // i = add_cmd(cmds, tokens, i, bef_cmd);

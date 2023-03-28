@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 21:03:14 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:43:51 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static size_t	get_length(t_expandable *expand)
 	expand->length++;
 	while (check_expandable(expand->str_literal[expand->index++]))
 		expand->length++;
+	return (0); // fix this shit later
 }
 
 static int	get_cut_str(t_expandable *expand)
