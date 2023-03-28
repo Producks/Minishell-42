@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 22:07:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/28 00:30:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	child_cleanup(t_mini *mini)
 	fprintf(stderr, "Child: %s %p\n", mini->env_copy[0], mini->env_copy[0]);
 	mini->env_copy[0][0] = 'Z';
 	fprintf(stderr, "Child: %s %p\n", mini->env_copy[0], mini->env_copy[0]);
-	free (mini->message);
+	//free (mini->message);
 	close(mini->fd_in);
 	close(mini->fd_out);
 	close(STDIN_FILENO);

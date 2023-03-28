@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 22:25:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/28 00:30:02 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	execution(t_mini *mini)
 	//generate_test_env(mini); // remove later, only used for testing commands without parsing
 	create_child_process(mini);
 	wait_for_child_process(mini->cmds_list);
-	mini->cmds_list = free_linked_list_mini(&mini->cmds_list); // fix later
+	//mini->cmds_list = free_linked_list_mini(&mini->cmds_list); // fix later
 	unlink("MiniHeredoc");
 }
