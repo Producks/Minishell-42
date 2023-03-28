@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 20:32:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 15:07:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,32 @@
 # include "../../libs/Libft/libft.h"
 # include "../main/struct.h"
 # include "../utils/utils.h"
+# include "../errors/error.h"
 # include <stdbool.h>
 # include <stdio.h>
 
 # define SUCCESS 0
 # define FAILURE -1
-# define SINGLE_QUOTE 39
+# define SINGLE_QUOTE 39 
 # define DOUBLE_QUOTE 34
 # define DOLLAR_SIGN  36
 # define QUESTION_MARK 63
+# define UNDERSCORE 95
 
 extern int	g_exit_status;
+
+typedef struct s_expandable
+{
+	size_t	length;
+	int		dollar_index_start;
+	int		index;
+	int		ret;
+	char	*env_str;
+	char	*env_check;
+	char	*original_cut;
+	char	*str_literal;
+	char	*cut_result;
+}	t_expandable;
 
 typedef struct s_literal
 {
@@ -62,5 +77,7 @@ void	literal_check_errors(t_literal *literal);
 int		dollar_interpreter(t_mini *mini, char **literal);
 /*quotes_interpreter.c*/
 int		interpret_quotes(t_mini *mini, char **tokens, int index);
+/*dollar_expandable.c*/
+int		dollar_expandable(t_mini *mini, char **literal, int index);
 
 #endif

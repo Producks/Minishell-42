@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/26 00:33:36 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 20:31:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -24,6 +25,9 @@
 # include "../../libs/Libft/libft.h"
 # include "../execution/execution.h"
 # include "../cmds/cmds.h"
+# include "../lexer/lexer.h"
+
+extern int	g_exit_status;
 
 # define RED   "\x1B[31m"
 # define GRN   "\x1B[32m"

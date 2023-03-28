@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/14 14:13:33 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/25 10:07:31 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,35 @@
 # define APPEND_OUT 53
 # define APPEND_IN 54
 
-void	create_child_process(t_mini *mini);
-void	handle_cmds(t_mini *mini);
 
-/*Functions of heredoc.c*/
-int		pipe_heredoc(t_mini *mini);
+/*execution.c*/
+void	execution(t_mini *mini);
 
-/*Functions of path.c*/
+/*path.c*/
 char	*find_path(t_mini *mini);
 
-/*Functions of redirection.c*/
-int		handle_redirections(t_mini *mini);
-void	restore_parent_fds(t_mini *mini);
-int		redirect_in_to_pipe(t_mini *mini);
-int		redirect_out_to_pipe(t_mini *mini);
-int		redirect_input(t_mini *mini);
-int		redirect_output(t_mini *mini);
-int		redirect_output_append(t_mini *mini);
+/*redirection_utils.c*/
+int		handle_io_redirections(t_mini *mini);
+void	restore_parent_file_descriptors(t_mini *mini);
+
+/*io_redirection.c*/
+int		redirect_input_from_file(t_mini *mini);
+int		redirect_output_to_file(t_mini *mini);
+int		redirect_output_append_to_file(t_mini *mini);
+int		redirect_output_to_pipe(t_mini *mini);
+int		redirect_input_to_pipe(t_mini *mini);
+
+/*heredoc.c*/
+int		pipe_heredoc(t_mini *mini);
+
+/*child.c*/
+int		create_child_process(t_mini *mini);
+void	wait_for_child_process(t_cmds *cmds);
+
+/*path.c*/
+char	*find_path(t_mini *mini);
+
+/*execve.c*/
+void	run_cmd(t_mini *mini);
 
 #endif
