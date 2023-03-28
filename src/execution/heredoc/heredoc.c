@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 14:33:36 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 20:51:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	pipe_heredoc(t_mini *mini)
 // 	printf("Don't chmod my file or delete my file😡\n");
 // 	return (FAILURE);
 // }
-
 // static int	file_handler(t_mini *mini)
 // {
 // 	int	open_fd;

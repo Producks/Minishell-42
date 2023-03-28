@@ -36,7 +36,8 @@ EXECUTION = ./src/execution/execution.c \
 PARSING = ./src/parsing/read_input.c \
 		./src/parsing/check_input.c \
 		./src/parsing/list_christo.c \
-		./src/parsing/list_redir_christo.c
+		./src/parsing/list_redir_christo.c \
+		./src/parsing/list_utils.c
 
 UTILS = ./src/utils/linked_list_cmds.c \
 		./src/utils/strjoin_path.c \

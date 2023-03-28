@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 14:37:44 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 20:43:59 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	generate_test_env(t_mini *mini)
 
 void	execution(t_mini *mini)
 {
-	generate_test_env(mini); // remove later, only used for testing commands without parsing
+	//generate_test_env(mini); // remove later, only used for testing commands without parsing
 	create_child_process(mini);
 	wait_for_child_process(mini->cmds_list);
 	mini->cmds_list = free_linked_list_mini(&mini->cmds_list); // fix later

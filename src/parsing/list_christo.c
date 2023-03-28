@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_christo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 19:25:35 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 20:46:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,9 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 	cmds = NULL;
 	// print_token(tokens);
 	check_cmds(&cmds, tokens, 0);
+	mini->cmds_list = cmds;
 	printall(cmds);
-	cmds = free_linked_list_cmds(&cmds);
+	execution(mini);
+	//cmds = free_linked_list_cmds(&cmds);
 	// printall(cmds);
 }

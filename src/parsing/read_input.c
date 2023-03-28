@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 20:32:05 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 20:37:28 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	read_input(t_mini *mini)
 		mini->message = readline(GRN "Minishell > " RESET);
 		if (!mini->message)
 			break ;
+		lexer(mini);
 		add_history(mini->message);
-		execution(mini);
 		free (mini->message);
 		mini->message = NULL;
 	}

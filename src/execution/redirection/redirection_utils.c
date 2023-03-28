@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 14:35:07 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:07:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	handle_out_redirection(t_mini *mini)
 	int	ret;
 
 	ret = 0;
+	printf("%d\n", mini->cmds_list->redir_list->type);
+	puts("hey");
 	if (mini->cmds_list->redir_list->type == REDIRECTION_PIPE)
 		ret = redirect_output_to_pipe(mini);
 	else if (mini->cmds_list->redir_list->type == READ_OUTPUT)
@@ -37,6 +39,8 @@ static int	handle_in_redirection(t_mini *mini)
 	int	ret;
 
 	ret = 0;
+	puts("in rederirection");
+	printf("%d\n", mini->cmds_list->redir_list->type);
 	if (mini->cmds_list->redir_list->type == REDIRECTION_PIPE)
 		ret = redirect_input_to_pipe(mini);
 	else if (mini->cmds_list->redir_list->type == READ_INPUT)

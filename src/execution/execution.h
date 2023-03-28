@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 10:07:31 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:08:00 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # define SUCCESS 0
 # define FAILURE -1
 
-# define REDIRECTION_PIPE 50
-# define READ_INPUT 51
-# define READ_OUTPUT 52
-# define APPEND_OUT 53
-# define APPEND_IN 54
+# define REDIRECTION_PIPE 50 // good
+# define READ_INPUT 52 
+# define READ_OUTPUT 51
+# define APPEND_OUT 54
+# define APPEND_IN 53
 
 
 /*execution.c*/
@@ -67,5 +67,4 @@ char	*find_path(t_mini *mini);
 
 /*execve.c*/
 void	run_cmd(t_mini *mini);
-
 #endif
