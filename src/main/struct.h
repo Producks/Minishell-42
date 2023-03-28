@@ -6,9 +6,10 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/22 13:49:21 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 20:27:08 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #ifndef STRUCT_H
@@ -38,6 +39,7 @@ typedef struct s_cmds
 	pid_t			pid;
 	struct s_cmds	*previous;
 	struct s_cmds	*next;
+	struct s_cmds	*head;
 }	t_cmds;
 
 /*

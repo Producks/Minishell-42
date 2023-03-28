@@ -6,9 +6,10 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 11:43:23 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 20:31:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PARSING_H
 # define PARSING_H
@@ -42,7 +43,15 @@ int	read_input(t_mini *mini);
 int tokenize(t_mini *mini);
 
 void	redir_list(char **tokens);
+void	redir_list_2(t_cmds **cmds, char **tokens, int i, int n, int f);
+int		redir_list_3(t_cmds *new_node, char **tokens, int i, int bef_cmd);
+int		is_pipe(char *token);
+int 	is_redir(char *token);
 void	*free_linked_list_redirr(t_redir **head);
-void	parse_linked_list(char **tokens, int num_token);
+void	parse_linked_list(t_mini *mini, char **tokens);
+int		interpret_quotes(t_mini *mini, char **tokens, int index);
+
+void 	addnodecmds(t_cmds **list, t_cmds *new_node);
+void 	addnoderedir(t_redir **list, t_redir *new_node);
 
 #endif
