@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 01:55:28 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/26 00:33:36 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ int tokenize(t_mini *mini);
 
 void	redir_list(char **tokens);
 void	redir_list_2(t_cmds **cmds, char **tokens, int i, int n, int f);
-int		redir_list_3(t_cmds **cmds, char **tokens, int i, int bef_cmd);
+int		redir_list_3(t_cmds *new_node, char **tokens, int i, int bef_cmd);
 int		is_pipe(char *token);
 int 	is_redir(char *token);
 void	*free_linked_list_redirr(t_redir **head);
 void	parse_linked_list(t_mini *mini, char **tokens);
 int		interpret_quotes(t_mini *mini, char **tokens, int index);
 
-void addnodecmds(t_cmds **list, t_cmds *new_node);
+void 	addnodecmds(t_cmds **list, t_cmds *new_node);
+void 	addnoderedir(t_redir **list, t_redir *new_node);
 
 #endif
