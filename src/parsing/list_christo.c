@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 19:25:35 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:11:31 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ int add_cmd_2(t_cmds **list, char **tokens, int i, int bef_cmd, int pipe_p)
 		else
 			break;
 	}
+	// printf ("THE i: %d\n", i);
 	if (is_pipe(tokens[i]) == 1)
 		new_node->cmds[c] = NULL;
 	else
@@ -242,15 +243,21 @@ void	check_cmds(t_cmds **cmds, char **tokens, int num_token)
 		pipe_p = find_pipe(tokens, i);
 		
 		// printf ("pipe_p: %d\n", pipe_p);
-		// printf ("THE i: %d\n", i);
+		printf ("THE i: %d\n", i);
 		if (pipe_p == 0)
 			i = find_cmds(tokens, i);
 		if (tokens[i + 1])
 		{
 			// printf ("THE i: %d\n", i);
 			// i = add_cmd(cmds, tokens, i, bef_cmd);
+			i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);	
+		}
+		else if (!tokens[i + 1] && is_redir_2(tokens[i - 1]) == 0)
+			{
+			// printf ("THE i: %d\n", i);
+			// i = add_cmd(cmds, tokens, i, bef_cmd);
 			i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
-	
+			i++;	
 		}
 		i++;
 		// printf ("THE i: %d\n", i);
