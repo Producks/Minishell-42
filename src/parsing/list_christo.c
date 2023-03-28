@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 20:46:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:35:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,35 +227,48 @@ int	find_pipe(char **tokens, int i)
 	return (0);
 }
 
-void	check_cmds(t_cmds **cmds, char **tokens, int num_token)
+void    check_cmds(t_cmds **cmds, char **tokens, int num_token)
 {
-	int i;
-	int bef_cmd;
-	int	pipe_p;
-
-	i = 0;
-	bef_cmd = 0;
-	while (tokens[i])
-	{
-		pipe_p = 0;
-		bef_cmd = i;
-		pipe_p = find_pipe(tokens, i);
-		
-		// printf ("pipe_p: %d\n", pipe_p);
-		// printf ("THE i: %d\n", i);
-		if (pipe_p == 0)
-			i = find_cmds(tokens, i);
-		if (tokens[i + 1])
-		{
-			// printf ("THE i: %d\n", i);
-			// i = add_cmd(cmds, tokens, i, bef_cmd);
-			i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
-	
-		}
-		i++;
-		// printf ("THE i: %d\n", i);
-	}
-	
+    int i;
+    int bef_cmd;
+    int pipe_p;
+    i = 0;
+    bef_cmd = 0;
+    while (tokens[i])
+    {
+        pipe_p = 0;
+        bef_cmd = i;
+        pipe_p = find_pipe(tokens, i);
+        // printf ("pipe_p: %d\n", pipe_p);
+        // printf ("THE i: %d\n", i);
+        if (pipe_p == 0)
+        {
+            i = find_cmds(tokens, i);
+        }
+        if (!tokens[i + 1] && i == 0)
+        {
+            //printf ("THE i: %d\n", i);
+            i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
+            i++;
+            break;
+        }
+        if (tokens[i + 1])
+        {
+           // puts( "ici");
+            // printf ("THE i: %d\n", i);
+            // i = add_cmd(cmds, tokens, i, bef_cmd);
+            i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
+        }
+        else if (!tokens[i + 1] && is_redir_2(tokens[i - 1]) == 0 && i > 2)
+            {
+            // printf ("THE i: %d\n", i);
+            // i = add_cmd(cmds, tokens, i, bef_cmd);
+            i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
+            i++;
+        }
+        i++;
+        // printf ("THE i: %d\n", i);
+    }
 }
 
 void	*free_linked_list_redirr(t_redir **head)
@@ -304,7 +317,7 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 	// print_token(tokens);
 	check_cmds(&cmds, tokens, 0);
 	mini->cmds_list = cmds;
-	printall(cmds);
+	//printall(cmds);
 	execution(mini);
 	//cmds = free_linked_list_cmds(&cmds);
 	// printall(cmds);

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 20:55:40 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:27:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	run_cmd(t_mini *mini)
 	int		index;
 
 	//child_cleanup(mini);
-	fprintf(stderr, "Child execve\n");
 	if (!mini->cmds_list->cmds)
 		child_cleanup(mini);
 	path = find_path(mini); // check later for errors leaks etc..
