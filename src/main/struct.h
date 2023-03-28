@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 22:43:54 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 21:36:37 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_cmds
 {
 	char			**cmds; // {echo, hello, NULL} {cat,}
 	char			*path;
+	int				nb_cmds;
 	int				fd_in;
 	int				fd_out;
 	t_redir			*redir_list;
