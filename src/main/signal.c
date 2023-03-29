@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 12:08:51 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/28 22:01:02 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,18 @@ void	silence_signal()
 //try and make this work with ctrl+D intead of ctr+c so it doesn't seg fault TODO
 void	q_handle(int num)
 {
-	silence_signal();
+	//silence_signal();
 	// exit (0);
+	g_exit_status = 130;
 }
 
 void	place_holder(int num)
 {
-	g_exit_status = 69;
+	write(1, "\n", 1);
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
+	g_exit_status = 130;
 }
 
 void	init_signals(void)

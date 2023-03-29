@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 08:40:34 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/24 08:42:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/28 20:54:18 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	redirect_input_from_file(t_mini *mini)
 {
 	mini->cmds_list->fd_in = open(mini->cmds_list->redir_list->filename, O_RDONLY);
 	if (mini->cmds_list->fd_in == FAILURE)
-		return (FAILURE);
+		return (print_errno(1), FAILURE);
 	if (dup2(mini->cmds_list->fd_in, STDIN_FILENO) == FAILURE)
 		return (FAILURE);
 	if (close(mini->cmds_list->fd_in) == FAILURE)

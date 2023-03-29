@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 18:58:03 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/27 23:54:51 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int	check_redir_2(t_redir **redir, char **tokens, int i, int bef_cmd)
 	}
 	// print_redir_list(*redir);
 	// printf ("THE i: %d\n", i);
-	if (!tokens[i]) // a checker
-		i -= 2;
+	// if (!tokens[i]) // a checker
+	// 	i -= 2;
 	return (i);
 }
 

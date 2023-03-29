@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 20:27:08 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/29 01:33:10 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ typedef struct s_cmds
 	char			*path;
 	int				fd_in;
 	int				fd_out;
+	bool			fd_out_bool;
 	t_redir			*redir_list;
 	pid_t			pid;
 	struct s_cmds	*previous;
 	struct s_cmds	*next;
-	struct s_cmds	*head;
+	struct s_cmds	*head; // why is there an head
 }	t_cmds;
 
 /*
@@ -58,6 +59,7 @@ typedef struct s_mini
 	char	**env_copy;
 	char 	*message;
 	char	**cmd;
+	char	**literal_token;
 	int		fd_in;
 	int		fd_out;
 }	t_mini;

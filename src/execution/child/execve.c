@@ -6,30 +6,41 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/28 00:30:44 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/29 02:07:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 #include "../../main/init.h"
 
-void	child_cleanup(t_mini *mini)
+void	child_cleanup_no_cmds(t_mini *mini)
 {
-	fprintf(stderr, "Child: %s %p\n", mini->env_copy[0], mini->env_copy[0]);
-	mini->env_copy[0][0] = 'Z';
-	fprintf(stderr, "Child: %s %p\n", mini->env_copy[0], mini->env_copy[0]);
-	//free (mini->message);
 	close(mini->fd_in);
 	close(mini->fd_out);
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	close(STDERR_FILENO);
-	if (mini->cmds_list->redir_list->type == REDIRECTION_PIPE) // check later !!dangerous!!
-	{
-		close(mini->fd_out);
-		close(mini->cmds_list->next->fd_in);
-	}
-	exit (0);
+	exit (1);
+}
+
+void	child_cleanup_execve_failure(t_mini *mini)
+{
+	perror("Minishell");
+	exit(127);
+}
+
+void	child_cleanup_before_execve(t_mini *mini)
+{
+	close(mini->fd_in);
+	close(mini->fd_out);
+}
+
+void	child_cleanup_command_not_found(t_mini *mini)
+{
+	print_string_error("Minishell: command not found: ");
+	print_string_error(mini->cmds_list->cmds[0]);
+	write(2, "\n", 1);
+	ft_free(mini->literal_token);
+	free_linked_list_mini(&mini->cmds_list);
+	free_struct(mini);
+	exit (127);
 }
 
 void	run_cmd(t_mini *mini)
@@ -37,11 +48,12 @@ void	run_cmd(t_mini *mini)
 	char	*path;
 	int		index;
 
-	//child_cleanup(mini);
 	if (!mini->cmds_list->cmds)
-		child_cleanup(mini);
+		child_cleanup_no_cmds(mini);
 	path = find_path(mini); // check later for errors leaks etc..
+	if (!path)
+		child_cleanup_command_not_found(mini);
+	child_cleanup_before_execve(mini);
 	execve(path, mini->cmds_list->cmds, mini->env_copy);
-	perror("Minishell");
-	exit(0);
+	child_cleanup_execve_failure(mini);
 }
