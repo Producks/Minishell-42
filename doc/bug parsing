@@ -6,7 +6,7 @@ Bugs:
 
 - Massive issue when it come down to free < > << >> ~ Seems to be an issue with how filename is stored? After more research it seems that it's getting the adress from literal_token which is dangerous.
 
-- Weird leak that get fix if I commend one of the line (see bug2.PNG) Seems to affect nothing if commented?
+- Weird leak that get fix if I comment one of the line (see bug2.PNG) Seems to affect nothing if commented?
 
 - << cat << cat cat | wc doesn't work properly see picture bug4.png and bug5.png
 
