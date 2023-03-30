@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 00:02:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/29 13:01:18 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 //Global variable for exit status
 int	g_exit_status = 0;
 
+static void	print_welcome_message(void)
+{
+	char	*user;
+
+	user = getenv("USER");
+	printf("Welcome %s to this garbage project\n", user);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_mini	mini;
@@ -26,6 +34,7 @@ int	main(int argc, char *argv[], char *envp[])
 	init_signals();
 	if (init_struct(&mini, envp) == -1)
 		return (ENOMEM);
+	print_welcome_message();
 	read_input(&mini);
 	free_struct(&mini);
 	return (0);
