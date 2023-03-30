@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/30 00:37:32 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 10:01:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int	check_if_built_ins(t_mini *mini)
 {
-	if (ft_strcmp(mini->cmds_list->cmds[0], "echo") == 0)
-		return (echo(mini->cmds_list->cmds));
+	// if (ft_strcmp(mini->cmds_list->cmds[0], "echo") == 0)
+	// 	return (echo(mini->cmds_list->cmds));
 	// else if (ft_strcmp(mini->cmd[0], "cd") == 0)
 	// 	cd(mini);
 	// else if (ft_strcmp(mini->cmd[0], "pwd") == 0)
@@ -28,8 +28,8 @@ int	check_if_built_ins(t_mini *mini)
 	// 	unset(mini);
 	// else if (ft_strcmp(mini->cmd[0], "env") == 0)
 	// 	env(mini->env_copy);
-	// else if (ft_strcmp(mini->cmd[0], "exit") == 0)
-	// 	ft_exit(mini);
+	if (ft_strcmp(mini->cmds_list->cmds[0], "exit") == 0)
+		ft_exit(mini);
 	return (1);
 }
 
@@ -48,6 +48,7 @@ void	wait_for_child_process(t_cmds *cmds)
 
 static void	create_fork(t_mini *mini)
 {
+	check_if_built_ins(mini); // FIX LATER BOZO
 	mini->cmds_list->pid = fork();
 	if (mini->cmds_list->pid == FAILURE)
 		perror("Minishell");
