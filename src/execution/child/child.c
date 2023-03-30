@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 02:14:20 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 00:37:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ void	wait_for_child_process(t_cmds *cmds)
 	}
 }
 
+static void	create_fork(t_mini *mini)
+{
+	mini->cmds_list->pid = fork();
+	if (mini->cmds_list->pid == FAILURE)
+		perror("Minishell");
+	if (mini->cmds_list->pid == SUCCESS)
+		run_cmd(mini);
+}
+
 /*Will handle errors later prototype to see if the idea works*/
 int	create_child_process(t_mini *mini)
 {
@@ -62,9 +71,7 @@ int	create_child_process(t_mini *mini)
 			restore_parent_file_descriptors(mini);
 			continue ;
 		}
-		mini->cmds_list->pid = fork();
-		if (mini->cmds_list->pid == 0)
-			run_cmd(mini);
+		create_fork(mini);
 		mini->cmds_list = mini->cmds_list->next;
 		restore_parent_file_descriptors(mini);
 	}

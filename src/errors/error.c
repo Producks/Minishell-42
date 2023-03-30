@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 12:27:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 00:54:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 01:01:35 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	print_errno(int error_nbr)
 
 void	print_string_error(const char *message)
 {
-	write(1, message, ft_strlen(message));
+	write(STDERR_FILENO, message, ft_strlen(message));
 }
