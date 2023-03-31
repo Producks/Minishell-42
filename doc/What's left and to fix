@@ -14,7 +14,6 @@ Known bug / What to fix:
 - Heredoc error handling
 - Leaks
 - Do massive testing to check for any conditional jump
-- Fix built-ins to work with the current structure
 - Fix built-ins to return the correct error code in case of failure
 - Fix redisplay bug with readline history
 - Fix error messages for error checking during lexical analysis

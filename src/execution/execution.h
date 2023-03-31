@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/28 21:48:28 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 19:01:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,9 @@ char	*find_path(t_mini *mini);
 
 /*execve.c*/
 void	run_cmd(t_mini *mini);
+
+/*builtin.c*/
+bool	check_if_builtin(t_mini *mini);
+int		built_ins(t_mini *mini);
+
 #endif

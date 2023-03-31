@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 12:55:28 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 01:09:10 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	child_cleanup_command_not_found(t_mini *mini)
 {
 	print_string_error("Minishell: command not found: ");
 	print_string_error(mini->cmds_list->cmds[0]);
-	write(2, "\n", 1);
+	write(STDERR_FILENO, "\n", 1);
 	ft_free(mini->literal_token);
 	free_linked_list_mini(&mini->cmds_list);
 	free_struct(mini);

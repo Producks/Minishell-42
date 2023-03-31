@@ -6,16 +6,15 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:39 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/04 08:50:10 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 22:43:57 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../main/init.h"
+#include "cmds.h"
 
 void	ft_exit(t_mini *mini)
 {
 	printf("Buh Bye\n");
-	free_struct(mini);
+	//free_struct(mini);
 	exit (0);
 }
