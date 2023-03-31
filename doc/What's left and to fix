@@ -3,7 +3,7 @@ Last updated on : 2023-03-24
 Feature left to add:
 
 - Parsing
-- Signals
+- Signals for child
 - Error handling / Memory management
 - Refactoring for production push
 - Fix readline lib issues with readline for production push
@@ -11,11 +11,9 @@ Feature left to add:
 
 Known bug / What to fix:
 
-- Heredoc FD/out and FD/in protection, massive bug if out redirected before heredoc
-- Heredoc file protection
+- Heredoc error handling
 - Leaks
 - Do massive testing to check for any conditional jump
-- Fix built-ins to work with the current structure
 - Fix built-ins to return the correct error code in case of failure
 - Fix redisplay bug with readline history
 - Fix error messages for error checking during lexical analysis

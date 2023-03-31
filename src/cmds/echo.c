@@ -6,13 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 22:30:09 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 01:04:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdbool.h>
-#include "../../libs/Libft/libft.h"
+#include "cmds.h"
 
 int	echo(char **message)
 {
@@ -36,5 +34,6 @@ int	echo(char **message)
 	}
 	if (check_n == false)
 		write(1, "\n", 1);
-	return (0);
+	g_exit_status = SUCCESS;
+	return (SUCCESS);
 }

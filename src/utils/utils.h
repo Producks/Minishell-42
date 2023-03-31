@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 16:08:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 16:53:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34
+# define SUCCESS 0
+# define FAILURE -1
 
 typedef struct s_split
 {
@@ -37,5 +39,7 @@ void	add_node_redir(t_redir **head, t_redir *new_node);
 t_redir *create_node_redir(void);
 
 char	*str_cutcut(char *original, char *replacement, char *to_replace);
+
+int	add_env_element(t_mini *mini, char *str_to_add);
 
 #endif

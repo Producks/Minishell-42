@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 23:59:33 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/31 19:23:24 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,35 +174,46 @@ int	count_arg_2(char **tokens, int i, int pipe_p)
 	n_arg = 0;
 	while (tokens[i] && i < pipe_p)
 	{
+		
 		if (is_redir_2(tokens[i]) == 1)
+		{
+			
 			i += 2;
+		}
 		else
+		{
 			n_arg++;
-		i++;
+			i++;
+			// printf("token : %s\n", tokens[i]);
+		}
+		
 	}
-	
+	printf("nb arg: %d\n", n_arg);
 	return (n_arg);
 }
 
 int	add_arg(t_cmds *new_node, char **tokens, int i, int n_arg, int c)
 {
-	while (tokens[i] && n_arg > 1)
-	{
-		interpret_quotes(NULL, tokens, i);
-		if (is_redir_2(tokens[i]) == 1)
-			i += 2;
-		new_node->cmds[c] = ft_strdup(tokens[i]);
-		// printf("arg : %s\n", new_node->cmds[c]);
-		c++;
-		i++;
-		n_arg--;
-	}
-	
+		while (tokens[i] && n_arg > 1)
+		{
+			// interpret_quotes(NULL, tokens, i);
+			if (is_redir_2(tokens[i]) == 1)
+				i += 2;
+			new_node->cmds[c] = ft_strdup(tokens[i]); // quotes
+			// printf("arg : %s\n", new_node->cmds[c]);
+			c++;
+			i++;
+			n_arg--;
+		}
+	// else
 	new_node->cmds[c] = NULL;
 	new_node->next = NULL;
+	// for (int z = 0; z < 3; z++)
+	// 	printf("%s\n", new_node->cmds[z]);
 	// printf("larg : %s\n", new_node->cmds[c]);
 	return (i);
 }
+//{"echo", "hello", NULL} NULL
 
 int	count_cmds(char **tokens)
 {
@@ -237,7 +248,8 @@ int add_cmd_2(t_cmds **list, char **tokens, int i, int bef_cmd, int pipe_p)
 		n_arg = count_arg(tokens, i);
 	// printf ("n arg: %d\n", n_arg);
 	// puts("ici");
-	new_node->cmds = ft_calloc(sizeof(char*), n_arg + 1);
+	new_node->cmds = ft_calloc(sizeof(char*), n_arg + 2);
+	// {arg, arg, NULL} 
 	while (i < pipe_p && pipe_p != 0)
 	{
 		if (is_redir_2(tokens[i]) == 1)
@@ -248,9 +260,11 @@ int add_cmd_2(t_cmds **list, char **tokens, int i, int bef_cmd, int pipe_p)
 	// printf ("THE i: %d\n", i);
 	if (is_pipe(tokens[i]) == 1)
 		new_node->cmds[c] = NULL;
+	else if (is_redir_2(tokens[i]) == 1)
+		new_node->cmds[c] = NULL;
 	else
 		new_node->cmds[c] = ft_strdup(tokens[i]);
-	new_node->redir_list = ft_calloc(1, sizeof(t_redir));
+	//new_node->redir_list = ft_calloc(1, sizeof(t_redir)); // leak here, if commented goes away. What is this for exactly?
 	// printf(YEL "cmds : %s\n" RESET, new_node->cmds[c]);
 	c++;
 	i++;
@@ -264,7 +278,7 @@ int add_cmd_2(t_cmds **list, char **tokens, int i, int bef_cmd, int pipe_p)
 
 int	find_cmds(char **tokens, int i)
 {
-	while (is_redir_2(tokens[i]) == 1)
+	while (is_redir_2(tokens[i]) == 1 && tokens[i + 2])
 		i +=2;
 	return (i);
 }
@@ -304,12 +318,11 @@ void    check_cmds(t_cmds **cmds, char **tokens, int num_token)
 		if (pipe_p == 0)
 			i = find_cmds(tokens, i);
 		i = add_cmd_2(cmds, tokens, i, bef_cmd, pipe_p);
-		printf ("THE i: %d\n", i);
+		// printf ("THE i: %d\n", i);
 		if (pipe_p != 0)
 			i++;
 		// i++;
-		// i++;
-		
+		// i++;	
 	}
 	
 }
@@ -331,6 +344,7 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 	check_cmds(&cmds, tokens, 0);
 	mini->cmds_list = cmds;
 	printall(cmds);
+	//ft_free(tokens);
 	execution(mini);
 	//cmds = free_linked_list_cmds(&cmds);
 	// printall(cmds);

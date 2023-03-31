@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 21:08:00 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 19:01:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <sys/stat.h>
 
 #ifdef __linux__
 # include <sys/types.h>
@@ -27,6 +28,7 @@
 # include "../../libs/Libft/libft.h"
 # include "../main/struct.h"
 # include "../utils/utils.h"
+# include "../errors/error.h"
 
 # define SUCCESS 0
 # define FAILURE -1
@@ -58,6 +60,17 @@ int		redirect_input_to_pipe(t_mini *mini);
 /*heredoc.c*/
 int		pipe_heredoc(t_mini *mini);
 
+/*heredoc_file_handler.c*/
+int		file_handler(t_mini *mini);
+int		get_file_status(int fd, struct stat *file_status);
+
+/*heredoc_fd_utils.c*/
+int		check_fd_heredoc(t_mini *mini);
+int		restore_previous_stdout_fileno(t_mini *mini);
+
+/*heredoc_error_handler.c*/
+int	handle_file_handle_error(t_mini *mini);
+
 /*child.c*/
 int		create_child_process(t_mini *mini);
 void	wait_for_child_process(t_cmds *cmds);
@@ -67,4 +80,9 @@ char	*find_path(t_mini *mini);
 
 /*execve.c*/
 void	run_cmd(t_mini *mini);
+
+/*builtin.c*/
+bool	check_if_builtin(t_mini *mini);
+int		built_ins(t_mini *mini);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:22:23 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/23 22:20:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/29 12:19:43 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static void	copy_left_over(char *result, char *left_over)
 	result[index] = '\0';
 }
 
-// CHECK LATER IF CORRECT AND NO CONDITIONAL JUMP
-static size_t	len_result(char *original, char *replacement, char *to_replace)
+static size_t	len_result(char *original, char *replacement, char *to_replace)// CHECK LATER IF CORRECT AND NO CONDITIONAL JUMP
 {
 	size_t	len;
 
@@ -69,7 +68,7 @@ char	*str_cutcut(char *original, char *replacement, char *to_replace)
 	char	*result;
 	char	*position;
 
-	if (!original | !replacement | !to_replace)
+	if (!original || !replacement || !to_replace)
 		return (NULL);
 	position = strncmp_cut(original, to_replace,
 			ft_strlen(original), ft_strlen(to_replace));

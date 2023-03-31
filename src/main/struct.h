@@ -6,11 +6,9 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/27 21:42:26 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/31 17:29:42 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef STRUCT_H
 # define STRUCT_H
@@ -36,6 +34,7 @@ typedef struct s_cmds
 	int				nb_cmds;
 	int				fd_in;
 	int				fd_out;
+	bool			fd_out_bool;
 	t_redir			*redir_list;
 	pid_t			pid;
 	struct s_cmds	*previous;
@@ -58,7 +57,8 @@ typedef struct s_mini
 	t_cmds	*cmds_list;
 	char	**env_copy;
 	char 	*message;
-	char	**cmd;
+	char	**literal_token; // remove later
+	bool	is_one_cmd;
 	int		fd_in;
 	int		fd_out;
 }	t_mini;

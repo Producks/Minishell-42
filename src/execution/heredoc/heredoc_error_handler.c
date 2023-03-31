@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   heredoc_error_handler.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 02:02:22 by ddemers          ###   ########.fr       */
+/*   Created: 2023/03/28 18:29:04 by ddemers           #+#    #+#             */
+/*   Updated: 2023/03/28 21:48:09 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../execution.h"
 
-#include "parsing.h"
-
-int	read_input(t_mini *mini)
+int	handle_file_handle_error(t_mini *mini)
 {
-	while (1)
-	{
-		if (g_exit_status == 69)
-			break ;
-		mini->message = readline(GRN "Minishell > " RESET);
-		if (!mini->message)
-			break ;
-		lexer(mini);
-		add_history(mini->message);
-		free (mini->message);
-		mini->message = NULL;
-	}
-	rl_clear_history();
-	return (SUCCESS);
+	return (FAILURE);
 }
