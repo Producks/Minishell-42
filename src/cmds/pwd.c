@@ -6,13 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 15:37:08 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 04:57:15 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 01:03:52 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "cmds.h"
 
 int	pwd(void)
 {
@@ -20,8 +18,8 @@ int	pwd(void)
 
 	pwd = getcwd(NULL, 69);
 	if (!pwd)
-		return (-1);
+		return (print_errno_ret(137));
 	printf("%s\n", pwd);
 	free (pwd);
-	return (0);
+	return (SUCCESS);
 }

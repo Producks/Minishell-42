@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/30 00:49:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 12:08:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,7 +331,7 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 	
 	check_cmds(&cmds, tokens, 0);
 	mini->cmds_list = cmds;
-	//printall(cmds);
+	printall(cmds);
 	//tokens = ft_free(tokens);
 	execution(mini);
 	//cmds = free_linked_list_cmds(&cmds);

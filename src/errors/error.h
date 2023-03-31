@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 12:18:19 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 00:50:40 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 01:02:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ extern int	g_exit_status;
 int		print_error(const char *message, int error_nbr);
 void	print_errno(int error_nbr);
 void	print_string_error(const char *message);
+int		print_errno_ret(int error_nbr);
 
 #endif

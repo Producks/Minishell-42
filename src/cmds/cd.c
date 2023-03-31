@@ -6,14 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/07 09:59:21 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 22:50:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 static int	add_pwd_to_env(t_mini *mini, char *old_pwd)
 {
@@ -35,7 +32,7 @@ static int	add_pwd_to_env(t_mini *mini, char *old_pwd)
 		else if (ft_strncmp(mini->env_copy[index], "OLDPWD=", 7) == 0)
 		{
 			free(mini->env_copy[index]);
-			mini->env_copy[index] = ft_strjoin("OLDPWD=", old_pwd);
+			mini->env_copy[index] = ft_strjoin("OLDPWD=", old_pwd); //protect this
 			count++;
 		}
 		index++;
@@ -77,7 +74,7 @@ static int	cd_deez(t_mini *mini, int count)
 		return (0);
 	}
 	if (count > 1)
-		ret = chdir(mini->cmd[1]);
+		ret = chdir(mini->cmds_list->cmds[1]);
 	else
 	{
 		home = get_home(mini);
@@ -94,7 +91,7 @@ int	cd(t_mini *mini)
 	int		count;
 	char	*current;
 
-	count = count_double_array(mini->cmd);
+	count = count_double_array(mini->cmds_list->cmds);
 	current = getcwd(NULL, 69);
 	if (!current)
 		return (-1);

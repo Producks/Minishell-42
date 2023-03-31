@@ -6,12 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/04 19:37:56 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 17:00:10 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../main/struct.h"
+#include "cmds.h"
 
 static int	export_exist(t_mini *mini, const char flag, int index)
 {
@@ -19,18 +18,18 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 	size_t	size;
 
 	i = 0;
-	size = 0;
-	while (mini->cmd[index][size] != '=')
-		size++;
 	while (mini->env_copy[i])
 	{
-		if (!ft_strncmp(mini->cmd[index], mini->env_copy[i], size))
+		size = 0;
+		while (mini->env_copy[i][size] != '=')
+			size++;
+		if (!ft_strncmp(mini->cmds_list->cmds[index], mini->env_copy[i], size)) // double check later fixed bug with length check
 		{
 			free(mini->env_copy[i]);
 			if (flag)
-				mini->env_copy[i] = ft_strjoin(mini->cmd[index], "\0");
+				mini->env_copy[i] = ft_strjoin(mini->cmds_list->cmds[index], "\0");
 			else
-				mini->env_copy[i] = ft_strdup(mini->cmd[index]);
+				mini->env_copy[i] = ft_strdup(mini->cmds_list->cmds[index]);
 			return (1);
 		}
 		i++;
@@ -39,22 +38,42 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 }
 
 /*Check for order later, adding it at the end for now*/
-static void	add_export(t_mini *mini, const char flag, int index)
-{
-	char	**new;
-	size_t	size;
+// static void	add_export(t_mini *mini, const char flag, int index)
+// {
+// 	char	**new;
+// 	size_t	size;
 
-	size = count_double_array(mini->env_copy);
-	new = ft_realloc(mini->env_copy, sizeof(char *) * (size + 1));
-	if (!new)
-		return ;
-	if (flag)
-		new[size] = ft_strjoin(mini->cmd[index], "\0");
-	else
-		new[size] = ft_strdup(mini->cmd[index]);
-	new[size + 1] = NULL;
-	mini->env_copy = new;
-	size = count_double_array(mini->env_copy);
+// 	size = count_double_array(mini->env_copy);
+// 	printf("%ld\n\n", size);
+// 	new = ft_realloc(mini->env_copy, sizeof(char *) * (size + 1));
+// 	//new = realloc(mini->env_copy, sizeof(char *) * (size + 1));
+// 	if (!new)
+// 		return ;
+// 	if (flag)
+// 		new[size - 1] = ft_strjoin(mini->cmds_list->cmds[index], "\0");
+// 	else
+// 		new[size - 1] = ft_strdup(mini->cmds_list->cmds[index]);
+// 	new[size] = NULL;
+// 	mini->env_copy = new;
+// 	size = count_double_array(mini->env_copy);
+// 	printf("%ld\n\n", size);
+// }
+
+static int	add_export(t_mini *mini, const char flag, int index)
+{
+	char	*str;
+	int		ret;
+
+    if (flag)
+        str = ft_strjoin(mini->cmds_list->cmds[index], "\0");
+    else
+        str = ft_strdup(mini->cmds_list->cmds[index]);
+	if (!str)
+		return (FAILURE); // handle later
+	ret = add_env_element(mini, str);
+	if (ret == FAILURE)
+		return (FAILURE);
+	free (str);
 }
 
 static char	parse_string(const char *str)
@@ -95,11 +114,11 @@ int	ft_export(t_mini *mini)
 	char	ret;
 
 	index = 0;
-	if (!mini->cmd[1])
+	if (!mini->cmds_list->cmds[1])
 		return (print_env(mini->env_copy));
-	while (mini->cmd[++index])
+	while (mini->cmds_list->cmds[++index])
 	{
-		ret = parse_string(mini->cmd[index]);
+		ret = parse_string(mini->cmds_list->cmds[index]);
 		if (ret == -1)
 			continue ;
 		else if (export_exist(mini, ret, index))

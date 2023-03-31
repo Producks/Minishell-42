@@ -31,10 +31,11 @@ EXECUTION = ./src/execution/execution.c \
 			./src/execution/child/path.c \
 			./src/execution/child/child.c \
 			./src/execution/child/execve.c \
+			./src/execution/child/builtin.c \
 			./src/execution/heredoc/heredoc.c \
 			./src/execution/heredoc/heredoc_error_handler.c \
 			./src/execution/heredoc/heredoc_fd_utils.c \
-			./src/execution/heredoc/heredoc_file_handler.c
+			./src/execution/heredoc/heredoc_file_handler.c 
 
 PARSING = ./src/parsing/read_input.c \
 		./src/parsing/check_input.c \
@@ -45,7 +46,8 @@ PARSING = ./src/parsing/read_input.c \
 UTILS = ./src/utils/linked_list_cmds.c \
 		./src/utils/strjoin_path.c \
 		./src/utils/place_holder.c \
-		./src/utils/str_cutcut.c
+		./src/utils/str_cutcut.c \
+		./src/utils/add_env_element.c
 
 LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \

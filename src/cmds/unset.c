@@ -6,15 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:05 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 12:37:34 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 01:07:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include "../main/struct.h"
-
-// extern int	g_exit_status;
+#include "cmds.h"
 
 static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 {
@@ -56,14 +52,14 @@ int	unset(t_mini *mini)
 	int	j;
 
 	j = 0;
-	if (mini->cmd[1] == NULL)
+	if (mini->cmds_list->cmds[1] == NULL)
 		return (0);
-	while (mini->cmd[++j])
+	while (mini->cmds_list->cmds[++j])
 	{
 		index = 0;
 		while (mini->env_copy[index])
 		{
-			if (unset_strcmp(mini->cmd[j], mini->env_copy[index]) == 0)
+			if (unset_strcmp(mini->cmds_list->cmds[j], mini->env_copy[index]) == 0)
 			{
 				ft_remove_element(mini, index, -1, 0);
 				break ;

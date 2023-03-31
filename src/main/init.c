@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 01:48:42 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/30 16:40:51 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int	copy_env(t_mini *mini, char *envp[])
 void	free_struct(t_mini *mini)
 {
 	mini->env_copy = ft_free(mini->env_copy);
-	mini->cmd = ft_free(mini->cmd);
 	if (mini->message)
 		free (mini->message);
 	close(mini->fd_in);
@@ -55,8 +54,8 @@ int	init_struct(t_mini *mini, char *envp[])
 	if (copy_env(mini, envp) == -1)
 		return (-1);
 	mini->message = NULL;
-	mini->cmd = NULL;
 	mini->cmds_list = NULL;
+	mini->is_one_cmd = false;
 	mini->fd_in = dup(STDIN_FILENO);
 	mini->fd_out = dup(STDOUT_FILENO);
 	return (0);
