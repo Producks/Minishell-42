@@ -6,12 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 01:28:13 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:52:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include "../execution.h"
+#include "../../main/signal.h"
 
 void	wait_for_child_process(t_cmds *cmds)
 {
@@ -42,12 +43,13 @@ static void	create_fork(t_mini *mini)
 		perror("Minishell");
 	if (mini->cmds_list->pid == SUCCESS)
 	{
+		child_signal();
 		if (is_built_in == true)
 		{
 			ret = built_ins(mini);
 			child_cleanup_no_cmds(mini);
 			exit(ret);
-		}
+		}	
 		run_cmd(mini);
 	}
 }

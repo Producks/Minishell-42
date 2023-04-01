@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/28 22:01:02 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:48:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ void	silence_signal()
 }
 // wrong signal command place holder for now
 //try and make this work with ctrl+D intead of ctr+c so it doesn't seg fault TODO
-void	q_handle(int num)
+void handle_sigquit(int num)
 {
-	//silence_signal();
-	// exit (0);
-	g_exit_status = 130;
+    write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+    g_exit_status = 131;
 }
 
 void	place_holder(int num)
@@ -52,8 +51,19 @@ void	place_holder(int num)
 	g_exit_status = 130;
 }
 
+void	place_holder_child(int num)
+{
+	g_exit_status = 130;
+	exit(EXIT_FAILURE);
+}
+
 void	init_signals(void)
 {
 	signal(SIGINT, place_holder);
-	signal(SIGQUIT, q_handle);
+}
+
+void	child_signal(void)
+{
+	signal(SIGINT, place_holder);
+	signal(SIGQUIT, handle_sigquit);
 }

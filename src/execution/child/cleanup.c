@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:26:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 01:33:01 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:59:01 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	child_cleanup_before_execve(t_mini *mini)
 {
 	close(mini->fd_in);
 	close(mini->fd_out);
+	if (!mini->cmds_list->redir_list) // prevent segfault
+		return ;
 	if (mini->cmds_list->redir_list->type == REDIRECTION_PIPE) // double check later
 	{
 		if (mini->cmds_list->redir_list->out == true)
