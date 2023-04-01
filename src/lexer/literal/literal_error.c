@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:58:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 19:18:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 23:21:11 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static void	check_double_redir_error(t_literal *literal)
 
 static void	check_pipe_error(t_literal *literal)
 {
-	if (literal->array[literal->index + 1][0] == '|')
-		return (literal_error_handling(literal, "double pipe bozo\n", 2));
 	if (!literal->array[literal->index + 1]) // check if pipe has no args to the right
 		return (literal_error_handling(literal, "Argument missing to right of the pipe\n", 2));
+	if (literal->array[literal->index + 1][0] == '|')
+		return (literal_error_handling(literal, "double pipe bozo\n", 2));
 	if (literal->index == 0) // check if pipe has no args to the left
 		return (literal_error_handling(literal, "Argument missing to left of the pipe\n", 2));
 }

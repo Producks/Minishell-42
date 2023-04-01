@@ -35,7 +35,8 @@ EXECUTION = ./src/execution/execution.c \
 			./src/execution/heredoc/heredoc.c \
 			./src/execution/heredoc/heredoc_error_handler.c \
 			./src/execution/heredoc/heredoc_fd_utils.c \
-			./src/execution/heredoc/heredoc_file_handler.c 
+			./src/execution/heredoc/heredoc_file_handler.c \
+			./src/execution/child/cleanup.c
 
 PARSING = ./src/parsing/read_input.c \
 		./src/parsing/check_input.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_redir_christo.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/27 23:54:51 by cperron          ###   ########.fr       */
+/*   Updated: 2023/03/31 23:04:46 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	addnode_end_redir(t_redir **list, int type, int dir, char *filename)
 		new_node->out = true;
 	if (dir == 0)
 		new_node->in = true;
-	new_node->filename = filename;
+	//new_node->filename = filename; // DUP ADDED
+	new_node->filename = ft_strdup(filename);
 
 	addnoderedir(list, new_node);
 	// new_node->next = NULL;

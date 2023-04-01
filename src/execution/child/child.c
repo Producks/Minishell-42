@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 01:24:29 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 23:36:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	create_fork(t_mini *mini)
 		if (is_built_in == true)
 		{
 			ret = built_ins(mini);
+			child_cleanup_no_cmds(mini);
 			exit(ret);
 		}
 		run_cmd(mini);

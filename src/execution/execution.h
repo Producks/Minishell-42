@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/30 19:01:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/31 23:28:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,11 @@ void	run_cmd(t_mini *mini);
 /*builtin.c*/
 bool	check_if_builtin(t_mini *mini);
 int		built_ins(t_mini *mini);
+
+/*Cleanup.c*/
+void	child_cleanup_command_not_found(t_mini *mini);
+void	child_cleanup_before_execve(t_mini *mini);
+void	child_cleanup_execve_failure(t_mini *mini);
+void	child_cleanup_no_cmds(t_mini *mini);
 
 #endif
