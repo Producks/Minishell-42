@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 10:09:01 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 21:15:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 18:09:51 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,22 @@ static void	quote_interpreter(char *copy, char *result)
 	result[j] = '\0';
 }
 
-int	interpret_quotes(t_mini *mini, char **tokens, int index)
+char	*interpret_quotes(char *str)
 {
 	size_t	count;
 	char	*result;
 	char	*copy;
 
-	copy = ft_strdup(tokens[index]);
+	copy = ft_strdup(str);
 	if (!copy)
-		return (print_errno(ENOMEM), FAILURE);
+		return (print_errno(ENOMEM), NULL);
 	count = count_quotes(copy);
+	if (count == 0)
+		return (copy);
 	result = malloc(sizeof(char) * (ft_strlen(copy) - count) + 1);
 	if (!result)
-		return (print_errno(ENOMEM), free(copy), FAILURE);
+		return (print_errno(ENOMEM), free(copy), NULL);
 	quote_interpreter(copy, result);
 	free (copy);
-	free (tokens[index]);
-	tokens[index] = result;
-	return (SUCCESS);
+	return (result);
 }

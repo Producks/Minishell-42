@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 02:02:22 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 18:37:08 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "parsing.h"
 

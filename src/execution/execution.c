@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/30 17:23:47 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 02:26:31 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	check_if_one_command(t_mini *mini)
 		mini->is_one_cmd = true;
 }
 
-void	execution(t_mini *mini)
+void		execution(t_mini *mini)
 {
 	check_if_one_command(mini);
 	create_child_process(mini);

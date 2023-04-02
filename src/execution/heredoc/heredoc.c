@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 17:41:20 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/01 18:00:55 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	write_to_heredoc(t_mini *mini, int fd)
 	struct stat		file_status;
 	int				ret;
 
+	puts("XD");
 	while (true)
 	{
 		message = readline(MAG "🤡Heredoc > " RESET);

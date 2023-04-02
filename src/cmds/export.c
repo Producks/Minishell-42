@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 17:00:10 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 17:52:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static int	add_export(t_mini *mini, const char flag, int index)
 	if (ret == FAILURE)
 		return (FAILURE);
 	free (str);
+	return (SUCCESS);
 }
 
 static char	parse_string(const char *str)

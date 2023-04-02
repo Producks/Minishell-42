@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 10:24:25 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/28 21:27:30 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 17:55:14 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_fd_heredoc(t_mini *mini)
 	int	ret;
 
 	ret = 0;
-	if (mini->cmds_list->fd_in != mini->cmds_list->fd_in && mini->cmds_list->fd_in != 0)
+	if (mini->fd_in != mini->cmds_list->fd_in && mini->cmds_list->fd_in != 0) // changed condition fix later
 		ret = restore_stdin_fileno(mini);
 	if (ret == FAILURE)
 		return (FAILURE);

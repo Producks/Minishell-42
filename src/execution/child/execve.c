@@ -6,51 +6,11 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 17:42:36 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/01 18:01:03 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
-#include "../../main/init.h"
-
-void	child_cleanup_no_cmds(t_mini *mini)
-{
-	fprintf(stderr, "Hello\n"); // maybe close pipe? fd leak
-	close(mini->fd_in);
-	close(mini->fd_out);
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	ft_free(mini->literal_token);
-	free_linked_list_mini(&mini->cmds_list);
-	free_struct(mini);
-	exit (0);
-}
-
-void	child_cleanup_execve_failure(t_mini *mini)
-{
-	perror("Minishell");
-	ft_free(mini->literal_token);
-	free_linked_list_mini(&mini->cmds_list);
-	free_struct(mini);
-	exit(1);
-}
-
-void	child_cleanup_before_execve(t_mini *mini)
-{
-	close(mini->fd_in);
-	close(mini->fd_out);
-}
-
-void	child_cleanup_command_not_found(t_mini *mini)
-{
-	print_string_error("Minishell: command not found: ");
-	print_string_error(mini->cmds_list->cmds[0]);
-	write(STDERR_FILENO, "\n", 1);
-	ft_free(mini->literal_token);
-	free_linked_list_mini(&mini->cmds_list);
-	free_struct(mini);
-	exit (127);
-}
 
 void	run_cmd(t_mini *mini)
 {
