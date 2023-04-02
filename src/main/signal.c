@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 02:48:12 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 20:02:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,15 @@ void	place_holder_child(int num)
 	g_exit_status = 130;
 	exit(EXIT_FAILURE);
 }
+void	r(int num)
+{
+	void;
+}
 
 void	init_signals(void)
 {
 	signal(SIGINT, place_holder);
+	signal(SIGQUIT, r);
 }
 
 void	child_signal(void)

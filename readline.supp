@@ -1,0 +1,7 @@
+{
+   "suppression": [
+      "readline",
+      "leak",
+      "libreadline*"
+   ]
+}
