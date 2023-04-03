@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 23:43:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 18:04:22 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	create_child_process(t_mini *mini)
 	int			ret;
 
 	mini->head_cmd = mini->cmds_list;
-	ret = 0;
+	ret = SUCCESS;
 	while (mini->cmds_list)
 	{
 		ret = handle_io_redirections(mini); // close pipe check later
