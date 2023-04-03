@@ -5,3 +5,4 @@
  alias mini_leaks='valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --suppressions=.ignore_readline_mac --trace-children=yes ./minishell'
 
 alias minishell_leaks='valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --suppressions=.ignore_readline -q ./minishell'
+ alias mini_leaks='valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --trace-children=yes ./minishell'

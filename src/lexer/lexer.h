@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 18:08:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 01:07:29 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	count_literal_string(t_literal *literal, const char *str);
 void	literal_string_sep(t_literal *literal, const char *str);
 char	**literal_tokenization(t_mini *mini);
 /*Literal_error.c*/
-void	literal_error_handling(t_literal *literal, const char *str, int err_nbr);
+void	literal_error_handling(t_literal *literal,
+			const char *str, int err_nbr);
 void	literal_check_errors(t_literal *literal);
 
 /*tokens_interpreter.c*/
@@ -79,5 +80,8 @@ int		dollar_interpreter(t_mini *mini, char **literal);
 char	*interpret_quotes(char *str);
 /*dollar_expandable.c*/
 int		dollar_expandable(t_mini *mini, char **literal, int index);
+/*Interpreter_utils.c*/
+bool	check_expandable(char c);
+void	single_quote_inc(t_expandable *expand);
 
 #endif

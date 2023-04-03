@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/30 22:50:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:45:04 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	add_pwd_to_env(t_mini *mini, char *old_pwd)
 		else if (ft_strncmp(mini->env_copy[index], "OLDPWD=", 7) == 0)
 		{
 			free(mini->env_copy[index]);
-			mini->env_copy[index] = ft_strjoin("OLDPWD=", old_pwd); //protect this
+			mini->env_copy[index] = ft_strjoin("OLDPWD=", old_pwd);  //protect this
 			count++;
 		}
 		index++;

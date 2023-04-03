@@ -1,8 +1,7 @@
-Last updated on : 2023-03-24
+Last updated on : 2023-04-03
 
 Feature left to add:
 
-- Parsing
 - Signals for child
 - Error handling / Memory management
 - Refactoring for production push
@@ -11,10 +10,11 @@ Feature left to add:
 
 Known bug / What to fix:
 
+- Fix dollar interpreter $1z and $ invalid read (fuck)
+- Parsing error handling
 - Heredoc error handling
 - Leaks
 - Do massive testing to check for any conditional jump
-- Fix built-ins to return the correct error code in case of failure
 - Fix redisplay bug with readline history
 - Fix error messages for error checking during lexical analysis
 - Fix norminettes issues

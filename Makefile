@@ -39,7 +39,6 @@ EXECUTION = ./src/execution/execution.c \
 			./src/execution/child/cleanup.c
 
 PARSING = ./src/parsing/read_input.c \
-		./src/parsing/check_input.c \
 		./src/parsing/list_christo.c \
 		./src/parsing/list_redir_christo.c \
 		./src/parsing/list_utils.c
@@ -57,7 +56,8 @@ LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal_error.c \
 		./src/lexer/interpreter/dollar_interpreter.c \
 		./src/lexer/interpreter/quotes_interpreter.c \
-		./src/lexer/interpreter/dollar_expandable.c
+		./src/lexer/interpreter/dollar_expandable.c \
+		./src/lexer/interpreter/interpreter_utils.c
 
 CMDS = ./src/cmds/echo.c \
 		./src/cmds/pwd.c \

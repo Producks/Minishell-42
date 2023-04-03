@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 20:02:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 23:32:33 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	place_holder_child(int num)
 }
 void	r(int num)
 {
-	void;
+	rl_redisplay();
 }
 
 void	init_signals(void)

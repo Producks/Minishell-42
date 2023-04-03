@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:22:23 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 12:19:43 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:54:19 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	copy_left_over(char *result, char *left_over)
 	result[index] = '\0';
 }
 
-static size_t	len_result(char *original, char *replacement, char *to_replace)// CHECK LATER IF CORRECT AND NO CONDITIONAL JUMP
+static size_t	len_result(char *original, char *replacement, char *to_replace)
 {
 	size_t	len;
 

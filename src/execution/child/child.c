@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 02:52:32 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/01 23:43:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ static void	create_fork(t_mini *mini)
 /*Will handle errors later prototype to see if the idea works*/
 int	create_child_process(t_mini *mini)
 {
-	t_cmds		*head;
 	int			ret;
 
-	head = mini->cmds_list;
+	mini->head_cmd = mini->cmds_list;
 	ret = 0;
 	while (mini->cmds_list)
 	{
@@ -70,6 +69,6 @@ int	create_child_process(t_mini *mini)
 		mini->cmds_list = mini->cmds_list->next;
 		restore_parent_file_descriptors(mini);
 	}
-	mini->cmds_list = head;
+	mini->cmds_list = mini->head_cmd;
 	return (ret);
 }
