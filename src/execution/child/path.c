@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/29 01:54:52 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:41:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*find_built_in_path(t_mini *mini)
 	int		index;
 
 	index = 0;
-	while (mini->env_copy[index] && ft_strncmp(mini->env_copy[index], "PATH=", 5))
+	while (mini->env_copy[index] && ft_strncmp(mini->env_copy[index],
+			"PATH=", 5))
 		index++;
 	if (!mini->env_copy[index])
 		return (NULL);
@@ -31,14 +32,10 @@ char	*find_built_in_path(t_mini *mini)
 	{
 		path = strjoin_path(path_try[index], mini->cmds_list->cmds[0], '/');
 		if (!access(path, F_OK))
-		{
-			ft_free(path_try);
-			return (path);
-		}
+			return (ft_free(path_try), path);
 		free(path);
 		index++;
 	}
-	//free(path);
 	ft_free(path_try); //check later free bug if wrong command
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 19:30:02 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/03 19:06:42 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		is_pipe(char *token);
 int 	is_redir(char *token);
 void	*free_linked_list_redirr(t_redir **head);
 void	parse_linked_list(t_mini *mini, char **tokens);
+//int		interpret_quotes(t_mini *mini, char **tokens, int index);
 
 void 	addnodecmds(t_cmds **list, t_cmds *new_node);
 void 	addnoderedir(t_redir **list, t_redir *new_node);

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 01:02:23 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/19 01:09:22 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 00:46:42 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	check_quotes_literal(t_literal *literal, const char *str)
 	while (str[literal->index] != literal->type && str[literal->index])
 		literal->str[literal->i++] = str[literal->index++];
 	if (!str[literal->index])
-		return (literal_error_handling(literal, "minishell: incorrect input\n", 2));
+		return (literal_error_handling(literal,
+				"minishell: incorrect input\n", 2));
 	literal->str[literal->i++] = str[literal->index++];
 }
 
@@ -36,10 +37,11 @@ void	literal_string_sep(t_literal *literal, const char *str)
 		}
 		while (!ft_isspace(str[literal->index]) && str[literal->index])
 		{
-			if (str[literal->index] == SINGLE_QUOTE || str[literal->index] == DOUBLE_QUOTE) // check if quotes
+			if (str[literal->index] == SINGLE_QUOTE
+				|| str[literal->index] == DOUBLE_QUOTE)
 				check_quotes_literal(literal, str);
 			else
-				check_if_redir(literal, str); // check if redir
+				check_if_redir(literal, str);
 			if (literal->ret == -1)
 				return ;
 		}

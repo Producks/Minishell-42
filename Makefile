@@ -59,7 +59,8 @@ LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal_error.c \
 		./src/lexer/interpreter/dollar_interpreter.c \
 		./src/lexer/interpreter/quotes_interpreter.c \
-		./src/lexer/interpreter/dollar_expandable.c
+		./src/lexer/interpreter/dollar_expandable.c \
+		./src/lexer/interpreter/interpreter_utils.c
 
 CMDS = ./src/cmds/echo.c \
 		./src/cmds/pwd.c \

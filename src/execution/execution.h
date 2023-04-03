@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 23:28:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:37:53 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include <stdbool.h>
 # include <sys/stat.h>
 
-#ifdef __linux__
-# include <sys/types.h>
-# include <sys/wait.h>
-#endif
+# ifdef __linux__
+#  include <sys/types.h>
+#  include <sys/wait.h>
+# endif
 
 # include "../../libs/Libft/libft.h"
 # include "../main/struct.h"
@@ -38,7 +38,6 @@
 # define READ_OUTPUT 51
 # define APPEND_OUT 54
 # define APPEND_IN 53
-
 
 /*execution.c*/
 void	execution(t_mini *mini);
@@ -69,7 +68,7 @@ int		check_fd_heredoc(t_mini *mini);
 int		restore_previous_stdout_fileno(t_mini *mini);
 
 /*heredoc_error_handler.c*/
-int	handle_file_handle_error(t_mini *mini);
+int		handle_file_handle_error(t_mini *mini);
 
 /*child.c*/
 int		create_child_process(t_mini *mini);

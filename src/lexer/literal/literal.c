@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:02:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/30 00:49:17 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 02:07:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_literal_struct(t_literal *literal)
 char	**literal_tokenization(t_mini *mini)
 {
 	t_literal	literal;
-	
+
 	init_literal_struct(&literal);
 	count_literal_string(&literal, mini->message);
 	if (!literal.count)

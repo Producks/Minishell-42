@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 18:01:03 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/03 19:07:25 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	run_cmd(t_mini *mini)
 	if (!path)
 		child_cleanup_command_not_found(mini);
 	child_cleanup_before_execve(mini);
-	execve(path, mini->cmds_list->cmds, mini->env_copy);
+	execve(path, mini->current_cmds, mini->env_copy);
 	free(path);
 	child_cleanup_execve_failure(mini);
 }

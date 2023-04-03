@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:36:27 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 16:55:16 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:55:01 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	add_env_element(t_mini *mini, char *str_to_add)
 		ft_free(new_envp);
 		return (FAILURE); // add later
 	}
-    index++;
+	index++;
     new_envp[index] = NULL;
     ft_free(mini->env_copy);
     mini->env_copy = new_envp;

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:05 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 01:07:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 12:44:14 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	unset(t_mini *mini)
 		index = 0;
 		while (mini->env_copy[index])
 		{
-			if (unset_strcmp(mini->cmds_list->cmds[j], mini->env_copy[index]) == 0)
+			if (unset_strcmp(mini->cmds_list->cmds[j],
+					mini->env_copy[index]) == 0)
 			{
 				ft_remove_element(mini, index, -1, 0);
 				break ;

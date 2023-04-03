@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:43:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/25 20:39:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/03 01:58:18 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ static int	dollar_dispatcher(t_mini *mini, char **literal, int index)
 				ret = dollar_expandable(mini, literal, index);
 			if (ret == FAILURE)
 				return (FAILURE);
+		}
+		if (!literal[index][j])
+		{
+			puts("fix"); // should fix more testing later
+			break ;
 		}
 		j++;
 	}
