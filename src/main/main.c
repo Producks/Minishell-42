@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 19:28:24 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 09:37:16 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ int	main(int argc, char *argv[], char *envp[])
 	init_signals();
 	if (init_struct(&mini, envp) == -1)
 		return (ENOMEM);
+	#ifndef TESTER
+	#  define TESTER 0
+	#endif
+	if (TESTER == true)
+	{
+		mini.message = ft_strdup(argv[1]);
+		lexer(&mini);
+		free_struct(&mini);
+		return (0);	
+	}
 	print_welcome_message();
 	read_input(&mini);
 	free_struct(&mini);

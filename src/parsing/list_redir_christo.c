@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/31 23:04:46 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 11:22:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	addnode_end_redir(t_redir **list, int type, int dir, char *filename)
 	if (dir == 0)
 		new_node->in = true;
 	//new_node->filename = filename; // DUP ADDED
-	new_node->filename = ft_strdup(filename);
+	new_node->filename = interpreter(filename);
 
 	addnoderedir(list, new_node);
 	// new_node->next = NULL;

@@ -6,11 +6,12 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/03 19:20:28 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 11:22:16 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../interpreter/interpreter.h"
 
 void	*free_linked_list_redirr(t_redir **head)
 {
@@ -199,7 +200,7 @@ int	add_arg(t_cmds *new_node, char **tokens, int i, int n_arg, int c)
 			// interpret_quotes(NULL, tokens, i);
 			if (is_redir_2(tokens[i]) == 1)
 				i += 2;
-			new_node->cmds[c] = interpret_quotes(tokens[i]); // quotes
+			new_node->cmds[c] = interpreter(tokens[i]); // quotes
 			// printf("arg : %s\n", new_node->cmds[c]);
 			c++;
 			i++;
@@ -263,7 +264,7 @@ int add_cmd_2(t_cmds **list, char **tokens, int i, int bef_cmd, int pipe_p)
 	else if (is_redir_2(tokens[i]) == 1)
 		new_node->cmds[c] = NULL;
 	else
-		new_node->cmds[c] = interpret_quotes(tokens[i]);
+		new_node->cmds[c] = interpreter(tokens[i]);
 	//new_node->redir_list = ft_calloc(1, sizeof(t_redir)); // leak here, if commented goes away. What is this for exactly?
 	// printf(YEL "cmds : %s\n" RESET, new_node->cmds[c]);
 	c++;

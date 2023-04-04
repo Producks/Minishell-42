@@ -54,10 +54,13 @@ LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal_string.c \
 		./src/lexer/literal/literal_redir.c \
 		./src/lexer/literal/literal_error.c \
-		./src/lexer/interpreter/dollar_interpreter.c \
-		./src/lexer/interpreter/quotes_interpreter.c \
-		./src/lexer/interpreter/dollar_expandable.c \
-		./src/lexer/interpreter/interpreter_utils.c
+		./src/lexer/literal/interpreter_utils.c
+
+INTERPRETER = ./src/interpreter/interpreter.c \
+			  ./src/interpreter/dollar/dollar_expandable.c \
+			  ./src/interpreter/dollar/dollar_interpreter.c \
+			  ./src/interpreter/quotes/quotes_interpreter.c \
+			  ./src/interpreter/cut.c
 
 CMDS = ./src/cmds/echo.c \
 		./src/cmds/pwd.c \
@@ -79,6 +82,7 @@ SRC = $(MAIN) \
 		$(UTILS) \
 		$(LEXER) \
 		$(CMDS) \
+		$(INTERPRETER) \
 		$(ERRORS)
 
 
@@ -123,8 +127,9 @@ lib:
 	@make -s -C libs/Libft
 #	make -C libs/Libft
 
-assert: CFLAGS += -DASSERT=1
-assert: fclean all
+#assert: CFLAGS += -DASSERT=1
+tester: CFLAGS += -D TESTER=1
+tester: fclean all
 	@python3 ./assert_minishell.py
 
 clean:

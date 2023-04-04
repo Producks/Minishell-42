@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 12:56:22 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 10:46:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include <stdbool.h>
 # include <stdio.h>
-#include <string.h>
+# include <string.h>
 //#include <readline/readline.h> // fix later
 //#include <readline/history.h> // fix later
 # include "../main/struct.h"
@@ -26,6 +26,7 @@
 # include "../execution/execution.h"
 # include "../cmds/cmds.h"
 # include "../lexer/lexer.h"
+# include "../interpreter/interpreter.h"
 
 extern int	g_exit_status;
 
