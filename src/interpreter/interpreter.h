@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:11:07 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 16:53:30 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 18:23:46 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,25 @@
 # define QUESTION_MARK 63
 # define UNDERSCORE 95
 
-// typedef struct s_expandable
-// {
-// 	size_t	length;
-// 	int		dollar_index_start;
-// 	int		index;
-// 	int		ret;
-// 	char	*env_str;
-// 	char	*env_check;
-// 	char	*original_cut;
-// 	char	*str_literal;
-// 	char	*cut_result;
-// }	t_expandable;
-
 typedef struct s_expandable
+{
+	size_t	length;
+	int		dollar_index_start;
+	int		index;
+	int		ret;
+	char	*env_str;
+	char	*env_check;
+	char	*original_cut;
+	char	*str_literal;
+	char	*cut_result;
+}	t_expandable;
+
+typedef struct s_dollar
 {
 	char	*result;
 	int		index;
 	int		ret;
-}	t_expandable;
+}	t_dollar;
 
 /*Interpreter.c*/
 char	*interpreter(char *str);
@@ -58,7 +58,7 @@ char	*dollar_interpreter(char *str);
 char	*interpret_quotes(char *str);
 
 /*dollar_expandable.c*/
-char	*dollar_expandable(char *str);
+int		dollar_expandable(t_dollar *dollar);
 
 /*Interpreter_utils.c*/
 bool	check_expandable(char c);

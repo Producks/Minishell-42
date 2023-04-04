@@ -6,13 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:43:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 16:36:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 18:20:45 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../interpreter.h"
 
-int	replace_exit_status(t_expandable *expand)
+int	replace_exit_status(t_dollar *expand)
 {
 	char	*exit_status;
 	char	*trim_str;
@@ -29,7 +29,7 @@ int	replace_exit_status(t_expandable *expand)
 	return (SUCCESS);
 }
 
-static int	dollar_dispatcher(t_expandable *expand)
+static int	dollar_dispatcher(t_dollar *expand)
 {
 	expand->index = 0;
 	expand->ret = 0;
@@ -56,7 +56,7 @@ static int	dollar_dispatcher(t_expandable *expand)
 
 char	*dollar_interpreter(char *str)
 {
-	t_expandable	expand;
+	t_dollar	expand;
 
 	expand.result = ft_strdup(str);
 	if (!expand.result)

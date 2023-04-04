@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 09:37:16 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 18:42:09 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 //Global variable for exit status
 int	g_exit_status = 0;
+char **g_env_test = NULL;
 
 static void	print_welcome_message(void)
 {
@@ -37,6 +38,7 @@ int	main(int argc, char *argv[], char *envp[])
 	#ifndef TESTER
 	#  define TESTER 0
 	#endif
+	g_env_test = mini.env_copy;
 	if (TESTER == true)
 	{
 		mini.message = ft_strdup(argv[1]);
