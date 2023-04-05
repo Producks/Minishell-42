@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 15:54:51 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 15:59:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 13:24:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,17 @@ static char	*get_cut_string(char *str, int index)
 	{
 		if (*str == SINGLE_QUOTE || *str == DOUBLE_QUOTE)
 		{
-			type = *str++;
+			type = *str;
+			str++;
 			count++;
 			while (*str != type)
-				*str++;
-			*str++;
+				str++;
+			str++;
 			continue ;
 		}
 		count++;
 		while (*str != SINGLE_QUOTE && *str != DOUBLE_QUOTE)
-			*str++;
+			str++;
 	}
 	cut = cut_deez(str);
 	if (!cut)
@@ -125,3 +126,32 @@ char	**cut_into_pieces(char *str)
 	}
 	return (cut);
 }
+
+// static char	*get_cut_string(char *str, int index)
+// {
+// 	int		count;
+// 	char	type;
+// 	char	*cut;
+// 	char	lol;
+
+// 	count = 0;
+// 	while (count != index)
+// 	{
+// 		if (*str == SINGLE_QUOTE || *str == DOUBLE_QUOTE)
+// 		{
+// 			type = *str++;
+// 			count++;
+// 			while (*str != type)
+// 				*str++;
+// 			*str++;
+// 			continue ;
+// 		}
+// 		count++;
+// 		while (*str != SINGLE_QUOTE && *str != DOUBLE_QUOTE)
+// 			*str++;
+// 	}
+// 	cut = cut_deez(str);
+// 	if (!cut)
+// 		return (NULL);
+// 	return (cut);
+// }
