@@ -25,6 +25,9 @@ PATH_READHISTORY = libs/readline/
 # RUN #
 RUN = @./minishell
 
+# Leak #
+LEAK = valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --trace-children=yes ./minishell
+
 EXECUTION = ./src/execution/execution.c \
 			./src/execution/redirection/io_redirection.c \
 			./src/execution/redirection/redirection_utils.c \
@@ -85,7 +88,6 @@ SRC = $(MAIN) \
 		$(INTERPRETER) \
 		$(ERRORS)
 
-
 # Colors #
 BLACK = \033[0;30m
 RED = \033[0;31m
@@ -127,7 +129,6 @@ lib:
 	@make -s -C libs/Libft
 #	make -C libs/Libft
 
-#assert: CFLAGS += -DASSERT=1
 tester: CFLAGS += -D TESTER=1
 tester: fclean all
 	@python3 ./assert_minishell.py
@@ -146,4 +147,7 @@ re: fclean all
 run: all
 	${RUN}
 
-.PHONY: all clean fclean re lib run
+leak: all
+	${LEAK}
+
+.PHONY: all clean fclean re lib run leak

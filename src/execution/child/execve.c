@@ -6,17 +6,19 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/02 00:24:29 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 22:59:48 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
+#include "../../parsing/parsing.h"
 
 void	run_cmd(t_mini *mini)
 {
 	char	*path;
 	int		index;
 
+	rl_clear_history();
 	if (!mini->cmds_list->cmds[0])
 		child_cleanup_no_cmds(mini);
 	path = find_path(mini); // check later for errors leaks etc..

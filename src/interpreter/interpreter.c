@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:10:44 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 18:57:18 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/04 22:41:57 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ char	*interpreter(char *str)
 	char	**cut;
 	char	*result;
 
+	if (!str)
+		return (NULL);
 	cut = cut_into_pieces(str);
 	if (!cut)
 		return (NULL);
