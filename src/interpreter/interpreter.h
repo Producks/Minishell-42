@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:11:07 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 21:41:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:36:06 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_dollar
 }	t_dollar;
 
 /*Interpreter.c*/
-char	*interpreter(char *str);
+char	*interpreter(char *str, t_mini *mini);
 
 /*dollar.interpreter.c*/
 char	*dollar_interpreter(char *str);

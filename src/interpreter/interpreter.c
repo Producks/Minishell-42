@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:10:44 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 22:41:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:35:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	literal_interpreter(char **str_array, int index)
 	return (SUCCESS);
 }
 
-char	*interpreter(char *str)
+char	*interpreter(char *str, t_mini *mini)
 {
 	int		index;
 	int		ret;
