@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 22:24:51 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 09:32:54 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ void	silence_signal()
     tcgetattr(STDIN_FILENO, &termios_p);
     termios_p.c_lflag &= ~(ICANON | ECHO | ISIG);
     tcsetattr(STDIN_FILENO, TCSANOW, &termios_p);
-
 }
 
 void	parent_signal_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
-		write(1, "\n", 1);
+		write(1, "\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -47,8 +46,6 @@ void	parent_signal_handler(int signal)
 	}
 	else if (signal == SIGQUIT)
 	{
-		rl_on_new_line();
-		rl_replace_line("", 0);
 		rl_redisplay();
 		return ;
 	}
@@ -57,9 +54,7 @@ void	parent_signal_handler(int signal)
 void	child_signal_handler(int signal)
 {
 	if (signal == SIGINT)
-	{
 		g_exit_status = 130;
-	}
 	else if (signal == SIGQUIT)
 	{
 		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);

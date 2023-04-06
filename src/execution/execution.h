@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 21:41:12 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 10:06:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		handle_file_handle_error(t_mini *mini);
 
 /*child.c*/
 int		create_child_process(t_mini *mini);
-void	wait_for_child_process(t_cmds *cmds);
+void	wait_for_child_process(t_cmds *cmds, bool skip_waiting);
 
 /*path.c*/
 char	*find_path(t_mini *mini);

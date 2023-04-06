@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 22:28:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 10:06:30 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 #include "../../utils/utils.h"
 #include "../../input/input.h"
 
-void	wait_for_child_process(t_cmds *cmds)
+void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 {
 	int	ret_status;
 
+	if (skip_waiting == true)
+		return ;
 	ret_status = g_exit_status;
 	while (cmds)
 	{
@@ -54,6 +56,7 @@ static void	create_fork(t_mini *mini)
 	if (is_built_in && mini->is_one_cmd)
 	{
 		built_ins(mini);
+		mini->skip_waiting = true;
 		return ;
 	}
 	mini->cmds_list->pid = fork();
