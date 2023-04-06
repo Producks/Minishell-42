@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/01 19:30:23 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/05 19:40:54 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	addnode_end_redir(t_redir **list, int type, int dir, char *filename)
 		new_node->out = true;
 	if (dir == 0)
 		new_node->in = true;
-	new_node->filename = interpret_quotes(filename);
+	if (filename)
+		new_node->filename = interpret_quotes(filename);
+	// puts(new_node->filename);
 	addnoderedir(list, new_node);
 }
 

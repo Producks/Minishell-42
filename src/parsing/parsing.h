@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 19:06:42 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:00:38 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_pos
 {
     int				bef_cmd;
 	int				pipe;
+	int				c;
+	t_mini			*mini;
 }	t_pos;
 
 int check_input(t_mini *mini);
