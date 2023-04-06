@@ -41,16 +41,19 @@ EXECUTION = ./src/execution/execution.c \
 			./src/execution/heredoc/heredoc_file_handler.c \
 			./src/execution/child/cleanup.c
 
-PARSING = ./src/parsing/read_input.c \
-		./src/parsing/list_christo.c \
-		./src/parsing/list_redir_christo.c \
-		./src/parsing/list_utils.c
+INPUT	= ./src/input/read_input.c
+
+PARSING = ./src/parsing/list_christo.c \
+		  ./src/parsing/list_redir_christo.c \
+		  ./src/parsing/list_utils.c
 
 UTILS = ./src/utils/linked_list_cmds.c \
-		./src/utils/strjoin_path.c \
-		./src/utils/place_holder.c \
-		./src/utils/str_cutcut.c \
-		./src/utils/add_env_element.c
+		./src/utils/strings/strjoin_path.c \
+		./src/utils/strings/str_cutcut.c \
+		./src/utils/add_env_element.c \
+		./src/utils/signal.c \
+		./src/utils/init.c \
+		./src/utils/print_startup.c
 
 LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \
@@ -75,17 +78,14 @@ CMDS = ./src/cmds/echo.c \
 
 ERRORS = ./src/errors/error.c
 
-MAIN = ./src/main/main.c \
-		./src/main/init.c \
-		./src/main/signal.c
-
-SRC = $(MAIN) \
+SRC = 	./src/main.c \
 		$(EXECUTION) \
 		$(PARSING) \
 		$(UTILS) \
 		$(LEXER) \
 		$(CMDS) \
 		$(INTERPRETER) \
+		$(INPUT) \
 		$(ERRORS)
 
 # Colors #

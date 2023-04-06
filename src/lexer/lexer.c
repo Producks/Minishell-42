@@ -6,11 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 10:44:41 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 21:42:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main/struct.h"
+#include "../utils/struct.h"
 #include "../parsing/parsing.h"
 #include "lexer.h"
 #include "../interpreter/interpreter.h"

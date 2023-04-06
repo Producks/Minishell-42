@@ -6,11 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 07:54:51 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 07:58:35 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 21:29:46 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../utils.h"
 
 char	*strjoin_path(char const *s1, char const *s2, char sep)
 {

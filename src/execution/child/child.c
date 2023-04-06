@@ -6,13 +6,14 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 18:04:22 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 22:28:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include "../execution.h"
-#include "../../main/signal.h"
+#include "../../utils/utils.h"
+#include "../../input/input.h"
 
 void	wait_for_child_process(t_cmds *cmds)
 {
@@ -25,6 +26,23 @@ void	wait_for_child_process(t_cmds *cmds)
 		g_exit_status = WEXITSTATUS(ret_status);
 		cmds = cmds->next;
 	}
+}
+
+static void	handle_child(t_mini *mini, bool is_built_in)
+{
+	int	ret;
+
+	ret = SUCCESS;
+	init_child_signal();
+	rl_clear_history();
+	//child_cleanup_before_command(mini);
+	if (is_built_in == true)
+	{
+		ret = built_ins(mini);
+		child_cleanup_no_cmds(mini);
+		exit(ret);
+	}	
+	run_cmd(mini);
 }
 
 static void	create_fork(t_mini *mini)
@@ -42,16 +60,7 @@ static void	create_fork(t_mini *mini)
 	if (mini->cmds_list->pid == FAILURE)
 		perror("Minishell");
 	if (mini->cmds_list->pid == SUCCESS)
-	{
-		child_signal();
-		if (is_built_in == true)
-		{
-			ret = built_ins(mini);
-			child_cleanup_no_cmds(mini);
-			exit(ret);
-		}	
-		run_cmd(mini);
-	}
+		handle_child(mini, is_built_in);
 }
 
 /*Will handle errors later prototype to see if the idea works*/

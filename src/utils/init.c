@@ -6,13 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 23:39:27 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 22:36:52 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../../libs/Libft/libft.h"
-#include "init.h"
+#include "utils.h"
 
 /*Make a copy of the envp and store it in the struct*/
 static int	copy_env(t_mini *mini, char *envp[])

@@ -23,8 +23,8 @@ echo The current user is '"'"$USER"'"'
 echo The current user is ${USER}
 echo The current user is "'"${USER}"'"
 echo The current user is '"'"${USER}"'"'
-#echo -n rtorto
-#echo -nnnnn fgergrg
+echo -n rtorto
+echo -nnnnn fgergrg
 echo -n-n fgjrogj
 "'"echo"'" The current user is ${USER}
 "''echo''" The current user is "'"${USER}"'"
@@ -52,7 +52,7 @@ cat < Makefile
 export $ec=ec
 export $ho=ho
 unset $PATH
-#$ec$ho test
+$ec$ho test
 # START HEREDOC
 #cat << 4 > file.txt | cat file.txt
 # END HEREDOC

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:11:07 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 18:23:46 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 21:41:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define INTERPRETER_H
 
 # include "../../libs/Libft/libft.h"
-# include "../main/struct.h"
+# include "../utils/struct.h"
 # include "../utils/utils.h"
 # include "../errors/error.h"
 # include <stdbool.h>

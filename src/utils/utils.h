@@ -6,14 +6,14 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 12:54:05 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 22:49:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../main/struct.h"
+# include "struct.h"
 
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34
@@ -43,5 +43,21 @@ char	*str_cutcut(char *original, char *replacement, char *to_replace);
 int		add_env_element(t_mini *mini, char *str_to_add);
 
 void	clean_redir_list(t_cmds *current);
+
+/* print_startup.c*/
+
+void	print_startup(void);
+
+/* Init.c */
+
+int		init_struct(t_mini *mini, char *envp[]);
+void	free_struct(t_mini *mini);
+
+/* Signal.c */
+
+void	init_child_signal(void);
+void	init_parent_signals(void);
+void	child_signal_handler(int signal);
+void	parent_signal_handler(int signal);
 
 #endif

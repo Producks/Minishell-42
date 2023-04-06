@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 12:05:44 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 21:41:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LEXER_H
 
 # include "../../libs/Libft/libft.h"
-# include "../main/struct.h"
+# include "../utils/struct.h"
 # include "../utils/utils.h"
 # include "../errors/error.h"
 # include <stdbool.h>
