@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 17:51:30 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:05:01 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	file_handler(t_mini *mini)
 	open_fd = open("MiniHeredoc", O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (open_fd == FAILURE)
 		return (FAILURE); // handle later
+	mini->delete_file = true;
 	return (open_fd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 13:26:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:06:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ static void	check_if_one_command(t_mini *mini)
 static void	parent_cleanup(t_mini *mini)
 {
 	mini->cmds_list = free_linked_list_mini(&mini->cmds_list);
+	
 	if (mini->delete_file == true)
-		unlink("Miniheredoc");
+		unlink("MiniHeredoc");
 	mini->skip_waiting = false;
 	mini->is_one_cmd = false;
 	mini->delete_file = false;
