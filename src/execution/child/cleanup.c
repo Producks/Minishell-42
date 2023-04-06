@@ -6,13 +6,13 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:26:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 19:08:14 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:14:36 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
-#include "../../main/init.h"
 #include "../../utils/utils.h"
+#include "../../input/input.h"
 
 void	check_if_pipe_cleanup(t_mini *mini)
 {
@@ -28,6 +28,7 @@ void	check_if_pipe_cleanup(t_mini *mini)
 
 void	free_double_array_execve(char **str, char **nope)
 {
+	
 	int	index;
 
 	index = 0;
@@ -75,7 +76,7 @@ void	child_cleanup_execve_failure(t_mini *mini)
 	exit(1);
 }
 
-void	child_cleanup_before_execve(t_mini *mini)
+void	child_cleanup_before_command(t_mini *mini)
 {
 	close(mini->fd_in);
 	close(mini->fd_out);

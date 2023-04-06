@@ -6,11 +6,33 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 01:04:34 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 07:20:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
+
+static bool	check_echo_option(const char *str, int count)
+{
+	int	index;
+
+	if (count != 1)
+		return (false);
+	index = 0;
+	if (!str[index])
+		return (false);
+	if (str[index++] != '-')
+			return (false);
+	if (str[index++] != 'n')
+		return (false);
+	while (str[index])
+	{
+		if (str[index] != 'n')
+			return (false);
+		index++;
+	}
+	return (true);
+}
 
 int	echo(char **message)
 {
@@ -21,7 +43,7 @@ int	echo(char **message)
 	check_n = false;
 	while (message[index])
 	{
-		if ((ft_strcmp(message[index], "-n") == 0) && (index == 1))
+		if (check_echo_option(message[index], index))
 		{
 			index++;
 			check_n = true;

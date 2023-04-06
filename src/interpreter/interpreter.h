@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   interpreter.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 14:11:54 by cperron          ###   ########.fr       */
+/*   Created: 2023/04/04 10:11:07 by ddemers           #+#    #+#             */
+/*   Updated: 2023/04/06 14:20:14 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef INTERPRETER_H
+# define INTERPRETER_H
 
 # include "../../libs/Libft/libft.h"
 # include "../utils/struct.h"
@@ -28,37 +28,41 @@
 # define QUESTION_MARK 63
 # define UNDERSCORE 95
 
-extern int	g_exit_status;
-typedef struct s_literal
+typedef struct s_expandable
 {
+	size_t	length;
+	int		dollar_index_start;
 	int		index;
-	int		i;
-	int		count;
 	int		ret;
-	char	flag;
-	char	type;
-	char	*str;
-	char	**array;
-}	t_literal;
+	char	*env_str;
+	char	*env_check;
+	char	*original_cut;
+	char	*str_literal;
+	char	*cut_result;
+}	t_expandable;
 
-/*Lexer.c*/
-void	lexer(t_mini *mini);
+typedef struct s_dollar
+{
+	char	*result;
+	int		index;
+	int		ret;
+}	t_dollar;
 
-/*Literal.c*/
-char	**literal_tokenization(t_mini *mini);
-/*Literal_redir.c*/
-int		isredir(int c);
-void	check_if_redir(t_literal *literal, const char *str);
-/*Literal_string.c*/
-void	count_literal_string(t_literal *literal, const char *str);
-void	literal_string_sep(t_literal *literal, const char *str);
-char	**literal_tokenization(t_mini *mini);
-/*Literal_error.c*/
-void	literal_error_handling(t_literal *literal,
-			const char *str, int err_nbr);
-void	literal_check_errors(t_literal *literal);
+/*Interpreter.c*/
+char	*interpreter(char *str, t_mini *mini);
 
+/*dollar.interpreter.c*/
+char	*dollar_interpreter(char *str, t_mini *mini);
+
+/*quotes_interpreter.c*/
+char	*interpret_quotes(char *str);
+
+/*dollar_expandable.c*/
+int		dollar_expandable(t_dollar *dollar, t_mini *mini);
+
+/*Interpreter_utils.c*/
 bool	check_expandable(char c);
-//void	single_quote_inc(t_expandable *expand);
+
+char	**cut_into_pieces(char *str);
 
 #endif

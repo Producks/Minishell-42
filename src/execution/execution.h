@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 12:37:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 10:06:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # endif
 
 # include "../../libs/Libft/libft.h"
-# include "../main/struct.h"
+# include "../utils/struct.h"
 # include "../utils/utils.h"
 # include "../errors/error.h"
 
@@ -72,7 +72,7 @@ int		handle_file_handle_error(t_mini *mini);
 
 /*child.c*/
 int		create_child_process(t_mini *mini);
-void	wait_for_child_process(t_cmds *cmds);
+void	wait_for_child_process(t_cmds *cmds, bool skip_waiting);
 
 /*path.c*/
 char	*find_path(t_mini *mini);
@@ -86,7 +86,7 @@ int		built_ins(t_mini *mini);
 
 /*Cleanup.c*/
 void	child_cleanup_command_not_found(t_mini *mini);
-void	child_cleanup_before_execve(t_mini *mini);
+void	child_cleanup_before_command(t_mini *mini);
 void	child_cleanup_execve_failure(t_mini *mini);
 void	child_cleanup_no_cmds(t_mini *mini);
 

@@ -6,11 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:22:23 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 12:54:19 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/05 21:29:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../utils.h"
 #include <stdio.h>
 
 static void	copy_left_over(char *result, char *left_over)

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 23:32:33 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 09:32:54 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,43 +32,44 @@ void	silence_signal()
     tcgetattr(STDIN_FILENO, &termios_p);
     termios_p.c_lflag &= ~(ICANON | ECHO | ISIG);
     tcsetattr(STDIN_FILENO, TCSANOW, &termios_p);
-
-}
-// wrong signal command place holder for now
-//try and make this work with ctrl+D intead of ctr+c so it doesn't seg fault TODO
-void handle_sigquit(int num)
-{
-    write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-    g_exit_status = 131;
 }
 
-void	place_holder(int num)
+void	parent_signal_handler(int signal)
 {
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	g_exit_status = 130;
+	if (signal == SIGINT)
+	{
+		write(1, "\n", STDOUT_FILENO);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_exit_status = 130;
+	}
+	else if (signal == SIGQUIT)
+	{
+		rl_redisplay();
+		return ;
+	}
 }
 
-void	place_holder_child(int num)
+void	child_signal_handler(int signal)
 {
-	g_exit_status = 130;
-	exit(EXIT_FAILURE);
-}
-void	r(int num)
-{
-	rl_redisplay();
-}
-
-void	init_signals(void)
-{
-	signal(SIGINT, place_holder);
-	signal(SIGQUIT, r);
+	if (signal == SIGINT)
+		g_exit_status = 130;
+	else if (signal == SIGQUIT)
+	{
+		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+    	g_exit_status = 131;
+	}
 }
 
-void	child_signal(void)
+void	init_child_signal(void)
 {
-	signal(SIGINT, place_holder);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGINT, child_signal_handler);
+	signal(SIGQUIT, child_signal_handler);
+}
+
+void	init_parent_signals(void)
+{
+	signal(SIGINT, parent_signal_handler);
+	signal(SIGQUIT, parent_signal_handler);
 }

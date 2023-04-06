@@ -6,11 +6,11 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 10:09:01 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 19:31:43 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:11:32 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lexer.h"
+#include "../interpreter.h"
 
 static size_t	count_quotes(char *str)
 {

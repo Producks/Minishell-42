@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interpreter_utils.c                                :+:      :+:    :+:   */
+/*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/03 01:06:19 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 19:04:27 by cperron          ###   ########.fr       */
+/*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
+/*   Updated: 2023/04/06 15:31:46 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lexer.h"
+#include "input.h"
 
-bool	check_expandable(char c)
+int	read_input(t_mini *mini)
 {
-	if ((ft_isalpha(c) || ft_isdigit(c) || c == UNDERSCORE))
-		return (true);
-	return (false);
-}
-
-void	single_quote_inc(t_expandable *expand)
-{
-	expand->index++;
-	while (expand->str_literal[expand->index] != SINGLE_QUOTE)
-		expand->index++;
-	expand->index++;
+	while (true)
+	{
+		if (g_exit_status == 69)
+			break ;
+		mini->message = readline(GRN "Minishell > " RESET);
+		if (!mini->message)
+			break ;
+		lexer(mini);
+		add_history(mini->message);
+		free (mini->message);
+		mini->message = NULL;
+	}
+	rl_clear_history();
+	return (SUCCESS);
 }

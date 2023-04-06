@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 14:00:38 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:26:28 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@
 
 # include <stdbool.h>
 # include <stdio.h>
-#include <string.h>
+# include <string.h>
 //#include <readline/readline.h> // fix later
 //#include <readline/history.h> // fix later
-# include "../main/struct.h"
+# include "../utils/struct.h"
 # include "../../libs/readline/history.h"
 # include "../../libs/readline/readline.h"
 # include "../../libs/Libft/libft.h"
 # include "../execution/execution.h"
 # include "../cmds/cmds.h"
 # include "../lexer/lexer.h"
+# include "../interpreter/interpreter.h"
 
 extern int	g_exit_status;
 
@@ -36,6 +37,7 @@ extern int	g_exit_status;
 # define MAG   "\x1B[35m"
 # define CYN   "\x1B[36m"
 # define WHT   "\x1B[37m"
+# define PNK   "\x1B[38;5;206m"
 # define RESET "\x1B[0m"
 
 typedef struct s_pos
@@ -43,8 +45,11 @@ typedef struct s_pos
     int				bef_cmd;
 	int				pipe;
 	int				c;
+	int				n_arg;
+	int				type;
 	t_mini			*mini;
 }	t_pos;
+// < Makefile cat
 
 int check_input(t_mini *mini);
 int	read_input(t_mini *mini);
@@ -75,7 +80,7 @@ int		count_arg(char **tokens, int i);
 int		count_arg_2(char **tokens, int i, int pipe_p);
 
 //parsing_utils_2
-int		add_arg(t_cmds *new_node, char **tokens, int i, int n_arg, int c);
+int		add_arg(t_cmds *new_node, char **tokens, int i, t_pos *pos);
 int		find_cmds(char **tokens, int i);
 int		find_pipe(char **tokens, int i);
 

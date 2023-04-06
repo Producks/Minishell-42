@@ -6,23 +6,24 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/06 14:06:24 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:31:53 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "../interpreter/interpreter.h"
 
-int	add_arg(t_cmds *new_node, char **tokens, int i, int n_arg, int c)
+int	add_arg(t_cmds *new_node, char **tokens, int i, t_pos *pos)
 {
-		while (tokens[i] && n_arg > 1)
+		while (tokens[i] && pos->n_arg > 1)
 		{
 			if (is_redir_2(tokens[i]) == 1)
 				i += 2;
 			if (tokens[i])
-				new_node->cmds[c] = interpret_quotes(tokens[i]);
-			c++;
+				new_node->cmds[pos->c] = interpreter(tokens[i], pos->mini);
+			pos->c++;
 			i++;
-			n_arg--;
+			pos->n_arg--;
 		}
 
 	new_node->next = NULL;
@@ -36,7 +37,7 @@ int add_the_cmd(t_cmds *new_node, char **tokens, int i, t_pos *pos)
 	else if (is_redir_2(tokens[i]) == 1)
 		new_node->cmds[pos->c] = NULL;
 	else
-		new_node->cmds[pos->c] = interpret_quotes(tokens[i]);
+		new_node->cmds[pos->c] = interpreter(tokens[i], pos->mini);
 	return (i + 1);
 }
 
@@ -44,7 +45,7 @@ int add_the_cmd(t_cmds *new_node, char **tokens, int i, t_pos *pos)
 int create_cmd_node(t_cmds **list, char **tokens, int i, t_pos *pos)
 {
 	t_cmds *new_node;
-	int n_arg;
+	// int n_arg;
 	// int c;
 	
 	pos->c = 0;
@@ -52,10 +53,10 @@ int create_cmd_node(t_cmds **list, char **tokens, int i, t_pos *pos)
 	// if (!new_node)
 	// 	return(free(new_node), -1);
 	if (pos->pipe != 0)
-		n_arg = count_arg_2(tokens, i, pos->pipe);
+		pos->n_arg = count_arg_2(tokens, i, pos->pipe);
 	else 
-		n_arg = count_arg(tokens, i);
-	new_node->cmds = ft_calloc(sizeof(char*), n_arg + 2);
+		pos->n_arg = count_arg(tokens, i);
+	new_node->cmds = ft_calloc(sizeof(char*), pos->n_arg + 2);
 	while (i < pos->pipe && pos->pipe != 0)
 	{
 		if (is_redir_2(tokens[i]) == 1)
@@ -65,7 +66,7 @@ int create_cmd_node(t_cmds **list, char **tokens, int i, t_pos *pos)
 	}
 	i = add_the_cmd(new_node, tokens, i, pos);
 	pos->c++;
-	i = add_arg(new_node, tokens, i, n_arg, pos);
+	i = add_arg(new_node, tokens, i, pos);
 	i = redir_list_3(new_node, tokens, i, pos);
 	addnodecmds(list, new_node);
 	return (i);
@@ -101,7 +102,7 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 	cmds = NULL;
 	check_cmds(&cmds, tokens, mini);
 	mini->cmds_list = cmds;
-	printall(cmds);
+	// printall(cmds);
 	ft_free(tokens);
 	execution(mini);
 }
