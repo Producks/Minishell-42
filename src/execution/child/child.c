@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 10:06:30 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 00:22:33 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 {
-	int	ret_status;
+	int		ret_status;
+	char	temp_buffer[15];
 
 	if (skip_waiting == true)
 		return ;
@@ -26,6 +27,11 @@ void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 	{
 		waitpid(cmds->pid, &ret_status, 0);
 		g_exit_status = WEXITSTATUS(ret_status);
+		if (cmds->tmp_file == true)
+		{
+			create_file_name(temp_buffer, cmds->count);
+			unlink(temp_buffer);
+		}
 		cmds = cmds->next;
 	}
 }

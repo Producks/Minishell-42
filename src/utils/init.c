@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 10:04:30 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 00:27:11 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	init_struct(t_mini *mini, char *envp[])
 	mini->head_cmd = NULL;
 	mini->is_one_cmd = false;
 	mini->skip_waiting = false;
-	mini->delete_file = false;
 	mini->fd_in = dup(STDIN_FILENO);
 	mini->fd_out = dup(STDOUT_FILENO);
 	return (0);

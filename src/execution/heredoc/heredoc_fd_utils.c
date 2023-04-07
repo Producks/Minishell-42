@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 10:24:25 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 17:55:14 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 16:26:24 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	restore_stdin_fileno(t_mini *mini)
 {
+	fprintf(stderr, "HEY\n");
 	if (dup2(mini->fd_in, STDIN_FILENO) == FAILURE)
 		return (print_errno(1), FAILURE);
 	return (SUCCESS);

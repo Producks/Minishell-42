@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:10:44 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 15:35:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:57:20 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*join_strings(char **str_array)
 	return (result);
 }
 
-static int	regular_interpreter(char **str_array, int index)
+static int	regular_interpreter(char **str_array, int index, t_mini *mini)
 {
 	char	*regular;
 	char	*result;
@@ -45,7 +45,7 @@ static int	regular_interpreter(char **str_array, int index)
 	regular = interpret_quotes(str_array[index]);
 	if (!regular)
 		return (FAILURE);
-	result = dollar_interpreter(regular);
+	result = dollar_interpreter(regular, mini);
 	free(regular);
 	if (!result)
 		return (FAILURE);
@@ -84,7 +84,7 @@ char	*interpreter(char *str, t_mini *mini)
 		if (cut[index][0] == SINGLE_QUOTE)
 			ret = literal_interpreter(cut, index);
 		else
-			ret = regular_interpreter(cut, index);
+			ret = regular_interpreter(cut, index, mini);
 		if (ret == FAILURE)
 			return (ft_free(cut), NULL);
 		index++;

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:43:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/04 18:20:45 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:58:10 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	replace_exit_status(t_dollar *expand)
 	return (SUCCESS);
 }
 
-static int	dollar_dispatcher(t_dollar *expand)
+static int	dollar_dispatcher(t_dollar *expand, t_mini *mini)
 {
 	expand->index = 0;
 	expand->ret = 0;
@@ -40,7 +40,7 @@ static int	dollar_dispatcher(t_dollar *expand)
 			if (expand->result[expand->index + 1] == QUESTION_MARK)
 				expand->ret = replace_exit_status(expand);
 			else
-				expand->ret = dollar_expandable(expand);
+				expand->ret = dollar_expandable(expand, mini);
 			if (expand->ret == FAILURE)
 				return (FAILURE);
 		}
@@ -54,14 +54,14 @@ static int	dollar_dispatcher(t_dollar *expand)
 	return (SUCCESS);
 }
 
-char	*dollar_interpreter(char *str)
+char	*dollar_interpreter(char *str, t_mini *mini)
 {
 	t_dollar	expand;
 
 	expand.result = ft_strdup(str);
 	if (!expand.result)
 		return (print_errno(ENOMEM), NULL);
-	if (dollar_dispatcher(&expand) == FAILURE)
+	if (dollar_dispatcher(&expand, mini) == FAILURE)
 		return (print_errno(ENOMEM), NULL);
 	return (expand.result);
 }

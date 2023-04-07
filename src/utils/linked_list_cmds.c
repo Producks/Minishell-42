@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:06:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 23:51:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 00:31:08 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,11 @@ void	clean_redir_list(t_cmds *current)
 	head = current->redir_list;
 	while (current->redir_list)
 	{
-		// printf("%p\n", current->redir_list->filename);
-		// printf("Filename: %s\n", current->redir_list->filename);
-		//safe_free(current->redir_list->filename);
 		head = current->redir_list->next;
 		if (current->redir_list->filename != NULL)
 			free(current->redir_list->filename);
+		if (current->redir_list->tmp_file != NULL)
+			free(current->redir_list->tmp_file);
 		free(current->redir_list);
 		current->redir_list = head;
 	}

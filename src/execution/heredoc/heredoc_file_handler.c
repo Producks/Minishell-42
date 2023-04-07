@@ -6,31 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 15:05:01 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 00:15:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-int	file_handler(t_mini *mini)
-{
-	int	open_fd;
-	int	ret;
-
-	if (!access("MiniHeredoc", F_OK))
-	{
-		ret = unlink("MiniHeredoc");
-		if (ret == FAILURE)
-			return (FAILURE);
-	}
-	open_fd = open("MiniHeredoc", O_CREAT | O_WRONLY | O_APPEND, 0644);
-	if (open_fd == FAILURE)
-		return (FAILURE); // handle later
-	mini->delete_file = true;
-	return (open_fd);
-}
-
-int	get_file_status(int fd, struct stat *file_status)
+int	get_file_status(t_mini *mini, int fd, struct stat *file_status)
 {
 	int		ret;
 	mode_t file_chmod;
@@ -46,10 +28,33 @@ int	get_file_status(int fd, struct stat *file_status)
 		printf("Bozo don't chmod my file wtf\n");
 		return (FAILURE);
 	}
-	if (access("MiniHeredoc", F_OK) == FAILURE)
+	if (access(mini->cmds_list->redir_list->tmp_file, F_OK) == FAILURE)
 	{
 		printf("Bozo can you not delete my file?\n");
 		return (FAILURE);
 	}
 	return (SUCCESS);
+}
+
+int	file_handler(t_mini *mini)
+{
+	int		open_fd;
+	char	file_name[15];
+	int		ret;
+
+	create_file_name(file_name, mini->cmds_list->count);
+	if (!access(file_name, F_OK))
+	{
+		ret = unlink(file_name);
+		if (ret == FAILURE)
+			return (FAILURE);
+	}
+	perror("pre open");
+	open_fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (open_fd == FAILURE)
+		return (FAILURE); // handle later
+	mini->cmds_list->redir_list->tmp_file = ft_strdup(file_name);
+	if (!mini->cmds_list->redir_list->tmp_file)
+		return (close(open_fd), FAILURE);
+	return (open_fd);
 }

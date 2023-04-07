@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 10:06:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 00:14:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ int		redirect_output_to_file(t_mini *mini);
 int		redirect_output_append_to_file(t_mini *mini);
 int		redirect_output_to_pipe(t_mini *mini);
 int		redirect_input_to_pipe(t_mini *mini);
+int		redirect_input_from_heredoc(t_mini *mini);
 
 /*heredoc.c*/
-int		pipe_heredoc(t_mini *mini);
+
+void	check_if_heredoc(t_mini *mini);
 
 /*heredoc_file_handler.c*/
 int		file_handler(t_mini *mini);
-int		get_file_status(int fd, struct stat *file_status);
+int	get_file_status(t_mini *mini, int fd, struct stat *file_status);
 
 /*heredoc_fd_utils.c*/
 int		check_fd_heredoc(t_mini *mini);

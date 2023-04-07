@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 15:16:59 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 00:36:16 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	write_to_heredoc(t_mini *mini, int fd)
 			break ;
 		if (!ft_strcmp(mini->cmds_list->redir_list->filename, message))
 			break ;
-		if (get_file_status(fd, &file_status) == FAILURE)
+		if (get_file_status(mini, fd, &file_status) == FAILURE)
 			return (free(message), close(fd), FAILURE);
 		write(fd, message, ft_strlen(message));
 		write(fd, "\n", 1);
@@ -40,24 +40,43 @@ static int	write_to_heredoc(t_mini *mini, int fd)
 	return (SUCCESS);
 }
 
-int	pipe_heredoc(t_mini *mini)
+static int	heredoc(t_mini *mini)
 {
 	int		open_fd;
 	int		ret;
 
-	if (check_fd_heredoc(mini) == FAILURE)
-		return (FAILURE);
 	open_fd = file_handler(mini);
 	if (open_fd == FAILURE)
-		return (FAILURE); //handle later
+		return (FAILURE);
 	ret = write_to_heredoc(mini, open_fd);
 	if (ret == FAILURE)
-		return (FAILURE); // handle fd
-	mini->cmds_list->fd_in = open("MiniHeredoc", O_RDONLY);
-	if (dup2(mini->cmds_list->fd_in, STDIN_FILENO) == FAILURE)
 		return (FAILURE);
-	if (close(mini->cmds_list->fd_in) == FAILURE)
-		return (FAILURE);
-	restore_previous_stdout_fileno(mini);
 	return (SUCCESS);
+}
+
+void	check_if_heredoc(t_mini *mini)
+{
+	t_redir	*head;
+	int		count;
+
+	mini->head_cmd = mini->cmds_list;
+	count = 0;
+	while (mini->cmds_list)
+	{
+		mini->cmds_list->count = count;
+		head = mini->cmds_list->redir_list;
+		while (mini->cmds_list->redir_list)
+		{
+			if (mini->cmds_list->redir_list->type == 54)
+			{
+				heredoc(mini);
+				mini->cmds_list->tmp_file = true;
+			}
+			mini->cmds_list->redir_list = mini->cmds_list->redir_list->next;
+		}
+		count++;
+		mini->cmds_list->redir_list = head;
+		mini->cmds_list = mini->cmds_list->next;
+	}
+	mini->cmds_list = mini->head_cmd;
 }
