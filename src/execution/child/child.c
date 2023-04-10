@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/07 00:22:33 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 08:50:52 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ static void	handle_child(t_mini *mini, bool is_built_in)
 
 	ret = SUCCESS;
 	init_child_signal();
-	rl_clear_history();
-	//child_cleanup_before_command(mini);
+	cleanup(mini);
 	if (is_built_in == true)
 	{
 		ret = built_ins(mini);

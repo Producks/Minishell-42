@@ -2,7 +2,7 @@ Last updated on : 2023-04-03
 
 Feature left to add:
 
-- Signals for child
+- Signals / Fix
 - Error handling / Memory management
 - Refactoring for production push
 - Fix readline lib issues with readline for production push
@@ -10,7 +10,6 @@ Feature left to add:
 
 Known bug / What to fix:
 
-- Fix dollar interpreter $1z and $ invalid read (fuck)
 - Parsing error handling
 - Heredoc error handling
 - Leaks

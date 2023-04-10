@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/07 00:36:16 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 11:57:45 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	check_if_heredoc(t_mini *mini)
 		head = mini->cmds_list->redir_list;
 		while (mini->cmds_list->redir_list)
 		{
-			if (mini->cmds_list->redir_list->type == 54)
+			if (mini->cmds_list->redir_list->type == 54 && count <= 99)
 			{
 				heredoc(mini);
 				mini->cmds_list->tmp_file = true;

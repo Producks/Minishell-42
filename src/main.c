@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 23:37:48 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 14:16:37 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int	main(int argc, char *argv[], char *envp[])
 	print_startup();
 	read_input(&mini);
 	free_struct(&mini);
-	return (0);
+	printf("exit\n");
+	return (g_exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:20:01 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 21:42:10 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 12:22:28 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ extern int	g_exit_status;
 # define WHT   "\x1B[37m"
 # define PNK   "\x1B[38;5;206m"
 # define RESET "\x1B[0m"
+# define LRED  "\x1B[91m"
+# define LGRN  "\x1B[92m"
+# define LYEL  "\x1B[93m"
+# define LBLU  "\x1B[94m"
+# define LMAG  "\x1B[95m"
+# define LCYN  "\x1B[96m"
+# define LGRY  "\x1B[37;1m"
+# define DGRY  "\x1B[90m"
+# define BRED  "\x1B[38;2;255;0;0m"
+# define BGRN  "\x1B[38;2;0;255;0m"
+# define BBLU  "\x1B[38;2;0;0;255m"
+# define ORNG  "\x1B[38;2;255;165;0m"
+# define PURP  "\x1B[38;2;128;0;128m"
+# define TEAL  "\x1B[38;2;0;128;128m"
+# define DORNG "\x1B[38;2;255;140;0m"
+# define BRWN  "\x1B[38;2;165;42;42m"
 
 extern int	g_exit_status;
 

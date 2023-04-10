@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:26:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 22:36:37 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 09:09:43 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,8 @@ void	free_linked_list_execve(t_mini *mini)
 void	child_cleanup_no_cmds(t_mini *mini)
 {
 	close(STDOUT_FILENO);
-	close(mini->fd_in);
-	close(mini->fd_out);
 	close(STDIN_FILENO);
-	check_if_pipe_cleanup(mini);
-	free_linked_list_mini(&mini->head_cmd);
+	//free_linked_list_mini(&mini->head_cmd);
 	free_struct(mini);
 	exit (0);
 }
@@ -78,11 +75,19 @@ void	child_cleanup_execve_failure(t_mini *mini)
 
 void	child_cleanup_before_command(t_mini *mini)
 {
+	//free_linked_list_execve(mini);
+}
+
+void	cleanup(t_mini *mini)
+{
+	rl_clear_history();
 	close(mini->fd_in);
 	close(mini->fd_out);
 	check_if_pipe_cleanup(mini);
 	mini->current_cmds = mini->cmds_list->cmds;
+	fprintf(stderr, "%p\n", mini->current_cmds);
 	free_linked_list_execve(mini);
+	fprintf(stderr, "%p\n", mini->current_cmds);
 	if (mini->message)
 		free (mini->message);
 }
@@ -92,10 +97,7 @@ void	child_cleanup_command_not_found(t_mini *mini)
 	print_string_error("Minishell: command not found: ");
 	print_string_error(mini->cmds_list->cmds[0]);
 	write(STDERR_FILENO, "\n", 1);
-	close(mini->fd_in);
-	close(mini->fd_out);
-	check_if_pipe_cleanup(mini);
-	free_linked_list_mini(&mini->head_cmd);
+	//free_linked_list_mini(&mini->head_cmd);
 	free_struct(mini);
 	exit (127);
 }

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 23:23:59 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 13:00:01 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,18 @@
 # define DOUBLE_QUOTE 34
 # define SUCCESS 0
 # define FAILURE -1
+
+# ifdef __linux__
+#  define OS 1
+# endif
+
+# ifdef __APPLE__
+#  define OS 0
+# endif
+
+# ifndef OS
+#  define OS 2
+# endif
 
 typedef struct s_split
 {
