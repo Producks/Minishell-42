@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 18:07:13 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/01 18:48:05 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:45:21 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	print_more_redir(t_redir *current, int i)
 
 void	print_redir_list(t_redir *redir)
 {
-	t_redir *current;
-	int i;
-	
+	t_redir	*current;
+	int		i;
+
 	i = 1;
 	current = redir;
 	while (current)
@@ -49,9 +49,9 @@ void	print_redir_list(t_redir *redir)
 
 void	printall(t_cmds *cmds)
 {
-	t_cmds *current;
-	int i;
-	
+	t_cmds	*current;
+	int		i;
+
 	i = 0;
 	current = cmds;
 	while (current)
@@ -59,7 +59,7 @@ void	printall(t_cmds *cmds)
 		i = 0;
 		printf(YEL "cmds : %s\n" RESET, current->cmds[i]);
 		i++;
-		while(current->cmds[i])
+		while (current->cmds[i])
 		{
 			printf(" arg :%s\n", current->cmds[i]);
 			i++;
@@ -74,7 +74,7 @@ void	printall(t_cmds *cmds)
 
 void	print_token(char **tokens)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tokens[i])
@@ -88,7 +88,6 @@ void	print_token(char **tokens)
 // {
 // 	t_redir *current;
 // 	t_redir *previous;
-	
 // 	current = *head;
 // 	while (current)
 // 	{
@@ -104,7 +103,6 @@ void	print_token(char **tokens)
 // {
 // 	t_cmds *current;
 // 	t_cmds *previous;
-	
 // 	current = *head;
 // 	while (current)
 // 	{

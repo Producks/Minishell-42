@@ -63,7 +63,8 @@ UTILS = ./src/utils/linked_list_cmds.c \
 		./src/utils/add_env_element.c \
 		./src/utils/signal.c \
 		./src/utils/init.c \
-		./src/utils/print_startup.c
+		./src/utils/print_startup.c \
+		./src/utils/strings/create_file_name.c
 
 LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \

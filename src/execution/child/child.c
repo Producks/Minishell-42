@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 10:06:30 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:56:49 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 {
-	int	ret_status;
+	int		ret_status;
+	char	temp_buffer[15];
 
 	if (skip_waiting == true)
 		return ;
@@ -26,6 +27,11 @@ void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 	{
 		waitpid(cmds->pid, &ret_status, 0);
 		g_exit_status = WEXITSTATUS(ret_status);
+		if (cmds->tmp_file == true)
+		{
+			create_file_name(temp_buffer, cmds->count);
+			unlink(temp_buffer);
+		}
 		cmds = cmds->next;
 	}
 }
@@ -36,8 +42,7 @@ static void	handle_child(t_mini *mini, bool is_built_in)
 
 	ret = SUCCESS;
 	init_child_signal();
-	rl_clear_history();
-	//child_cleanup_before_command(mini);
+	cleanup(mini);
 	if (is_built_in == true)
 	{
 		ret = built_ins(mini);
@@ -55,7 +60,9 @@ static void	create_fork(t_mini *mini)
 	is_built_in = check_if_builtin(mini);
 	if (is_built_in && mini->is_one_cmd)
 	{
+		mini->current_cmds = mini->cmds_list->cmds;
 		built_ins(mini);
+		mini->current_cmds = NULL;
 		mini->skip_waiting = true;
 		return ;
 	}
@@ -75,7 +82,7 @@ int	create_child_process(t_mini *mini)
 	ret = SUCCESS;
 	while (mini->cmds_list)
 	{
-		ret = handle_io_redirections(mini); // close pipe check later
+		ret = handle_io_redirections(mini);
 		if (ret == SUCCESS)
 			create_fork(mini);
 		mini->cmds_list = mini->cmds_list->next;

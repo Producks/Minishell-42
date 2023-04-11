@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 12:38:22 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 22:51:07 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	handle_in_redirection(t_mini *mini)
 	else if (mini->cmds_list->redir_list->type == READ_INPUT)
 		ret = redirect_input_from_file(mini);
 	else
-		ret = pipe_heredoc(mini);
+		ret = redirect_input_from_heredoc(mini);
 	return (ret);
 }
 

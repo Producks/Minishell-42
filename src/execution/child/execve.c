@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 14:14:38 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:53:41 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ void	run_cmd(t_mini *mini)
 	char	*path;
 	int		index;
 
-	if (!mini->cmds_list->cmds[0])
+	if (!mini->current_cmds[0])
 		child_cleanup_no_cmds(mini);
 	path = find_path(mini); // check later for errors leaks etc..
 	if (!path)
 		child_cleanup_command_not_found(mini);
-	child_cleanup_before_command(mini);
 	execve(path, mini->current_cmds, mini->env_copy);
 	free(path);
 	child_cleanup_execve_failure(mini);

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 22:49:32 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:45:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,24 @@
 # define UTILS_H
 
 # include "struct.h"
+# include "../errors/error.h"
 
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34
 # define SUCCESS 0
 # define FAILURE -1
+
+# ifdef __linux__
+#  define OS 1
+# endif
+
+# ifdef __APPLE__
+#  define OS 0
+# endif
+
+# ifndef OS
+#  define OS 2
+# endif
 
 typedef struct s_split
 {
@@ -59,5 +72,7 @@ void	init_child_signal(void);
 void	init_parent_signals(void);
 void	child_signal_handler(int signal);
 void	parent_signal_handler(int signal);
+
+void	create_file_name(char *str, int number);
 
 #endif

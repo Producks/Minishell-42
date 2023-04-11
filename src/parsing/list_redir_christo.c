@@ -6,26 +6,32 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/06 15:09:04 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 22:16:16 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	addnode_end_redir(t_redir **list, int dir, char *filename, t_pos *pos)
+int	addnode_end_redir(t_redir **list, int dir, char *filename, t_pos *pos)
 {
-	t_redir *new_node;
-	
+	t_redir	*new_node;
+
 	new_node = ft_calloc(1, sizeof(t_redir));
+	if (!new_node)
+		return (print_errno(ENOMEM), FAILURE);
 	new_node->type = pos->type;
 	if (dir == 1)
 		new_node->out = true;
 	if (dir == 0)
 		new_node->in = true;
 	if (filename)
+	{
 		new_node->filename = interpreter(filename, pos->mini);
-	// puts(new_node->filename);
+		if (!new_node->filename)
+			return (FAILURE);
+	}
 	addnoderedir(list, new_node);
+	return (SUCCESS);
 }
 
 int	check_pipe_in(t_redir **redir, char **tokens, int i, t_pos *pos)
@@ -35,7 +41,8 @@ int	check_pipe_in(t_redir **redir, char **tokens, int i, t_pos *pos)
 		if (ft_strcmp(tokens[i], "|") == 0)
 		{
 			pos->type = 50;
-			addnode_end_redir(redir, 1, NULL, pos);
+			if (addnode_end_redir(redir, 1, NULL, pos) == FAILURE)
+				return (FAILURE);
 			return (1);
 		}	
 		i++;
@@ -45,7 +52,7 @@ int	check_pipe_in(t_redir **redir, char **tokens, int i, t_pos *pos)
 
 int	check_pipe_out(t_redir **redir, char **tokens, int i, t_pos *pos)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (tokens[j] && j < i)
@@ -53,7 +60,8 @@ int	check_pipe_out(t_redir **redir, char **tokens, int i, t_pos *pos)
 		if (ft_strcmp(tokens[j], "|") == 0)
 		{
 			pos->type = 50;
-			addnode_end_redir(redir, 0, NULL, pos);
+			if (addnode_end_redir(redir, 0, NULL, pos) == FAILURE)
+				return (FAILURE);
 			return (1);
 		}	
 		j++;
@@ -64,7 +72,7 @@ int	check_pipe_out(t_redir **redir, char **tokens, int i, t_pos *pos)
 int	check_redir_2(t_redir **redir, char **tokens, int i, t_pos *pos)
 {
 	int	max;
-	
+
 	max = i;
 	i = pos->bef_cmd;
 	while (tokens[i] && is_pipe(tokens[i]) == 0)
@@ -72,23 +80,10 @@ int	check_redir_2(t_redir **redir, char **tokens, int i, t_pos *pos)
 		if (ft_strcmp(tokens[i], ">") == 0)
 		{
 			pos->type = 51;
-			addnode_end_redir(redir, 1, tokens[i + 1], pos);
+			if (addnode_end_redir(redir, 1, tokens[i + 1], pos) == FAILURE)
+				return (FAILURE);
 		}
-		if (ft_strcmp(tokens[i], "<") == 0)
-		{
-			pos->type = 52;
-			addnode_end_redir(redir, 0, tokens[i + 1], pos);
-		}
-		if (ft_strcmp(tokens[i], ">>") == 0)
-		{
-			pos->type = 53;
-			addnode_end_redir(redir, 1, tokens[i + 1], pos);
-		}
-		if (ft_strcmp(tokens[i], "<<") == 0)
-		{
-			pos->type = 54;
-			addnode_end_redir(redir, 0, tokens[i + 1], pos);
-		}
+		i = check_redir(redir, tokens, i, pos);
 		i++;
 	}
 	return (i);
@@ -96,13 +91,17 @@ int	check_redir_2(t_redir **redir, char **tokens, int i, t_pos *pos)
 
 int	redir_list_3(t_cmds *new_node, char **tokens, int i, t_pos *pos)
 {
-	t_redir *redir;
-	
+	t_redir	*redir;
+
 	redir = NULL;
 	i = pos->bef_cmd;
-	check_pipe_in(&redir, tokens, i, pos);
-	check_pipe_out(&redir, tokens, i, pos);
+	if (check_pipe_in(&redir, tokens, i, pos) == FAILURE)
+		return (FAILURE);
+	if (check_pipe_out(&redir, tokens, i, pos) == FAILURE)
+		return (FAILURE);
 	i = check_redir_2(&redir, tokens, i, pos);
+	if (i == FAILURE)
+		return (FAILURE);
 	new_node->redir_list = redir;
 	return (i);
 }

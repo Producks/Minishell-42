@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 15:31:46 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:55:44 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@ int	read_input(t_mini *mini)
 	while (true)
 	{
 		if (g_exit_status == 69)
+		{
+			g_exit_status = SUCCESS;
 			break ;
+		}
 		mini->message = readline(GRN "Minishell > " RESET);
 		if (!mini->message)
+		{
+			if (errno == ENOMEM)
+				g_exit_status = 1;
 			break ;
+		}
 		lexer(mini);
 		add_history(mini->message);
 		free (mini->message);

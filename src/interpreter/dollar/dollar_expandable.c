@@ -6,13 +6,11 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 14:20:54 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:54:38 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../interpreter.h"
-
-extern char	**g_env_test;
 
 static size_t	get_length(t_expandable *expand)
 {
@@ -76,18 +74,16 @@ static int	get_env_str(t_expandable *expand)
 static int	get_envp(t_mini *mini, t_expandable *expand)
 {
 	int	index;
-	char	**test;
 
 	index = 0;
-	test = g_env_test;
-	while (test[index])
+	while (mini->env_copy[index])
 	{
 		if (!ft_strncmp(expand->env_check,
-				test[index], expand->length))
+				mini->env_copy[index], expand->length))
 		{
-			if (test[index][expand->length] == '=')
+			if (mini->env_copy[index][expand->length] == '=')
 			{
-				expand->env_str = ft_strdup(test[index]
+				expand->env_str = ft_strdup(mini->env_copy[index]
 						+ expand->length + 1);
 				if (!expand->env_str)
 					return (print_errno(ENOMEM), FAILURE);
@@ -116,7 +112,7 @@ int	dollar_expandable(t_dollar *dollar, t_mini *mini)
 	expand.ret = get_cut_str(&expand);
 	if (expand.ret == FAILURE)
 		return (free(expand.env_check), FAILURE);
-	expand.ret = get_envp(mini, &expand); // add mini later 
+	expand.ret = get_envp(mini, &expand);
 	if (expand.ret == FAILURE)
 		return (free(expand.env_check), free(expand.original_cut), FAILURE);
 	expand.cut_result = str_cutcut(dollar->result,
@@ -130,25 +126,5 @@ int	dollar_expandable(t_dollar *dollar, t_mini *mini)
 	free (expand.env_str);
 	free (expand.env_check);
 	free (expand.original_cut);
-	//free (expand.cut_result);
 	return (SUCCESS);
 }
-
-	// while (test[index])
-	// {
-	// 	if (!ft_strncmp(expand->env_check,
-	// 			test[index], expand->length))
-	// 	{
-	// 		if (test[index][expand->length] == '=')
-	// 		{
-	// 			expand->env_str = ft_strdup(test[index]
-	// 					+ expand->length + 1);
-	// 			if (!expand->env_str)
-	// 				return (print_errno(ENOMEM), FAILURE);
-	// 			return (SUCCESS);
-	// 		}
-	// 		index++;
-	// 		continue ;
-	// 	}
-	// 	index++;
-	// }

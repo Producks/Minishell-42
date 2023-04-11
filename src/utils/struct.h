@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 14:14:18 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:53:16 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_redirect
 {
 	char				*filename;
+	char				*tmp_file;
 	bool				in;
 	bool				out;
 	int					type;
@@ -36,6 +37,8 @@ typedef struct s_cmds
 	bool			fd_out_bool;
 	t_redir			*redir_list;
 	pid_t			pid;
+	bool			tmp_file;
+	int				count;
 	struct s_cmds	*previous;
 	struct s_cmds	*next;
 	struct s_cmds	*head;
@@ -52,7 +55,6 @@ typedef struct s_mini
 	int		fd_out;
 	bool	is_one_cmd;
 	bool	skip_waiting;
-	bool	delete_file;
 }	t_mini;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 15:31:50 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:52:59 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ void	lexer(t_mini *mini)
 	literal_tokens = literal_tokenization(mini);
 	if (!literal_tokens)
 		return ;
-	// if (dollar_interpreter(mini, literal_tokens) == FAILURE)
-	// {
-	// 	ft_free(literal_tokens);
-	// 	return ;
-	// }
 	parse_linked_list(mini, literal_tokens);
 	free_linked_list_mini(&mini->cmds_list); // add cleanup later
 }

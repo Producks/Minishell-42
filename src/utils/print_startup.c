@@ -6,14 +6,14 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 22:46:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 22:48:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/07 12:55:19 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 #include "../input/input.h"
 
-static void	fetch(void)
+static void	fetch_mac(void)
 {
 	printf ("\n"
 		GRN"                 ,xNMM.\n"
@@ -35,11 +35,39 @@ static void	fetch(void)
 		RESET);
 }
 
+static void	fetch_linux(void)
+{
+	printf (
+		GRN" ..............\n"
+		"             ..,;:ccc,.\n"
+		"           ......''';lxO.\n"
+		" .....''''..........,:ld;\n"
+		"            .';;;:::;,,.x,\n"
+		GRN"       ..'''."DORNG"            0Xxoc:,.  ...\n"
+		GRN"   ...."DORNG"                ,ONkc;,;cokOdc',.\n"
+		GRN"  ."DORNG"                   OMo           ':dd$o.\n"
+		DORNG"                     dMc               :OO;\n"
+		"                     0M.                 .:o.\n"
+		PNK"                     ;Wd\n"
+		"                      ;XO,\n"
+		"                        ,d0Odlc;,..\n"
+		"                            ..',;:cdOOd::,.\n"
+		BBLU"                                     .:d;.':;.\n"
+		"                                          ;l   ..\n"
+		"                                           .o\n"
+		"                                             c\n"
+		"                                             .'\n"
+		"                                              .\n"RESET);
+}
+
 void	print_startup(void)
 {
 	char	*user;
 
 	user = getenv("USER");
-	fetch();
-	printf("Welcome %s to Minishell!\n", user);
+	if (OS == 0)
+		fetch_mac();
+	else if (OS == 1)
+		fetch_linux();
+	printf("Welcome %s to Minishell\n", user);
 }

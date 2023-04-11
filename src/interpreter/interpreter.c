@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:10:44 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 15:43:57 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:52:51 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ char	*interpreter(char *str, t_mini *mini)
 		else
 			ret = regular_interpreter(cut, index, mini);
 		if (ret == FAILURE)
-			return (ft_free(cut), NULL);
+			return (free_double_array(cut), NULL);
 		index++;
 	}
 	result = join_strings(cut);
-	ft_free(cut);
+	free_double_array(cut);
 	if (!result)
 		return (NULL);
 	return (result);
