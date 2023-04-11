@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 00:43:38 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:19:43 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int		built_ins(t_mini *mini);
 
 /*Cleanup.c*/
 void	child_cleanup_command_not_found(t_mini *mini);
-void	child_cleanup_before_command(t_mini *mini);
 void	child_cleanup_execve_failure(t_mini *mini);
 void	child_cleanup_no_cmds(t_mini *mini);
 void	cleanup(t_mini *mini);

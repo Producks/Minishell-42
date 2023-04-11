@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 16:01:11 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:55:48 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	dollar_expandable(t_dollar *dollar, t_mini *mini)
 	expand.ret = get_cut_str(&expand);
 	if (expand.ret == FAILURE)
 		return (free(expand.env_check), FAILURE);
-	expand.ret = get_envp(mini, &expand); // add mini later 
+	expand.ret = get_envp(mini, &expand);
 	if (expand.ret == FAILURE)
 		return (free(expand.env_check), free(expand.original_cut), FAILURE);
 	expand.cut_result = str_cutcut(dollar->result,
@@ -126,25 +126,5 @@ int	dollar_expandable(t_dollar *dollar, t_mini *mini)
 	free (expand.env_str);
 	free (expand.env_check);
 	free (expand.original_cut);
-	//free (expand.cut_result);
 	return (SUCCESS);
 }
-
-	// while (test[index])
-	// {
-	// 	if (!ft_strncmp(expand->env_check,
-	// 			test[index], expand->length))
-	// 	{
-	// 		if (test[index][expand->length] == '=')
-	// 		{
-	// 			expand->env_str = ft_strdup(test[index]
-	// 					+ expand->length + 1);
-	// 			if (!expand->env_str)
-	// 				return (print_errno(ENOMEM), FAILURE);
-	// 			return (SUCCESS);
-	// 		}
-	// 		index++;
-	// 		continue ;
-	// 	}
-	// 	index++;
-	// }

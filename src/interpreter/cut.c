@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 15:54:51 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 13:24:41 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:14:54 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,37 +121,8 @@ char	**cut_into_pieces(char *str)
 	{
 		cut[index] = get_cut_string(str, index);
 		if (!cut[index])
-			return (ft_free(cut), NULL);
+			return (free_double_array(cut), NULL);
 		index++;
 	}
 	return (cut);
 }
-
-// static char	*get_cut_string(char *str, int index)
-// {
-// 	int		count;
-// 	char	type;
-// 	char	*cut;
-// 	char	lol;
-
-// 	count = 0;
-// 	while (count != index)
-// 	{
-// 		if (*str == SINGLE_QUOTE || *str == DOUBLE_QUOTE)
-// 		{
-// 			type = *str++;
-// 			count++;
-// 			while (*str != type)
-// 				*str++;
-// 			*str++;
-// 			continue ;
-// 		}
-// 		count++;
-// 		while (*str != SINGLE_QUOTE && *str != DOUBLE_QUOTE)
-// 			*str++;
-// 	}
-// 	cut = cut_deez(str);
-// 	if (!cut)
-// 		return (NULL);
-// 	return (cut);
-// }

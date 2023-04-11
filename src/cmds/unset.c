@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:05 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 12:44:14 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:05:02 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 	new = malloc(sizeof(char *) * size);
 	if (!new)
 	{
-		ft_free(mini->env_copy);
+		free_double_array(mini->env_copy);
 		mini->env_copy = NULL;
 		return ;
 	}
@@ -31,7 +31,7 @@ static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 		if (i != index)
 			new[j++] = ft_strdup(mini->env_copy[i]);
 	new[j] = NULL;
-	ft_free(mini->env_copy);
+	free_double_array(mini->env_copy);
 	mini->env_copy = new;
 }
 
@@ -52,14 +52,14 @@ int	unset(t_mini *mini)
 	int	j;
 
 	j = 0;
-	if (mini->cmds_list->cmds[1] == NULL)
+	if (mini->current_cmds[1] == NULL)
 		return (0);
-	while (mini->cmds_list->cmds[++j])
+	while (mini->current_cmds[++j])
 	{
 		index = 0;
 		while (mini->env_copy[index])
 		{
-			if (unset_strcmp(mini->cmds_list->cmds[j],
+			if (unset_strcmp(mini->current_cmds[j],
 					mini->env_copy[index]) == 0)
 			{
 				ft_remove_element(mini, index, -1, 0);

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:06:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/07 00:31:08 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 10:02:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void *safe_free(char *str)
 // 		node_to_delete->previous->next = node_to_delete->next;
 // 	if (node_to_delete->next != NULL)
 // 		node_to_delete->next->previous = node_to_delete->previous;
-// 	ft_free(node_to_delete->cmds);
+// 	free_double_array(node_to_delete->cmds);
 // 	node_to_delete->path = safe_free(node_to_delete->path);
 // 	node_to_delete->infile = safe_free(node_to_delete->infile);
 // 	node_to_delete->outfile = safe_free(node_to_delete->outfile);
@@ -89,7 +89,7 @@ void	*free_linked_list_mini(t_cmds **head)
 	{
 		if (current->redir_list)
 			clean_redir_list(current);
-		ft_free(current->cmds);
+		free_double_array(current->cmds);
 		previous = current;
 		current = current->next;
 		free(previous);

@@ -6,13 +6,12 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 23:22:43 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 23:36:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:52:02 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../utils.h"
 
-//.Miniheredoc00\0 15
 void	create_file_name(char *dst, int number)
 {
 	ft_strncpy(dst, ".Miniheredoc", 12);

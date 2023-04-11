@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/07 13:00:01 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:45:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define UTILS_H
 
 # include "struct.h"
+# include "../errors/error.h"
 
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:02:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 02:07:12 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:50:23 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ char	**literal_tokenization(t_mini *mini)
 	literal.array = ft_split(literal.str, 29);
 	if (!literal.array)
 		return (free(literal.str), print_errno(ENOMEM), NULL);
-	literal_check_errors(&literal); // check more case later
+	literal_check_errors(&literal);
 	if (literal.ret == -1)
-		return (free(literal.str), ft_free(literal.array), NULL);
+		return (free(literal.str), free_double_array(literal.array), NULL);
 	return (free(literal.str), literal.array);
 }

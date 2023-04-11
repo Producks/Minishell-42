@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/01 17:52:44 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 09:29:46 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 		size = 0;
 		while (mini->env_copy[i][size] != '=')
 			size++;
-		if (!ft_strncmp(mini->cmds_list->cmds[index], mini->env_copy[i], size)) // double check later fixed bug with length check
+		if (!ft_strncmp(mini->current_cmds[index], mini->env_copy[i], size)) // double check later fixed bug with length check
 		{
 			free(mini->env_copy[i]);
 			if (flag)
-				mini->env_copy[i] = ft_strjoin(mini->cmds_list->cmds[index], "\0");
+				mini->env_copy[i] = ft_strjoin(mini->current_cmds[index], "\0");
 			else
-				mini->env_copy[i] = ft_strdup(mini->cmds_list->cmds[index]);
+				mini->env_copy[i] = ft_strdup(mini->current_cmds[index]);
 			return (1);
 		}
 		i++;
@@ -50,9 +50,9 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 // 	if (!new)
 // 		return ;
 // 	if (flag)
-// 		new[size - 1] = ft_strjoin(mini->cmds_list->cmds[index], "\0");
+// 		new[size - 1] = ft_strjoin(mini->current_cmds[index], "\0");
 // 	else
-// 		new[size - 1] = ft_strdup(mini->cmds_list->cmds[index]);
+// 		new[size - 1] = ft_strdup(mini->current_cmds[index]);
 // 	new[size] = NULL;
 // 	mini->env_copy = new;
 // 	size = count_double_array(mini->env_copy);
@@ -65,9 +65,9 @@ static int	add_export(t_mini *mini, const char flag, int index)
 	int		ret;
 
     if (flag)
-        str = ft_strjoin(mini->cmds_list->cmds[index], "\0");
+        str = ft_strjoin(mini->current_cmds[index], "\0");
     else
-        str = ft_strdup(mini->cmds_list->cmds[index]);
+        str = ft_strdup(mini->current_cmds[index]);
 	if (!str)
 		return (FAILURE); // handle later
 	ret = add_env_element(mini, str);
@@ -115,11 +115,11 @@ int	ft_export(t_mini *mini)
 	char	ret;
 
 	index = 0;
-	if (!mini->cmds_list->cmds[1])
+	if (!mini->current_cmds[1])
 		return (print_env(mini->env_copy));
-	while (mini->cmds_list->cmds[++index])
+	while (mini->current_cmds[++index])
 	{
-		ret = parse_string(mini->cmds_list->cmds[index]);
+		ret = parse_string(mini->current_cmds[index]);
 		if (ret == -1)
 			continue ;
 		else if (export_exist(mini, ret, index))

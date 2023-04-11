@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 08:50:52 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:38:13 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void	handle_child(t_mini *mini, bool is_built_in)
 	ret = SUCCESS;
 	init_child_signal();
 	cleanup(mini);
-	if (is_built_in == true)
-	{
-		ret = built_ins(mini);
-		child_cleanup_no_cmds(mini);
-		exit(ret);
-	}	
+	// if (is_built_in == true)
+	// {
+	// 	ret = built_ins(mini);
+	// 	child_cleanup_no_cmds(mini);
+	// 	exit(ret);
+	// }	
 	run_cmd(mini);
 }
 
@@ -58,12 +58,14 @@ static void	create_fork(t_mini *mini)
 	int		ret;
 
 	is_built_in = check_if_builtin(mini);
-	if (is_built_in && mini->is_one_cmd)
-	{
-		built_ins(mini);
-		mini->skip_waiting = true;
-		return ;
-	}
+	// if (is_built_in && mini->is_one_cmd)
+	// {
+	// 	mini->current_cmds = mini->cmds_list->cmds;
+	// 	built_ins(mini);
+	// 	mini->current_cmds = NULL;
+	// 	mini->skip_waiting = true;
+	// 	return ;
+	// }
 	mini->cmds_list->pid = fork();
 	if (mini->cmds_list->pid == FAILURE)
 		perror("Minishell");
@@ -80,7 +82,7 @@ int	create_child_process(t_mini *mini)
 	ret = SUCCESS;
 	while (mini->cmds_list)
 	{
-		ret = handle_io_redirections(mini); // close pipe check later
+		ret = handle_io_redirections(mini);
 		if (ret == SUCCESS)
 			create_fork(mini);
 		mini->cmds_list = mini->cmds_list->next;

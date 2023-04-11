@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:10:44 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 15:57:20 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 15:35:33 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ char	*interpreter(char *str, t_mini *mini)
 		else
 			ret = regular_interpreter(cut, index, mini);
 		if (ret == FAILURE)
-			return (ft_free(cut), NULL);
+			return (free_double_array(cut), NULL);
 		index++;
 	}
 	result = join_strings(cut);
-	ft_free(cut);
+	free_double_array(cut);
 	if (!result)
 		return (NULL);
 	return (result);

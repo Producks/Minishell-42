@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 12:45:04 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 09:29:17 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	cd_deez(t_mini *mini, int count)
 		return (0);
 	}
 	if (count > 1)
-		ret = chdir(mini->cmds_list->cmds[1]);
+		ret = chdir(mini->current_cmds[1]);
 	else
 	{
 		home = get_home(mini);
@@ -91,7 +91,7 @@ int	cd(t_mini *mini)
 	int		count;
 	char	*current;
 
-	count = count_double_array(mini->cmds_list->cmds);
+	count = count_double_array(mini->current_cmds);
 	current = getcwd(NULL, 69);
 	if (!current)
 		return (-1);

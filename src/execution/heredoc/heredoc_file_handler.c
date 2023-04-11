@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/07 00:15:12 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/10 16:15:16 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ int	file_handler(t_mini *mini)
 	{
 		ret = unlink(file_name);
 		if (ret == FAILURE)
-			return (FAILURE);
+			return (print_errno(errno), FAILURE);
 	}
-	perror("pre open");
 	open_fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (open_fd == FAILURE)
-		return (FAILURE); // handle later
+		return (print_errno(errno), FAILURE);
 	mini->cmds_list->redir_list->tmp_file = ft_strdup(file_name);
 	if (!mini->cmds_list->redir_list->tmp_file)
-		return (close(open_fd), FAILURE);
+		return (close(open_fd), print_errno(ENOMEM), FAILURE);
 	return (open_fd);
 }
