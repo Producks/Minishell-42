@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_file_handler.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:57:55 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/11 10:41:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
 
-//<< cat cat | << cat cat
 int	get_file_status(t_mini *mini, int fd, struct stat *file_status)
 {
 	int		ret;
-	mode_t file_chmod;
+	mode_t	file_chmod;
 
 	ret = fstat(fd, file_status);
 	if (ret == -1)

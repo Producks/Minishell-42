@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 10:19:43 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 10:44:13 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,20 @@
 # define APPEND_IN 53
 
 /*execution.c*/
+
 void	execution(t_mini *mini);
 
 /*path.c*/
+
 char	*find_path(t_mini *mini);
 
 /*redirection_utils.c*/
+
 int		handle_io_redirections(t_mini *mini);
 void	restore_parent_file_descriptors(t_mini *mini);
 
 /*io_redirection.c*/
+
 int		redirect_input_from_file(t_mini *mini);
 int		redirect_output_to_file(t_mini *mini);
 int		redirect_output_append_to_file(t_mini *mini);
@@ -62,31 +66,34 @@ int		redirect_input_from_heredoc(t_mini *mini);
 void	check_if_heredoc(t_mini *mini);
 
 /*heredoc_file_handler.c*/
-int		file_handler(t_mini *mini);
-int	get_file_status(t_mini *mini, int fd, struct stat *file_status);
 
-/*heredoc_fd_utils.c*/
-int		check_fd_heredoc(t_mini *mini);
-int		restore_previous_stdout_fileno(t_mini *mini);
+int		file_handler(t_mini *mini);
+int		get_file_status(t_mini *mini, int fd, struct stat *file_status);
 
 /*heredoc_error_handler.c*/
+
 int		handle_file_handle_error(t_mini *mini);
 
 /*child.c*/
+
 int		create_child_process(t_mini *mini);
 void	wait_for_child_process(t_cmds *cmds, bool skip_waiting);
 
 /*path.c*/
+
 char	*find_path(t_mini *mini);
 
 /*execve.c*/
+
 void	run_cmd(t_mini *mini);
 
 /*builtin.c*/
+
 bool	check_if_builtin(t_mini *mini);
 int		built_ins(t_mini *mini);
 
 /*Cleanup.c*/
+
 void	child_cleanup_command_not_found(t_mini *mini);
 void	child_cleanup_execve_failure(t_mini *mini);
 void	child_cleanup_no_cmds(t_mini *mini);

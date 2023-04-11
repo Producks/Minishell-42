@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:01:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:53:41 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/11 10:45:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	run_cmd(t_mini *mini)
 
 	if (!mini->current_cmds[0])
 		child_cleanup_no_cmds(mini);
-	path = find_path(mini); // check later for errors leaks etc..
+	path = find_path(mini);
 	if (!path)
 		child_cleanup_command_not_found(mini);
 	execve(path, mini->current_cmds, mini->env_copy);
