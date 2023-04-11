@@ -50,9 +50,12 @@ PARSING =	./src/parsing/list_christo.c \
 
 INPUT	= ./src/input/read_input.c
 
-# PARSING = ./src/parsing/list_christo.c \
-# 		  ./src/parsing/list_redir_christo.c \
-# 		  ./src/parsing/list_utils.c
+PARSING =	./src/parsing/list_christo.c \
+			./src/parsing/list_redir_christo.c \
+			./src/parsing/parsing_utils_1.c\
+			./src/parsing/parsing_utils_2.c\
+			./src/parsing/test_list.c\
+			./src/parsing/list_utils.c
 
 UTILS = ./src/utils/linked_list_cmds.c \
 		./src/utils/strings/strjoin_path.c \

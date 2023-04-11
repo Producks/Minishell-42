@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/06 15:31:53 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:50:27 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,13 @@ int add_the_cmd(t_cmds *new_node, char **tokens, int i, t_pos *pos)
 int create_cmd_node(t_cmds **list, char **tokens, int i, t_pos *pos)
 {
 	t_cmds *new_node;
-	// int n_arg;
-	// int c;
 	
 	pos->c = 0;
 	new_node = ft_calloc(1, sizeof(t_cmds));
-	// if (!new_node)
-	// 	return(free(new_node), -1);
 	if (pos->pipe != 0)
 		pos->n_arg = count_arg_2(tokens, i, pos->pipe);
 	else 
-		pos->n_arg = count_arg(tokens, i);
+		pos->n_arg = count_arg(tokens, i);	
 	new_node->cmds = ft_calloc(sizeof(char*), pos->n_arg + 2);
 	while (i < pos->pipe && pos->pipe != 0)
 	{
@@ -106,3 +102,5 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 	ft_free(tokens);
 	execution(mini);
 }
+//make re; make run
+//echo -nnnnnnnnnnnn hello

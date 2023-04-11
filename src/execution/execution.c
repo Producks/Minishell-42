@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 13:26:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:47:20 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ static void	check_if_one_command(t_mini *mini)
 static void	parent_cleanup(t_mini *mini)
 {
 	mini->cmds_list = free_linked_list_mini(&mini->cmds_list);
+	
 	if (mini->delete_file == true)
-		unlink("Miniheredoc");
+		unlink("MiniHeredoc");
 	mini->skip_waiting = false;
 	mini->is_one_cmd = false;
 	mini->delete_file = false;
@@ -44,5 +45,5 @@ void	execution(t_mini *mini)
 	create_child_process(mini);
 	wait_for_child_process(mini->cmds_list, mini->skip_waiting);
 	parent_cleanup(mini);
-	perror("Minishell");
+	//perror("Minishell");
 }
