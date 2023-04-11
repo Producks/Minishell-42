@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/10 23:03:15 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 17:21:00 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	create_cmd_node(t_cmds **list, char **tokens, int i, t_pos *pos)
 	new_node->cmds = ft_calloc(sizeof(char *), pos->n_arg + 2);
 	if (!new_node->cmds)
 		return (free(new_node), print_errno(ENOMEM), FAILURE);
+	i = go_to_cmd(tokens, i, pos);
 	i = add_the_cmd(new_node, tokens, i, pos);
 	if (i == FAILURE)
 		return (free_linked_list_mini(&new_node), FAILURE);
