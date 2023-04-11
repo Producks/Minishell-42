@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/10 22:19:02 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 22:57:02 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int	create_cmd_node(t_cmds **list, char **tokens, int i, t_pos *pos)
 		return (free(new_node), print_errno(ENOMEM), FAILURE);
 	i = add_the_cmd(new_node, tokens, i, pos);
 	if (i == FAILURE)
-		return (FAILURE);
+		return (free_linked_list_mini(&new_node), FAILURE);
 	pos->c++;
 	i = add_arg(new_node, tokens, i, pos);
 	if (i == FAILURE)
-		return (FAILURE);
+		return (free_linked_list_mini(&new_node), FAILURE);
 	i = redir_list_3(new_node, tokens, i, pos);
 	if (i == FAILURE)
-		return (FAILURE);
+		return (free_linked_list_mini(&new_node), FAILURE);
 	addnodecmds(list, new_node);
 	return (i);
 }
