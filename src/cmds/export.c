@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 09:29:46 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 01:36:48 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,6 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 	}
 	return (0);
 }
-
-/*Check for order later, adding it at the end for now*/
-// static void	add_export(t_mini *mini, const char flag, int index)
-// {
-// 	char	**new;
-// 	size_t	size;
-
-// 	size = count_double_array(mini->env_copy);
-// 	printf("%ld\n\n", size);
-// 	new = ft_realloc(mini->env_copy, sizeof(char *) * (size + 1));
-// 	//new = realloc(mini->env_copy, sizeof(char *) * (size + 1));
-// 	if (!new)
-// 		return ;
-// 	if (flag)
-// 		new[size - 1] = ft_strjoin(mini->current_cmds[index], "\0");
-// 	else
-// 		new[size - 1] = ft_strdup(mini->current_cmds[index]);
-// 	new[size] = NULL;
-// 	mini->env_copy = new;
-// 	size = count_double_array(mini->env_copy);
-// 	printf("%ld\n\n", size);
-// }
 
 static int	add_export(t_mini *mini, const char flag, int index)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:52:59 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/10 23:46:04 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,13 @@
 #include "lexer.h"
 #include "../interpreter/interpreter.h"
 
-/*Store an array of tokens from the user command in the mini struct.*/
 void	lexer(t_mini *mini)
 {
 	char	**literal_tokens;
-	int		ret;
 
-
-	// mini->message = ft_strdup("");
 	literal_tokens = literal_tokenization(mini);
 	if (!literal_tokens)
 		return ;
 	parse_linked_list(mini, literal_tokens);
-	free_linked_list_mini(&mini->cmds_list); // add cleanup later
+	free_linked_list_mini(&mini->cmds_list);
 }
- // echo hello > cat

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 11:32:41 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 01:35:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	check_echo_option(const char *str, int count)
 	if (!str[index])
 		return (false);
 	if (str[index++] != '-')
-			return (false);
+		return (false);
 	if (str[index++] != 'n')
 		return (false);
 	while (str[index])

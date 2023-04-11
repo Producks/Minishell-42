@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 14:11:54 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/11 01:35:26 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,33 @@ typedef struct s_literal
 }	t_literal;
 
 /*Lexer.c*/
+
 void	lexer(t_mini *mini);
 
 /*Literal.c*/
+
 char	**literal_tokenization(t_mini *mini);
+
 /*Literal_redir.c*/
+
 int		isredir(int c);
 void	check_if_redir(t_literal *literal, const char *str);
+
 /*Literal_string.c*/
+
 void	count_literal_string(t_literal *literal, const char *str);
 void	literal_string_sep(t_literal *literal, const char *str);
 char	**literal_tokenization(t_mini *mini);
+
 /*Literal_error.c*/
+
+void	check_bracket_error(t_literal *literal, const char *str);
+void	check_pipe_error(t_literal *literal);
+void	check_double_redir_error(t_literal *literal);
+void	check_single_redir_error(t_literal *literal);
 void	literal_error_handling(t_literal *literal,
 			const char *str, int err_nbr);
-void	literal_check_errors(t_literal *literal);
 
 bool	check_expandable(char c);
-//void	single_quote_inc(t_expandable *expand);
 
 #endif

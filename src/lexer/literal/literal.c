@@ -6,11 +6,40 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:02:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 15:50:23 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 01:31:25 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lexer.h"
+
+void	literal_check_errors(t_literal *literal)
+{
+	literal->index = 0;
+	while (literal->array[literal->index])
+	{
+		check_bracket_error(literal, literal->array[literal->index]);
+		if (literal->ret == -1)
+			return ;
+		literal->index++;
+	}
+	literal->index = 0;
+	while (literal->array[literal->index])
+	{
+		if (isredir(literal->array[literal->index][0]))
+		{
+			literal->type = literal->array[literal->index][0];
+			if (literal->array[literal->index][1] == literal->type)
+				check_double_redir_error(literal);
+			else if (literal->type == '|')
+				check_pipe_error(literal);
+			else
+				check_single_redir_error(literal);
+			if (literal->ret == -1)
+				return ;
+		}
+		literal->index++;
+	}
+}
 
 static void	init_literal_struct(t_literal *literal)
 {

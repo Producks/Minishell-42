@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:58:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/03 02:05:47 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 01:29:08 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	literal_error_handling(t_literal *literal, const char *str, int err_nbr)
 	literal->ret = -1;
 }
 
-static void	check_single_redir_error(t_literal *literal)
+void	check_single_redir_error(t_literal *literal)
 {
 	if (isredir(literal->array[literal->index][1]))
 		return (literal_error_handling(literal,
@@ -32,8 +32,7 @@ static void	check_single_redir_error(t_literal *literal)
 				"Minishell: Is redir right bad\n", 2));
 }
 
-// fix << name test
-static void	check_double_redir_error(t_literal *literal)
+void	check_double_redir_error(t_literal *literal)
 {
 	if (literal->type == '|')
 		return (literal_error_handling(literal, "double pipe bozo\n", 2));
@@ -44,7 +43,7 @@ static void	check_double_redir_error(t_literal *literal)
 		return (literal_error_handling(literal, "Is redir right bad\n", 2));
 }
 
-static void	check_pipe_error(t_literal *literal)
+void	check_pipe_error(t_literal *literal)
 {
 	if (!literal->array[literal->index + 1])
 		return (literal_error_handling(literal,
@@ -57,7 +56,7 @@ static void	check_pipe_error(t_literal *literal)
 				"Minishell: Argument missing to the left of the pipe\n", 2));
 }
 
-static void	check_bracket_error(t_literal *literal, const char *str)
+void	check_bracket_error(t_literal *literal, const char *str)
 {
 	int	index;
 
@@ -77,34 +76,5 @@ static void	check_bracket_error(t_literal *literal, const char *str)
 			}
 		}
 		index++;
-	}
-}
-
-void	literal_check_errors(t_literal *literal)
-{
-	literal->index = 0;
-	while (literal->array[literal->index])
-	{
-		check_bracket_error(literal, literal->array[literal->index]);
-		if (literal->ret == -1)
-			return ;
-		literal->index++;
-	}
-	literal->index = 0;
-	while (literal->array[literal->index])
-	{
-		if (isredir(literal->array[literal->index][0]))
-		{
-			literal->type = literal->array[literal->index][0];
-			if (literal->array[literal->index][1] == literal->type)
-				check_double_redir_error(literal);
-			else if (literal->type == '|')
-				check_pipe_error(literal);
-			else
-				check_single_redir_error(literal);
-			if (literal->ret == -1)
-				return ;
-		}
-		literal->index++;
 	}
 }
