@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 09:32:54 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:24:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,16 @@
 
 extern int	g_exit_status;
 
-void	silence_signal()
-{
-	char *term = getenv("TERM");
-	
-    if (tgetent(NULL, term) != 1)
-        printf("Error: could not load termcap database.\n");
-
-    struct termios termios_p;
-	
-    tcgetattr(STDIN_FILENO, &termios_p);
-    termios_p.c_lflag &= ~(ICANON | ECHO | ISIG);
-    tcsetattr(STDIN_FILENO, TCSANOW, &termios_p);
-}
+// void	silence_signal()
+// {
+// 	char *term = getenv("TERM");
+//     if (tgetent(NULL, term) != 1)
+//         printf("Error: could not load termcap database.\n");
+//     struct termios termios_p;
+//     tcgetattr(STDIN_FILENO, &termios_p);
+//     termios_p.c_lflag &= ~(ICANON | ECHO | ISIG);
+//     tcsetattr(STDIN_FILENO, TCSANOW, &termios_p);
+// }
 
 void	parent_signal_handler(int signal)
 {
@@ -58,7 +55,7 @@ void	child_signal_handler(int signal)
 	else if (signal == SIGQUIT)
 	{
 		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-    	g_exit_status = 131;
+		g_exit_status = 131;
 	}
 }
 

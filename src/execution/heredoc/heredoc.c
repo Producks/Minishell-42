@@ -3,42 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:53:32 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:03:06 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../parsing/parsing.h"
 #include "../execution.h"
+#include "../../input/input.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-
-static int	write_to_heredoc(t_mini *mini, int fd)
-{
-	char			*message;
-	struct stat		file_status;
-	int				ret;
-
-	while (true)
-	{
-		message = readline(MAG "Heredoc > " RESET);
-		if (!message)
-			break ;
-		if (!ft_strcmp(mini->cmds_list->redir_list->filename, message))
-			break ;
-		if (get_file_status(mini, fd, &file_status) == FAILURE)
-			return (free(message), close(fd), FAILURE);
-		write(fd, message, ft_strlen(message));
-		write(fd, "\n", 1);
-		free (message);
-	}
-	free (message);
-	close(fd);
-	return (SUCCESS);
-}
 
 static int	heredoc(t_mini *mini)
 {

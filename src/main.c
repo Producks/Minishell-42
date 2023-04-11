@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:53:19 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:12:25 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_mini	mini;
 
 	init_parent_signals();
-	if (init_struct(&mini, envp) == FAILURE)
+	if (init_struct_mini(&mini, envp) == FAILURE)
 		return (ENOMEM);
 	#ifndef TESTER
 	#  define TESTER 0
@@ -34,12 +34,12 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		mini.message = ft_strdup(argv[1]);
 		lexer(&mini);
-		free_struct(&mini);
+		free_struct_mini(&mini);
 		return (0);
 	}
 	print_startup();
 	read_input(&mini);
-	free_struct(&mini);
+	free_struct_mini(&mini);
 	printf("exit\n");
 	return (g_exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 02:16:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define DOUBLE_QUOTE 34
 # define SUCCESS 0
 # define FAILURE -1
+# define UNDERSCORE 95
 
 # ifdef __linux__
 #  define OS 1
@@ -45,8 +46,8 @@ void	print_startup(void);
 
 /* Init.c */
 
-int		init_struct(t_mini *mini, char *envp[]);
-void	free_struct(t_mini *mini);
+int		init_struct_mini(t_mini *mini, char *envp[]);
+void	free_struct_mini(t_mini *mini);
 
 /* Signal.c */
 
@@ -59,9 +60,10 @@ void	parent_signal_handler(int signal);
 
 void	create_file_name(char *str, int number);
 
-/* Add_env_element.c */
+/* Env_functions.c */
 
 int		add_env_element(t_mini *mini, char *str_to_add);
+int		copy_env(t_mini *mini, char *envp[]);
 
 /* Str_cutcut.c */
 
@@ -70,5 +72,9 @@ char	*str_cutcut(char *original, char *replacement, char *to_replace);
 /* Strjoin_path.c */
 
 char	*strjoin_path(char const *s1, char const *s2, char sep);
+
+/* Check_expandable.c */
+
+bool	check_expandable(char c);
 
 #endif

@@ -46,7 +46,8 @@ PARSING =	./src/parsing/list_christo.c \
 			./src/parsing/test_list.c\
 			./src/parsing/list_utils.c
 
-INPUT	= ./src/input/read_input.c
+INPUT	= 	./src/input/read_input.c \
+			./src/input/read_input_heredoc.c
 
 PARSING =	./src/parsing/list_christo.c \
 			./src/parsing/list_redir_christo.c \
@@ -55,21 +56,20 @@ PARSING =	./src/parsing/list_christo.c \
 			./src/parsing/test_list.c\
 			./src/parsing/list_utils.c
 
-UTILS = ./src/utils/linked_list_cmds.c \
-		./src/utils/strings/strjoin_path.c \
+UTILS = ./src/utils/strings/strjoin_path.c \
 		./src/utils/strings/str_cutcut.c \
-		./src/utils/add_env_element.c \
+		./src/utils/env_functions.c \
 		./src/utils/signal.c \
-		./src/utils/init.c \
+		./src/utils/mini_struct_functions.c \
 		./src/utils/print_startup.c \
-		./src/utils/strings/create_file_name.c
+		./src/utils/strings/create_file_name.c \
+		./src/utils/check_expandable.c
 
 LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \
 		./src/lexer/literal/literal_string.c \
 		./src/lexer/literal/literal_redir.c \
-		./src/lexer/literal/literal_error.c \
-		./src/lexer/literal/interpreter_utils.c
+		./src/lexer/literal/literal_error.c
 
 INTERPRETER = ./src/interpreter/interpreter.c \
 			  ./src/interpreter/dollar/dollar_expandable.c \

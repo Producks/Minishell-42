@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 01:35:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:37:13 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define DOUBLE_QUOTE 34
 # define DOLLAR_SIGN  36
 # define QUESTION_MARK 63
-# define UNDERSCORE 95
 
 extern int	g_exit_status;
 typedef struct s_literal

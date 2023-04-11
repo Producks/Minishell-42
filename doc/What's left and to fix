@@ -17,3 +17,6 @@ Known bug / What to fix:
 - Fix redisplay bug with readline history
 - Fix error messages for error checking during lexical analysis
 - Fix norminettes issues
+- unset perror
+- heredoc $
+- chmod .sh

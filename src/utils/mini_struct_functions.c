@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   mini_struct_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 15:49:30 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:20:24 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,50 @@
 #include "../../libs/Libft/libft.h"
 #include "utils.h"
 
-/*Make a copy of the envp and store it in the struct*/
-static int	copy_env(t_mini *mini, char *envp[])
+void	*safe_free(char *str)
 {
-	int		count;
-	int		index;
-
-	count = 0;
-	while (envp[count++])
-		continue ;
-	mini->env_copy = malloc(sizeof(char *) * count);
-	if (!mini->env_copy)
-		return (print_errno(ENOMEM), FAILURE);
-	index = -1;
-	while (envp[++index])
-	{
-		mini->env_copy[index] = ft_strdup(envp[index]);
-		if (!mini->env_copy[index])
-		{
-			free_double_array(mini->env_copy);
-			return (print_errno(ENOMEM), FAILURE);
-		}
-	}
-	mini->env_copy[index] = NULL;
-	return (SUCCESS);
+	if (str)
+		free(str);
+	return (NULL);
 }
 
-void	free_struct(t_mini *mini)
+void	clean_redir_list(t_cmds *current)
+{
+	t_redir	*head;
+
+	head = current->redir_list;
+	while (current->redir_list)
+	{
+		head = current->redir_list->next;
+		if (current->redir_list->filename != NULL)
+			free(current->redir_list->filename);
+		if (current->redir_list->tmp_file != NULL)
+			free(current->redir_list->tmp_file);
+		free(current->redir_list);
+		current->redir_list = head;
+	}
+}
+
+void	*free_linked_list_mini(t_cmds **head)
+{
+	t_cmds	*current;
+	t_cmds	*previous;
+
+	current = *head;
+	while (current)
+	{
+		if (current->redir_list)
+			clean_redir_list(current);
+		free_double_array(current->cmds);
+		previous = current;
+		current = current->next;
+		free(previous);
+		previous = NULL;
+	}
+	return (NULL);
+}
+
+void	free_struct_mini(t_mini *mini)
 {
 	mini->env_copy = free_double_array(mini->env_copy);
 	mini->current_cmds = free_double_array(mini->current_cmds);
@@ -50,7 +67,7 @@ void	free_struct(t_mini *mini)
 	close(mini->fd_out);
 }
 
-int	init_struct(t_mini *mini, char *envp[])
+int	init_struct_mini(t_mini *mini, char *envp[])
 {
 	if (copy_env(mini, envp) == FAILURE)
 		return (FAILURE);
