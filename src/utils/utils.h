@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 14:37:49 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 18:08:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,9 @@ char	*strjoin_path(char const *s1, char const *s2, char sep);
 /* Check_expandable.c */
 
 bool	check_expandable(char c);
+
+/* Free_linked_list_exec */
+
+void	free_linked_list_execve(t_mini *mini);
 
 #endif

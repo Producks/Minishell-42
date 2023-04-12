@@ -1,5 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
+/* ************************************************************************** */ /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -45,6 +44,13 @@ static int	unset_strcmp(const char *str1, const char *str2)
 	return (1);
 }
 
+static void	write_unset_error(const char *str)
+{
+	write(STDERR_FILENO, "Minishell: unset: `", 19);
+	write(STDERR_FILENO, str, ft_strlen(str));
+	write(STDERR_FILENO, "': not a valid identifiter\n", 27);
+}
+
 /*More testing need to be done, seems to be good for now*/
 int	unset(t_mini *mini)
 {
@@ -53,9 +59,14 @@ int	unset(t_mini *mini)
 
 	j = 0;
 	if (mini->current_cmds[1] == NULL)
-		return (0);
+		return (SUCCESS);
 	while (mini->current_cmds[++j])
 	{
+		if (!ft_isalpha(mini->current_cmds[j][0]) && mini->current_cmds[j][0] != '_')
+		{
+			write_unset_error(mini->current_cmds[j]);
+			continue ;
+		}
 		index = 0;
 		while (mini->env_copy[index])
 		{
@@ -68,5 +79,5 @@ int	unset(t_mini *mini)
 			index++;
 		}
 	}
-	return (0);
+	return (SUCCESS);
 }

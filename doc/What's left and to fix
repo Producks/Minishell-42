@@ -10,13 +10,10 @@ Feature left to add:
 
 Known bug / What to fix:
 
-- Parsing error handling
-- Heredoc error handling
 - Leaks
 - Do massive testing to check for any conditional jump
 - Fix redisplay bug with readline history
-- Fix error messages for error checking during lexical analysis
-- Fix norminettes issues
-- unset perror
+- check return value builtin
+- XDDDDDD pwd doesn't work
 - heredoc $
 - chmod .sh

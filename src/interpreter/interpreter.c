@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   interpreter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:10:44 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:52:51 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/11 18:11:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static char	*join_strings(char **str_array)
 		else
 		{
 			tmp = ft_strjoin(result, str_array[index]);
-            free(result);
-            result = tmp;
+			free(result);
+			result = tmp;
 		}
 		if (!result)
 			return (NULL); // fix later
@@ -90,8 +90,7 @@ char	*interpreter(char *str, t_mini *mini)
 		index++;
 	}
 	result = join_strings(cut);
-	free_double_array(cut);
 	if (!result)
-		return (NULL);
-	return (result);
+		return (free_double_array(cut), NULL);
+	return (free_double_array(cut), result);
 }

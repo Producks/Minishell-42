@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:15:29 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 21:41:28 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 21:54:15 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		pwd(void);
 int		env(char **env_copy);
 int		cd(t_mini *mini);
 int		ft_export(t_mini *mini);
-void	ft_exit(t_mini *mini);
+int		ft_exit(t_mini *mini);
 int		unset(t_mini *mini);
 
 #endif

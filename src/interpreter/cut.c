@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 15:54:51 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 10:14:54 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 18:13:30 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static int	count_number_elements(char *str)
 		else
 		{
 			count++;
-			while (str[index] && str[index] != SINGLE_QUOTE && str[index] != DOUBLE_QUOTE)
+			while (str[index] && str[index] != SINGLE_QUOTE
+				&& str[index] != DOUBLE_QUOTE)
 				index++;
 		}
 	}
@@ -48,7 +49,8 @@ static int	get_len(const char *str, char c)
 	index = 0;
 	if (c != SINGLE_QUOTE && c != DOUBLE_QUOTE)
 	{
-		while (str[index] && str[index] != SINGLE_QUOTE && str[index] != DOUBLE_QUOTE)
+		while (str[index] && str[index] != SINGLE_QUOTE
+			&& str[index] != DOUBLE_QUOTE)
 			index++;
 		return (index);
 	}

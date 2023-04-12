@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_expandable.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:54:38 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/11 18:12:38 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static size_t	get_length(t_expandable *expand)
 	expand->length++;
 	while (check_expandable(expand->str_literal[expand->index++]))
 		expand->length++;
-	return(0);
+	return (0);
 }
 
 static int	get_cut_str(t_expandable *expand)

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 01:39:23 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 22:10:03 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static int	add_pwd_to_env(t_mini *mini, char *old_pwd)
 		if (ft_strncmp(mini->env_copy[index], "PWD=", 4) == 0)
 		{
 			free(mini->env_copy[index]);
-			mini->env_copy[index] = ft_strjoin("PWD=", getcwd(NULL, 69));//PROTECT
+			mini->env_copy[index] = ft_strjoin("PWD=", getcwd(NULL, 69)); // bad fix this
 			if (!mini->env_copy[index])
-				return (-1);
+				return (FAILURE);
 			count++;
 		}
 		else if (ft_strncmp(mini->env_copy[index], "OLDPWD=", 7) == 0)
@@ -70,7 +70,7 @@ static int	cd_deez(t_mini *mini, int count)
 
 	if (count > 2)
 	{
-		write(2, "minishell: cd: too many arguments\n", 35);
+		write(2, "Minishell: cd: too many arguments\n", 35);
 		return (0);
 	}
 	if (count > 1)

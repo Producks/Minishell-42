@@ -63,7 +63,8 @@ UTILS = ./src/utils/strings/strjoin_path.c \
 		./src/utils/mini_struct_functions.c \
 		./src/utils/print_startup.c \
 		./src/utils/strings/create_file_name.c \
-		./src/utils/check_expandable.c
+		./src/utils/check_expandable.c \
+		./src/utils/free_linked_list_exec.c
 
 LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \

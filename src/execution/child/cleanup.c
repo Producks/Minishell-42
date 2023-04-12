@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:26:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 14:12:46 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 18:07:14 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,43 +18,11 @@ void	check_if_pipe_cleanup(t_mini *mini)
 {
 	if (mini->cmds_list->redir_list != NULL)
 	{
-		if (mini->cmds_list->redir_list->type == REDIRECTION_PIPE) // double check later
+		if (mini->cmds_list->redir_list->type == REDIRECTION_PIPE)
 		{
 			if (mini->cmds_list->redir_list->out == true)
 				close(mini->cmds_list->next->fd_in);
 		}
-	}
-}
-
-void	free_double_array_execve(char **str, char **nope)
-{
-	
-	int	index;
-
-	index = 0;
-	if (!str || !nope)
-		return ;
-	if (str == nope)
-		return ;
-	while (str[index])
-		free(str[index++]);
-	free (str);
-}
-
-void	free_linked_list_execve(t_mini *mini)
-{
-	t_cmds	*previous;
-
-	previous = NULL;
-	while (mini->head_cmd)
-	{
-		if (mini->head_cmd->redir_list)
-			clean_redir_list(mini->head_cmd);
-		free_double_array_execve(mini->head_cmd->cmds, mini->current_cmds);
-		previous = mini->head_cmd;
-		mini->head_cmd = mini->head_cmd->next;
-		free(previous);
-		previous = NULL;
 	}
 }
 

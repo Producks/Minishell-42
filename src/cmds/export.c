@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:06 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 01:36:48 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/11 21:45:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static int	export_exist(t_mini *mini, const char flag, int index)
 		size = 0;
 		while (mini->env_copy[i][size] != '=')
 			size++;
-		if (!ft_strncmp(mini->current_cmds[index], mini->env_copy[i], size)) // double check later fixed bug with length check
+		if (!ft_strncmp(mini->current_cmds[index], mini->env_copy[i], size))
 		{
 			free(mini->env_copy[i]);
 			if (flag)
-				mini->env_copy[i] = ft_strjoin(mini->current_cmds[index], "\0");
+				mini->env_copy[i] = ft_strjoin(mini->current_cmds[index], "\0"); // fix
 			else
 				mini->env_copy[i] = ft_strdup(mini->current_cmds[index]);
 			return (1);
@@ -42,10 +42,10 @@ static int	add_export(t_mini *mini, const char flag, int index)
 	char	*str;
 	int		ret;
 
-    if (flag)
-        str = ft_strjoin(mini->current_cmds[index], "\0");
-    else
-        str = ft_strdup(mini->current_cmds[index]);
+	if (flag)
+		str = ft_strjoin(mini->current_cmds[index], "\0");
+	else
+		str = ft_strdup(mini->current_cmds[index]);
 	if (!str)
 		return (FAILURE); // handle later
 	ret = add_env_element(mini, str);
