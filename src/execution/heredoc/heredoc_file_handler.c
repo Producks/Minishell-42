@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 10:41:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:13:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	get_file_status(t_mini *mini, int fd, struct stat *file_status)
 
 	ret = fstat(fd, file_status);
 	if (ret == -1)
-	{
-		return (FAILURE); // perror later
-	}
+		return (print_errno(errno), FAILURE);
 	file_chmod = file_status->st_mode & 07777;
 	if (file_chmod != 0644)
 	{
@@ -30,7 +28,7 @@ int	get_file_status(t_mini *mini, int fd, struct stat *file_status)
 	}
 	if (access(mini->cmds_list->redir_list->tmp_file, F_OK) == FAILURE)
 	{
-		printf("Bozo can you not delete my file?\n");
+		printf("Bozo can you not delete my file?\n"); // fix later
 		return (FAILURE);
 	}
 	return (SUCCESS);

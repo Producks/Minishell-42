@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 22:10:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/12 15:55:06 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	cd_deez(t_mini *mini, int count)
 
 	if (count > 2)
 	{
-		write(2, "Minishell: cd: too many arguments\n", 35);
+		write(STDERR_FILENO, "Minishell: cd: too many arguments\n", 35);
 		return (0);
 	}
 	if (count > 1)

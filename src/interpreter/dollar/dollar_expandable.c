@@ -6,13 +6,13 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 07:54:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 18:12:38 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:11:52 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../interpreter.h"
 
-static size_t	get_length(t_expandable *expand)
+static void	get_length(t_expandable *expand)
 {
 	expand->index = 0;
 	expand->length = 0;
@@ -22,15 +22,14 @@ static size_t	get_length(t_expandable *expand)
 	expand->index++;
 	if (expand->str_literal[expand->index] == '{')
 		expand->index++;
-	if (!check_expandable(expand->str_literal[expand->index])) // refacto here later
-		return (0);
+	if (!check_expandable(expand->str_literal[expand->index]))
+		return ;
 	if (ft_isdigit(expand->str_literal[expand->index]))
-		return (0);
+		return ;
 	expand->index++;
 	expand->length++;
 	while (check_expandable(expand->str_literal[expand->index++]))
 		expand->length++;
-	return (0);
 }
 
 static int	get_cut_str(t_expandable *expand)
@@ -106,6 +105,8 @@ int	dollar_expandable(t_dollar *dollar, t_mini *mini)
 
 	expand.str_literal = dollar->result;
 	get_length(&expand);
+	if (!expand.length)
+		return (dollar_length_h(dollar, mini, expand.dollar_index_start));
 	expand.ret = get_env_str(&expand);
 	if (expand.ret == FAILURE)
 		return (FAILURE);
@@ -124,7 +125,5 @@ int	dollar_expandable(t_dollar *dollar, t_mini *mini)
 	free(dollar->result);
 	dollar->result = expand.cut_result;
 	free (expand.env_str);
-	free (expand.env_check);
-	free (expand.original_cut);
-	return (SUCCESS);
+	return (free(expand.env_check), free(expand.original_cut), SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 00:58:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 01:29:08 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/12 21:33:04 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	check_bracket_error(t_literal *literal, const char *str)
 		if (str[index] == DOLLAR_SIGN)
 		{
 			index++;
+			if (!str[index])
+				break ;
 			if (str[index] == '{')
 			{
 				while (str[index] != '}' && str[index])

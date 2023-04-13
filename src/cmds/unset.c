@@ -1,11 +1,12 @@
-/* ************************************************************************** */ /*                                                                            */
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 13:35:05 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 10:05:02 by ddemers          ###   ########.fr       */
+/*   Created: 2023/04/13 00:21:37 by ddemers           #+#    #+#             */
+/*   Updated: 2023/04/13 00:21:54 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +52,16 @@ static void	write_unset_error(const char *str)
 	write(STDERR_FILENO, "': not a valid identifiter\n", 27);
 }
 
-/*More testing need to be done, seems to be good for now*/
+static int	check_syntax_error_unset(const char *str, char c)
+{
+	if (!ft_isalpha(c) && c != '_')
+	{
+		write_unset_error(str);
+		return (1);
+	}
+	return (0);
+}
+
 int	unset(t_mini *mini)
 {
 	int	index;
@@ -62,11 +72,9 @@ int	unset(t_mini *mini)
 		return (SUCCESS);
 	while (mini->current_cmds[++j])
 	{
-		if (!ft_isalpha(mini->current_cmds[j][0]) && mini->current_cmds[j][0] != '_')
-		{
-			write_unset_error(mini->current_cmds[j]);
+		if (check_syntax_error_unset(mini->current_cmds[j],
+				mini->current_cmds[j][0]))
 			continue ;
-		}
 		index = 0;
 		while (mini->env_copy[index])
 		{

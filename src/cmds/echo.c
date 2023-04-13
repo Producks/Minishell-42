@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 21:44:08 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/12 14:12:23 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ int	echo(char **message)
 	}
 	if (check_n == false)
 		write(1, "\n", 1);
-	return (SUCCESS);
+	return (BUILTIN_SUCCESS);
 }

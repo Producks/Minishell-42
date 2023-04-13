@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:11:07 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 02:18:33 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:10:47 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,9 @@ int		dollar_expandable(t_dollar *dollar, t_mini *mini);
 bool	check_expandable(char c);
 
 char	**cut_into_pieces(char *str);
+
+/* Dollar_length_handle.c */
+
+int		dollar_length_h(t_dollar *dollar, t_mini *mini, int start);
 
 #endif

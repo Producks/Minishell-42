@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 13:22:23 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/05 21:29:41 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/12 15:58:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,6 @@ char	*strncmp_cut(const char *haystack, const char *needle, size_t len,
 		return (NULL);
 	while (*haystack && i <= len)
 	{
-		if (*haystack == SINGLE_QUOTE)
-		{
-			haystack++;
-			len--;
-			while (*haystack != SINGLE_QUOTE)
-			{
-				haystack++;
-				len--;
-			}
-		}
 		if (*haystack == *needle && ft_strncmp(haystack, needle, i) == 0)
 			return ((char *)haystack);
 		haystack++;

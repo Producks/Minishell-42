@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:56:49 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/12 16:02:32 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	handle_child(t_mini *mini, bool is_built_in)
 	{
 		ret = built_ins(mini);
 		child_cleanup_no_cmds(mini);
+		if (ret == 69)
+			exit (0);
 		exit(ret);
 	}	
 	run_cmd(mini);
@@ -61,9 +63,10 @@ static void	create_fork(t_mini *mini)
 	if (is_built_in && mini->is_one_cmd)
 	{
 		mini->current_cmds = mini->cmds_list->cmds;
-		built_ins(mini);
+		ret = built_ins(mini);
 		mini->current_cmds = NULL;
 		mini->skip_waiting = true;
+		g_exit_status = ret;
 		return ;
 	}
 	mini->cmds_list->pid = fork();

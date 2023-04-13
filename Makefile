@@ -76,7 +76,8 @@ INTERPRETER = ./src/interpreter/interpreter.c \
 			  ./src/interpreter/dollar/dollar_expandable.c \
 			  ./src/interpreter/dollar/dollar_interpreter.c \
 			  ./src/interpreter/quotes/quotes_interpreter.c \
-			  ./src/interpreter/cut.c
+			  ./src/interpreter/cut.c \
+			  ./src/interpreter/dollar/dollar_length_handle.c
 
 CMDS = ./src/cmds/echo.c \
 		./src/cmds/pwd.c \

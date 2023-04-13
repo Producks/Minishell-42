@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:45:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:55:44 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/12 12:14:52 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	read_input(t_mini *mini)
 			break ;
 		}
 		mini->message = readline(GRN "Minishell > " RESET);
+		//mini->message = readline("Minishell > ");
 		if (!mini->message)
 		{
 			if (errno == ENOMEM)

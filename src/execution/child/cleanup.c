@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:26:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 18:07:14 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/12 11:13:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	cleanup(t_mini *mini)
 	check_if_pipe_cleanup(mini);
 	mini->current_cmds = mini->cmds_list->cmds;
 	free_linked_list_execve(mini);
+	mini->cmds_list = NULL;
 	if (mini->message)
 	{
 		free (mini->message);

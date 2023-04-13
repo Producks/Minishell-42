@@ -15,5 +15,14 @@ Known bug / What to fix:
 - Fix redisplay bug with readline history
 - check return value builtin
 - XDDDDDD pwd doesn't work
-- heredoc $
-- chmod .sh
+- Maybe add heredoc error handling
+
+
+Builtin double checkup:
+
+- echo done
+- env done
+- exit done
+- export done except random \ check if time
+- unset TODO doesn't work at home?
+

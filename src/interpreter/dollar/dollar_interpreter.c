@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_interpreter.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:43:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:52:44 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/12 16:06:14 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	replace_exit_status(t_dollar *expand)
 	if (!exit_status)
 		return (print_errno(ENOMEM), FAILURE);
 	trim_str = str_cutcut(expand->result, exit_status, "$?");
-	if (!trim_str) // check if I need to free later str incase of failure
+	if (!trim_str)
 		return (free(exit_status), print_errno(ENOMEM), FAILURE);
 	free(expand->result);
 	free(exit_status);
@@ -45,10 +45,7 @@ static int	dollar_dispatcher(t_dollar *expand, t_mini *mini)
 				return (FAILURE);
 		}
 		if (!expand->result[expand->index])
-		{
-			puts("fix"); // should fix more testing later
 			break ;
-		}
 		expand->index++;
 	}
 	return (SUCCESS);
@@ -62,6 +59,6 @@ char	*dollar_interpreter(char *str, t_mini *mini)
 	if (!expand.result)
 		return (print_errno(ENOMEM), NULL);
 	if (dollar_dispatcher(&expand, mini) == FAILURE)
-		return (print_errno(ENOMEM), NULL);
+		return (NULL);
 	return (expand.result);
 }
