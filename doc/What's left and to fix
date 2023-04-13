@@ -25,4 +25,4 @@ Builtin double checkup:
 - exit done
 - export done except random \ check if time
 - unset TODO doesn't work at home?
-
+- Ambirous redir < $XD
