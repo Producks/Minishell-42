@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:53:19 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:26:36 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 // //Global variable for exit status
 int		g_exit_status = 0;
+int		g_test = 0;
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -41,5 +42,6 @@ int	main(int argc, char *argv[], char *envp[])
 	read_input(&mini);
 	free_struct(&mini);
 	printf("exit\n");
+	restore_terminal();
 	return (g_exit_status);
 }

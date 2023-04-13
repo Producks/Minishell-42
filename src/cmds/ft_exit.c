@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:39 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/30 22:43:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:27:50 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_exit(t_mini *mini)
 {
 	printf("Buh Bye\n");
+	restore_terminal();
 	//free_struct(mini);
 	exit (0);
 }

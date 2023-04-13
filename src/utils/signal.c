@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 09:32:54 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:23:45 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,57 +19,80 @@
 #include "../parsing/parsing.h"
 
 extern int	g_exit_status;
+extern int	g_test;
+struct termios saved_termios;
 
-void	silence_signal()
+void	disable_echo()
 {
-	char *term = getenv("TERM");
-	
-    if (tgetent(NULL, term) != 1)
-        printf("Error: could not load termcap database.\n");
-
     struct termios termios_p;
-	
     tcgetattr(STDIN_FILENO, &termios_p);
-    termios_p.c_lflag &= ~(ICANON | ECHO | ISIG);
+	saved_termios = termios_p;
+    termios_p.c_lflag &= ~ECHOCTL;
     tcsetattr(STDIN_FILENO, TCSANOW, &termios_p);
+}
+
+void	restore_terminal()
+{
+    // Restore the saved terminal settings
+    tcsetattr(STDIN_FILENO, TCSANOW, &saved_termios);
 }
 
 void	parent_signal_handler(int signal)
 {
-	if (signal == SIGINT)
+	
+	if (signal == SIGINT && g_test == 0)
 	{
+		// write(STDOUT_FILENO, "p", 1);
 		write(1, "\n", STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 		g_exit_status = 130;
 	}
+	else if (signal == SIGINT && g_test == 1)
+	{
+		// write(STDOUT_FILENO, "c", 1);
+		write(1, "\n", STDOUT_FILENO);
+		rl_redisplay();
+		g_test = 0;
+		disable_echo();
+		g_exit_status = 130;
+	}
 	else if (signal == SIGQUIT)
 	{
-		rl_redisplay();
-		return ;
+		
+		// return ;
 	}
+	// restore_terminal();
 }
 
 void	child_signal_handler(int signal)
 {
 	if (signal == SIGINT)
+	{
+		write(STDOUT_FILENO, "c", 1);
+		rl_redisplay();
+		g_test = 0;
 		g_exit_status = 130;
+	}
 	else if (signal == SIGQUIT)
 	{
 		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-    	g_exit_status = 131;
+		g_exit_status = 131;
 	}
 }
 
 void	init_child_signal(void)
 {
+	restore_terminal();
 	signal(SIGINT, child_signal_handler);
 	signal(SIGQUIT, child_signal_handler);
+	
 }
 
 void	init_parent_signals(void)
 {
+	disable_echo();
 	signal(SIGINT, parent_signal_handler);
 	signal(SIGQUIT, parent_signal_handler);
 }

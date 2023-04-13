@@ -5,6 +5,8 @@
 		"algorithm": "c",
 		"string": "c",
 		"string_view": "c",
-		"iterator": "c"
+		"iterator": "c",
+		"parsing.h": "c",
+		"struct.h": "c"
 	}
 }

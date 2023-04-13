@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:56:49 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:14:36 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "../execution.h"
 #include "../../utils/utils.h"
 #include "../../input/input.h"
+
+extern int g_test;
 
 void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 {
@@ -41,6 +43,7 @@ static void	handle_child(t_mini *mini, bool is_built_in)
 	int	ret;
 
 	ret = SUCCESS;
+	// write(STDOUT_FILENO, "c", 1);
 	init_child_signal();
 	cleanup(mini);
 	if (is_built_in == true)
@@ -57,6 +60,7 @@ static void	create_fork(t_mini *mini)
 	bool	is_built_in;
 	int		ret;
 
+	g_test = 1;
 	is_built_in = check_if_builtin(mini);
 	if (is_built_in && mini->is_one_cmd)
 	{

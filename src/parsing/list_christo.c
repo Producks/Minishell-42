@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/10 22:57:02 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/12 22:51:18 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	create_cmd_node(t_cmds **list, char **tokens, int i, t_pos *pos)
 	if (i == FAILURE)
 		return (free_linked_list_mini(&new_node), FAILURE);
 	pos->c++;
+	i = go_to_cmd(tokens, i, pos);
 	i = add_arg(new_node, tokens, i, pos);
 	if (i == FAILURE)
 		return (free_linked_list_mini(&new_node), FAILURE);
