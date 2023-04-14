@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 14:37:13 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 15:29:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define SUCCESS 0
 # define FAILURE -1
+# define COMMAND_LINE_ERROR 2
 # define SINGLE_QUOTE 39 
 # define DOUBLE_QUOTE 34
 # define DOLLAR_SIGN  36

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 13:16:29 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 15:27:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	redirect_input_from_heredoc(t_mini *mini)
 	if (mini->cmds_list->fd_in == FAILURE)
 		return (print_errno(1), FAILURE);
 	if (dup2(mini->cmds_list->fd_in, STDIN_FILENO) == FAILURE)
-		return (FAILURE);
+		return (print_errno(errno), FAILURE);
 	if (close(mini->cmds_list->fd_in) == FAILURE)
-		return (FAILURE);
+		return (print_errno(errno), FAILURE);
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 23:15:34 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:39:48 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ void	free_struct_mini(t_mini *mini);
 
 /* Signal.c */
 
-void	init_child_signal(void);
-void	init_parent_signals(void);
-void	child_signal_handler(int signal);
-void	parent_signal_handler(int signal);
-void	trap_signal(void);
+void	signals_handler(bool parent, bool mute, bool is_interactive);
+void	regular_shell(int signal);
+void	interactive_shell(int signal);
 
 /* Create_file_name.c */
 

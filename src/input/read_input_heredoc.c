@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:59:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/12 11:40:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:44:00 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	write_to_heredoc(t_mini *mini, int fd)
 	struct stat		file_status;
 	int				ret;
 
+	signals_handler(true, false, true);
 	while (true)
 	{
 		message = readline(MAG "Heredoc > " RESET);
@@ -45,7 +46,7 @@ int	write_to_heredoc(t_mini *mini, int fd)
 		write(fd, expanded_message, ft_strlen(expanded_message));
 		write(fd, "\n", 1);
 	}
-	free (message);
+	signals_handler(true, false, false);
 	close(fd);
-	return (SUCCESS);
+	return (free (message), SUCCESS);
 }

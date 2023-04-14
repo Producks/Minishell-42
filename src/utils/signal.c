@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 23:23:56 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:41:02 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,30 +31,15 @@ extern int	g_exit_status;
 //     tcsetattr(STDIN_FILENO, TCSANOW, &termios_p);
 // }
 
-void	parent_signal_handler(int signal)
+void	regular_shell(int signal)
 {
 	if (signal == SIGINT)
-	{
-		write(1, "\n", STDOUT_FILENO);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+		write(STDOUT_FILENO, "\n", 1);
 	else if (signal == SIGQUIT)
-	{
-		write(1, "\n", STDOUT_FILENO);
-		//write(STDOUT_FILENO, "\b\b\b\b", 4);
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+		write(STDERR_FILENO, "Quit: 3\n", 8);
 }
 
-void	mute_signal(int signal)
-{
-	int	lol;
-}
-
-void	child_signal_handler(int signal)
+void	interactive_shell(int signal)
 {
 	if (signal == SIGINT)
 	{
@@ -63,24 +48,29 @@ void	child_signal_handler(int signal)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (signal == SIGQUIT)
-		write(STDERR_FILENO, "Quit: 3\n", 8);
 }
 
-void	trap_signal(void)
+void	signals_handler(bool parent, bool mute, bool is_interactive)
 {
-	signal(SIGINT, mute_signal);
-	signal(SIGQUIT, mute_signal);
-}
-
-void	init_child_signal(void)
-{
-	signal(SIGINT, init_parent_signals);
-	signal(SIGQUIT, init_parent_signals);
-}
-
-void	init_parent_signals(void)
-{
-	signal(SIGINT, parent_signal_handler);
-	signal(SIGQUIT, parent_signal_handler);
+	if (parent == true)
+	{
+		if (mute == true)
+		{
+			signal(SIGINT, SIG_IGN);
+			signal(SIGQUIT, SIG_IGN);
+		}
+		else if (is_interactive)
+		{
+			signal(SIGINT, interactive_shell);
+			signal(SIGQUIT, SIG_IGN);
+		}
+		else
+		{
+			signal(SIGINT, regular_shell);
+			signal(SIGQUIT, regular_shell);
+		}
+		return ;
+	}
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

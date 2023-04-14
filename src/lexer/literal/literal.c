@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:02:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 01:31:25 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 15:28:28 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	literal_check_errors(t_literal *literal)
 	while (literal->array[literal->index])
 	{
 		check_bracket_error(literal, literal->array[literal->index]);
-		if (literal->ret == -1)
+		if (literal->ret == FAILURE)
 			return ;
 		literal->index++;
 	}
@@ -34,7 +34,7 @@ void	literal_check_errors(t_literal *literal)
 				check_pipe_error(literal);
 			else
 				check_single_redir_error(literal);
-			if (literal->ret == -1)
+			if (literal->ret == FAILURE)
 				return ;
 		}
 		literal->index++;
@@ -64,13 +64,13 @@ char	**literal_tokenization(t_mini *mini)
 	if (!literal.str)
 		return (print_errno(ENOMEM), NULL);
 	literal_string_sep(&literal, mini->message);
-	if (literal.ret == -1)
+	if (literal.ret == FAILURE)
 		return (free(literal.str), NULL);
 	literal.array = ft_split(literal.str, 29);
 	if (!literal.array)
 		return (free(literal.str), print_errno(ENOMEM), NULL);
 	literal_check_errors(&literal);
-	if (literal.ret == -1)
+	if (literal.ret == FAILURE)
 		return (free(literal.str), free_double_array(literal.array), NULL);
 	return (free(literal.str), literal.array);
 }
