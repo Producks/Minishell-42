@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/12 23:13:23 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 23:15:34 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_child_signal(void);
 void	init_parent_signals(void);
 void	child_signal_handler(int signal);
 void	parent_signal_handler(int signal);
+void	trap_signal(void);
 
 /* Create_file_name.c */
 

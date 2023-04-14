@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:54:04 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/13 23:15:49 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	execution(t_mini *mini)
 	create_child_process(mini);
 	wait_for_child_process(mini->cmds_list, mini->skip_waiting);
 	parent_cleanup(mini);
+	init_parent_signals();
 }

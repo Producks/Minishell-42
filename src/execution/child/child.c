@@ -6,35 +6,44 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/12 16:02:32 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 23:16:19 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include <signal.h>
+#include <unistd.h>
 #include "../execution.h"
 #include "../../utils/utils.h"
 #include "../../input/input.h"
 
-void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
+void wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 {
-	int		ret_status;
-	char	temp_buffer[15];
+    int		ret_status;
+    char	temp_buffer[15];
 
-	if (skip_waiting == true)
-		return ;
-	ret_status = g_exit_status;
-	while (cmds)
-	{
-		waitpid(cmds->pid, &ret_status, 0);
-		g_exit_status = WEXITSTATUS(ret_status);
-		if (cmds->tmp_file == true)
+    if (skip_waiting == true)
+        return;
+    ret_status = g_exit_status;
+    while (cmds)
+    {
+        waitpid(cmds->pid, &ret_status, 0);
+        if (WIFEXITED(ret_status))
+            g_exit_status = WEXITSTATUS(ret_status);
+        else if (WIFSIGNALED(ret_status))
 		{
-			create_file_name(temp_buffer, cmds->count);
-			unlink(temp_buffer);
+			g_exit_status = 128 + WTERMSIG(ret_status);
 		}
-		cmds = cmds->next;
-	}
+        if (cmds->tmp_file == true)
+        {
+            create_file_name(temp_buffer, cmds->count);
+            unlink(temp_buffer);
+        }
+        cmds = cmds->next;
+        init_parent_signals();
+    }
 }
+
 
 static void	handle_child(t_mini *mini, bool is_built_in)
 {

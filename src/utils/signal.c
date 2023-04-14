@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 22:32:22 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 23:23:56 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,44 @@ void	parent_signal_handler(int signal)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_exit_status = 130;
 	}
 	else if (signal == SIGQUIT)
 	{
+		write(1, "\n", STDOUT_FILENO);
+		//write(STDOUT_FILENO, "\b\b\b\b", 4);
+		rl_replace_line("", 0);
 		rl_redisplay();
-		return ;
 	}
+}
+
+void	mute_signal(int signal)
+{
+	int	lol;
 }
 
 void	child_signal_handler(int signal)
 {
 	if (signal == SIGINT)
-		g_exit_status = 130;
-	else if (signal == SIGQUIT)
 	{
-		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-		g_exit_status = 131;
+		write(STDOUT_FILENO, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
+	else if (signal == SIGQUIT)
+		write(STDERR_FILENO, "Quit: 3\n", 8);
+}
+
+void	trap_signal(void)
+{
+	signal(SIGINT, mute_signal);
+	signal(SIGQUIT, mute_signal);
 }
 
 void	init_child_signal(void)
 {
-	signal(SIGINT, child_signal_handler);
-	signal(SIGQUIT, child_signal_handler);
+	signal(SIGINT, init_parent_signals);
+	signal(SIGQUIT, init_parent_signals);
 }
 
 void	init_parent_signals(void)

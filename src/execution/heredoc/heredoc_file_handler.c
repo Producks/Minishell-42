@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 00:13:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 13:13:31 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	get_file_status(t_mini *mini, int fd, struct stat *file_status)
 	file_chmod = file_status->st_mode & 07777;
 	if (file_chmod != 0644)
 	{
-		printf("Bozo don't chmod my file wtf\n");
+		write(STDERR_FILENO, "Minishell: Can you not chmod my file?\n", 38);
 		return (FAILURE);
 	}
 	if (access(mini->cmds_list->redir_list->tmp_file, F_OK) == FAILURE)
 	{
-		printf("Bozo can you not delete my file?\n"); // fix later
+		write(STDERR_FILENO, "Minishell: Can you not delete my file?\n", 39);
 		return (FAILURE);
 	}
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 00:21:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 00:21:54 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 12:54:57 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,38 @@ static void	write_unset_error(const char *str)
 
 static int	check_syntax_error_unset(const char *str, char c)
 {
+	int	index;
+
 	if (!ft_isalpha(c) && c != '_')
 	{
 		write_unset_error(str);
 		return (1);
 	}
+	index = 0;
+	while (str[index])
+	{
+		if (str[index] == '=')
+		{
+			write_unset_error(str);
+			return (1);
+		}
+		index++;
+	}
 	return (0);
 }
 
-int	unset(t_mini *mini)
+int	unset(t_mini *mini, int index, int j, bool error)
 {
-	int	index;
-	int	j;
-
-	j = 0;
 	if (mini->current_cmds[1] == NULL)
 		return (SUCCESS);
 	while (mini->current_cmds[++j])
 	{
 		if (check_syntax_error_unset(mini->current_cmds[j],
 				mini->current_cmds[j][0]))
+		{
+			error = true;
 			continue ;
+		}
 		index = 0;
 		while (mini->env_copy[index])
 		{
@@ -87,5 +98,8 @@ int	unset(t_mini *mini)
 			index++;
 		}
 	}
-	return (SUCCESS);
+	if (error == true)
+		return (BUILTIN_COMMAND_ERROR);
+	return (BUILTIN_SUCCESS);
 }
+//6

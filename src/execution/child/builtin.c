@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 18:56:47 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/12 16:01:57 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 12:55:18 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	built_ins(t_mini *mini)
 	else if (ft_strcmp(mini->current_cmds[0], "export") == 0)
 		ret = ft_export(mini);
 	else if (ft_strcmp(mini->current_cmds[0], "unset") == 0)
-		ret = unset(mini);
+		ret = unset(mini, 0, 0, false);
 	else if (ft_strcmp(mini->current_cmds[0], "env") == 0)
 		ret = env(mini->env_copy);
 	else if (ft_strcmp(mini->current_cmds[0], "exit") == 0)

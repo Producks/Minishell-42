@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:10:44 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 00:11:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/13 13:35:22 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*join_strings(char **str_array)
 			result = tmp;
 		}
 		if (!result)
-			return (NULL); // fix maybe?
+			return (print_errno(ENOMEM), NULL);
 		index++;
 	}
 	return (result);

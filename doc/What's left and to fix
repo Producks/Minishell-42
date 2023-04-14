@@ -1,21 +1,19 @@
-Last updated on : 2023-04-03
+Last updated on : 2023-04-13
 
 Feature left to add:
 
 - Signals / Fix
 - Error handling / Memory management
-- Refactoring for production push
-- Fix readline lib issues with readline for production push
-
 
 Known bug / What to fix:
 
-- Leaks
-- Do massive testing to check for any conditional jump
+- Leaks ?
 - Fix redisplay bug with readline history
 - check return value builtin
 - XDDDDDD pwd doesn't work
 - Maybe add heredoc error handling
+- Ambirous redir < $XD
+- signal +2 exit status check
 
 
 Builtin double checkup:
@@ -23,6 +21,5 @@ Builtin double checkup:
 - echo done
 - env done
 - exit done
-- export done except random \ check if time
-- unset TODO doesn't work at home?
-- Ambirous redir < $XD
+- unset done
+- export done
