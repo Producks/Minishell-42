@@ -6,12 +6,10 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 09:32:18 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 13:05:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:09:28 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../../libs/Libft/libft.h"
 #include "utils.h"
 
 void	*safe_free(char *str)

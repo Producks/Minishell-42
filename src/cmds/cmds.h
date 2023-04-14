@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:15:29 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 12:54:48 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 16:56:07 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@
 # include "../utils/utils.h"
 
 extern int	g_exit_status;
-
-# define BUILTIN_SUCCESS 0
-# define BUILTIN_COMMAND_ERROR 1
-# define COMMAND_LINE_ERROR 2
 
 int		echo(char **message);
 int		pwd(void);

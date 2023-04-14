@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:11:07 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 00:10:47 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:12:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,6 @@
 # include "../utils/struct.h"
 # include "../utils/utils.h"
 # include "../errors/error.h"
-# include <stdbool.h>
-# include <stdio.h>
-
-# define SUCCESS 0
-# define FAILURE -1
-# define SINGLE_QUOTE 39 
-# define DOUBLE_QUOTE 34
-# define DOLLAR_SIGN  36
-# define QUESTION_MARK 63
-# define UNDERSCORE 95
 
 typedef struct s_expandable
 {

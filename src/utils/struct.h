@@ -6,14 +6,14 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 13:05:14 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 16:35:54 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "../../libs/Libft/libft.h"
+# include <unistd.h>
 # include <stdbool.h>
 
 typedef struct s_redirect

@@ -6,19 +6,14 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 12:18:19 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/31 01:02:34 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:05:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-# define SUCCESS 0
-# define FAILURE -1
-# define GENERAL_ERROR 1
-# define MISUSE 2
-# define COMMAND_NOT_FOUND 127
-
+# include "../utils/common_definitons.h"
 # include <stdio.h>
 # include <errno.h>
 # include "../../libs/Libft/libft.h"

@@ -6,14 +6,12 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 14:41:02 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:16:28 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <signal.h>
-#include <termcap.h>
+#include <termcap.h> // remove later ?
 #include <termios.h>
 #include <unistd.h>
 #include "../parsing/parsing.h"

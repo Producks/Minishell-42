@@ -6,12 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 22:46:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/07 12:55:19 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:09:46 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include "../input/input.h"
 
 static void	fetch_mac(void)
 {

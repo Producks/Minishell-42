@@ -6,11 +6,10 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 15:15:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:17:37 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errno.h>
 #include "./utils/utils.h" 
 #include "./utils/struct.h"
 
@@ -38,8 +37,9 @@ int	main(int argc, char *argv[], char *envp[])
 		return (0);
 	}
 	print_startup();
-	read_input(&mini);
+	g_exit_status = read_input(&mini);
+	rl_clear_history();
 	free_struct_mini(&mini);
-	printf("exit\n");
+	printf("exit\n"); // check if we leave \n or not
 	return (g_exit_status);
 }

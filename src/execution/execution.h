@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 10:44:13 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 16:55:12 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@
 # include "../utils/struct.h"
 # include "../utils/utils.h"
 # include "../errors/error.h"
-
-# define SUCCESS 0
-# define FAILURE -1
-
-# define REDIRECTION_PIPE 50 // good
-# define READ_INPUT 52 
-# define READ_OUTPUT 51
-# define APPEND_OUT 54
-# define APPEND_IN 53
 
 /*execution.c*/
 

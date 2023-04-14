@@ -6,14 +6,12 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:19:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 13:05:39 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:08:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../utils/struct.h"
-#include "../parsing/parsing.h"
 #include "lexer.h"
-#include "../interpreter/interpreter.h"
+#include "../parsing/parsing.h"
 
 void	lexer(t_mini *mini)
 {
