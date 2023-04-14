@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 19:59:33 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/12 22:51:18 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/13 17:49:44 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 	free_double_array(tokens);
 	execution(mini);
 }
-// printall(cmds);
 
+// printall(cmds);
 // i = go_to_cmd(tokens, i, pos); bef add_the_cmd in create cmd_node
 
 //make re; make run

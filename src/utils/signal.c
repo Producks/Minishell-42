@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 07:33:52 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 00:23:45 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/13 03:50:40 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "../parsing/parsing.h"
 
 extern int	g_exit_status;
-extern int	g_test;
 struct termios saved_termios;
 
 void	disable_echo()
@@ -40,7 +39,7 @@ void	restore_terminal()
 void	parent_signal_handler(int signal)
 {
 	
-	if (signal == SIGINT && g_test == 0)
+	if (signal == SIGINT)
 	{
 		// write(STDOUT_FILENO, "p", 1);
 		write(1, "\n", STDOUT_FILENO);
@@ -49,18 +48,10 @@ void	parent_signal_handler(int signal)
 		rl_redisplay();
 		g_exit_status = 130;
 	}
-	else if (signal == SIGINT && g_test == 1)
-	{
-		// write(STDOUT_FILENO, "c", 1);
-		write(1, "\n", STDOUT_FILENO);
-		rl_redisplay();
-		g_test = 0;
-		disable_echo();
-		g_exit_status = 130;
-	}
 	else if (signal == SIGQUIT)
 	{
-		
+		rl_replace_line("", 0);
+		rl_redisplay();
 		// return ;
 	}
 	// restore_terminal();
@@ -71,13 +62,14 @@ void	child_signal_handler(int signal)
 	if (signal == SIGINT)
 	{
 		write(STDOUT_FILENO, "c", 1);
+		write(1, "\n", STDOUT_FILENO);
 		rl_redisplay();
-		g_test = 0;
+		// disable_echo();
 		g_exit_status = 130;
 	}
 	else if (signal == SIGQUIT)
 	{
-		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 		g_exit_status = 131;
 	}
 }

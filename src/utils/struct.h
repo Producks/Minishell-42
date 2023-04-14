@@ -6,7 +6,7 @@
 /*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/10 20:53:16 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/13 00:52:06 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_mini
 	int		fd_out;
 	bool	is_one_cmd;
 	bool	skip_waiting;
+	bool	child_fork;
 }	t_mini;
 
 #endif
