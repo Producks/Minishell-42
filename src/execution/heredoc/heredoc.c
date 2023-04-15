@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/15 12:46:59 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 14:27:13 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int	redirect_input_from_heredoc(t_mini *mini)
 	return (SUCCESS);
 }
 
-static void	exit_heredoc(t_mini *mini, int exit_status)
+static void	exit_heredoc(t_mini *mini, int exit_status, t_redir *head)
 {
+	mini->cmds_list->redir_list = head;
 	close(mini->fd_in);
 	close(mini->fd_out);
 	free_linked_list_mini(&mini->cmds_list);
@@ -42,7 +43,7 @@ static void	exit_heredoc(t_mini *mini, int exit_status)
 	exit(exit_status);
 }
 
-static int	heredoc(t_mini *mini)
+static int	heredoc(t_mini *mini, t_redir *head)
 {
 	int		open_fd;
 	int		ret;
@@ -51,12 +52,12 @@ static int	heredoc(t_mini *mini)
 	rl_clear_history();
 	open_fd = file_handler(mini);
 	if (open_fd == FAILURE)
-		exit_heredoc(mini, errno);
+		exit_heredoc(mini, errno, head);
 	ret = write_to_heredoc(mini, open_fd);
-	exit_heredoc(mini, ret);
+	exit_heredoc(mini, ret, head);
 }
 
-static int	heredoc_fork(t_mini *mini)
+static int	heredoc_fork(t_mini *mini, t_redir *head)
 {
 	pid_t	child;
 	int		ret_status;
@@ -66,13 +67,11 @@ static int	heredoc_fork(t_mini *mini)
 	if (child == FAILURE)
 		return (print_errno(errno), SUCCESS);
 	if (child == SUCCESS)
-		heredoc(mini);
+		heredoc(mini, head);
 	signals_handler_parent(true, false);
 	waitpid(child, &ret_status, 0);
 	signals_handler_parent(false, false);
 	g_exit_status = calculate_exit_status(ret_status);
-	if (g_exit_status == 130)
-		return (FAILURE);
 	create_file_name(file_name, mini->cmds_list->count);
 	mini->cmds_list->redir_list->tmp_file = ft_strdup(file_name);
 	if (!mini->cmds_list->redir_list->tmp_file)
@@ -96,7 +95,7 @@ int	check_if_heredoc(t_mini *mini)
 		while (mini->cmds_list->redir_list)
 		{
 			if (mini->cmds_list->redir_list->type == 54 && count <= 99)
-				ret = heredoc_fork(mini);
+				ret = heredoc_fork(mini, head);
 			if (ret == FAILURE)
 				return (FAILURE);
 			mini->cmds_list->redir_list = mini->cmds_list->redir_list->next;
