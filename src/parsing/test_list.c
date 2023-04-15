@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 18:07:13 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/10 21:45:21 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/14 17:26:08 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,39 +83,3 @@ void	print_token(char **tokens)
 		i++;
 	}
 }
-
-// void	*free_linked_list_redirr(t_redir **head)
-// {
-// 	t_redir *current;
-// 	t_redir *previous;
-// 	current = *head;
-// 	while (current)
-// 	{
-// 		previous = current;
-// 		current = current->next;
-// 		free(previous);
-// 		previous = NULL;
-// 	}
-// 	return (NULL);
-// }
-
-// void	*free_linked_list_cmds(t_cmds **head)
-// {
-// 	t_cmds *current;
-// 	t_cmds *previous;
-// 	current = *head;
-// 	while (current)
-// 	{
-// 		previous = current;
-// 		current = current->next;
-// 		printf("cmds add : %p\n", previous->cmds);
-// 		free(previous->cmds);
-// 		printf("cmds add : %p\n", previous->cmds);
-// 		free_linked_list_redirr(&previous->redir_list);
-// 		free(previous);
-// 		printf("cmds add : %p\n", previous->cmds);
-// 		previous = NULL;
-// 		// printf("cmds add : %p\n", previous->cmds);
-// 	}
-// 	return (NULL);
-// }

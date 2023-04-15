@@ -1,25 +1,11 @@
-Last updated on : 2023-04-13
+Last updated on : 2023-04-14
 
 Feature left to add:
 
-- Signals / Fix
 - Error handling / Memory management
 
 Known bug / What to fix:
 
 - Leaks ?
-- Fix redisplay bug with readline history
-- check return value builtin
-- XDDDDDD pwd doesn't work
-- Maybe add heredoc error handling
 - Ambirous redir < $XD
 - signal +2 exit status check
-
-
-Builtin double checkup:
-
-- echo done
-- env done
-- exit done
-- unset done
-- export done
