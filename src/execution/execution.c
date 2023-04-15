@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 09:59:40 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 13:20:37 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 12:20:09 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ static void	parent_cleanup(t_mini *mini)
 void	execution(t_mini *mini)
 {
 	check_if_one_command(mini);
-	check_if_heredoc(mini);
+	if (check_if_heredoc(mini) == FAILURE)
+	{
+		parent_cleanup(mini);
+		return ;
+	}
 	create_child_process(mini);
 	wait_for_child_process(mini->cmds_list, mini->skip_waiting);
 	parent_cleanup(mini);

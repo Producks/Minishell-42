@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:59:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 22:58:02 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 12:10:22 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static char	*handle_dollar_heredoc(t_mini *mini, char *message)
 
 static int	handle_message_error(t_mini *mini)
 {
-	signals_handler(true, false, false);
+	if (g_exit_status == 6969)
+		return (130);
 	if (errno == ENOMEM)
 		return (print_errno(errno), FAILURE);
 	write(STDERR_FILENO,
@@ -43,7 +44,6 @@ int	write_to_heredoc(t_mini *mini, int fd)
 	struct stat		file_status;
 	int				ret;
 
-	signals_handler(true, false, true);
 	while (true)
 	{
 		message = readline(MAG "Heredoc > " RESET);
@@ -61,6 +61,5 @@ int	write_to_heredoc(t_mini *mini, int fd)
 		write(fd, "\n", 1);
 		free(expanded_message);
 	}
-	signals_handler(true, false, false);
 	return (free (message), close(fd), SUCCESS);
 }

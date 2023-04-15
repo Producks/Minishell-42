@@ -2,10 +2,10 @@ Last updated on : 2023-04-14
 
 Feature left to add:
 
-- Error handling / Memory management
+- None
 
 Known bug / What to fix:
 
-- Leaks ?
-- Ambirous redir < $XD
+- Error handling / Memory management
+- Ambigous redirection checkup < $LL
 - signal +2 exit status check

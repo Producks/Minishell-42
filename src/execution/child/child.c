@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 15:09:59 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 01:28:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	handle_child(t_mini *mini, bool is_built_in)
 	int	ret;
 
 	ret = SUCCESS;
-	signals_handler(false, false, false);
+	signals_handler_child(false);
 	cleanup(mini);
 	if (is_built_in == true)
 	{

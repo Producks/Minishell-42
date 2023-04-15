@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 16:45:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 16:56:28 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 11:17:48 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@
 
 # define BUILTIN_SUCCESS 0
 # define BUILTIN_COMMAND_ERROR 1
+
+/* Signals definitions */
+
+# define SIGINT_EXIT 2
+# define SIGQUIT_EXIT 3
 
 /* Colors definitions */
 

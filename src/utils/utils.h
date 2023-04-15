@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 17:05:20 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 11:48:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void	*free_linked_list_mini(t_cmds **head);
 
 /* Signal.c */
 
-void	signals_handler(bool parent, bool mute, bool is_interactive);
+void	signals_handler_parent(bool mute, bool is_interactive);
+void	signals_handler_child(bool is_heredoc);
 void	regular_shell(int signal);
 void	interactive_shell(int signal);
+void	heredoc_signal(int signal);
 
 /* Create_file_name.c */
 
@@ -59,5 +61,9 @@ bool	check_expandable(char c);
 /* Free_linked_list_exec */
 
 void	free_linked_list_execve(t_mini *mini);
+
+/* Calculate_exit_status.c */
+
+int		calculate_exit_status(int exit_status);
 
 #endif

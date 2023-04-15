@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 16:55:12 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 11:58:23 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		redirect_input_from_heredoc(t_mini *mini);
 
 /*heredoc.c*/
 
-void	check_if_heredoc(t_mini *mini);
+int		check_if_heredoc(t_mini *mini);
 
 /*heredoc_file_handler.c*/
 

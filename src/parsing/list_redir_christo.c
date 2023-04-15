@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/04/14 17:54:18 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 12:23:55 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	addnode_end_redir(t_redir **list, int dir, char *filename, t_pos *pos)
 		new_node->in = true;
 	if (filename)
 	{
-		if (pos->type == 54)
-			new_node->filename = interpret_quotes(filename);
-		else
-			new_node->filename = interpreter(filename, pos->mini);
+		// if (pos->type == 54)
+		// 	new_node->filename = interpret_quotes(filename);
+		// else
+		new_node->filename = interpreter(filename, pos->mini);
 		if (!new_node->filename)
 			return (FAILURE);
 	}
