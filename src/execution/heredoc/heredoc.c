@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/15 12:26:48 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 12:46:59 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void	exit_heredoc(t_mini *mini, int exit_status)
 {
 	close(mini->fd_in);
 	close(mini->fd_out);
-	mini->cmds_list = free_linked_list_mini(&mini->cmds_list);
-	mini->env_copy = free_double_array(mini->env_copy);
-	mini->current_cmds = free_double_array(mini->current_cmds);
+	free_linked_list_mini(&mini->cmds_list);
+	free_double_array(mini->env_copy);
+	free_double_array(mini->current_cmds);
 	exit(exit_status);
 }
 
