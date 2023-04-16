@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:59:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 01:43:08 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 17:40:38 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*handle_dollar_heredoc(t_mini *mini, char *message)
 static int	handle_message_error(t_mini *mini)
 {
 	if (g_exit_status == 6969)
-		return (130); // fix for school
+		return (1);
 	if (errno == ENOMEM)
 		return (print_errno(errno), errno);
 	write(STDERR_FILENO,

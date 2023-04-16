@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/15 01:27:06 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 17:17:58 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int	main(int argc, char *argv[], char *envp[])
 	g_exit_status = read_input(&mini);
 	rl_clear_history();
 	free_struct_mini(&mini);
-	printf("exit\n"); // check if we leave \n or not
+	printf("exit\n");
 	return (g_exit_status);
 }

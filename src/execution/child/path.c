@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 00:13:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 17:57:29 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*find_built_in_path(t_mini *mini)
 	return (NULL);
 }
 
-/*I CAN'T*/
+/* I CAN'T */
 char	*absolute_path(t_mini *mini)
 {
 	char	*absolute_path;

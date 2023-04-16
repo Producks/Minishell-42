@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 04:12:41 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 17:18:53 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ static void	handle_child(t_mini *mini, bool is_built_in)
 	{
 		ret = built_ins(mini);
 		child_cleanup_no_cmds(mini);
-		if (ret == 69)
-			exit (0);
 		exit(ret);
 	}	
 	run_cmd(mini);

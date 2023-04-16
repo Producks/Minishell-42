@@ -10,3 +10,10 @@ Known bug / What to fix:
 - Ambigous redirection checkup < $LL
 - signal +2 exit status check
 ???
+
+//- exit only exit no arg or leave CHECK LATER
+// FIX SIGNAL HEREDOC CTRL+C = 1 not 0
+
+
+- relative path
+- export PATH=/bin

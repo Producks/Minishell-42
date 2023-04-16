@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 04:09:22 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 16:43:01 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_mini
 	int		fd_out;
 	bool	is_one_cmd;
 	bool	skip_waiting;
+	bool	exit;
 }	t_mini;
 
 #endif
