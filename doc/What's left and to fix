@@ -1,4 +1,4 @@
-Last updated on : 2023-04-14
+Last updated on : 2023-04-16
 
 Feature left to add:
 
@@ -7,5 +7,6 @@ Feature left to add:
 Known bug / What to fix:
 
 - Error handling / Memory management
-- Ambigous redirection checkup < $LL
+- Ambigous redirection checkup < $LL ? done check return value school
 - signal +2 exit status check
+- SIGPIPE
