@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/15 01:28:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 04:12:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 	ret_status = g_exit_status;
 	while (cmds)
 	{
-		waitpid(cmds->pid, &ret_status, 0);
-		if (WIFEXITED(ret_status))
-			g_exit_status = WEXITSTATUS(ret_status);
-		else if (WIFSIGNALED(ret_status))
+		if (cmds->skip == false)
 		{
-			g_exit_status = 128 + WTERMSIG(ret_status);
+			waitpid(cmds->pid, &ret_status, 0);
+			g_exit_status = calculate_exit_status(ret_status);
 		}
 		if (cmds->tmp_file == true)
 		{
@@ -83,7 +81,6 @@ static void	create_fork(t_mini *mini)
 		handle_child(mini, is_built_in);
 }
 
-/*Will handle errors later prototype to see if the idea works*/
 int	create_child_process(t_mini *mini)
 {
 	int			ret;
@@ -95,6 +92,8 @@ int	create_child_process(t_mini *mini)
 		ret = handle_io_redirections(mini);
 		if (ret == SUCCESS)
 			create_fork(mini);
+		if (ret == FAILURE)
+			mini->cmds_list->skip = true;
 		mini->cmds_list = mini->cmds_list->next;
 		restore_parent_file_descriptors(mini);
 	}

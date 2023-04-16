@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 23:26:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/12 11:13:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 02:19:59 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void	child_cleanup_command_not_found(t_mini *mini)
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
 	close(STDERR_FILENO);
-	exit (127);
+	exit (127); // check
 }

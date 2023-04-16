@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:12 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 17:07:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 23:24:41 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,9 @@ void	literal_error_handling(t_literal *literal,
 /* Check_expandable.c */
 
 bool	check_expandable(char c);
+
+/* literal_sigpipe_check.c */
+
+int		literal_sigpipe_check(t_literal *literal);
 
 #endif

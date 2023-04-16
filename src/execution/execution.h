@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/15 11:58:23 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 02:00:25 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ int		check_if_heredoc(t_mini *mini);
 
 int		file_handler(t_mini *mini);
 int		get_file_status(t_mini *mini, int fd, struct stat *file_status);
-
-/*heredoc_error_handler.c*/
-
-int		handle_file_handle_error(t_mini *mini);
+void	unlink_temp_file(t_mini *mini);
 
 /*child.c*/
 

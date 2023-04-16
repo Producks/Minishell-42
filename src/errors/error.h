@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 12:18:19 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 17:05:55 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 03:59:39 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int		print_error(const char *message, int error_nbr);
 void	print_errno(int error_nbr);
 void	print_string_error(const char *message);
 int		print_errno_ret(int error_nbr);
+int		print_ambigous(const char *message, int error_nbr);
 
 #endif

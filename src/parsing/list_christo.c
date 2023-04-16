@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:39:00 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/15 12:40:10 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 17:08:27 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ void	parse_linked_list(t_mini *mini, char **tokens)
 		return ;
 	}
 	mini->cmds_list = cmds;
+	mini->head_cmd = mini->cmds_list;
 	free_double_array(tokens);
 	execution(mini);
+	mini->head_cmd = NULL;
 }
 // printall(cmds);

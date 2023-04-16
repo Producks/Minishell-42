@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 16:35:54 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 04:09:22 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_cmds
 	pid_t			pid;
 	bool			tmp_file;
 	int				count;
+	bool			skip;
 	struct s_cmds	*previous;
 	struct s_cmds	*next;
 	struct s_cmds	*head;

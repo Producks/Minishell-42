@@ -6,11 +6,20 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/15 01:14:01 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 01:56:02 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../execution.h"
+
+void	unlink_temp_file(t_mini *mini)
+{
+	char	file_name[15];
+
+	create_file_name(file_name, mini->cmds_list->count);
+	if (!access(file_name, F_OK))
+		unlink(file_name);
+}
 
 int	get_file_status(t_mini *mini, int fd, struct stat *file_status)
 {

@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/06 22:51:07 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 03:53:50 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	restore_parent_file_descriptors(t_mini *mini)
 {
-	dup2(mini->fd_in, STDIN_FILENO);
-	dup2(mini->fd_out, STDOUT_FILENO);
+	if (dup2(mini->fd_in, STDIN_FILENO) == FAILURE)
+		print_errno(errno);
+	if (dup2(mini->fd_out, STDOUT_FILENO) == FAILURE)
+		print_errno(errno);
 }
 
 static int	handle_out_redirection(t_mini *mini)
