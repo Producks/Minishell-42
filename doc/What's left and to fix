@@ -9,3 +9,4 @@ Known bug / What to fix:
 - Error handling / Memory management
 - Ambigous redirection checkup < $LL
 - signal +2 exit status check
+???
