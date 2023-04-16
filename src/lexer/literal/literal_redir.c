@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 01:01:03 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/19 01:11:50 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/03/29 18:06:20 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,17 @@ int	isredir(int c)
 
 static void	double_redir_check(t_literal *literal, const char *str)
 {
+	char	type;
+
 	literal->str[literal->i++] = 29;
 	literal->str[literal->i++] = str[literal->index++];
-	literal->str[literal->i++] = str[literal->index++];
-	literal->str[literal->i++] = 29;
+	if (str[literal->index] != literal->type)
+		literal->str[literal->i++] = 29;
+	else
+	{
+		literal->str[literal->i++] = str[literal->index++];
+		literal->str[literal->i++] = 29;
+	}
 }
 
 static void	single_redir_check(t_literal *literal, const char *str)

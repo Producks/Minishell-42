@@ -1,0 +1,23 @@
+Last updated on : 2023-03-29
+
+Bugs:
+
+1#- Invalid write with < > << >> (see image bug1.png) (see bug3.png) doesn't happen if multiple argument? Double invalid write if printall is also called.
+
+- Massive issue when it come down to free < > << >> ~ Seems to be an issue with how filename is stored? After more research it seems that it's getting the adress from literal_token which is dangerous.
+
+- Weird leak that get fix if I comment one of the line (see bug2.PNG) Seems to affect nothing if commented?
+
+3 #- << cat << cat cat | wc doesn't work properly see picture bug4.png and bug5.png
+
+2#- Segfault with input : < Makefile
+	See picture bug6.png for valgrind log
+
+- Cmds double pointer not being null if no command? double check with me
+
+2#- Segfault with input <Makefile|>LOL
+                                                                                                                                                                                   
+1#<< lol cat | wc
+
+
+example: <lol>cat cat|wc>xd

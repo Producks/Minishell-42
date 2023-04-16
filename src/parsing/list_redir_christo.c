@@ -3,132 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   list_redir_christo.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 21:45:03 by cperron           #+#    #+#             */
-/*   Updated: 2023/03/17 23:41:04 by cperron          ###   ########.fr       */
+/*   Updated: 2023/04/16 04:02:36 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	*free_linked_list_redirr(t_redir **head)
+int	addnode_end_redir(t_redir **list, int dir, char *filename, t_pos *pos)
 {
-	t_redir *current;
-	t_redir *previous;
-	
-	current = *head;
-	while (current)
-	{
-		previous = current;
-		current = current->next;
-		free(previous);
-		previous = NULL;
-	}
-	return (NULL);
-}
+	t_redir	*new_node;
 
-void	print_redir_list(t_redir *redir)
-{
-	t_redir *current;
-	int i;
-	
-	i = 1;
-	current = redir;
-	while (current)
-	{
-		if (current->type == 50)
-			printf("|\n");
-		if (current->type == 51)
-			printf(">\n");
-		if (current->type == 52)
-			printf("<\n");
-		if (current->type == 53)
-			printf(">>\n");
-		if (current->type == 54)
-			printf("<<\n");
-		printf("node :%d\n", i);
-		printf("in :%d\n", current->in);
-		printf("out :%d\n", current->out);
-		printf("filename : %s\n\n", current->filename);
-		current = current->next;
-		i++;
-	}
-}
-
-void	addnode_end_redir(t_redir **list, int type, int dir, char *filename)
-{
-	t_redir *new_node;
-	
 	new_node = ft_calloc(1, sizeof(t_redir));
-	new_node->type = type;
+	if (!new_node)
+		return (print_errno(ENOMEM), FAILURE);
+	new_node->type = pos->type;
 	if (dir == 1)
 		new_node->out = true;
 	if (dir == 0)
 		new_node->in = true;
-	new_node->filename = filename;
-	new_node->next = NULL;
-	new_node->head = *list;
-
-
-	t_redir *current;
-	
-	if (*list == NULL)
-		*list = new_node;
-	
-	else
+	if (filename)
 	{
-	current = *list;
-	while(current->next)
-		current = current->next;
-	current->next = new_node;
+		if (pos->type == 54)
+			new_node->filename = interpret_quotes(filename);
+		else
+		new_node->filename = interpreter(filename, pos->mini);
+		if (!new_node->filename)
+			return (FAILURE);
 	}
+	addnoderedir(list, new_node);
+	return (SUCCESS);
 }
 
-void	check_pipe(t_redir **redir, char **tokens, int num_token)
+int	check_pipe_in(t_redir **redir, char **tokens, int i, t_pos *pos)
 {
-	int i;
-
-	i = 0;
 	while (tokens[i])
 	{
 		if (ft_strcmp(tokens[i], "|") == 0)
 		{
-			addnode_end_redir(redir, 50, 1, tokens[i - 1]);
-			addnode_end_redir(redir, 50, 0, tokens[i + 1]);
+			pos->type = 50;
+			if (addnode_end_redir(redir, 1, NULL, pos) == FAILURE)
+				return (FAILURE);
+			return (1);
 		}	
 		i++;
 	}
+	return (0);
 }
 
-void	check_redir(t_redir **redir, char **tokens, int num_token)
+int	check_pipe_out(t_redir **redir, char **tokens, int i, t_pos *pos)
 {
-	int i;
+	int	j;
 
-	i = 0;
-	while (tokens[i])
+	j = 0;
+	while (tokens[j] && j < i)
+	{
+		if (ft_strcmp(tokens[j], "|") == 0)
+		{
+			pos->type = 50;
+			if (addnode_end_redir(redir, 0, NULL, pos) == FAILURE)
+				return (FAILURE);
+			return (1);
+		}	
+		j++;
+	}
+	return (0);
+}
+
+int	check_redir_2(t_redir **redir, char **tokens, int i, t_pos *pos)
+{
+	int	max;
+
+	max = i;
+	i = pos->bef_cmd;
+	while (tokens[i] && is_pipe(tokens[i]) == 0)
 	{
 		if (ft_strcmp(tokens[i], ">") == 0)
-			addnode_end_redir(redir, 51, 1, tokens[i + 1]);
-		if (ft_strcmp(tokens[i], "<") == 0)
-			addnode_end_redir(redir, 52, 0, tokens[i + 1]);
-		if (ft_strcmp(tokens[i], ">>") == 0)
-			addnode_end_redir(redir, 53, 1, tokens[i + 1]);
-		if (ft_strcmp(tokens[i], "<<") == 0)
-			addnode_end_redir(redir, 54, 0, tokens[i + 1]);
+		{
+			pos->type = 51;
+			if (addnode_end_redir(redir, 1, tokens[i + 1], pos) == FAILURE)
+				return (FAILURE);
+		}
+		i = check_redir(redir, tokens, i, pos);
 		i++;
 	}
+	return (i);
 }
 
-void	redir_list(char **tokens)
+int	redir_list_3(t_cmds *new_node, char **tokens, int i, t_pos *pos)
 {
-	t_redir *redir;
-	
+	t_redir	*redir;
+
 	redir = NULL;
-	check_pipe(&redir, tokens, 0);
-	check_redir(&redir, tokens, 0);
-	print_redir_list(redir);
-	if(redir)
-		redir = free_linked_list_redirr(&redir);
-	print_redir_list(redir);
+	i = pos->bef_cmd;
+	if (check_pipe_in(&redir, tokens, i, pos) == FAILURE)
+		return (FAILURE);
+	if (check_pipe_out(&redir, tokens, i, pos) == FAILURE)
+		return (FAILURE);
+	i = check_redir_2(&redir, tokens, i, pos);
+	if (i == FAILURE)
+		return (FAILURE);
+	new_node->redir_list = redir;
+	return (i);
 }

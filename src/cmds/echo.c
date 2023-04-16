@@ -6,13 +6,33 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 11:01:53 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/10 22:30:09 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/12 14:12:23 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdbool.h>
-#include "../../libs/Libft/libft.h"
+#include "cmds.h"
+
+static bool	check_echo_option(const char *str, int count)
+{
+	int	index;
+
+	if (count != 1)
+		return (false);
+	index = 0;
+	if (!str[index])
+		return (false);
+	if (str[index++] != '-')
+		return (false);
+	if (str[index++] != 'n')
+		return (false);
+	while (str[index])
+	{
+		if (str[index] != 'n')
+			return (false);
+		index++;
+	}
+	return (true);
+}
 
 int	echo(char **message)
 {
@@ -23,7 +43,7 @@ int	echo(char **message)
 	check_n = false;
 	while (message[index])
 	{
-		if ((ft_strcmp(message[index], "-n") == 0) && (index == 1))
+		if (check_echo_option(message[index], index))
 		{
 			index++;
 			check_n = true;
@@ -36,5 +56,5 @@ int	echo(char **message)
 	}
 	if (check_n == false)
 		write(1, "\n", 1);
-	return (0);
+	return (BUILTIN_SUCCESS);
 }

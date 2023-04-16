@@ -5,16 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 13:35:05 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/05 12:37:34 by ddemers          ###   ########.fr       */
+/*   Created: 2023/04/13 00:21:37 by ddemers           #+#    #+#             */
+/*   Updated: 2023/04/13 12:54:57 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include "../main/struct.h"
-
-// extern int	g_exit_status;
+#include "cmds.h"
 
 static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 {
@@ -27,7 +23,7 @@ static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 	new = malloc(sizeof(char *) * size);
 	if (!new)
 	{
-		ft_free(mini->env_copy);
+		free_double_array(mini->env_copy);
 		mini->env_copy = NULL;
 		return ;
 	}
@@ -35,7 +31,7 @@ static void	ft_remove_element(t_mini *mini, int index, int i, int j)
 		if (i != index)
 			new[j++] = ft_strdup(mini->env_copy[i]);
 	new[j] = NULL;
-	ft_free(mini->env_copy);
+	free_double_array(mini->env_copy);
 	mini->env_copy = new;
 }
 
@@ -49,21 +45,52 @@ static int	unset_strcmp(const char *str1, const char *str2)
 	return (1);
 }
 
-/*More testing need to be done, seems to be good for now*/
-int	unset(t_mini *mini)
+static void	write_unset_error(const char *str)
+{
+	write(STDERR_FILENO, "Minishell: unset: `", 19);
+	write(STDERR_FILENO, str, ft_strlen(str));
+	write(STDERR_FILENO, "': not a valid identifiter\n", 27);
+}
+
+static int	check_syntax_error_unset(const char *str, char c)
 {
 	int	index;
-	int	j;
 
-	j = 0;
-	if (mini->cmd[1] == NULL)
-		return (0);
-	while (mini->cmd[++j])
+	if (!ft_isalpha(c) && c != '_')
 	{
+		write_unset_error(str);
+		return (1);
+	}
+	index = 0;
+	while (str[index])
+	{
+		if (str[index] == '=')
+		{
+			write_unset_error(str);
+			return (1);
+		}
+		index++;
+	}
+	return (0);
+}
+
+int	unset(t_mini *mini, int index, int j, bool error)
+{
+	if (mini->current_cmds[1] == NULL)
+		return (SUCCESS);
+	while (mini->current_cmds[++j])
+	{
+		if (check_syntax_error_unset(mini->current_cmds[j],
+				mini->current_cmds[j][0]))
+		{
+			error = true;
+			continue ;
+		}
 		index = 0;
 		while (mini->env_copy[index])
 		{
-			if (unset_strcmp(mini->cmd[j], mini->env_copy[index]) == 0)
+			if (unset_strcmp(mini->current_cmds[j],
+					mini->env_copy[index]) == 0)
 			{
 				ft_remove_element(mini, index, -1, 0);
 				break ;
@@ -71,5 +98,8 @@ int	unset(t_mini *mini)
 			index++;
 		}
 	}
-	return (0);
+	if (error == true)
+		return (BUILTIN_COMMAND_ERROR);
+	return (BUILTIN_SUCCESS);
 }
+//6

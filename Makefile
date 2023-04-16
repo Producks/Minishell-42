@@ -25,36 +25,80 @@ PATH_READHISTORY = libs/readline/
 # RUN #
 RUN = @./minishell
 
-# Source #
-SRC = 	./src/main/main.c\
-		./src/execution/fork.c\
-		./src/cmds/echo.c\
-		./src/cmds/pwd.c\
-		./src/cmds/env.c\
-		./src/cmds/cd.c\
-		./src/cmds/export.c\
-		./src/cmds/ft_exit.c\
-		./src/cmds/unset.c\
-		./src/main/init.c \
-		./src/main/signal.c \
-		./src/parsing/read_input.c \
-		./src/parsing/check_input.c \
-		./src/parsing/list_christo.c\
-		./src/parsing/list_redir_christo.c\
-		./src/utils/linked_list_cmds.c \
-		./src/execution/redirection.c \
-		./src/utils/strjoin_path.c \
-		./src/execution/path.c \
-		./src/execution/heredoc.c \
-		./src/utils/place_holder.c \
-		./src/lexer/lexer.c \
+# Leak #
+LEAK = valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --trace-children=yes ./minishell
+
+EXECUTION = ./src/execution/execution.c \
+			./src/execution/redirection/io_redirection.c \
+			./src/execution/redirection/redirection_utils.c \
+			./src/execution/child/path.c \
+			./src/execution/child/child.c \
+			./src/execution/child/execve.c \
+			./src/execution/child/builtin.c \
+			./src/execution/heredoc/heredoc.c \
+			./src/execution/heredoc/heredoc_file_handler.c \
+			./src/execution/child/cleanup.c
+
+PARSING =	./src/parsing/list_christo.c \
+			./src/parsing/list_redir_christo.c \
+			./src/parsing/parsing_utils_1.c\
+			./src/parsing/parsing_utils_2.c\
+			./src/parsing/test_list.c\
+			./src/parsing/list_utils.c
+
+INPUT	= 	./src/input/read_input.c \
+			./src/input/read_input_heredoc.c
+
+PARSING =	./src/parsing/list_christo.c \
+			./src/parsing/list_redir_christo.c \
+			./src/parsing/parsing_utils_1.c\
+			./src/parsing/parsing_utils_2.c\
+			./src/parsing/test_list.c\
+			./src/parsing/list_utils.c
+
+UTILS = ./src/utils/strings/strjoin_path.c \
+		./src/utils/strings/str_cutcut.c \
+		./src/utils/env_functions.c \
+		./src/utils/signal.c \
+		./src/utils/mini_struct_functions.c \
+		./src/utils/print_startup.c \
+		./src/utils/strings/create_file_name.c \
+		./src/utils/check_expandable.c \
+		./src/utils/free_linked_list_exec.c \
+		./src/utils/calculate_exit_status.c
+
+LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \
 		./src/lexer/literal/literal_string.c \
 		./src/lexer/literal/literal_redir.c \
-		./src/lexer/literal/literal_error.c \
-		./src/lexer/interpreter/dollar_interpreter.c \
-		./src/lexer/interpreter/quotes_interpreter.c \
-		./src/utils/str_cutcut.c
+		./src/lexer/literal/literal_error.c
+
+INTERPRETER = ./src/interpreter/interpreter.c \
+			  ./src/interpreter/dollar/dollar_expandable.c \
+			  ./src/interpreter/dollar/dollar_interpreter.c \
+			  ./src/interpreter/quotes/quotes_interpreter.c \
+			  ./src/interpreter/cut.c \
+			  ./src/interpreter/dollar/dollar_length_handle.c
+
+CMDS = ./src/cmds/echo.c \
+		./src/cmds/pwd.c \
+		./src/cmds/env.c \
+		./src/cmds/cd.c \
+		./src/cmds/export.c \
+		./src/cmds/ft_exit.c \
+		./src/cmds/unset.c
+
+ERRORS = ./src/errors/error.c
+
+SRC = 	./src/main.c \
+		$(EXECUTION) \
+		$(PARSING) \
+		$(UTILS) \
+		$(LEXER) \
+		$(CMDS) \
+		$(INTERPRETER) \
+		$(INPUT) \
+		$(ERRORS)
 
 # Colors #
 BLACK = \033[0;30m
@@ -97,8 +141,8 @@ lib:
 	@make -s -C libs/Libft
 #	make -C libs/Libft
 
-assert: CFLAGS += -DASSERT=1
-assert: fclean all
+tester: CFLAGS += -D TESTER=1
+tester: fclean all
 	@python3 ./assert_minishell.py
 
 clean:
@@ -115,4 +159,7 @@ re: fclean all
 run: all
 	${RUN}
 
-.PHONY: all clean fclean re lib run
+leak: all
+	${LEAK}
+
+.PHONY: all clean fclean re lib run leak

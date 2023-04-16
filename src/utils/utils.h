@@ -6,36 +6,64 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 08:07:10 by ddemers           #+#    #+#             */
-/*   Updated: 2023/03/20 16:08:03 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/15 11:48:40 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "../main/struct.h"
+# include "common_definitons.h"
+# include "struct.h"
+# include "../../libs/Libft/libft.h"
+# include "../errors/error.h"
 
-# define SINGLE_QUOTE 39
-# define DOUBLE_QUOTE 34
+/* print_startup.c*/
 
-typedef struct s_split
-{
-	int		nbr_elements;
-	char	**array;
-}	t_split;
+void	print_startup(void);
 
-t_cmds *create_node_cmds(void);
-void	add_node_cmds(t_cmds **head, t_cmds *new_node);
-void	delete_node_cmds(t_cmds **head, t_cmds *node_to_delete);
+/* Mini_struct_functions.c */
+
+int		init_struct_mini(t_mini *mini, char *envp[]);
+void	free_struct_mini(t_mini *mini);
+void	clean_redir_list(t_cmds *current);
 void	*free_linked_list_mini(t_cmds **head);
-char	*strjoin_path(char const *s1, char const *s2, char sep);
 
-/*Place holder for t_redir*/
-void	*free_linked_list_redir(t_redir **head);
-void	delete_node_redir(t_redir **head, t_redir *node_to_delete);
-void	add_node_redir(t_redir **head, t_redir *new_node);
-t_redir *create_node_redir(void);
+/* Signal.c */
+
+void	signals_handler_parent(bool mute, bool is_interactive);
+void	signals_handler_child(bool is_heredoc);
+void	regular_shell(int signal);
+void	interactive_shell(int signal);
+void	heredoc_signal(int signal);
+
+/* Create_file_name.c */
+
+void	create_file_name(char *str, int number);
+
+/* Env_functions.c */
+
+int		add_env_element(t_mini *mini, char *str_to_add);
+int		copy_env(t_mini *mini, char *envp[]);
+
+/* Str_cutcut.c */
 
 char	*str_cutcut(char *original, char *replacement, char *to_replace);
+
+/* Strjoin_path.c */
+
+char	*strjoin_path(char const *s1, char const *s2, char sep);
+
+/* Check_expandable.c */
+
+bool	check_expandable(char c);
+
+/* Free_linked_list_exec */
+
+void	free_linked_list_execve(t_mini *mini);
+
+/* Calculate_exit_status.c */
+
+int		calculate_exit_status(int exit_status);
 
 #endif

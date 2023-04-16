@@ -1,0 +1,11 @@
+Last updated on : 2023-04-14
+
+Feature left to add:
+
+- None
+
+Known bug / What to fix:
+
+- Error handling / Memory management
+- Ambigous redirection checkup < $LL
+- signal +2 exit status check
