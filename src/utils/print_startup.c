@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 22:46:28 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 17:09:46 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 13:44:24 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	print_startup(void)
 		fetch_mac();
 	else if (OS == 1)
 		fetch_linux();
-	printf("Welcome %s to Minishell\n", user);
+	printf(ORNG"Welcome %s to Minishell!\n"RESET, user);
 }

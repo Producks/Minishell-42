@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:59:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 17:40:38 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 11:03:19 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	write_to_heredoc(t_mini *mini, int fd)
 
 	while (true)
 	{
-		message = readline(MAG "Heredoc > " RESET);
+		message = readline("Heredoc > ");
 		if (!message)
 			return (close(fd), handle_message_error(mini));
 		if (!ft_strcmp(mini->cmds_list->redir_list->filename, message))

@@ -3,7 +3,6 @@ NAME = minishell
 
 # Compile stuff #
 CC = @gcc
-#CC = gcc
 CFGLAGS = -Wall -Werror -Wextra
 
 # Remove #
@@ -24,9 +23,6 @@ PATH_READHISTORY = libs/readline/
 
 # RUN #
 RUN = @./minishell
-
-# Leak #
-LEAK = valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all --trace-children=yes ./minishell
 
 EXECUTION = ./src/execution/execution.c \
 			./src/execution/redirection/io_redirection.c \
@@ -112,36 +108,23 @@ PURPLE = \033[0;35m
 CYAN = \033[0;36m
 WHITE = \033[0;37m
 
-# Check if linux or mac, add a flag depending on the os #
-# ifeq ($(OS), Linux)
-# 	FLAGS = $(LINUX)
-# else ifeq ($(OS), Darwin)
-# 	FLAGS = $(MAC)
-#         ,----,
-#    ___.`      `,
-#    `===  D     :
-#      `'.      .'
-#         )    (                   ,
-#        /      \_________________/|
-#       /                          |
-#      |                           ;
-#      |               _____       /
-#      |      \       ______7    ,'
-#      |       \    ______7     /
-#       \       `-,____7      ,'   
-# ^~^~^~^`\                  /~^~^~^~^
-#   ~^~^~^ `----------------' ~^~^~^
-#  ~^~^~^~^~^^~^~^~^~^~^~^~^~^~^~^~
-
 all: lib $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 		${CC} ${CFGLAGS} ${OBJS} -lreadline -lncurses ${READLINE} ${READHISTORY} ${LIBFT} -o ${NAME}
-	@echo "$(GREEN)Done$(WHITE)"
+	@echo "${GREEN}Everything compiled!🎉${WHITE}"
+	@echo " _______________________________________________________________________"
+	@echo "|[] Minishell                                                     |[F]|!|"
+	@echo "|'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''|'|"
+	@echo "|${GREEN}Minishell >${WHITE} open https://www.youtube.com/watch?v=dQw4w9WgXcQ         | |"
+	@echo "|${GREEN}Minishell >${WHITE} echo Hello World!                                        | |"
+	@echo "|Hello World!                                                         | |"
+	@echo "|${GREEN}Minishell >${WHITE} rm -rf minishell                                         |_|"
+	@echo "|_____________________________________________________________________|/|"
+	@echo "${PURPLE}By ${YELLOW}Ddemers🦆 ${CYAN}& ${RED}Cperron🍆${WHITE}"
 
 lib:
 	@make -s -C libs/Libft
-#	make -C libs/Libft
 
 tester: CFLAGS += -D TESTER=1
 tester: fclean all
@@ -161,7 +144,4 @@ re: fclean all
 run: all
 	${RUN}
 
-leak: all
-	${LEAK}
-
-.PHONY: all clean fclean re lib run leak
+.PHONY: all clean fclean re lib run

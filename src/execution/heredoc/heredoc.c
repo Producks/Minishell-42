@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:21:41 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 17:41:26 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 12:17:45 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	heredoc_fork(t_mini *mini, t_redir *head)
 {
 	pid_t	child;
 	int		ret_status;
-	char	file_name[15];
+	char	file_name[19];
 
 	child = fork();
 	if (child == FAILURE)
@@ -72,7 +72,7 @@ static int	heredoc_fork(t_mini *mini, t_redir *head)
 	waitpid(child, &ret_status, 0);
 	signals_handler_parent(false, false);
 	g_exit_status = calculate_exit_status(ret_status);
-	if (g_exit_status == 130 || g_exit_status == ENOMEM)
+	if (g_exit_status == 1 || g_exit_status == ENOMEM)
 		return (unlink_temp_file(mini), FAILURE);
 	mini->cmds_list->tmp_file = true;
 	create_file_name(file_name, mini->cmds_list->count);

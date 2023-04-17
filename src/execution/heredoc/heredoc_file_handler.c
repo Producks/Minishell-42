@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 17:20:11 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 01:56:02 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 12:01:57 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	unlink_temp_file(t_mini *mini)
 {
-	char	file_name[15];
+	char	file_name[19];
 
 	create_file_name(file_name, mini->cmds_list->count);
 	if (!access(file_name, F_OK))
@@ -46,10 +46,11 @@ int	get_file_status(t_mini *mini, int fd, struct stat *file_status)
 int	file_handler(t_mini *mini)
 {
 	int		open_fd;
-	char	file_name[15];
+	char	file_name[19];
 	int		ret;
 
 	create_file_name(file_name, mini->cmds_list->count);
+	printf("%s\n", file_name);
 	if (!access(file_name, F_OK))
 	{
 		ret = unlink(file_name);

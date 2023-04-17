@@ -11,10 +11,10 @@ Known bug / What to fix:
 - signal +2 exit status check
 ???
 
-//- exit only exit no arg or leave CHECK LATER
 // FIX SIGNAL HEREDOC CTRL+C = 1 not 0
-// PWD TOO MANY ARGS?
 
 
-- relative path
-- export PATH=/bin
+- relative path // done?
+- export PATH=/bin // done ?
+
+- /TMP file temp file

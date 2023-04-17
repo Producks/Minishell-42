@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:26 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 17:18:53 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 11:57:09 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	wait_for_child_process(t_cmds *cmds, bool skip_waiting)
 {
 	int		ret_status;
-	char	temp_buffer[15];
+	char	temp_buffer[19];
 
 	if (skip_waiting == true)
 		return ;
