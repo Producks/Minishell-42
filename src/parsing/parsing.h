@@ -3,39 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 11:56:15 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 14:44:47 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 14:09:45 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 
-# include <stdbool.h>
 # include <stdio.h>
-# include <string.h>
-# include "../utils/struct.h"
-# include "../../libs/readline/history.h"
-# include "../../libs/readline/readline.h"
-# include "../../libs/Libft/libft.h"
 # include "../execution/execution.h"
-# include "../cmds/cmds.h"
-# include "../lexer/lexer.h"
 # include "../interpreter/interpreter.h"
 
-// extern int	g_exit_status;
-
-# define RED   "\x1B[31m"
-# define GRN   "\x1B[32m"
-# define YEL   "\x1B[33m"
-# define BLU   "\x1B[34m"
-# define MAG   "\x1B[35m"
-# define CYN   "\x1B[36m"
-# define WHT   "\x1B[37m"
-# define PNK   "\x1B[38;5;206m"
-# define RESET "\x1B[0m"
 
 typedef struct s_pos
 {
@@ -46,11 +27,6 @@ typedef struct s_pos
 	int		type;
 	t_mini	*mini;
 }	t_pos;
-
-//else
-int		check_input(t_mini *mini);
-int		read_input(t_mini *mini);
-int		tokenize(t_mini *mini);
 
 //list_redir
 int		redir_list_3(t_cmds *new_node, char **tokens, int i, t_pos *pos);

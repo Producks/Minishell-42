@@ -45,8 +45,8 @@ PARSING =	./src/parsing/list_christo.c \
 INPUT	= 	./src/input/read_input.c \
 			./src/input/read_input_heredoc.c
 
-PARSING =	./src/parsing/list_christo.c \
-			./src/parsing/list_redir_christo.c \
+PARSING =	./src/parsing/list_cmds.c \
+			./src/parsing/list_redir.c \
 			./src/parsing/parsing_utils_1.c\
 			./src/parsing/parsing_utils_2.c\
 			./src/parsing/test_list.c\

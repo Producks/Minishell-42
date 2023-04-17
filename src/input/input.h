@@ -3,25 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:20:01 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 16:50:08 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 14:22:14 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INPUT_H
 # define INPUT_H
 
-# include <stdbool.h>
 # include <stdio.h>
-# include <string.h>
-# include "../utils/struct.h"
 # include "../../libs/readline/history.h"
 # include "../../libs/readline/readline.h"
-# include "../../libs/Libft/libft.h"
 # include "../execution/execution.h"
-# include "../cmds/cmds.h"
 # include "../lexer/lexer.h"
 # include "../interpreter/interpreter.h"
 

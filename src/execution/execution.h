@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 03:35:37 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 02:00:25 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 14:20:06 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <fcntl.h>
-# include <stdbool.h>
 # include <sys/stat.h>
 
 # ifdef __linux__
@@ -25,10 +21,7 @@
 #  include <sys/wait.h>
 # endif
 
-# include "../../libs/Libft/libft.h"
-# include "../utils/struct.h"
 # include "../utils/utils.h"
-# include "../errors/error.h"
 
 /*execution.c*/
 

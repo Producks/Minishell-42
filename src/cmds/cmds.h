@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
+/*   By: cperron <cperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:15:29 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 20:14:44 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 14:16:15 by cperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMDS_H
 # define CMDS_H
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "../utils/struct.h"
-# include "../../libs/Libft/libft.h"
-# include "../errors/error.h"
 # include "../utils/utils.h"
 
 extern int	g_exit_status;
