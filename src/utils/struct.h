@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 07:26:14 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 16:43:01 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 20:03:10 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_mini
 	char	**current_cmds;
 	char	**env_copy;
 	char	*message;
+	char	*current_dir;
 	int		fd_in;
 	int		fd_out;
 	bool	is_one_cmd;

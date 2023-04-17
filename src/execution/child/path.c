@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:16:04 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 17:57:29 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 00:11:10 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*find_built_in_path(t_mini *mini)
 		index++;
 	if (!mini->env_copy[index])
 		return (NULL);
-	path_try = ft_split(mini->env_copy[index], ':');
+	path_try = ft_split((mini->env_copy[index] + 5), ':');
 	if (!path_try)
 		return (NULL);
 	index = 0;
@@ -41,13 +41,13 @@ char	*find_built_in_path(t_mini *mini)
 }
 
 /* I CAN'T */
-char	*absolute_path(t_mini *mini)
+char	*absolute_path(char *path)
 {
 	char	*absolute_path;
 
-	if (!access(mini->current_cmds[0], F_OK))
+	if (!access(path, F_OK))
 	{
-		absolute_path = ft_strdup(mini->current_cmds[0]);
+		absolute_path = ft_strdup(path);
 		if (!absolute_path)
 			return (print_errno(ENOMEM), NULL);
 		return (absolute_path);
@@ -60,7 +60,7 @@ char	*executable_path(t_mini *mini)
 	char	*abs_path;
 	char	*pwd;
 
-	pwd = getcwd(NULL, 69);
+	pwd = getcwd(NULL, 0);
 	if (!pwd)
 		return (NULL);
 	abs_path = ft_strjoin(pwd, mini->current_cmds[0]);
@@ -71,15 +71,43 @@ char	*executable_path(t_mini *mini)
 	return (free(pwd), free(abs_path), NULL);
 }
 
+char	*change_path(t_mini *mini)
+{
+	char	*ret;
+	char	*dir;
+	int		count;
+	int		index;
+
+	count = count_double_dot(mini->current_cmds[0]);
+	if (count == 0)
+	{
+		ret = ft_strdup(mini->current_cmds[0]);
+		if (!ret)
+			return (print_errno(errno), NULL);
+		return (ret);
+	}
+	index = (3 * count);
+	dir = get_dir_changed(mini, count);
+	if (!dir)
+		return (NULL);
+	ret = strjoin_path(dir, (mini->current_cmds[0] + index), '/');
+	return (free(dir), ret);
+}
+
 char	*find_path(t_mini *mini)
 {
 	char	*path;
+	char	*path_changed;
 
-	if (ft_strncmp(mini->current_cmds[0], "./", 2) == 0)
-		path = absolute_path(mini);
-	else if (ft_strncmp(mini->current_cmds[0], "/", 1) == 0)
-		path = absolute_path(mini);
+	path_changed = change_path(mini);
+	if (!path_changed)
+		return (NULL);
+	if (ft_strncmp(path_changed, "./", 2) == 0)
+		path = absolute_path(path_changed);
+	else if (ft_strncmp(path_changed, "/", 1) == 0)
+		path = absolute_path(path_changed);
 	else
 		path = find_built_in_path(mini);
+	free(path_changed);
 	return (path);
 }

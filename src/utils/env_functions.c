@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:05:42 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/11 14:22:01 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 00:13:48 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,34 @@ int	add_env_element(t_mini *mini, char *str_to_add)
 	new_envp[index] = NULL;
 	free_double_array(mini->env_copy);
 	mini->env_copy = new_envp;
+	return (SUCCESS);
+}
+
+int	add_pwd_to_env(t_mini *mini, char *old_pwd, int index, int count)
+{
+	char	*copy;
+
+	while (mini->env_copy[index] && count != 2)
+	{
+		if (ft_strncmp(mini->env_copy[index], "PWD=", 4) == 0)
+		{
+			copy = ft_strjoin("PWD=", getcwd(NULL, 0));
+			if (!copy)
+				return (print_errno(ENOMEM), FAILURE);
+			free(mini->env_copy[index]);
+			mini->env_copy[index] = copy;
+			count++;
+		}
+		else if (ft_strncmp(mini->env_copy[index], "OLDPWD=", 7) == 0)
+		{
+			copy = ft_strjoin("OLDPWD=", old_pwd);
+			if (!copy)
+				return (print_errno(ENOMEM), FAILURE);
+			free(mini->env_copy[index]);
+			mini->env_copy[index] = copy;
+			count++;
+		}
+		index++;
+	}
 	return (SUCCESS);
 }

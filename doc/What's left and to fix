@@ -13,6 +13,7 @@ Known bug / What to fix:
 
 //- exit only exit no arg or leave CHECK LATER
 // FIX SIGNAL HEREDOC CTRL+C = 1 not 0
+// PWD TOO MANY ARGS?
 
 
 - relative path

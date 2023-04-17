@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   count_double_dot.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 15:37:08 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 20:19:58 by ddemers          ###   ########.fr       */
+/*   Created: 2023/04/16 23:25:40 by ddemers           #+#    #+#             */
+/*   Updated: 2023/04/16 23:29:16 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmds.h"
+#include "utils.h"
 
-int	pwd(t_mini *mini)
+int	count_double_dot(const char *str)
 {
-	char	*pwd;
+	int	index;
+	int	count;
 
-	if (!mini->current_dir)
+	count = 0;
+	index = 0;
+	while (str[index])
 	{
-		pwd = getcwd(NULL, 0);
-		if (!pwd)
-			return (print_errno(errno), BUILTIN_COMMAND_ERROR);
-		printf("%s\n", pwd);
-		free(pwd);
-		return (SUCCESS);
+		if (!ft_strncmp((str + index), "../", 3))
+		{
+			count++;
+			index += 3;
+			continue ;
+		}
+		break ;
 	}
-	printf("%s\n", mini->current_dir);
-	return (SUCCESS);
+	if (!str[index])
+		return (0);
+	return (count);
 }

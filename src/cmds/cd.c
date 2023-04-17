@@ -6,40 +6,11 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:34:58 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/13 16:26:52 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 00:13:38 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
-
-static int	add_pwd_to_env(t_mini *mini, char *old_pwd, int index, int count)
-{
-	char	*copy;
-
-	while (mini->env_copy[index] && count != 2)
-	{
-		if (ft_strncmp(mini->env_copy[index], "PWD=", 4) == 0)
-		{
-			copy = ft_strjoin("PWD=", getcwd(NULL, 69));
-			if (!copy)
-				return (print_errno(ENOMEM), FAILURE);
-			free(mini->env_copy[index]);
-			mini->env_copy[index] = copy;
-			count++;
-		}
-		else if (ft_strncmp(mini->env_copy[index], "OLDPWD=", 7) == 0)
-		{
-			copy = ft_strjoin("OLDPWD=", old_pwd);
-			if (!copy)
-				return (print_errno(ENOMEM), FAILURE);
-			free(mini->env_copy[index]);
-			mini->env_copy[index] = copy;
-			count++;
-		}
-		index++;
-	}
-	return (SUCCESS);
-}
 
 static char	*get_home(t_mini *mini)
 {
@@ -67,41 +38,72 @@ static char	*get_home(t_mini *mini)
 static int	cd_deez(t_mini *mini, int count)
 {
 	char	*home;
-	int		ret;
 
 	if (count > 1)
-		ret = chdir(mini->current_cmds[1]);
-	else
 	{
-		home = get_home(mini);
-		if (!home)
-			return (ENOMEM);
-		ret = chdir(home);
+		if (chdir(mini->current_cmds[1]) == FAILURE)
+			return (print_errno(errno), BUILTIN_COMMAND_ERROR);
+		return (SUCCESS);
 	}
-	if (ret == FAILURE)
-	{
-		print_errno(errno);
+	home = get_home(mini);
+	if (!home)
 		return (BUILTIN_COMMAND_ERROR);
+	if (chdir(home) == FAILURE)
+		return (free(home), BUILTIN_COMMAND_ERROR);
+	return (BUILTIN_SUCCESS);
+}
+
+char	*get_current_dir(t_mini *mini)
+{
+	char	*dir;
+
+	if (!mini->current_dir)
+	{
+		dir = getcwd(NULL, 0);
+		if (!dir)
+			return (print_errno(errno), NULL);
 	}
-	return (SUCCESS);
+	dir = ft_strdup(mini->current_dir);
+	if (!dir)
+		return (print_errno(errno), NULL);
+	return (dir);
+}
+
+void	update_pwd(t_mini *mini)
+{
+	char	*current_pwd;
+
+	current_pwd = getcwd(NULL, 0);
+	if (!current_pwd)
+	{
+		write(STDERR_FILENO, "Minishell: Couldn't update directoy\n", 36);
+		return ;
+	}
+	free(mini->current_dir);
+	mini->current_dir = current_pwd;
 }
 
 int	cd(t_mini *mini)
 {
+	size_t	argument_count;
 	int		ret;
-	int		count;
-	char	*current;
+	char	*new_dir;
+	char	*current_dir;
 
-	count = count_double_array(mini->current_cmds);
-	current = getcwd(NULL, 69);
-	if (!current)
-		return (print_errno(errno), errno);
-	ret = cd_deez(mini, count);
-	if (ret != SUCCESS)
-		return (ret);
-	ret = add_pwd_to_env(mini, current, 0, 0);
-	if (ret == FAILURE)
-		return (ENOMEM);
-	free(current);
+	argument_count = count_double_array(mini->current_cmds);
+	if (argument_count > 2)
+	{
+		write(STDERR_FILENO, "Minishell: cd: too many arguments\n", 34);
+		return (BUILTIN_COMMAND_ERROR);
+	}
+	current_dir = get_current_dir(mini);
+	if (!current_dir)
+		return (BUILTIN_COMMAND_ERROR);
+	if (cd_deez(mini, argument_count) == FAILURE)
+		return (free(current_dir), BUILTIN_COMMAND_ERROR);
+	update_pwd(mini);
+	if (add_pwd_to_env(mini, current_dir, 0, 0) == FAILURE)
+		return (free(current_dir), ENOMEM);
+	free(current_dir);
 	return (BUILTIN_SUCCESS);
 }

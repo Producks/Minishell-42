@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:35:39 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 17:34:43 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/17 00:14:29 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	ft_exit(t_mini *mini)
 		ret = check_if_numeric_argument(mini->current_cmds[1]);
 		if (!ret)
 			return (ft_atoi(mini->current_cmds[1]));
-		write (STDERR_FILENO, "Minishell: exit: numeric argument required\n", 43);
+		write (STDERR_FILENO,
+			"Minishell: exit: numeric argument required\n", 43);
 		return (255);
 	}
 	return (BUILTIN_SUCCESS);

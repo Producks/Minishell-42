@@ -65,7 +65,9 @@ UTILS = ./src/utils/strings/strjoin_path.c \
 		./src/utils/strings/create_file_name.c \
 		./src/utils/check_expandable.c \
 		./src/utils/free_linked_list_exec.c \
-		./src/utils/calculate_exit_status.c
+		./src/utils/calculate_exit_status.c \
+		./src/utils/count_double_dot.c \
+		./src/utils/strings/get_dir_changed.c
 
 LEXER = ./src/lexer/lexer.c \
 		./src/lexer/literal/literal.c \

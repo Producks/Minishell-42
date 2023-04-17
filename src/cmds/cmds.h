@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:15:29 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/14 16:56:07 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 20:14:44 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 extern int	g_exit_status;
 
 int		echo(char **message);
-int		pwd(void);
+int		pwd(t_mini *mini);
 int		env(char **env_copy);
 int		cd(t_mini *mini);
 int		ft_export(t_mini *mini);

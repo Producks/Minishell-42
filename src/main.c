@@ -6,7 +6,7 @@
 /*   By: ddemers <ddemers@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:30:13 by ddemers           #+#    #+#             */
-/*   Updated: 2023/04/16 17:17:58 by ddemers          ###   ########.fr       */
+/*   Updated: 2023/04/16 20:08:37 by ddemers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	signals_handler_parent(false, false);
 	if (init_struct_mini(&mini, envp) == FAILURE)
-		return (ENOMEM);
+		return (errno);
 	#ifndef TESTER
 	#  define TESTER 0
 	#endif
