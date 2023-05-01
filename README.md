@@ -1,7 +1,7 @@
 
 # Minishell-42
 
-A team project with [cperron](https://github.com/christow666) for the 42 school cursus. The main goal of the project was to make a small shell that is similar to bash. You can read the subject [here](https://github.com/Producks/Minishell-42/blob/main/doc/en.subject.pdf).
+A team project with [cperron](https://github.com/christow666) for the 42 school cursus. The main goal of the project was to make a small shell that is similar to bash. You can read the subject [here](https://github.com/Producks/Minishell-42/blob/main/doc/en.subject.pdf).  
 ![Screenshot preview of minishell.](https://github.com/Producks/Minishell-42/blob/main/doc/zzzzzz.PNG?raw=true)
 ## Features
 - Compatible with linux and mac
