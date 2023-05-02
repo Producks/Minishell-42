@@ -1,4 +1,3 @@
-
 # Minishell-42
 
 A team project with [cperron](https://github.com/christow666) for the 42 school cursus. The main goal of the project was to make a small shell that is similar to bash. You can read the subject [here](https://github.com/Producks/Minishell-42/blob/main/doc/en.subject.pdf).  
@@ -29,3 +28,15 @@ It loops forever unless **exit** command is entered or a signal is sent with the
 
 ## Lexical analysis
 Now this is where things start to be complicated and were a nightmare to deal with. Splitting words into tokens were really difficult at first with all the edge cases that were possible.
+
+## Parser
+
+## Interpreter
+The role of this part is to remove these: **"** **'** **\$**  
+The tricky part is the order you do things for this. Here an example of a tricky situation: '$USER'  
+Removing the single quote first would result in me not knowing it had single quotes. To remove any confusion I ended  
+up splitting my tokens into more tokens and do the things individually and paste them back together at the end.
+Here an representation of how the tokens were getting split into sub tokens:
+
+## Executor
+If we got here it mean there was no syntax error from the user. We first have to check for the heredoc...tbc
