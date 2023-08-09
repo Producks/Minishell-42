@@ -2,7 +2,7 @@
 echo "toto"
 echo '"'toto'"'
 echo """totot"""
-echo "'""totot""'"
+echo "'""totot""'"a
 echo '''ta'''
 "echo" tata
 echo "''test''"
